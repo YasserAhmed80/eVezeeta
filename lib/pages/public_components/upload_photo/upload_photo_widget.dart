@@ -85,37 +85,44 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 300.0,
-                          constraints: const BoxConstraints(
-                            maxWidth: 400.0,
-                          ),
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 1.0,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
-                            shape: BoxShape.rectangle,
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
                           ),
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  _model.curretImage != null &&
-                                          _model.curretImage != ''
-                                      ? functions.stringToImagePath(
-                                          _model.curretImage)!
-                                      : 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg',
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
+                          child: Container(
+                            width: double.infinity,
+                            height: 300.0,
+                            constraints: const BoxConstraints(
+                              maxWidth: 400.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              borderRadius: BorderRadius.circular(12.0),
+                              shape: BoxShape.rectangle,
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 1.0,
                               ),
-                            ],
+                            ),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  child: Image.network(
+                                    _model.curretImage != null &&
+                                            _model.curretImage != ''
+                                        ? functions.stringToImagePath(
+                                            _model.curretImage)!
+                                        : 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg',
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -123,29 +130,36 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 300.0,
-                          constraints: const BoxConstraints(
-                            maxWidth: 400.0,
-                          ),
-                          decoration: BoxDecoration(
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 1.0,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
-                            shape: BoxShape.rectangle,
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
                           ),
-                          child: AuthUserStreamWidget(
-                            builder: (context) => ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.memory(
-                                _model.uplodedImage?.bytes ??
-                                    Uint8List.fromList([]),
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
+                          child: Container(
+                            width: double.infinity,
+                            height: 300.0,
+                            constraints: const BoxConstraints(
+                              maxWidth: 400.0,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              shape: BoxShape.rectangle,
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 1.0,
+                              ),
+                            ),
+                            child: AuthUserStreamWidget(
+                              builder: (context) => ClipRRect(
+                                borderRadius: BorderRadius.circular(12.0),
+                                child: Image.memory(
+                                  _model.uplodedImage?.bytes ??
+                                      Uint8List.fromList([]),
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),

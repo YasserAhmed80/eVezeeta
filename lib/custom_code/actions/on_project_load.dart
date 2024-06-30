@@ -69,40 +69,33 @@ Future onProjectLoad() async {
   }
   //---------------------------------------------------------------------------------------------------------//
 
-  //---------------------------------------------------------------------------------------------------------//
-  Future getRefCities(String coll_name) async {
-    // Get a reference to the ref_religion collection in Firestore
+  /**
+
+  Future getGovernate() async {
+    // Get governate data
 
     try {
       CollectionReference refCollection =
-          FirebaseFirestore.instance.collection(coll_name);
+          FirebaseFirestore.instance.collection('governate');
 
       // Get the documents in the ref_religion collection
       QuerySnapshot refCollectionSnapshot = await refCollection.get();
 
-      // Create a list to hold the religion data
-
-      // Loop through the documents and add the data to the list
-
       refCollectionSnapshot.docs.forEach((doc) async {
-        DtRefTableStruct item = DtRefTableStruct();
+        DtGovernateStruct item = DtRefTableStruct();
 
-        item.code = doc.get('code');
-        item.countryCde = doc.get('country_cde');
+        item.gov_key = doc.get('code');
+        item.cntryCde = doc.get('cntry_cde');
         item.desc = doc.get('desc');
-        item.source = 'cities';
-        item.lng = doc.get('lng');
+        item.lng_cde = doc.get('lng_cde');
 
-        if (item.lng == FFAppState().currentLanguage) {
-          FFAppState().update(() {
-            FFAppState().appStateRefData.add(item);
-          });
-        }
+     
       });
     } catch (e) {
       print('error in load ref citite $e');
     }
   }
+  */
   //---------------------------------------------------------------------------------------------------------//
 
   //---------------------------------------------------------------------------------------------------------//
@@ -130,7 +123,7 @@ Future onProjectLoad() async {
 
   // calling functions
   await getCollectionData('ref_data');
-  await getRefCities('ref_cities');
+  //await getRefCities('ref_cities');
   addListOfNumbers('age', 18, 70);
   addListOfNumbers('height', 140, 210);
   addListOfNumbers('weight', 40, 150);

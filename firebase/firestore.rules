@@ -25,6 +25,48 @@ service cloud.firestore {
     match /imgs/{document} {
       allow create: if true;
       allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /doc/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /governate/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /zone_area/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /govern_zone/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /category/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /category_sub/{document} {
+      allow create: if true;
+      allow read: if true;
       allow write: if true;
       allow delete: if true;
     }

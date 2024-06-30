@@ -20,20 +20,36 @@ class DoctorDataImagesModel extends FlutterFlowModel<DoctorDataImagesWidget> {
 
   final unfocusNode = FocusNode();
   // Model for upload_photo component.
-  late UploadPhotoModel uploadPhotoModel;
+  late UploadPhotoModel uploadPhotoModel1;
+  // Model for upload_photo component.
+  late UploadPhotoModel uploadPhotoModel2;
+  // Model for upload_photo component.
+  late UploadPhotoModel uploadPhotoModel3;
+  // Model for upload_photo component.
+  late UploadPhotoModel uploadPhotoModel4;
+  // Model for upload_photo component.
+  late UploadPhotoModel uploadPhotoModel5;
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 
   @override
   void initState(BuildContext context) {
-    uploadPhotoModel = createModel(context, () => UploadPhotoModel());
+    uploadPhotoModel1 = createModel(context, () => UploadPhotoModel());
+    uploadPhotoModel2 = createModel(context, () => UploadPhotoModel());
+    uploadPhotoModel3 = createModel(context, () => UploadPhotoModel());
+    uploadPhotoModel4 = createModel(context, () => UploadPhotoModel());
+    uploadPhotoModel5 = createModel(context, () => UploadPhotoModel());
     customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    uploadPhotoModel.dispose();
+    uploadPhotoModel1.dispose();
+    uploadPhotoModel2.dispose();
+    uploadPhotoModel3.dispose();
+    uploadPhotoModel4.dispose();
+    uploadPhotoModel5.dispose();
     customNavbarModel.dispose();
   }
 }

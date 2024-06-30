@@ -675,8 +675,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_data_images
   {
+    'c1uxqt35': {
+      'ar': 'صورة الطبيب',
+      'en': '',
+    },
     'erp0r5xv': {
       'ar': 'صور العيادة',
+      'en': '',
+    },
+    'h0mvthzk': {
+      'ar': '1',
+      'en': '',
+    },
+    'myvv12n7': {
+      'ar': '2',
       'en': '',
     },
     '1qrdz17y': {
