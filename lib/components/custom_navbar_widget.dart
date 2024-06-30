@@ -99,19 +99,8 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                   color: FlutterFlowTheme.of(context).primary,
                   size: 24.0,
                 ),
-                onPressed: () async {
-                  context.pushNamed(
-                    'profile_images_Edit',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: const TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                      ),
-                    },
-                  );
-
-                  FFAppState().selectedNavTab = 2;
-                  setState(() {});
+                onPressed: () {
+                  print('showFavorities pressed ...');
                 },
               ),
               FlutterFlowIconButton(
@@ -129,7 +118,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                 ),
                 onPressed: () async {
                   context.pushNamed(
-                    'customer_details',
+                    'doctor_data_images',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,

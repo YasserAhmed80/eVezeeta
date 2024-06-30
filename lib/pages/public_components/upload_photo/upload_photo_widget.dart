@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'upload_photo_model.dart';
@@ -13,9 +14,19 @@ class UploadPhotoWidget extends StatefulWidget {
   const UploadPhotoWidget({
     super.key,
     required this.storageFolder,
-  });
+    required this.entityType,
+    required this.entityCode,
+    String? imgType,
+    required this.imgSeq,
+    required this.imgRef,
+  }) : imgType = imgType ?? '';
 
   final String? storageFolder;
+  final String? entityType;
+  final String? entityCode;
+  final String imgType;
+  final int? imgSeq;
+  final String? imgRef;
 
   @override
   State<UploadPhotoWidget> createState() => _UploadPhotoWidgetState();
@@ -89,11 +100,22 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                   .secondaryBackground,
                             ),
                           ),
-                          child: Icon(
-                            Icons.add_a_photo_outlined,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            size: 150.0,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  _model.curretImage != null &&
+                                          _model.curretImage != ''
+                                      ? functions.stringToImagePath(
+                                          _model.curretImage)!
+                                      : 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg',
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -164,13 +186,18 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                       _model.isLoading = true;
                                       setState(() {});
                                       // save_cus_photo
-                                      _model.photoName =
+                                      _model.photoUrl =
                                           await actions.saveImageToStorage1(
                                         _model.uplodedImage,
                                         widget.storageFolder!,
+                                        widget.entityType!,
+                                        widget.entityCode!,
+                                        widget.imgType,
+                                        widget.imgSeq!,
                                       );
                                       _model.saveLoadImage = false;
                                       _model.isLoading = false;
+                                      _model.curretImage = _model.photoUrl;
                                       setState(() {});
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

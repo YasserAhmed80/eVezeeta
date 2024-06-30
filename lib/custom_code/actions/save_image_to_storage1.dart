@@ -23,8 +23,8 @@ import '/auth/firebase_auth/auth_util.dart';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-Future<String?> saveImageToStorage1(
-    FFUploadedFile? fileData, String folderName) async {
+Future<String?> saveImageToStorage1(FFUploadedFile? fileData, String folderName,
+    String entityType, String entityCode, String imgType, int imgSeq) async {
   if (fileData == null || fileData.bytes == null) return null;
 
   print('File name$fileData.name');
@@ -59,10 +59,15 @@ Future<String?> saveImageToStorage1(
     try {
       CollectionReference collectionReference = FirebaseFirestore.instance
           .collection(
-              folderName); // collection name same as photo folder in storage
+              'imgs'); // collection name same as photo folder in storage
 
-      DocumentReference documentReference = await collectionReference
-          .add({'cus_id': '100', 'img': downloadURL, 'c': '1'});
+      DocumentReference documentReference = await collectionReference.add({
+        'e_type': entityType,
+        'e_code': entityCode,
+        'i_ref': downloadURL,
+        'i_type': imgType,
+        'i_seq': imgSeq
+      });
     } catch (e) {
       print(e.toString());
     }

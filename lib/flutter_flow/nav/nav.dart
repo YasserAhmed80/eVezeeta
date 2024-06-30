@@ -104,11 +104,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const CustomerNewWidget(),
         ),
         FFRoute(
-          name: 'profile_images_Edit',
-          path: '/profileImagesEdit',
-          builder: (context, params) => const ProfileImagesEditWidget(),
-        ),
-        FFRoute(
           name: 'customer_new_initial',
           path: '/customer_new_initial',
           builder: (context, params) => const CustomerNewInitialWidget(),
@@ -132,6 +127,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'doctor_data_address',
           path: '/doctorDataAddress',
           builder: (context, params) => const DoctorDataAddressWidget(),
+        ),
+        FFRoute(
+          name: 'doctor_data_images',
+          path: '/doctorDataImages',
+          builder: (context, params) => const DoctorDataImagesWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

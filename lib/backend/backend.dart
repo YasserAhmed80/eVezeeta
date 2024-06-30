@@ -7,8 +7,8 @@ import 'schema/util/firestore_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/ref_data_record.dart';
-import 'schema/cus_photos_record.dart';
 import 'schema/ref_cities_record.dart';
+import 'schema/imgs_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -19,8 +19,8 @@ export 'schema/util/schema_util.dart';
 
 export 'schema/users_record.dart';
 export 'schema/ref_data_record.dart';
-export 'schema/cus_photos_record.dart';
 export 'schema/ref_cities_record.dart';
+export 'schema/imgs_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -96,43 +96,6 @@ Future<List<RefDataRecord>> queryRefDataRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query CusPhotosRecords (as a Stream and as a Future).
-Future<int> queryCusPhotosRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      CusPhotosRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<CusPhotosRecord>> queryCusPhotosRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      CusPhotosRecord.collection,
-      CusPhotosRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<CusPhotosRecord>> queryCusPhotosRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      CusPhotosRecord.collection,
-      CusPhotosRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query RefCitiesRecords (as a Stream and as a Future).
 Future<int> queryRefCitiesRecordCount({
   Query Function(Query)? queryBuilder,
@@ -165,6 +128,43 @@ Future<List<RefCitiesRecord>> queryRefCitiesRecordOnce({
     queryCollectionOnce(
       RefCitiesRecord.collection,
       RefCitiesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ImgsRecords (as a Stream and as a Future).
+Future<int> queryImgsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ImgsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ImgsRecord>> queryImgsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ImgsRecord.collection,
+      ImgsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ImgsRecord>> queryImgsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ImgsRecord.collection,
+      ImgsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

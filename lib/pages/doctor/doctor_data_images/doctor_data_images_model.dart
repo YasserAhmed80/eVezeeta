@@ -1,10 +1,10 @@
 import '/components/custom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/public_components/upload_photo/upload_photo_widget.dart';
-import 'profile_images_edit_widget.dart' show ProfileImagesEditWidget;
+import 'doctor_data_images_widget.dart' show DoctorDataImagesWidget;
 import 'package:flutter/material.dart';
 
-class ProfileImagesEditModel extends FlutterFlowModel<ProfileImagesEditWidget> {
+class DoctorDataImagesModel extends FlutterFlowModel<DoctorDataImagesWidget> {
   ///  Local state fields for this page.
 
   List<String> imageList = [];

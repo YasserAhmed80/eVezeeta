@@ -302,21 +302,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'profile. profile',
     },
   },
-  // profile_images_Edit
-  {
-    'hhdd7kht': {
-      'ar': 'من فضلك ادخل 5 صور مناسبه',
-      'en': 'Please enter 5 suitable photos',
-    },
-    'hb7pqe4h': {
-      'ar': 'Page Title',
-      'en': 'Page Title',
-    },
-    'jtc92y3p': {
-      'ar': 'Shop',
-      'en': 'Shop',
-    },
-  },
   // customer_new_initial
   {
     'mnyz4zrt': {
@@ -686,6 +671,29 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '54hdqaol': {
       'ar': 'address',
       'en': 'Home',
+    },
+  },
+  // doctor_data_images
+  {
+    'erp0r5xv': {
+      'ar': 'صور العيادة',
+      'en': '',
+    },
+    '1qrdz17y': {
+      'ar': 'صورة إثبات بطاقة مزاولة المهنة*',
+      'en': '',
+    },
+    'g1qvau7w': {
+      'ar': 'صورة إثبات اللقب المهني ',
+      'en': '',
+    },
+    'jx7kwnlm': {
+      'ar': 'ادخال صور العمل',
+      'en': 'Page Title',
+    },
+    'e1umpmqd': {
+      'ar': 'Shop',
+      'en': 'Shop',
     },
   },
   // Miscellaneous
