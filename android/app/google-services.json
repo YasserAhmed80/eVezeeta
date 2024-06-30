@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "359096720103",
+    "project_id": "evezeeta",
+    "storage_bucket": "evezeeta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359096720103:android:36676ba480254e5d2de042",
+        "android_client_info": {
+          "package_name": "com.mycompany.eVezeeta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359096720103-dnfll6m603c5h8knukkga1lh2bo7kcha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.eVezeeta",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "359096720103-q673k0g7dimld4jng8720rnffir983gj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZP9rVZJ7jf4G8avHCoACdOVnxM-mIXlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359096720103-q673k0g7dimld4jng8720rnffir983gj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "359096720103-gud7a0nsc0vdga23lsbkemq7rf6v9slv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.marriageapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359096720103:android:311c2a20c64bf7fe2de042",
+        "android_client_info": {
+          "package_name": "com.mycompany.marriageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359096720103-q673k0g7dimld4jng8720rnffir983gj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZP9rVZJ7jf4G8avHCoACdOVnxM-mIXlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359096720103-q673k0g7dimld4jng8720rnffir983gj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "359096720103-gud7a0nsc0vdga23lsbkemq7rf6v9slv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.marriageapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
