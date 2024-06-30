@@ -1,9 +1,10 @@
+import '/components/custom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'doctor_data_page1_widget.dart' show DoctorDataPage1Widget;
+import 'doctor_data_main_widget.dart' show DoctorDataMainWidget;
 import 'package:flutter/material.dart';
 
-class DoctorDataPage1Model extends FlutterFlowModel<DoctorDataPage1Widget> {
+class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -51,10 +52,13 @@ class DoctorDataPage1Model extends FlutterFlowModel<DoctorDataPage1Widget> {
   FocusNode? descriptionFocusNode2;
   TextEditingController? descriptionTextController2;
   String? Function(BuildContext, String?)? descriptionTextController2Validator;
+  // Model for custom_navbar component.
+  late CustomNavbarModel customNavbarModel;
 
   @override
   void initState(BuildContext context) {
     fullNameTextControllerValidator = _fullNameTextControllerValidator;
+    customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
   @override
@@ -68,5 +72,7 @@ class DoctorDataPage1Model extends FlutterFlowModel<DoctorDataPage1Widget> {
 
     descriptionFocusNode2?.dispose();
     descriptionTextController2?.dispose();
+
+    customNavbarModel.dispose();
   }
 }

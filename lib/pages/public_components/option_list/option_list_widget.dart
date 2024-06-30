@@ -100,7 +100,7 @@ class _OptionListWidgetState extends State<OptionListWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Cairo',
                                       color:
                                           FlutterFlowTheme.of(context).primary,
                                       fontSize: 18.0,
@@ -215,7 +215,7 @@ class _OptionListWidgetState extends State<OptionListWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         fontSize: 16.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:

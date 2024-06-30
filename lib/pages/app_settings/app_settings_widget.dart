@@ -91,7 +91,7 @@ class _AppSettingsWidgetState extends State<AppSettingsWidget> {
                         ),
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
                       ),
@@ -114,7 +114,7 @@ class _AppSettingsWidgetState extends State<AppSettingsWidget> {
                       'i1xngnkt' /* تغير اللغة */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Cairo',
                           letterSpacing: 0.0,
                           lineHeight: 2.0,
                         ),
@@ -124,7 +124,7 @@ class _AppSettingsWidgetState extends State<AppSettingsWidget> {
                       'fiha96f0' /* تغير اللغة الي العربيه او الان... */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Cairo',
                           color: const Color(0xFF8B97A2),
                           letterSpacing: 0.0,
                         ),
@@ -160,7 +160,7 @@ class _AppSettingsWidgetState extends State<AppSettingsWidget> {
                     'ogdv0dqu' /* تغير الي الوضع الليلي */,
                   ),
                   style: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily: 'Inter',
+                        fontFamily: 'Cairo',
                         letterSpacing: 0.0,
                         lineHeight: 2.0,
                       ),
@@ -170,7 +170,7 @@ class _AppSettingsWidgetState extends State<AppSettingsWidget> {
                     'fumvhh72' /* تغير اعدادات من الوضع ليلا او ... */,
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
+                        fontFamily: 'Cairo',
                         color: const Color(0xFF8B97A2),
                         letterSpacing: 0.0,
                       ),

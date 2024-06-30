@@ -144,7 +144,7 @@ class _ProfileEditMainItemWidgetState extends State<ProfileEditMainItemWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Cairo',
                                             fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.bold,
@@ -181,7 +181,7 @@ class _ProfileEditMainItemWidgetState extends State<ProfileEditMainItemWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Cairo',
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
                                             fontSize: 18.0,

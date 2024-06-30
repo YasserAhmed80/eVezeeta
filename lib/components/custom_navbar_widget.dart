@@ -157,7 +157,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                 ),
                 onPressed: () async {
                   context.pushNamed(
-                    'customer_new',
+                    'doctor_data_address',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
@@ -185,7 +185,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                 ),
                 onPressed: () async {
                   context.pushNamed(
-                    'appSettings',
+                    'doctor_data_main',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,

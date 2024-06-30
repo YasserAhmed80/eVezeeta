@@ -231,7 +231,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                             style: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
                           ).animateOnPageLoad(
@@ -273,7 +273,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                                 .secondaryBackground,
                             textStyle:
                                 FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Cairo',
                                       letterSpacing: 0.0,
                                     ),
                             elevation: 0.0,
@@ -311,7 +311,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),

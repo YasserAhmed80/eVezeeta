@@ -104,7 +104,7 @@ class _CustomerDetailsWidgetState extends State<CustomerDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Cairo',
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -115,7 +115,7 @@ class _CustomerDetailsWidgetState extends State<CustomerDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            fontFamily: 'Inter',
+                                            fontFamily: 'Cairo',
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
                                             fontSize: 20.0,
@@ -132,7 +132,7 @@ class _CustomerDetailsWidgetState extends State<CustomerDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Cairo',
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
@@ -236,7 +236,7 @@ class _CustomerDetailsWidgetState extends State<CustomerDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Inter',
+                                                  fontFamily: 'Cairo',
                                                   fontSize: 18.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
@@ -413,7 +413,7 @@ class _CustomerDetailsWidgetState extends State<CustomerDetailsWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   fontSize: 18.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
@@ -495,7 +495,7 @@ class _CustomerDetailsWidgetState extends State<CustomerDetailsWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Cairo',
                                     fontSize: 18.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,

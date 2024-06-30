@@ -80,7 +80,7 @@ class _ProfileImagesEditWidgetState extends State<ProfileImagesEditWidget> {
                     ),
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Cairo',
                           fontSize: 20.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.bold,

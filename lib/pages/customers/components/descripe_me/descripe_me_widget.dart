@@ -72,7 +72,7 @@ class _DescripeMeWidgetState extends State<DescripeMeWidget> {
                         'header',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
+                            fontFamily: 'Cairo',
                             color: FlutterFlowTheme.of(context).primary,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
@@ -94,7 +94,7 @@ class _DescripeMeWidgetState extends State<DescripeMeWidget> {
                           'details',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
+                              fontFamily: 'Cairo',
                               fontSize: 16.0,
                               letterSpacing: 0.0,
                             ),

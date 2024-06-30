@@ -11,5 +11,7 @@ export '/pages/customer_new_initial/customer_new_initial_widget.dart'
 export '/pages/customer_details/customer_details_widget.dart'
     show CustomerDetailsWidget;
 export '/pages/app_settings/app_settings_widget.dart' show AppSettingsWidget;
-export '/pages/doctor/doctor_data_page1/doctor_data_page1_widget.dart'
-    show DoctorDataPage1Widget;
+export '/pages/doctor/doctor_data_main/doctor_data_main_widget.dart'
+    show DoctorDataMainWidget;
+export '/pages/doctor/doctor_data_address/doctor_data_address_widget.dart'
+    show DoctorDataAddressWidget;

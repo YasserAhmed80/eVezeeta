@@ -83,7 +83,7 @@ class _CustomerNewInitialWidgetState extends State<CustomerNewInitialWidget> {
                       'mnyz4zrt' /* السلام عليكم و رحمة الله */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
+                          fontFamily: 'Cairo',
                           fontSize: 20.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.bold,
@@ -111,12 +111,12 @@ class _CustomerNewInitialWidgetState extends State<CustomerNewInitialWidget> {
                         ),
                         labelStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
                         hintStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
                         enabledBorder: OutlineInputBorder(
@@ -163,7 +163,7 @@ class _CustomerNewInitialWidgetState extends State<CustomerNewInitialWidget> {
                             : null,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
+                            fontFamily: 'Cairo',
                             color: FlutterFlowTheme.of(context).primary,
                             fontSize: 16.0,
                             letterSpacing: 0.0,
@@ -252,7 +252,7 @@ class _CustomerNewInitialWidgetState extends State<CustomerNewInitialWidget> {
                                                           context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:

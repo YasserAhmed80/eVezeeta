@@ -410,7 +410,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
     },
   },
-  // doctor_data_page1
+  // doctor_data_main
   {
     '8dwjbrx4': {
       'ar': 'المعلومات الشخصية',
@@ -445,7 +445,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose your specialty',
     },
     '9et69ohs': {
-      'ar': 'اختا التخصص الرئيسي',
+      'ar': 'اختار التخصص الرئيسي',
       'en': 'Sister main specialty',
     },
     '6hwqf5z6': {
@@ -541,7 +541,150 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Basic doctor information',
     },
     '0jhzugac': {
-      'ar': 'Home',
+      'ar': 'main',
+      'en': 'Home',
+    },
+  },
+  // doctor_data_address
+  {
+    'mn65y5fg': {
+      'ar': 'عنوان العمل',
+      'en': 'personal information',
+    },
+    'tpioyxvu': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'o18jjifm': {
+      'ar': '544545',
+      'en': '',
+    },
+    '4yr1vpwp': {
+      'ar': 'البلد',
+      'en': '',
+    },
+    'pin0z8yp': {
+      'ar': 'Search for an item...',
+      'en': '',
+    },
+    'dbob9bdn': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'o8gcmhfx': {
+      'ar': '544545',
+      'en': '',
+    },
+    'gx6jm4zr': {
+      'ar': 'المحافظة',
+      'en': '',
+    },
+    'xmcegdz5': {
+      'ar': 'اختار المحافظة',
+      'en': '',
+    },
+    '9u51dwbp': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'yzudth5d': {
+      'ar': '544545',
+      'en': '',
+    },
+    'nbr48oan': {
+      'ar': 'المنطقة / المركز',
+      'en': '',
+    },
+    'onqssuu2': {
+      'ar': 'اختار المنطقة',
+      'en': '',
+    },
+    'jnsaxmuk': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'icvimrzq': {
+      'ar': '544545',
+      'en': '',
+    },
+    '6b0nzqut': {
+      'ar': 'الحي',
+      'en': '',
+    },
+    'pm4psr0u': {
+      'ar': 'اختار الحي',
+      'en': '',
+    },
+    'lno0cklc': {
+      'ar': 'العنوان (الشارع و المبني)',
+      'en': 'Full professional title',
+    },
+    'n3k69oum': {
+      'ar': 'تليفونات الحجز',
+      'en': 'Subspecialty',
+    },
+    'rjy1mmws': {
+      'ar': 'تليفون عمل 1',
+      'en': 'Full professional title',
+    },
+    '5hmaj61p': {
+      'ar': 'تليفون عمل 2 ',
+      'en': 'Full professional title',
+    },
+    'a2puizon': {
+      'ar': 'موقع العمل علي الخريطة',
+      'en': 'Professional title',
+    },
+    'y15qo9sj': {
+      'ar': 'Map will be shwon here ',
+      'en': '',
+    },
+    'l98y3n2a': {
+      'ar': 'حفظ البانات',
+      'en': 'Save data',
+    },
+    'ahunvoqm': {
+      'ar': 'Please enter the patients full name.',
+      'en': 'Please enter the patients full name.',
+    },
+    'eem96jco': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': 'Please choose an option from the dropdown',
+    },
+    '4xzvoer1': {
+      'ar': 'Please enter an age for the patient.',
+      'en': 'Please enter an age for the patient.',
+    },
+    'bhaf9i8z': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': 'Please choose an option from the dropdown',
+    },
+    '677td51y': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': 'Please choose an option from the dropdown',
+    },
+    '323vhujx': {
+      'ar': 'Please enter the date of birth of the patient.',
+      'en': 'Please enter the date of birth of the patient.',
+    },
+    'xp52of87': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': 'Please choose an option from the dropdown',
+    },
+    'o62khzzu': {
+      'ar': 'Field is required',
+      'en': 'Field is required',
+    },
+    'bjpmmgis': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': 'Please choose an option from the dropdown',
+    },
+    '8kjzlm0z': {
+      'ar': 'ادخل عنوان العمل',
+      'en': 'Basic doctor information',
+    },
+    '54hdqaol': {
+      'ar': 'address',
       'en': 'Home',
     },
   },

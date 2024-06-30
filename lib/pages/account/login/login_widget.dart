@@ -199,13 +199,13 @@ class _LoginWidgetState extends State<LoginWidget>
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Cairo',
                                     letterSpacing: 0.0,
                                   ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Cairo',
                                     letterSpacing: 0.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
@@ -257,7 +257,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
                             validator: _model
@@ -288,13 +288,13 @@ class _LoginWidgetState extends State<LoginWidget>
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Cairo',
                                     letterSpacing: 0.0,
                                   ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Cairo',
                                     letterSpacing: 0.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
@@ -345,7 +345,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
                             validator: _model.passwordTextControllerValidator
@@ -408,7 +408,7 @@ class _LoginWidgetState extends State<LoginWidget>
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Cairo',
                                     color: Colors.white,
                                     letterSpacing: 0.0,
                                   ),
@@ -443,7 +443,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,
@@ -472,7 +472,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Cairo',
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -528,7 +528,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Cairo',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -586,7 +586,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.bold,

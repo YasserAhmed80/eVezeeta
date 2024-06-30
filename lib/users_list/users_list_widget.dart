@@ -110,13 +110,13 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Cairo',
                                       letterSpacing: 0.0,
                                     ),
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Cairo',
                                       letterSpacing: 0.0,
                                     ),
                                 enabledBorder: InputBorder.none,
@@ -130,7 +130,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
+                                    fontFamily: 'Cairo',
                                     letterSpacing: 0.0,
                                   ),
                               cursorColor: FlutterFlowTheme.of(context).primary,
@@ -172,7 +172,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                           FlutterFlowTheme.of(context).secondaryText,
                       labelStyle:
                           FlutterFlowTheme.of(context).labelSmall.override(
-                                fontFamily: 'Inter',
+                                fontFamily: 'Cairo',
                                 letterSpacing: 0.0,
                               ),
                       unselectedLabelStyle: const TextStyle(),
@@ -272,7 +272,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -289,7 +289,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .titleLarge
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -317,7 +317,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -335,7 +335,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -402,7 +402,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -419,7 +419,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .titleLarge
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -447,7 +447,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -465,7 +465,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -547,7 +547,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -564,7 +564,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .titleLarge
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -592,7 +592,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -610,7 +610,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -677,7 +677,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -694,7 +694,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .titleLarge
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -722,7 +722,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -740,7 +740,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -822,7 +822,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -839,7 +839,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .titleLarge
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -867,7 +867,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -885,7 +885,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -952,7 +952,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                           context)
                                                       .bodyLarge
                                                       .override(
-                                                        fontFamily: 'Inter',
+                                                        fontFamily: 'Cairo',
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
@@ -969,7 +969,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .titleLarge
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -997,7 +997,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),
@@ -1015,7 +1015,7 @@ class _UsersListWidgetState extends State<UsersListWidget>
                                                             context)
                                                         .labelMedium
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily: 'Cairo',
                                                           letterSpacing: 0.0,
                                                         ),
                                                   ),

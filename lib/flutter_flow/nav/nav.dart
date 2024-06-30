@@ -74,14 +74,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const LoginWidget() : const DoctorDataPage1Widget(),
+          appStateNotifier.loggedIn ? const LoginWidget() : const DoctorDataMainWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? const LoginWidget()
-              : const DoctorDataPage1Widget(),
+              : const DoctorDataMainWidget(),
         ),
         FFRoute(
           name: 'login',
@@ -124,9 +124,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const AppSettingsWidget(),
         ),
         FFRoute(
-          name: 'doctor_data_page1',
-          path: '/doctorDataPage1',
-          builder: (context, params) => const DoctorDataPage1Widget(),
+          name: 'doctor_data_main',
+          path: '/doctorDataMain',
+          builder: (context, params) => const DoctorDataMainWidget(),
+        ),
+        FFRoute(
+          name: 'doctor_data_address',
+          path: '/doctorDataAddress',
+          builder: (context, params) => const DoctorDataAddressWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -299,7 +304,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/doctorDataPage1';
+            return '/doctorDataMain';
           }
           return null;
         },

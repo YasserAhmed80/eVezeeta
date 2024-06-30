@@ -114,7 +114,7 @@ class _UserActionsMainWidgetState extends State<UserActionsMainWidget> {
                 'text',
               ),
               style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Inter',
+                    fontFamily: 'Cairo',
                     letterSpacing: 0.0,
                     fontWeight: FontWeight.w600,
                   ),

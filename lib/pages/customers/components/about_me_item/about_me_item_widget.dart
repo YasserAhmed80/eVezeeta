@@ -118,7 +118,7 @@ class _AboutMeItemWidgetState extends State<AboutMeItemWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Cairo',
                                       fontSize: 16.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w500,
@@ -142,7 +142,7 @@ class _AboutMeItemWidgetState extends State<AboutMeItemWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
-                                      fontFamily: 'Inter',
+                                      fontFamily: 'Cairo',
                                       color:
                                           FlutterFlowTheme.of(context).primary,
                                       fontSize: 14.0,
