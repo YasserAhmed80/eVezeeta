@@ -1,5 +1,5 @@
-import '/components/custom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'app_settings_widget.dart' show AppSettingsWidget;
 import 'package:flutter/material.dart';
 

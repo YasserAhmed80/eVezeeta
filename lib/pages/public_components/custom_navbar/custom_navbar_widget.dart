@@ -73,7 +73,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                 ),
                 onPressed: () async {
                   context.pushNamed(
-                    'customer_new_initial',
+                    'doctor_data_main',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,

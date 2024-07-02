@@ -17,6 +17,8 @@ Future onProjectLoad() async {
   // copy code of ref_religion collection in firestore to app state religionRef data type
   // Assuming you have already initialized Firestore in your Flutter app
 
+  print('stat onProjetLoad');
+
   //---------------------------------------------------------------------------------------------------------//
   Future getCollectionData(String coll_name) async {
     // Get a reference to the ref_religion collection in Firestore
@@ -69,8 +71,6 @@ Future onProjectLoad() async {
   }
   //---------------------------------------------------------------------------------------------------------//
 
-  /**
-
   Future getGovernate() async {
     // Get governate data
 
@@ -82,20 +82,84 @@ Future onProjectLoad() async {
       QuerySnapshot refCollectionSnapshot = await refCollection.get();
 
       refCollectionSnapshot.docs.forEach((doc) async {
-        DtGovernateStruct item = DtRefTableStruct();
+        DtGovernateStruct item = DtGovernateStruct();
 
-        item.gov_key = doc.get('code');
+        item.govKey = doc.get('gov_key');
         item.cntryCde = doc.get('cntry_cde');
         item.desc = doc.get('desc');
-        item.lng_cde = doc.get('lng_cde');
+        item.lngCde = doc.get('lng_cde');
 
-     
+        if (item.lngCde == FFAppState().currentLanguage) {
+          FFAppState().update(() {
+            FFAppState().refGovernate.add(item);
+          });
+        }
       });
     } catch (e) {
-      print('error in load ref citite $e');
+      print('error in getGovernate $e');
     }
   }
-  */
+
+  //---------------------------------------------------------------------------------------------------------//
+  Future getZone() async {
+    // Get governate data
+
+    try {
+      CollectionReference refCollection =
+          FirebaseFirestore.instance.collection('govern_zone');
+
+      // Get the documents in the ref_religion collection
+      QuerySnapshot refCollectionSnapshot = await refCollection.get();
+
+      refCollectionSnapshot.docs.forEach((doc) async {
+        DtZoneStruct item = DtZoneStruct();
+
+        item.zoneKey = doc.get('zone_key');
+        item.govCde = doc.get('govern_cde');
+        item.desc = doc.get('desc');
+        item.lngCde = doc.get('lng_cde');
+
+        if (item.lngCde == FFAppState().currentLanguage) {
+          FFAppState().update(() {
+            FFAppState().refZone.add(item);
+          });
+        }
+      });
+    } catch (e) {
+      print('error in getZone $e');
+    }
+  }
+  //---------------------------------------------------------------------------------------------------------//
+
+  //---------------------------------------------------------------------------------------------------------//
+  Future getArea() async {
+    // Get governate data
+
+    try {
+      CollectionReference refCollection =
+          FirebaseFirestore.instance.collection('zone_area');
+
+      // Get the documents in the ref_religion collection
+      QuerySnapshot refCollectionSnapshot = await refCollection.get();
+
+      refCollectionSnapshot.docs.forEach((doc) async {
+        DtAreaStruct item = DtAreaStruct();
+
+        item.areaKey = doc.get('area_key');
+        item.zoneCde = doc.get('zone_cde');
+        item.desc = doc.get('desc');
+        item.lngCde = doc.get('lng_cde');
+
+        if (item.lngCde == FFAppState().currentLanguage) {
+          FFAppState().update(() {
+            FFAppState().refArea.add(item);
+          });
+        }
+      });
+    } catch (e) {
+      print('error in getArea $e');
+    }
+  }
   //---------------------------------------------------------------------------------------------------------//
 
   //---------------------------------------------------------------------------------------------------------//
@@ -108,6 +172,7 @@ Future onProjectLoad() async {
       DtRefTableStruct item = DtRefTableStruct();
 
       item.code = i;
+
       item.source = data_source;
       item.desc = i.toString();
       item.lng = 0; // all languages
@@ -118,15 +183,22 @@ Future onProjectLoad() async {
     }
   }
 
-  print(FFAppState().appStateRefData);
   //---------------------------------------------------------------------------------------------------------//
 
-  // calling functions
-  await getCollectionData('ref_data');
-  //await getRefCities('ref_cities');
-  addListOfNumbers('age', 18, 70);
-  addListOfNumbers('height', 140, 210);
-  addListOfNumbers('weight', 40, 150);
+  try {
+    // calling functions
+    //await getCollectionData('ref_data');
+    //await getRefCities('ref_cities');
+    addListOfNumbers('age', 18, 70);
+    addListOfNumbers('height', 140, 210);
+    addListOfNumbers('weight', 40, 150);
 
-  // set dark mode
+    await getGovernate();
+    await getZone();
+    await getArea();
+
+    //print(FFAppState().appStateRefData);
+  } catch (e) {
+    print('error in called functions $e');
+  }
 }

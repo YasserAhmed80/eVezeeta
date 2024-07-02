@@ -1,5 +1,5 @@
-import '/components/custom_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/upload_photo/upload_photo_widget.dart';
 import 'doctor_data_images_widget.dart' show DoctorDataImagesWidget;
 import 'package:flutter/material.dart';

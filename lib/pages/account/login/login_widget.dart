@@ -392,7 +392,7 @@ class _LoginWidgetState extends State<LoginWidget>
                               }
 
                               context.goNamedAuth(
-                                  'users_list', context.mounted);
+                                  'doctor_data_main', context.mounted);
                             },
                             text: FFLocalizations.of(context).getText(
                               '2k6yfsd7' /* تسجيل */,
@@ -498,15 +498,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                         0.0, 0.0, 0.0, 16.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-                                        final user = await authManager
-                                            .signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-
-                                        context.pushNamedAuth(
-                                            'users_list', context.mounted);
+                                        context.pushNamed('doctor_data_main');
                                       },
                                       text: FFLocalizations.of(context).getText(
                                         '8xrq1lb7' /* تسجيل بواسطة جوجل */,

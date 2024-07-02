@@ -1,13 +1,16 @@
-import '/components/custom_navbar_widget.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'doctor_data_address_model.dart';
 export 'doctor_data_address_model.dart';
 
@@ -50,6 +53,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -139,86 +144,133 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                FlutterFlowDropDown<String>(
-                                                  controller: _model
-                                                          .dropDownValueController1 ??=
-                                                      FormFieldController<
-                                                          String>(null),
-                                                  options: [
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'tpioyxvu' /* Option 1 */,
-                                                    ),
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'o18jjifm' /* 544545 */,
-                                                    )
-                                                  ],
-                                                  onChanged: (val) => setState(
-                                                      () => _model
-                                                              .dropDownValue1 =
-                                                          val),
-                                                  width: double.infinity,
-                                                  height: 56.0,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Cairo',
-                                                            letterSpacing: 0.0,
+                                                StreamBuilder<
+                                                    List<CountryRecord>>(
+                                                  stream: queryCountryRecord(),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            valueColor:
+                                                                AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                            ),
                                                           ),
-                                                  hintText: FFLocalizations.of(
-                                                          context)
-                                                      .getText(
-                                                    '4yr1vpwp' /* البلد */,
-                                                  ),
-                                                  icon: Icon(
-                                                    Icons
-                                                        .wrong_location_outlined,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondary,
-                                                    size: 24.0,
-                                                  ),
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
-                                                  elevation: 2.0,
-                                                  borderColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  borderWidth: 0.5,
-                                                  borderRadius: 0.0,
-                                                  margin: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 4.0, 16.0, 4.0),
-                                                  hidesUnderline: true,
-                                                  isOverButton: true,
-                                                  isSearchable: false,
-                                                  isMultiSelect: false,
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<CountryRecord>
+                                                        countryCodeCountryRecordList =
+                                                        snapshot.data!;
+                                                    return FlutterFlowDropDown<
+                                                        int>(
+                                                      controller: _model
+                                                              .countryCodeValueController ??=
+                                                          FormFieldController<
+                                                              int>(
+                                                        _model.countryCodeValue ??=
+                                                            1,
+                                                      ),
+                                                      options: List<int>.from(
+                                                          countryCodeCountryRecordList
+                                                              .map(
+                                                                  (e) => e.cKey)
+                                                              .toList()),
+                                                      optionLabels:
+                                                          countryCodeCountryRecordList
+                                                              .map(
+                                                                  (e) => e.desc)
+                                                              .toList(),
+                                                      onChanged: (val) =>
+                                                          setState(() => _model
+                                                                  .countryCodeValue =
+                                                              val),
+                                                      width: double.infinity,
+                                                      height: 56.0,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                      hintText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        '4yr1vpwp' /* البلد */,
+                                                      ),
+                                                      icon: Icon(
+                                                        Icons
+                                                            .wrong_location_outlined,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondary,
+                                                        size: 24.0,
+                                                      ),
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
+                                                      elevation: 2.0,
+                                                      borderColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      borderWidth: 0.5,
+                                                      borderRadius: 0.0,
+                                                      margin:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16.0,
+                                                                  4.0,
+                                                                  16.0,
+                                                                  4.0),
+                                                      hidesUnderline: true,
+                                                      isOverButton: true,
+                                                      isSearchable: false,
+                                                      isMultiSelect: false,
+                                                    );
+                                                  },
                                                 ),
-                                                FlutterFlowDropDown<String>(
+                                                FlutterFlowDropDown<int>(
                                                   controller: _model
-                                                          .dropDownValueController2 ??=
-                                                      FormFieldController<
-                                                          String>(null),
-                                                  options: [
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'dbob9bdn' /* Option 1 */,
-                                                    ),
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'o8gcmhfx' /* 544545 */,
-                                                    )
-                                                  ],
-                                                  onChanged: (val) => setState(
-                                                      () => _model
-                                                              .dropDownValue2 =
-                                                          val),
+                                                          .govCodeValueController ??=
+                                                      FormFieldController<int>(
+                                                    _model.govCodeValue ??=
+                                                        _model.governateCode,
+                                                  ),
+                                                  options: List<int>.from(
+                                                      FFAppState()
+                                                          .refGovernate
+                                                          .map((e) => e.govKey)
+                                                          .toList()),
+                                                  optionLabels: FFAppState()
+                                                      .refGovernate
+                                                      .map((e) => e.desc)
+                                                      .toList(),
+                                                  onChanged: (val) async {
+                                                    setState(() => _model
+                                                        .govCodeValue = val);
+                                                    _model.governateCode =
+                                                        _model.govCodeValue;
+                                                    setState(() {});
+                                                  },
                                                   width: double.infinity,
                                                   height: 56.0,
                                                   searchHintTextStyle:
@@ -246,6 +298,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .override(
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
                                                   hintText: FFLocalizations.of(
                                                           context)
@@ -284,25 +338,38 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   isSearchable: true,
                                                   isMultiSelect: false,
                                                 ),
-                                                FlutterFlowDropDown<String>(
+                                                FlutterFlowDropDown<int>(
                                                   controller: _model
-                                                          .dropDownValueController3 ??=
-                                                      FormFieldController<
-                                                          String>(null),
-                                                  options: [
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '9u51dwbp' /* Option 1 */,
-                                                    ),
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'yzudth5d' /* 544545 */,
-                                                    )
-                                                  ],
-                                                  onChanged: (val) => setState(
-                                                      () => _model
-                                                              .dropDownValue3 =
-                                                          val),
+                                                          .zoneCodeValueController ??=
+                                                      FormFieldController<int>(
+                                                    _model.zoneCodeValue ??=
+                                                        _model.zoneCode,
+                                                  ),
+                                                  options: List<int>.from(
+                                                      functions
+                                                          .getFilteredZone(
+                                                              _model
+                                                                  .governateCode!,
+                                                              FFAppState()
+                                                                  .refZone
+                                                                  .toList())!
+                                                          .map((e) => e.zoneKey)
+                                                          .toList()),
+                                                  optionLabels: functions
+                                                      .getFilteredZone(
+                                                          _model.governateCode!,
+                                                          FFAppState()
+                                                              .refZone
+                                                              .toList())!
+                                                      .map((e) => e.desc)
+                                                      .toList(),
+                                                  onChanged: (val) async {
+                                                    setState(() => _model
+                                                        .zoneCodeValue = val);
+                                                    _model.zoneCode =
+                                                        _model.zoneCodeValue;
+                                                    setState(() {});
+                                                  },
                                                   width: double.infinity,
                                                   height: 56.0,
                                                   searchHintTextStyle:
@@ -330,6 +397,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .override(
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
                                                   hintText: FFLocalizations.of(
                                                           context)
@@ -368,25 +437,33 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   isSearchable: true,
                                                   isMultiSelect: false,
                                                 ),
-                                                FlutterFlowDropDown<String>(
+                                                FlutterFlowDropDown<int>(
                                                   controller: _model
-                                                          .dropDownValueController4 ??=
-                                                      FormFieldController<
-                                                          String>(null),
-                                                  options: [
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'jnsaxmuk' /* Option 1 */,
-                                                    ),
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'icvimrzq' /* 544545 */,
-                                                    )
-                                                  ],
+                                                          .areaCodeValueController ??=
+                                                      FormFieldController<int>(
+                                                    _model.areaCodeValue ??=
+                                                        _model.areaCode,
+                                                  ),
+                                                  options: List<int>.from(
+                                                      functions
+                                                          .getFilteredArea(
+                                                              _model.zoneCode!,
+                                                              FFAppState()
+                                                                  .refArea
+                                                                  .toList())!
+                                                          .map((e) => e.areaKey)
+                                                          .toList()),
+                                                  optionLabels: functions
+                                                      .getFilteredArea(
+                                                          _model.zoneCode!,
+                                                          FFAppState()
+                                                              .refArea
+                                                              .toList())!
+                                                      .map((e) => e.desc)
+                                                      .toList(),
                                                   onChanged: (val) => setState(
                                                       () => _model
-                                                              .dropDownValue4 =
-                                                          val),
+                                                          .areaCodeValue = val),
                                                   width: double.infinity,
                                                   height: 56.0,
                                                   searchHintTextStyle:
@@ -414,6 +491,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .override(
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
                                                   hintText: FFLocalizations.of(
                                                           context)

@@ -15,6 +15,7 @@ import 'schema/zone_area_record.dart';
 import 'schema/govern_zone_record.dart';
 import 'schema/category_record.dart';
 import 'schema/category_sub_record.dart';
+import 'schema/country_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -33,6 +34,7 @@ export 'schema/zone_area_record.dart';
 export 'schema/govern_zone_record.dart';
 export 'schema/category_record.dart';
 export 'schema/category_sub_record.dart';
+export 'schema/country_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -399,6 +401,43 @@ Future<List<CategorySubRecord>> queryCategorySubRecordOnce({
     queryCollectionOnce(
       CategorySubRecord.collection,
       CategorySubRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query CountryRecords (as a Stream and as a Future).
+Future<int> queryCountryRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CountryRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CountryRecord>> queryCountryRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CountryRecord.collection,
+      CountryRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CountryRecord>> queryCountryRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CountryRecord.collection,
+      CountryRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

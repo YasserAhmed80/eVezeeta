@@ -29,6 +29,28 @@ DtRefTableStruct? getRefItemLable(
   return null;
 }
 
+List<DtAreaStruct>? getFilteredArea(
+  int zoneKey,
+  List<DtAreaStruct>? areaList,
+) {
+  List<DtAreaStruct>? outputList =
+      areaList?.where((item) => item.zoneCde == zoneKey).toList();
+
+  //print(outputList);
+  return outputList;
+}
+
 String? stringToImagePath(String? url) {
   return url;
+}
+
+List<DtZoneStruct>? getFilteredZone(
+  int govKey,
+  List<DtZoneStruct>? zoneList,
+) {
+  List<DtZoneStruct>? outputList =
+      zoneList?.where((item) => item.govCde == govKey).toList();
+
+  //print(outputList);
+  return outputList;
 }

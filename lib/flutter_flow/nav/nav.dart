@@ -94,26 +94,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const Onboarding01Widget(),
         ),
         FFRoute(
-          name: 'users_list',
-          path: '/usersList',
-          builder: (context, params) => const UsersListWidget(),
-        ),
-        FFRoute(
-          name: 'customer_new',
-          path: '/customer_new',
-          builder: (context, params) => const CustomerNewWidget(),
-        ),
-        FFRoute(
-          name: 'customer_new_initial',
-          path: '/customer_new_initial',
-          builder: (context, params) => const CustomerNewInitialWidget(),
-        ),
-        FFRoute(
-          name: 'customer_details',
-          path: '/customer_details',
-          builder: (context, params) => const CustomerDetailsWidget(),
-        ),
-        FFRoute(
           name: 'appSettings',
           path: '/appSettings',
           builder: (context, params) => const AppSettingsWidget(),
