@@ -229,38 +229,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'دكتورة',
       'en': 'female doctor',
     },
-    'colegrlm': {
-      'ar': 'التخصص الرئيسي',
-      'en': 'Main specialty',
-    },
-    'dv0oiqps': {
-      'ar': 'Option 1',
-      'en': 'Option 1',
-    },
-    'umljheqw': {
-      'ar': 'من فضلك اختار التخصص',
-      'en': 'Please choose your specialty',
-    },
-    '9et69ohs': {
-      'ar': 'اختار التخصص الرئيسي',
-      'en': 'Sister main specialty',
-    },
-    '6hwqf5z6': {
-      'ar': 'التخصص الفرعي',
-      'en': 'Subspecialty',
-    },
-    'znilmdsm': {
-      'ar': 'تخصص فرعي 1',
-      'en': 'Subspecialty 1',
-    },
-    'hlw4lc6m': {
-      'ar': 'Title',
-      'en': 'Title',
-    },
-    'e44k3hae': {
-      'ar': 'Title',
-      'en': 'Title',
-    },
     'fxzrnu78': {
       'ar': 'اللقب المهني',
       'en': 'Professional title',
@@ -292,6 +260,38 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'unkdvfww': {
       'ar': 'معلومات عنك',
       'en': 'information about you',
+    },
+    'colegrlm': {
+      'ar': 'التخصص الرئيسي',
+      'en': 'Main specialty',
+    },
+    'dv0oiqps': {
+      'ar': 'Option 1',
+      'en': 'Option 1',
+    },
+    'umljheqw': {
+      'ar': 'من فضلك اختار التخصص',
+      'en': 'Please choose your specialty',
+    },
+    '9et69ohs': {
+      'ar': 'اختار التخصص الرئيسي',
+      'en': 'Sister main specialty',
+    },
+    '6hwqf5z6': {
+      'ar': 'التخصص الفرعي',
+      'en': 'Subspecialty',
+    },
+    'hu7fnup2': {
+      'ar': 'Option 1',
+      'en': 'Option 1',
+    },
+    'gfwrxbi5': {
+      'ar': 'من فضلك اختار التخصص',
+      'en': 'Please choose your specialty',
+    },
+    'tfg070lx': {
+      'ar': 'اختار التخصص الرئيسي',
+      'en': 'Sister main specialty',
     },
     'r2angc5b': {
       'ar': 'حفظ البانات',

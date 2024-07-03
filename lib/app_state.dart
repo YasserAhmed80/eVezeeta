@@ -82,6 +82,36 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _refArea;
     });
+    _safeInit(() {
+      _refCategory = prefs
+              .getStringList('ff_refCategory')
+              ?.map((x) {
+                try {
+                  return DtCategoryStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refCategory;
+    });
+    _safeInit(() {
+      _refSubCategory = prefs
+              .getStringList('ff_refSubCategory')
+              ?.map((x) {
+                try {
+                  return DtSubCategoryStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refSubCategory;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -316,6 +346,88 @@ class FFAppState extends ChangeNotifier {
     refArea.insert(index, value);
     prefs.setStringList(
         'ff_refArea', _refArea.map((x) => x.serialize()).toList());
+  }
+
+  List<DtCategoryStruct> _refCategory = [];
+  List<DtCategoryStruct> get refCategory => _refCategory;
+  set refCategory(List<DtCategoryStruct> value) {
+    _refCategory = value;
+    prefs.setStringList(
+        'ff_refCategory', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefCategory(DtCategoryStruct value) {
+    refCategory.add(value);
+    prefs.setStringList(
+        'ff_refCategory', _refCategory.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefCategory(DtCategoryStruct value) {
+    refCategory.remove(value);
+    prefs.setStringList(
+        'ff_refCategory', _refCategory.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefCategory(int index) {
+    refCategory.removeAt(index);
+    prefs.setStringList(
+        'ff_refCategory', _refCategory.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefCategoryAtIndex(
+    int index,
+    DtCategoryStruct Function(DtCategoryStruct) updateFn,
+  ) {
+    refCategory[index] = updateFn(_refCategory[index]);
+    prefs.setStringList(
+        'ff_refCategory', _refCategory.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefCategory(int index, DtCategoryStruct value) {
+    refCategory.insert(index, value);
+    prefs.setStringList(
+        'ff_refCategory', _refCategory.map((x) => x.serialize()).toList());
+  }
+
+  List<DtSubCategoryStruct> _refSubCategory = [];
+  List<DtSubCategoryStruct> get refSubCategory => _refSubCategory;
+  set refSubCategory(List<DtSubCategoryStruct> value) {
+    _refSubCategory = value;
+    prefs.setStringList(
+        'ff_refSubCategory', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefSubCategory(DtSubCategoryStruct value) {
+    refSubCategory.add(value);
+    prefs.setStringList('ff_refSubCategory',
+        _refSubCategory.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefSubCategory(DtSubCategoryStruct value) {
+    refSubCategory.remove(value);
+    prefs.setStringList('ff_refSubCategory',
+        _refSubCategory.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefSubCategory(int index) {
+    refSubCategory.removeAt(index);
+    prefs.setStringList('ff_refSubCategory',
+        _refSubCategory.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefSubCategoryAtIndex(
+    int index,
+    DtSubCategoryStruct Function(DtSubCategoryStruct) updateFn,
+  ) {
+    refSubCategory[index] = updateFn(_refSubCategory[index]);
+    prefs.setStringList('ff_refSubCategory',
+        _refSubCategory.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefSubCategory(int index, DtSubCategoryStruct value) {
+    refSubCategory.insert(index, value);
+    prefs.setStringList('ff_refSubCategory',
+        _refSubCategory.map((x) => x.serialize()).toList());
   }
 }
 

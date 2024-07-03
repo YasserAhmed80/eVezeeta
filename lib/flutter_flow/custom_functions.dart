@@ -42,6 +42,22 @@ List<DtAreaStruct>? getFilteredArea(
   return outputList;
 }
 
+List<DtSubCategoryStruct>? getFilteredSubCategory(
+  int catKey,
+  List<DtSubCategoryStruct>? subCatList,
+) {
+  print('subcat');
+
+  print(subCatList);
+
+  List<DtSubCategoryStruct>? outputList =
+      subCatList?.where((item) => item.catCde == catKey).toList();
+
+  outputList?.sort((a, b) => a.desc.compareTo(b.desc));
+
+  return outputList;
+}
+
 String? stringToImagePath(String? url) {
   return url;
 }
@@ -56,4 +72,14 @@ List<DtZoneStruct>? getFilteredZone(
   outputList?.sort((a, b) => a.desc.compareTo(b.desc));
 
   return outputList;
+}
+
+bool? checkItemInList(
+  int? itemKey,
+  List<int>? itemList,
+) {
+  if (itemKey == null || itemList == null) {
+    return false;
+  }
+  return itemList.contains(itemKey);
 }

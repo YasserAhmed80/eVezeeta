@@ -113,9 +113,17 @@ Future onLoadCtitiesData() async {
   //---------------------------------------------------------------------------------------------------------//
 
   try {
-    await getGovernate();
-    await getZone();
-    await getArea();
+    if (FFAppState().refGovernate.length == 0) {
+      await getGovernate();
+    }
+
+    if (FFAppState().refZone.length == 0) {
+      await getZone();
+    }
+
+    if (FFAppState().refArea.length == 0) {
+      await getArea();
+    }
 
     //print(FFAppState().appStateRefData);
   } catch (e) {

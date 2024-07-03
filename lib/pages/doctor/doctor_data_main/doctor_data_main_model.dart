@@ -5,6 +5,30 @@ import 'doctor_data_main_widget.dart' show DoctorDataMainWidget;
 import 'package:flutter/material.dart';
 
 class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
+  ///  Local state fields for this page.
+
+  String? docName;
+
+  int? docType;
+
+  int? docCategory = 14;
+
+  List<int> docSubCategory = [1, 2];
+  void addToDocSubCategory(int item) => docSubCategory.add(item);
+  void removeFromDocSubCategory(int item) => docSubCategory.remove(item);
+  void removeAtIndexFromDocSubCategory(int index) =>
+      docSubCategory.removeAt(index);
+  void insertAtIndexInDocSubCategory(int index, int item) =>
+      docSubCategory.insert(index, item);
+  void updateDocSubCategoryAtIndex(int index, Function(int) updateFn) =>
+      docSubCategory[index] = updateFn(docSubCategory[index]);
+
+  int? docTitleCde;
+
+  String? docTitleDesc;
+
+  String? docAbout;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -29,15 +53,6 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
       choiceChipsValueController1?.value?.firstOrNull;
   set choiceChipsValue1(String? val) =>
       choiceChipsValueController1?.value = val != null ? [val] : [];
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue1;
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue2;
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue3;
   // State field(s) for ChoiceChips widget.
   FormFieldController<List<String>>? choiceChipsValueController2;
   String? get choiceChipsValue2 =>
@@ -52,6 +67,12 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   FocusNode? descriptionFocusNode2;
   TextEditingController? descriptionTextController2;
   String? Function(BuildContext, String?)? descriptionTextController2Validator;
+  // State field(s) for DropDown widget.
+  int? dropDownValue1;
+  FormFieldController<int>? dropDownValueController1;
+  // State field(s) for DropDown widget.
+  int? dropDownValue2;
+  FormFieldController<int>? dropDownValueController2;
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 

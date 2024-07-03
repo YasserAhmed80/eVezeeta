@@ -17,95 +17,65 @@ Future onLoadDocCategories() async {
   // copy code of ref_religion collection in firestore to app state religionRef data type
   // Assuming you have already initialized Firestore in your Flutter app
 
-  print('stat onLoadCtitiesData');
+  print('stat onLoadDocCategories');
 
-  Future getGovernate() async {
+  Future getCategory() async {
     // Get governate data
 
     try {
       CollectionReference refCollection =
-          FirebaseFirestore.instance.collection('governate');
+          FirebaseFirestore.instance.collection('category');
 
       // Get the documents in the ref_religion collection
       QuerySnapshot refCollectionSnapshot = await refCollection.get();
 
       refCollectionSnapshot.docs.forEach((doc) async {
-        DtGovernateStruct item = DtGovernateStruct();
+        DtCategoryStruct item = DtCategoryStruct();
 
-        item.govKey = doc.get('gov_key');
-        item.cntryCde = doc.get('cntry_cde');
+        item.catKey = doc.get('cat_key');
+        item.seq = doc.get('seq');
         item.desc = doc.get('desc');
         item.lngCde = doc.get('lng_cde');
 
         if (item.lngCde == FFAppState().currentLanguage) {
           FFAppState().update(() {
-            FFAppState().refGovernate.add(item);
+            FFAppState().refCategory.add(item);
           });
         }
       });
     } catch (e) {
-      print('error in getGovernate $e');
+      print('error in getCategory $e');
     }
   }
 
   //---------------------------------------------------------------------------------------------------------//
-  Future getZone() async {
+  Future getSubCategory() async {
     // Get governate data
 
     try {
       CollectionReference refCollection =
-          FirebaseFirestore.instance.collection('govern_zone');
+          FirebaseFirestore.instance.collection('category_sub');
 
       // Get the documents in the ref_religion collection
       QuerySnapshot refCollectionSnapshot = await refCollection.get();
 
       refCollectionSnapshot.docs.forEach((doc) async {
-        DtZoneStruct item = DtZoneStruct();
+        DtSubCategoryStruct item = DtSubCategoryStruct();
 
-        item.zoneKey = doc.get('zone_key');
-        item.govCde = doc.get('govern_cde');
+        item.subKey = doc.get('sub_key');
+        item.catCde = doc.get('cat_cde');
+        item.seq = doc.get('seq');
         item.desc = doc.get('desc');
         item.lngCde = doc.get('lng_cde');
 
         if (item.lngCde == FFAppState().currentLanguage) {
           FFAppState().update(() {
-            FFAppState().refZone.add(item);
+            FFAppState().refSubCategory.add(item);
           });
         }
       });
     } catch (e) {
-      print('error in getZone $e');
-    }
-  }
-  //---------------------------------------------------------------------------------------------------------//
-
-  //---------------------------------------------------------------------------------------------------------//
-  Future getArea() async {
-    // Get governate data
-
-    try {
-      CollectionReference refCollection =
-          FirebaseFirestore.instance.collection('zone_area');
-
-      // Get the documents in the ref_religion collection
-      QuerySnapshot refCollectionSnapshot = await refCollection.get();
-
-      refCollectionSnapshot.docs.forEach((doc) async {
-        DtAreaStruct item = DtAreaStruct();
-
-        item.areaKey = doc.get('area_key');
-        item.zoneCde = doc.get('zone_cde');
-        item.desc = doc.get('desc');
-        item.lngCde = doc.get('lng_cde');
-
-        if (item.lngCde == FFAppState().currentLanguage) {
-          FFAppState().update(() {
-            FFAppState().refArea.add(item);
-          });
-        }
-      });
-    } catch (e) {
-      print('error in getArea $e');
+      print('error in getSubCategory $e');
     }
   }
   //---------------------------------------------------------------------------------------------------------//
@@ -113,12 +83,17 @@ Future onLoadDocCategories() async {
   //---------------------------------------------------------------------------------------------------------//
 
   try {
-    await getGovernate();
-    await getZone();
-    await getArea();
+    if (FFAppState().refCategory.length == 0) {
+      await getCategory();
+      //FFAppState().refCategory?.sort((a, b) => a.seq > b.seq);
+    }
+
+    if (FFAppState().refSubCategory.length == 0) {
+      await getSubCategory();
+    }
 
     //print(FFAppState().appStateRefData);
   } catch (e) {
-    print('error in called functions $e');
+    print('error in onLoadDocCategories $e');
   }
 }

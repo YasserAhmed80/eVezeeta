@@ -1,3 +1,4 @@
+import '/components/switch_title_component_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -5,8 +6,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'doctor_data_main_model.dart';
 export 'doctor_data_main_model.dart';
 
@@ -26,6 +31,11 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DoctorDataMainModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.onLoadDocCategories();
+    });
 
     _model.fullNameTextController ??= TextEditingController();
     _model.fullNameFocusNode ??= FocusNode();
@@ -48,6 +58,8 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -163,7 +175,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
-                                                width: 1.0,
+                                                width: 0.5,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
@@ -173,7 +185,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
-                                                width: 1.0,
+                                                width: 0.5,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
@@ -183,7 +195,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .error,
-                                                width: 1.0,
+                                                width: 0.5,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
@@ -194,7 +206,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .error,
-                                                width: 1.0,
+                                                width: 0.5,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
@@ -300,7 +312,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               borderColor:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              borderWidth: 2.0,
+                                              borderWidth: 1.0,
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                             ),
@@ -316,231 +328,6 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                             ),
                                             wrapped: false,
                                           ),
-                                        ),
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'colegrlm' /* التخصص الرئيسي */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                        FlutterFlowDropDown<String>(
-                                          controller: _model
-                                                  .dropDownValueController ??=
-                                              FormFieldController<String>(null),
-                                          options: [
-                                            FFLocalizations.of(context).getText(
-                                              'dv0oiqps' /* Option 1 */,
-                                            ),
-                                            '',
-                                            '',
-                                            ''
-                                          ],
-                                          onChanged: (val) => setState(
-                                              () => _model.dropDownValue = val),
-                                          width: double.infinity,
-                                          height: 56.0,
-                                          searchHintTextStyle:
-                                              GoogleFonts.getFont(
-                                            'Cairo',
-                                            color: Colors.black,
-                                            fontSize: 14.0,
-                                          ),
-                                          searchTextStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                          hintText: FFLocalizations.of(context)
-                                              .getText(
-                                            'umljheqw' /* من فضلك اختار التخصص */,
-                                          ),
-                                          searchHintText:
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                            '9et69ohs' /* اختار التخصص الرئيسي */,
-                                          ),
-                                          searchCursorColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          icon: Icon(
-                                            Icons.keyboard_arrow_down_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
-                                          elevation: 1.0,
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                          borderWidth: 0.5,
-                                          borderRadius: 8.0,
-                                          margin:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 4.0, 16.0, 4.0),
-                                          hidesUnderline: true,
-                                          isOverButton: true,
-                                          isSearchable: true,
-                                          isMultiSelect: false,
-                                        ),
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            '6hwqf5z6' /* التخصص الفرعي */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                        ListView(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 2.0),
-                                              child: SwitchListTile.adaptive(
-                                                value: _model
-                                                        .switchListTileValue1 ??=
-                                                    true,
-                                                onChanged: (newValue) async {
-                                                  setState(() => _model
-                                                          .switchListTileValue1 =
-                                                      newValue);
-                                                },
-                                                title: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'znilmdsm' /* تخصص فرعي 1 */,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                                tileColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                activeColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                activeTrackColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiary,
-                                                dense: false,
-                                                controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .trailing,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 1.0),
-                                              child: SwitchListTile.adaptive(
-                                                value: _model
-                                                        .switchListTileValue2 ??=
-                                                    false,
-                                                onChanged: (newValue) async {
-                                                  setState(() => _model
-                                                          .switchListTileValue2 =
-                                                      newValue);
-                                                },
-                                                title: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'hlw4lc6m' /* Title */,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                                tileColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                activeColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                activeTrackColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiary,
-                                                dense: false,
-                                                controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .trailing,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 1.0),
-                                              child: SwitchListTile.adaptive(
-                                                value: _model
-                                                        .switchListTileValue3 ??=
-                                                    false,
-                                                onChanged: (newValue) async {
-                                                  setState(() => _model
-                                                          .switchListTileValue3 =
-                                                      newValue);
-                                                },
-                                                title: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'e44k3hae' /* Title */,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                                tileColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                activeColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                activeTrackColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiary,
-                                                dense: false,
-                                                controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .trailing,
-                                              ),
-                                            ),
-                                          ],
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -632,7 +419,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               borderColor:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              borderWidth: 2.0,
+                                              borderWidth: 1.0,
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                             ),
@@ -864,6 +651,224 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                           validator: _model
                                               .descriptionTextController2Validator
                                               .asValidator(context),
+                                        ),
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'colegrlm' /* التخصص الرئيسي */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                        FlutterFlowDropDown<int>(
+                                          controller: _model
+                                                  .dropDownValueController1 ??=
+                                              FormFieldController<int>(
+                                            _model.dropDownValue1 ??=
+                                                _model.docCategory,
+                                          ),
+                                          options: List<int>.from(FFAppState()
+                                              .refCategory
+                                              .map((e) => e.catKey)
+                                              .toList()),
+                                          optionLabels: FFAppState()
+                                              .refCategory
+                                              .map((e) => e.desc)
+                                              .toList(),
+                                          onChanged: (val) async {
+                                            setState(() =>
+                                                _model.dropDownValue1 = val);
+                                            _model.docCategory =
+                                                _model.dropDownValue1;
+                                            setState(() {});
+                                          },
+                                          width: double.infinity,
+                                          height: 56.0,
+                                          maxHeight: 300.0,
+                                          searchHintTextStyle:
+                                              GoogleFonts.getFont(
+                                            'Cairo',
+                                            color: Colors.black,
+                                            fontSize: 14.0,
+                                          ),
+                                          searchTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                          hintText: FFLocalizations.of(context)
+                                              .getText(
+                                            'umljheqw' /* من فضلك اختار التخصص */,
+                                          ),
+                                          searchHintText:
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                            '9et69ohs' /* اختار التخصص الرئيسي */,
+                                          ),
+                                          searchCursorColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          icon: Icon(
+                                            Icons.category_outlined,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            size: 24.0,
+                                          ),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          elevation: 1.0,
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          borderWidth: 0.5,
+                                          borderRadius: 8.0,
+                                          margin:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 4.0, 16.0, 4.0),
+                                          hidesUnderline: true,
+                                          isOverButton: true,
+                                          isSearchable: true,
+                                          isMultiSelect: false,
+                                        ),
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            '6hwqf5z6' /* التخصص الفرعي */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                        Builder(
+                                          builder: (context) {
+                                            final subCatList = functions
+                                                    .getFilteredSubCategory(
+                                                        _model.docCategory!,
+                                                        FFAppState()
+                                                            .refSubCategory
+                                                            .toList())
+                                                    ?.toList() ??
+                                                [];
+                                            return ListView.separated(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: subCatList.length,
+                                              separatorBuilder: (_, __) =>
+                                                  const SizedBox(height: 2.0),
+                                              itemBuilder:
+                                                  (context, subCatListIndex) {
+                                                final subCatListItem =
+                                                    subCatList[subCatListIndex];
+                                                return SwitchTitleComponentWidget(
+                                                  key: Key(
+                                                      'Keyxjd_${subCatListIndex}_of_${subCatList.length}'),
+                                                  item: subCatListItem,
+                                                  inputList:
+                                                      _model.docSubCategory,
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                        FlutterFlowDropDown<int>(
+                                          controller: _model
+                                                  .dropDownValueController2 ??=
+                                              FormFieldController<int>(
+                                            _model.dropDownValue2 ??= -1,
+                                          ),
+                                          options: List<int>.from(functions
+                                              .getFilteredSubCategory(
+                                                  _model.docCategory!,
+                                                  FFAppState()
+                                                      .refSubCategory
+                                                      .toList())!
+                                              .map((e) => e.subKey)
+                                              .toList()),
+                                          optionLabels: functions
+                                              .getFilteredSubCategory(
+                                                  _model.docCategory!,
+                                                  FFAppState()
+                                                      .refSubCategory
+                                                      .toList())!
+                                              .map((e) => e.desc)
+                                              .toList(),
+                                          onChanged: (val) => setState(() =>
+                                              _model.dropDownValue2 = val),
+                                          width: double.infinity,
+                                          height: 56.0,
+                                          maxHeight: 300.0,
+                                          searchHintTextStyle:
+                                              GoogleFonts.getFont(
+                                            'Cairo',
+                                            color: Colors.black,
+                                            fontSize: 14.0,
+                                          ),
+                                          searchTextStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                          hintText: FFLocalizations.of(context)
+                                              .getText(
+                                            'gfwrxbi5' /* من فضلك اختار التخصص */,
+                                          ),
+                                          searchHintText:
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                            'tfg070lx' /* اختار التخصص الرئيسي */,
+                                          ),
+                                          searchCursorColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          elevation: 1.0,
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          borderWidth: 0.5,
+                                          borderRadius: 8.0,
+                                          margin:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 4.0, 16.0, 4.0),
+                                          hidesUnderline: true,
+                                          isOverButton: true,
+                                          isSearchable: true,
+                                          isMultiSelect: false,
                                         ),
                                       ]
                                           .divide(const SizedBox(height: 12.0))
