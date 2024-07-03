@@ -68,11 +68,8 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   TextEditingController? descriptionTextController2;
   String? Function(BuildContext, String?)? descriptionTextController2Validator;
   // State field(s) for DropDown widget.
-  int? dropDownValue1;
-  FormFieldController<int>? dropDownValueController1;
-  // State field(s) for DropDown widget.
-  int? dropDownValue2;
-  FormFieldController<int>? dropDownValueController2;
+  int? dropDownValue;
+  FormFieldController<int>? dropDownValueController;
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 

@@ -12,10 +12,12 @@ class SwitchTitleComponentWidget extends StatefulWidget {
     super.key,
     required this.item,
     required this.inputList,
+    required this.actionReturnedList,
   });
 
   final DtSubCategoryStruct? item;
   final List<int>? inputList;
+  final Future Function(List<int> returenedList)? actionReturnedList;
 
   @override
   State<SwitchTitleComponentWidget> createState() =>
@@ -63,6 +65,9 @@ class _SwitchTitleComponentWidgetState
         if (newValue) {
           _model.addToSelectedList(widget.item!.subKey);
           setState(() {});
+          await widget.actionReturnedList?.call(
+            _model.selectedList,
+          );
         } else {
           _model.removeFromSelectedList(widget.item!.subKey);
           setState(() {});

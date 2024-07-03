@@ -281,18 +281,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'التخصص الفرعي',
       'en': 'Subspecialty',
     },
-    'hu7fnup2': {
-      'ar': 'Option 1',
-      'en': 'Option 1',
-    },
-    'gfwrxbi5': {
-      'ar': 'من فضلك اختار التخصص',
-      'en': 'Please choose your specialty',
-    },
-    'tfg070lx': {
-      'ar': 'اختار التخصص الرئيسي',
-      'en': 'Sister main specialty',
-    },
     'r2angc5b': {
       'ar': 'حفظ البانات',
       'en': 'Save data',

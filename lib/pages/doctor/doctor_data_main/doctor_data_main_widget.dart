@@ -664,10 +664,10 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               ),
                                         ),
                                         FlutterFlowDropDown<int>(
-                                          controller: _model
-                                                  .dropDownValueController1 ??=
-                                              FormFieldController<int>(
-                                            _model.dropDownValue1 ??=
+                                          controller:
+                                              _model.dropDownValueController ??=
+                                                  FormFieldController<int>(
+                                            _model.dropDownValue ??=
                                                 _model.docCategory,
                                           ),
                                           options: List<int>.from(FFAppState()
@@ -680,9 +680,9 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               .toList(),
                                           onChanged: (val) async {
                                             setState(() =>
-                                                _model.dropDownValue1 = val);
+                                                _model.dropDownValue = val);
                                             _model.docCategory =
-                                                _model.dropDownValue1;
+                                                _model.dropDownValue;
                                             setState(() {});
                                           },
                                           width: double.infinity,
@@ -782,93 +782,28 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                   item: subCatListItem,
                                                   inputList:
                                                       _model.docSubCategory,
+                                                  actionReturnedList:
+                                                      (returenedList) async {
+                                                    _model.docSubCategory =
+                                                        returenedList
+                                                            .toList()
+                                                            .cast<int>();
+                                                    setState(() {});
+                                                  },
                                                 );
                                               },
                                             );
                                           },
                                         ),
-                                        FlutterFlowDropDown<int>(
-                                          controller: _model
-                                                  .dropDownValueController2 ??=
-                                              FormFieldController<int>(
-                                            _model.dropDownValue2 ??= -1,
-                                          ),
-                                          options: List<int>.from(functions
-                                              .getFilteredSubCategory(
-                                                  _model.docCategory!,
-                                                  FFAppState()
-                                                      .refSubCategory
-                                                      .toList())!
-                                              .map((e) => e.subKey)
-                                              .toList()),
-                                          optionLabels: functions
-                                              .getFilteredSubCategory(
-                                                  _model.docCategory!,
-                                                  FFAppState()
-                                                      .refSubCategory
-                                                      .toList())!
-                                              .map((e) => e.desc)
-                                              .toList(),
-                                          onChanged: (val) => setState(() =>
-                                              _model.dropDownValue2 = val),
-                                          width: double.infinity,
-                                          height: 56.0,
-                                          maxHeight: 300.0,
-                                          searchHintTextStyle:
-                                              GoogleFonts.getFont(
-                                            'Cairo',
-                                            color: Colors.black,
-                                            fontSize: 14.0,
-                                          ),
-                                          searchTextStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                          hintText: FFLocalizations.of(context)
-                                              .getText(
-                                            'gfwrxbi5' /* من فضلك اختار التخصص */,
-                                          ),
-                                          searchHintText:
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                            'tfg070lx' /* اختار التخصص الرئيسي */,
-                                          ),
-                                          searchCursorColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          icon: Icon(
-                                            Icons.keyboard_arrow_down_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
-                                          elevation: 1.0,
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                          borderWidth: 0.5,
-                                          borderRadius: 8.0,
-                                          margin:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 4.0, 16.0, 4.0),
-                                          hidesUnderline: true,
-                                          isOverButton: true,
-                                          isSearchable: true,
-                                          isMultiSelect: false,
+                                        Text(
+                                          _model.docSubCategory.length
+                                              .toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                       ]
                                           .divide(const SizedBox(height: 12.0))
