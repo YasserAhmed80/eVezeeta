@@ -5,9 +5,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,11 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DoctorDataAddressModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.onLoadCtitiesData();
+    });
 
     _model.descriptionTextController1 ??= TextEditingController();
     _model.descriptionFocusNode1 ??= FocusNode();
@@ -206,7 +213,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                                     0.0,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .bold,
+                                                                        .w500,
                                                               ),
                                                       hintText:
                                                           FFLocalizations.of(
@@ -273,6 +280,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   },
                                                   width: double.infinity,
                                                   height: 56.0,
+                                                  maxHeight: 300.0,
                                                   searchHintTextStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -281,7 +289,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
                                                             fontWeight:
-                                                                FontWeight.bold,
+                                                                FontWeight.w500,
                                                           ),
                                                   searchTextStyle:
                                                       FlutterFlowTheme.of(
@@ -298,8 +306,6 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .override(
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.bold,
                                                           ),
                                                   hintText: FFLocalizations.of(
                                                           context)
@@ -372,6 +378,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   },
                                                   width: double.infinity,
                                                   height: 56.0,
+                                                  maxHeight: 300.0,
                                                   searchHintTextStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -380,7 +387,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
                                                             fontWeight:
-                                                                FontWeight.bold,
+                                                                FontWeight.w500,
                                                           ),
                                                   searchTextStyle:
                                                       FlutterFlowTheme.of(
@@ -397,8 +404,6 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .override(
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.bold,
                                                           ),
                                                   hintText: FFLocalizations.of(
                                                           context)
@@ -466,6 +471,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .areaCodeValue = val),
                                                   width: double.infinity,
                                                   height: 56.0,
+                                                  maxHeight: 300.0,
                                                   searchHintTextStyle:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -474,7 +480,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
                                                             fontWeight:
-                                                                FontWeight.bold,
+                                                                FontWeight.w500,
                                                           ),
                                                   searchTextStyle:
                                                       FlutterFlowTheme.of(
@@ -492,7 +498,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                             fontFamily: 'Cairo',
                                                             letterSpacing: 0.0,
                                                             fontWeight:
-                                                                FontWeight.bold,
+                                                                FontWeight.w500,
                                                           ),
                                                   hintText: FFLocalizations.of(
                                                           context)
@@ -718,7 +724,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   style: GoogleFonts.getFont(
                                                     'Cairo',
                                                     color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.w500,
                                                     fontSize: 14.0,
                                                   ),
                                                   maxLines: 4,

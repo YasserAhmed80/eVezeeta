@@ -71,97 +71,6 @@ Future onProjectLoad() async {
   }
   //---------------------------------------------------------------------------------------------------------//
 
-  Future getGovernate() async {
-    // Get governate data
-
-    try {
-      CollectionReference refCollection =
-          FirebaseFirestore.instance.collection('governate');
-
-      // Get the documents in the ref_religion collection
-      QuerySnapshot refCollectionSnapshot = await refCollection.get();
-
-      refCollectionSnapshot.docs.forEach((doc) async {
-        DtGovernateStruct item = DtGovernateStruct();
-
-        item.govKey = doc.get('gov_key');
-        item.cntryCde = doc.get('cntry_cde');
-        item.desc = doc.get('desc');
-        item.lngCde = doc.get('lng_cde');
-
-        if (item.lngCde == FFAppState().currentLanguage) {
-          FFAppState().update(() {
-            FFAppState().refGovernate.add(item);
-          });
-        }
-      });
-    } catch (e) {
-      print('error in getGovernate $e');
-    }
-  }
-
-  //---------------------------------------------------------------------------------------------------------//
-  Future getZone() async {
-    // Get governate data
-
-    try {
-      CollectionReference refCollection =
-          FirebaseFirestore.instance.collection('govern_zone');
-
-      // Get the documents in the ref_religion collection
-      QuerySnapshot refCollectionSnapshot = await refCollection.get();
-
-      refCollectionSnapshot.docs.forEach((doc) async {
-        DtZoneStruct item = DtZoneStruct();
-
-        item.zoneKey = doc.get('zone_key');
-        item.govCde = doc.get('govern_cde');
-        item.desc = doc.get('desc');
-        item.lngCde = doc.get('lng_cde');
-
-        if (item.lngCde == FFAppState().currentLanguage) {
-          FFAppState().update(() {
-            FFAppState().refZone.add(item);
-          });
-        }
-      });
-    } catch (e) {
-      print('error in getZone $e');
-    }
-  }
-  //---------------------------------------------------------------------------------------------------------//
-
-  //---------------------------------------------------------------------------------------------------------//
-  Future getArea() async {
-    // Get governate data
-
-    try {
-      CollectionReference refCollection =
-          FirebaseFirestore.instance.collection('zone_area');
-
-      // Get the documents in the ref_religion collection
-      QuerySnapshot refCollectionSnapshot = await refCollection.get();
-
-      refCollectionSnapshot.docs.forEach((doc) async {
-        DtAreaStruct item = DtAreaStruct();
-
-        item.areaKey = doc.get('area_key');
-        item.zoneCde = doc.get('zone_cde');
-        item.desc = doc.get('desc');
-        item.lngCde = doc.get('lng_cde');
-
-        if (item.lngCde == FFAppState().currentLanguage) {
-          FFAppState().update(() {
-            FFAppState().refArea.add(item);
-          });
-        }
-      });
-    } catch (e) {
-      print('error in getArea $e');
-    }
-  }
-  //---------------------------------------------------------------------------------------------------------//
-
   //---------------------------------------------------------------------------------------------------------//
   // add list of numbers to the age, weight and height
   void addListOfNumbers(
@@ -192,10 +101,6 @@ Future onProjectLoad() async {
     addListOfNumbers('age', 18, 70);
     addListOfNumbers('height', 140, 210);
     addListOfNumbers('weight', 40, 150);
-
-    await getGovernate();
-    await getZone();
-    await getArea();
 
     //print(FFAppState().appStateRefData);
   } catch (e) {

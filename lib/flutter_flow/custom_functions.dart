@@ -36,6 +36,8 @@ List<DtAreaStruct>? getFilteredArea(
   List<DtAreaStruct>? outputList =
       areaList?.where((item) => item.zoneCde == zoneKey).toList();
 
+  outputList?.sort((a, b) => a.desc.compareTo(b.desc));
+
   //print(outputList);
   return outputList;
 }
@@ -51,6 +53,7 @@ List<DtZoneStruct>? getFilteredZone(
   List<DtZoneStruct>? outputList =
       zoneList?.where((item) => item.govCde == govKey).toList();
 
-  //print(outputList);
+  outputList?.sort((a, b) => a.desc.compareTo(b.desc));
+
   return outputList;
 }
