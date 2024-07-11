@@ -30,6 +30,10 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
 
   String? docAbout;
 
+  bool isTypeSelected = true;
+
+  bool isTitleSelected = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

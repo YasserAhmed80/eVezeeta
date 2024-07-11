@@ -127,6 +127,12 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                     alignment: const AlignmentDirectional(1.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        // check doc type and title selection
+                        _model.isTypeSelected =
+                            _model.docType == -1 ? false : true;
+                        _model.isTitleSelected =
+                            _model.docTitleCde == -1 ? false : true;
+                        setState(() {});
                         if (_model.formKey.currentState == null ||
                             !_model.formKey.currentState!.validate()) {
                           return;
@@ -378,6 +384,12 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14.0,
                                           ),
+                                          maxLength: 200,
+                                          buildCounter: (context,
+                                                  {required currentLength,
+                                                  required isFocused,
+                                                  maxLength}) =>
+                                              null,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primary,
@@ -407,6 +419,16 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       .primaryBackground,
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
+                                              border: Border.all(
+                                                color: _model.isTypeSelected
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                width: 0.5,
+                                              ),
                                             ),
                                             child: Align(
                                               alignment: const AlignmentDirectional(
@@ -538,6 +560,16 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       .primaryBackground,
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
+                                              border: Border.all(
+                                                color: _model.isTitleSelected
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                width: 0.5,
+                                              ),
                                             ),
                                             child: Align(
                                               alignment: const AlignmentDirectional(
