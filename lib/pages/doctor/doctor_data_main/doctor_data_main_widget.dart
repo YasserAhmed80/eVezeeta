@@ -68,6 +68,8 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
       // doc sub cat codes
       _model.docSubCategory =
           FFAppState().currentDoctor.subCatId.toList().cast<int>();
+      _model.docType = FFAppState().currentDoctor.gender;
+      _model.docTitleCde = FFAppState().currentDoctor.titleId;
       setState(() {});
         });
 
@@ -140,6 +142,13 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                         if (_model.docCategoryValue == null) {
                           return;
                         }
+                        // update page state
+                        _model.docName =
+                            _model.fullNameFieldTextController.text;
+                        _model.docTitleDesc =
+                            _model.docTitleFieldTextController.text;
+                        _model.docAbout = _model.aboutFieldTextController.text;
+                        setState(() {});
                         // update model
                         FFAppState().updateCurrentDoctorStruct(
                           (e) => e
@@ -449,15 +458,16 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                     setState(() => _model
                                                             .docTypeChoiceValue =
                                                         val?.firstOrNull);
-                                                    if (_model
-                                                            .docTypeChoiceValue ==
-                                                        'دكتور') {
-                                                      _model.docType = 1;
-                                                      setState(() {});
-                                                    } else {
-                                                      _model.docType = 0;
-                                                      setState(() {});
-                                                    }
+                                                    _model.docType = functions
+                                                        .getDocTypeItem(
+                                                            _model
+                                                                .docTypeChoiceValue,
+                                                            FFAppState()
+                                                                .refDocType
+                                                                .toList(),
+                                                            0)
+                                                        ?.typeKey;
+                                                    setState(() {});
                                                   },
                                                   selectedChipStyle: ChipStyle(
                                                     backgroundColor:
@@ -523,13 +533,32 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                   chipSpacing: 18.0,
                                                   rowSpacing: 12.0,
                                                   multiselect: false,
+                                                  initialized: _model
+                                                          .docTypeChoiceValue !=
+                                                      null,
                                                   alignment:
                                                       WrapAlignment.start,
                                                   controller: _model
                                                           .docTypeChoiceValueController ??=
                                                       FormFieldController<
                                                           List<String>>(
-                                                    [],
+                                                    [
+                                                      FFAppState()
+                                                                  .currentDoctor
+                                                                  .dbDocRef !=
+                                                              null
+                                                          ? functions
+                                                              .getDocTypeItem(
+                                                                  'any',
+                                                                  FFAppState()
+                                                                      .refDocType
+                                                                      .toList(),
+                                                                  FFAppState()
+                                                                      .currentDoctor
+                                                                      .gender)!
+                                                              .desc
+                                                          : 'none'
+                                                    ],
                                                   ),
                                                   wrapped: false,
                                                 ),
@@ -586,10 +615,21 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       .map((label) =>
                                                           ChipData(label))
                                                       .toList(),
-                                                  onChanged: (val) => setState(
-                                                      () => _model
-                                                              .docTitleChoiceValue =
-                                                          val?.firstOrNull),
+                                                  onChanged: (val) async {
+                                                    setState(() => _model
+                                                            .docTitleChoiceValue =
+                                                        val?.firstOrNull);
+                                                    _model.docTitleCde = functions
+                                                        .getDocTitleItem(
+                                                            _model
+                                                                .docTitleChoiceValue,
+                                                            FFAppState()
+                                                                .refDocTitle
+                                                                .toList(),
+                                                            0)
+                                                        ?.titleKey;
+                                                    setState(() {});
+                                                  },
                                                   selectedChipStyle: ChipStyle(
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
@@ -654,13 +694,32 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                   chipSpacing: 12.0,
                                                   rowSpacing: 12.0,
                                                   multiselect: false,
+                                                  initialized: _model
+                                                          .docTitleChoiceValue !=
+                                                      null,
                                                   alignment: WrapAlignment
                                                       .spaceBetween,
                                                   controller: _model
                                                           .docTitleChoiceValueController ??=
                                                       FormFieldController<
                                                           List<String>>(
-                                                    [],
+                                                    [
+                                                      FFAppState()
+                                                                  .currentDoctor
+                                                                  .dbDocRef !=
+                                                              null
+                                                          ? functions
+                                                              .getDocTitleItem(
+                                                                  'any',
+                                                                  FFAppState()
+                                                                      .refDocTitle
+                                                                      .toList(),
+                                                                  FFAppState()
+                                                                      .currentDoctor
+                                                                      .titleId)!
+                                                              .desc
+                                                          : 'none'
+                                                    ],
                                                   ),
                                                   wrapped: true,
                                                 ),
