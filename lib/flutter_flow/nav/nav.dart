@@ -117,6 +117,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'doctor_List',
           path: '/doctorList',
           builder: (context, params) => const DoctorListWidget(),
+        ),
+        FFRoute(
+          name: 'testAppstate',
+          path: '/testAppstate',
+          builder: (context, params) => const TestAppstateWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

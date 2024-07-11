@@ -15,6 +15,8 @@ class SwitchTitleComponentModel
   void updateSelectedListAtIndex(int index, Function(int) updateFn) =>
       selectedList[index] = updateFn(selectedList[index]);
 
+  bool switchValue = false;
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for SwitchListTile widget.

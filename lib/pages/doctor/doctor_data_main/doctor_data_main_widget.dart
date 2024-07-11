@@ -1,4 +1,6 @@
 import '/backend/backend.dart';
+import '/components/empty_list_component_widget.dart';
+import '/components/load_categories_component_widget.dart';
 import '/components/switch_title_component_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -7,7 +9,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -36,42 +37,43 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await actions.onLoadDocCategories();
-      // doc name
-      setState(() {
-        _model.fullNameFieldTextController?.text =
-            FFAppState().currentDoctor.name;
-        _model.fullNameFieldTextController?.selection =
-            TextSelection.collapsed(
-                offset: _model.fullNameFieldTextController!.text.length);
-      });
-      // doc title
-      setState(() {
-        _model.docTitleFieldTextController?.text =
-            FFAppState().currentDoctor.titleDesc;
-        _model.docTitleFieldTextController?.selection =
-            TextSelection.collapsed(
-                offset: _model.docTitleFieldTextController!.text.length);
-      });
-      // doc about
-      setState(() {
-        _model.aboutFieldTextController?.text =
-            FFAppState().currentDoctor.about;
-        _model.aboutFieldTextController?.selection = TextSelection.collapsed(
-            offset: _model.aboutFieldTextController!.text.length);
-      });
-      // doc cat cde
-      setState(() {
-        _model.docCategoryValueController?.value =
-            FFAppState().currentDoctor.catId;
-      });
-      // doc sub cat codes
-      _model.docSubCategory =
-          FFAppState().currentDoctor.subCatId.toList().cast<int>();
-      _model.docType = FFAppState().currentDoctor.gender;
-      _model.docTitleCde = FFAppState().currentDoctor.titleId;
-      setState(() {});
+      if (FFAppState().currentDoctor.dbDocRef != null) {
+        // doc name
+        setState(() {
+          _model.fullNameFieldTextController?.text =
+              FFAppState().currentDoctor.name;
+          _model.fullNameFieldTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.fullNameFieldTextController!.text.length);
         });
+        // doc title
+        setState(() {
+          _model.docTitleFieldTextController?.text =
+              FFAppState().currentDoctor.titleDesc;
+          _model.docTitleFieldTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.docTitleFieldTextController!.text.length);
+        });
+        // doc about
+        setState(() {
+          _model.aboutFieldTextController?.text =
+              FFAppState().currentDoctor.about;
+          _model.aboutFieldTextController?.selection = TextSelection.collapsed(
+              offset: _model.aboutFieldTextController!.text.length);
+        });
+        // doc cat cde
+        setState(() {
+          _model.docCategoryValueController?.value =
+              FFAppState().currentDoctor.catId;
+        });
+        // doc sub cat codes
+        _model.docSubCategory =
+            FFAppState().currentDoctor.subCatId.toList().cast<int>();
+        _model.docType = FFAppState().currentDoctor.gender;
+        _model.docTitleCde = FFAppState().currentDoctor.titleId;
+        setState(() {});
+      }
+    });
 
     _model.fullNameFieldTextController ??= TextEditingController();
     _model.fullNameFieldFocusNode ??= FocusNode();
@@ -194,6 +196,22 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                             },
                           ),
                         }, docRecordReference);
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('حفظ بيانات الطبيب'),
+                              content: const Text('تم حفظ البيانات بنجاح'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                         FFAppState().updateCurrentDoctorStruct(
                           (e) => e..dbDocRef = _model.docReference?.reference,
                         );
@@ -202,7 +220,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                         setState(() {});
                       },
                       text: FFLocalizations.of(context).getText(
-                        '9ydlp7cy' /* Save */,
+                        '229rzvtz' /* Save */,
                       ),
                       options: FFButtonOptions(
                         height: 40.0,
@@ -1100,6 +1118,13 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                             .toList())
                                                     ?.toList() ??
                                                 [];
+                                            if (subCatList.isEmpty) {
+                                              return const SizedBox(
+                                                height: 200.0,
+                                                child:
+                                                    EmptyListComponentWidget(),
+                                              );
+                                            }
 
                                             return ListView.separated(
                                               padding: EdgeInsets.zero,
@@ -1113,31 +1138,51 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                   (context, subCatListIndex) {
                                                 final subCatListItem =
                                                     subCatList[subCatListIndex];
-                                                return SwitchTitleComponentWidget(
-                                                  key: Key(
-                                                      'Keyxjd_${subCatListIndex}_of_${subCatList.length}'),
-                                                  item: subCatListItem,
-                                                  inputList:
-                                                      _model.docSubCategory,
-                                                  actionReturnedList:
-                                                      (returnItem,
-                                                          switchValue) async {
-                                                    if (switchValue) {
-                                                      _model
-                                                          .addToDocSubCategory(
-                                                              returnItem!);
-                                                      setState(() {});
-                                                    } else {
-                                                      _model
-                                                          .removeFromDocSubCategory(
-                                                              returnItem!);
-                                                      setState(() {});
-                                                    }
-                                                  },
+                                                return wrapWithModel(
+                                                  model: _model
+                                                      .switchTitleComponentModels
+                                                      .getModel(
+                                                    subCatListItem.subKey
+                                                        .toString(),
+                                                    subCatListIndex,
+                                                  ),
+                                                  updateCallback: () =>
+                                                      setState(() {}),
+                                                  child:
+                                                      SwitchTitleComponentWidget(
+                                                    key: Key(
+                                                      'Keyxjd_${subCatListItem.subKey.toString()}',
+                                                    ),
+                                                    item: subCatListItem,
+                                                    inputList:
+                                                        _model.docSubCategory,
+                                                    actionReturnedList:
+                                                        (returnItem,
+                                                            switchValue) async {
+                                                      if (switchValue) {
+                                                        _model
+                                                            .addToDocSubCategory(
+                                                                returnItem!);
+                                                        setState(() {});
+                                                      } else {
+                                                        _model
+                                                            .removeFromDocSubCategory(
+                                                                returnItem!);
+                                                        setState(() {});
+                                                      }
+                                                    },
+                                                  ),
                                                 );
                                               },
                                             );
                                           },
+                                        ),
+                                        wrapWithModel(
+                                          model: _model
+                                              .loadCategoriesComponentModel,
+                                          updateCallback: () => setState(() {}),
+                                          child:
+                                              const LoadCategoriesComponentWidget(),
                                         ),
                                       ]
                                           .divide(const SizedBox(height: 12.0))

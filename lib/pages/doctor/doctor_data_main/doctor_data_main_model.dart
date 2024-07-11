@@ -1,4 +1,6 @@
 import '/backend/backend.dart';
+import '/components/load_categories_component_widget.dart';
+import '/components/switch_title_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
@@ -98,6 +100,11 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   // State field(s) for docCategory widget.
   int? docCategoryValue;
   FormFieldController<int>? docCategoryValueController;
+  // Models for switchTitleComponent dynamic component.
+  late FlutterFlowDynamicModels<SwitchTitleComponentModel>
+      switchTitleComponentModels;
+  // Model for loadCategoriesComponent component.
+  late LoadCategoriesComponentModel loadCategoriesComponentModel;
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
@@ -110,6 +117,10 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
     docTitleFieldTextControllerValidator =
         _docTitleFieldTextControllerValidator;
     aboutFieldTextControllerValidator = _aboutFieldTextControllerValidator;
+    switchTitleComponentModels =
+        FlutterFlowDynamicModels(() => SwitchTitleComponentModel());
+    loadCategoriesComponentModel =
+        createModel(context, () => LoadCategoriesComponentModel());
     customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
@@ -125,6 +136,8 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
     aboutFieldFocusNode?.dispose();
     aboutFieldTextController?.dispose();
 
+    switchTitleComponentModels.dispose();
+    loadCategoriesComponentModel.dispose();
     customNavbarModel.dispose();
   }
 }

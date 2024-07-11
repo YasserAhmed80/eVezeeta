@@ -42,6 +42,8 @@ class _SwitchTitleComponentWidgetState
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.selectedList = widget.inputList!.toList().cast<int>();
+      _model.switchValue = functions.checkItemInList(
+          widget.item?.subKey, _model.selectedList.toList())!;
       setState(() {});
     });
 
@@ -57,37 +59,41 @@ class _SwitchTitleComponentWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile.adaptive(
-      value: _model.switchListTileValue ??= functions.checkItemInList(
-          widget.item?.subKey, _model.selectedList.toList())!,
-      onChanged: (newValue) async {
-        setState(() => _model.switchListTileValue = newValue);
-        if (newValue) {
-          await widget.actionReturnedList?.call(
-            widget.item?.subKey,
-            true,
-          );
-        } else {
-          await widget.actionReturnedList?.call(
-            widget.item?.subKey,
-            false,
-          );
-        }
-      },
-      title: Text(
-        widget.item!.desc,
-        style: FlutterFlowTheme.of(context).titleLarge.override(
-              fontFamily: 'Cairo',
-              fontSize: 14.0,
-              letterSpacing: 0.0,
-              fontWeight: FontWeight.normal,
-            ),
-      ),
-      tileColor: FlutterFlowTheme.of(context).primaryBackground,
-      activeColor: FlutterFlowTheme.of(context).primaryBackground,
-      activeTrackColor: FlutterFlowTheme.of(context).tertiary,
-      dense: false,
-      controlAffinity: ListTileControlAffinity.trailing,
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        SwitchListTile.adaptive(
+          value: _model.switchListTileValue ??= _model.switchValue == true,
+          onChanged: (newValue) async {
+            setState(() => _model.switchListTileValue = newValue);
+            if (newValue) {
+              await widget.actionReturnedList?.call(
+                widget.item?.subKey,
+                true,
+              );
+            } else {
+              await widget.actionReturnedList?.call(
+                widget.item?.subKey,
+                false,
+              );
+            }
+          },
+          title: Text(
+            _model.switchValue.toString(),
+            style: FlutterFlowTheme.of(context).titleLarge.override(
+                  fontFamily: 'Cairo',
+                  fontSize: 14.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.normal,
+                ),
+          ),
+          tileColor: FlutterFlowTheme.of(context).primaryBackground,
+          activeColor: FlutterFlowTheme.of(context).primaryBackground,
+          activeTrackColor: FlutterFlowTheme.of(context).tertiary,
+          dense: false,
+          controlAffinity: ListTileControlAffinity.trailing,
+        ),
+      ],
     );
   }
 }

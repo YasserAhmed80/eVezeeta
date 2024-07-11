@@ -1,9 +1,13 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/upload_photo/upload_photo_widget.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'doctor_data_images_model.dart';
 export 'doctor_data_images_model.dart';
 
@@ -24,6 +28,23 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
     super.initState();
     _model = createModel(context, () => DoctorDataImagesModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await queryImgsRecordOnce(
+        queryBuilder: (imgsRecord) => imgsRecord.where(Filter.or(
+          Filter(
+            'e_type',
+            isEqualTo: 'doc',
+          ),
+          Filter(
+            'e_cde',
+            isEqualTo: '',
+          ),
+        )),
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -36,6 +57,8 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -124,10 +147,13 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel1,
                                     updateCallback: () => setState(() {}),
-                                    child: const UploadPhotoWidget(
+                                    child: UploadPhotoWidget(
                                       storageFolder: 'doc',
                                       entityType: 'doc',
-                                      entityCode: '100',
+                                      entityCode: FFAppState()
+                                          .currentDoctor
+                                          .dbDocRef!
+                                          .id,
                                       imgType: 'p',
                                       imgSeq: 1,
                                       imgRef: '\'\'',
@@ -217,11 +243,14 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel2,
                                       updateCallback: () => setState(() {}),
-                                      child: const UploadPhotoWidget(
+                                      child: UploadPhotoWidget(
                                         storageFolder: 'doc',
                                         entityType: 'doc',
-                                        entityCode: '100',
-                                        imgType: 'p',
+                                        entityCode: FFAppState()
+                                            .currentDoctor
+                                            .dbDocRef!
+                                            .id,
+                                        imgType: 'h',
                                         imgSeq: 1,
                                         imgRef: '\'\'',
                                       ),
@@ -277,12 +306,18 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel3,
                                       updateCallback: () => setState(() {}),
-                                      child: const UploadPhotoWidget(
+                                      child: UploadPhotoWidget(
                                         storageFolder: 'doc',
-                                        entityType: 'doc',
-                                        entityCode: '100',
-                                        imgType: 'p',
-                                        imgSeq: 1,
+                                        entityType: FFAppState()
+                                            .currentDoctor
+                                            .dbDocRef!
+                                            .id,
+                                        entityCode: FFAppState()
+                                            .currentDoctor
+                                            .dbDocRef!
+                                            .id,
+                                        imgType: 'h',
+                                        imgSeq: 2,
                                         imgRef: '\'\'',
                                       ),
                                     ),
@@ -342,11 +377,14 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel4,
                                     updateCallback: () => setState(() {}),
-                                    child: const UploadPhotoWidget(
+                                    child: UploadPhotoWidget(
                                       storageFolder: 'doc',
                                       entityType: 'doc',
-                                      entityCode: '100',
-                                      imgType: 'p',
+                                      entityCode: FFAppState()
+                                          .currentDoctor
+                                          .dbDocRef!
+                                          .id,
+                                      imgType: 'r1',
                                       imgSeq: 1,
                                       imgRef: '\'\'',
                                     ),
@@ -409,11 +447,14 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel5,
                                       updateCallback: () => setState(() {}),
-                                      child: const UploadPhotoWidget(
+                                      child: UploadPhotoWidget(
                                         storageFolder: 'doc',
                                         entityType: 'doc',
-                                        entityCode: '100',
-                                        imgType: 'p',
+                                        entityCode: FFAppState()
+                                            .currentDoctor
+                                            .dbDocRef!
+                                            .id,
+                                        imgType: 'r2',
                                         imgSeq: 1,
                                         imgRef: '\'\'',
                                       ),

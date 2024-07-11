@@ -1,11 +1,11 @@
 import '/backend/backend.dart';
+import '/components/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,49 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await actions.onLoadCtitiesData();
+      if (FFAppState().currentDoctor.dbDocRef != null) {
+        _model.countryCode = FFAppState().currentDoctor.aCon;
+        _model.governateCode = FFAppState().currentDoctor.aGov;
+        _model.zoneCode = FFAppState().currentDoctor.aZone;
+        _model.areaCode = FFAppState().currentDoctor.aArea;
+        _model.addrDesc = FFAppState().currentDoctor.aAddr;
+        _model.tel1 = FFAppState().currentDoctor.tel1;
+        _model.tel2 = FFAppState().currentDoctor.tel2;
+        setState(() {});
+        // contry field
+        setState(() {
+          _model.countryCodeValueController?.value =
+              FFAppState().currentDoctor.aCon;
+        });
+        setState(() {
+          _model.govCodeValueController?.value =
+              FFAppState().currentDoctor.aGov;
+        });
+        setState(() {
+          _model.zoneCodeValueController?.value =
+              FFAppState().currentDoctor.aZone;
+        });
+        setState(() {
+          _model.areaCodeValueController?.value =
+              FFAppState().currentDoctor.aArea;
+        });
+        setState(() {
+          _model.addressDescTextController?.text =
+              FFAppState().currentDoctor.aAddr;
+          _model.addressDescTextController?.selection = TextSelection.collapsed(
+              offset: _model.addressDescTextController!.text.length);
+        });
+        setState(() {
+          _model.tel1TextController?.text = FFAppState().currentDoctor.tel1;
+          _model.tel1TextController?.selection = TextSelection.collapsed(
+              offset: _model.tel1TextController!.text.length);
+        });
+        setState(() {
+          _model.tel2TextController?.text = FFAppState().currentDoctor.tel2;
+          _model.tel2TextController?.selection = TextSelection.collapsed(
+              offset: _model.tel2TextController!.text.length);
+        });
+      }
     });
 
     _model.addressDescTextController ??= TextEditingController();
@@ -93,15 +135,53 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      await FFAppState()
-                          .currentDoctor
-                          .dbDocRef!
-                          .update(createDocRecordData(
-                            name: _model.countryCodeValue?.toString(),
-                          ));
-                                        },
+                      if (FFAppState().currentDoctor.dbDocRef != null) {
+                        // update model
+                        FFAppState().updateCurrentDoctorStruct(
+                          (e) => e
+                            ..aCon = _model.countryCode
+                            ..aGov = _model.governateCode
+                            ..aZone = _model.zoneCode
+                            ..aArea = _model.areaCode
+                            ..tel1 = _model.tel1TextController.text
+                            ..tel2 = _model.tel2TextController.text
+                            ..aAddr = _model.addressDescTextController.text,
+                        );
+                        setState(() {});
+                        // save to DB
+
+                        await FFAppState()
+                            .currentDoctor
+                            .dbDocRef!
+                            .update(createDocRecordData(
+                              aCon: FFAppState().currentDoctor.aCon,
+                              aGov: FFAppState().currentDoctor.aGov,
+                              aZone: FFAppState().currentDoctor.aZone,
+                              aArea: FFAppState().currentDoctor.aArea,
+                              tel1: FFAppState().currentDoctor.tel1,
+                              tel2: FFAppState().currentDoctor.tel2,
+                              aAddr: FFAppState().currentDoctor.aAddr,
+                            ));
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('حفظ بيانات الطبيب'),
+                              content: const Text('تم حفظ البيانات بنجاح'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    },
                     text: FFLocalizations.of(context).getText(
-                      '229rzvtz' /* Save */,
+                      '9ydlp7cy' /* Save */,
                     ),
                     options: FFButtonOptions(
                       height: 40.0,
@@ -507,9 +587,13 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               .toList())!
                                                       .map((e) => e.desc)
                                                       .toList(),
-                                                  onChanged: (val) => setState(
-                                                      () => _model
-                                                          .areaCodeValue = val),
+                                                  onChanged: (val) async {
+                                                    setState(() => _model
+                                                        .areaCodeValue = val);
+                                                    _model.areaCode =
+                                                        _model.areaCodeValue;
+                                                    setState(() {});
+                                                  },
                                                   width: double.infinity,
                                                   height: 56.0,
                                                   maxHeight: 300.0,
@@ -1309,6 +1393,11 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                             ),
                                           ),
                                         ),
+                                      ),
+                                      wrapWithModel(
+                                        model: _model.loadCitiesCoponentModel,
+                                        updateCallback: () => setState(() {}),
+                                        child: const LoadCitiesCoponentWidget(),
                                       ),
                                     ]
                                         .divide(const SizedBox(height: 12.0))

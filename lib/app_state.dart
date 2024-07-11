@@ -142,6 +142,17 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _refDocType;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_currentDoctor')) {
+        try {
+          final serializedData = prefs.getString('ff_currentDoctor') ?? '{}';
+          _currentDoctor =
+              DtDoctorStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -560,10 +571,12 @@ class FFAppState extends ChangeNotifier {
   DtDoctorStruct get currentDoctor => _currentDoctor;
   set currentDoctor(DtDoctorStruct value) {
     _currentDoctor = value;
+    prefs.setString('ff_currentDoctor', value.serialize());
   }
 
   void updateCurrentDoctorStruct(Function(DtDoctorStruct) updateFn) {
     updateFn(_currentDoctor);
+    prefs.setString('ff_currentDoctor', _currentDoctor.serialize());
   }
 }
 

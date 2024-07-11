@@ -313,7 +313,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بيانات الطبيب الاساسية',
       'en': 'Basic doctor information',
     },
-    '9ydlp7cy': {
+    '229rzvtz': {
       'ar': 'Save',
       'en': '',
     },
@@ -448,7 +448,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'ادخل عنوان العمل',
       'en': 'Basic doctor information',
     },
-    '229rzvtz': {
+    '9ydlp7cy': {
       'ar': 'Save',
       'en': '',
     },
@@ -512,6 +512,28 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'zrwrju63': {
       'ar': 'Home',
+      'en': '',
+    },
+  },
+  // testAppstate
+  {
+    'mu62r1ss': {
+      'ar': 'Page Title',
+      'en': '',
+    },
+    'mxas0rf6': {
+      'ar': 'Button',
+      'en': '',
+    },
+    'rmxrt49s': {
+      'ar': 'Home',
+      'en': '',
+    },
+  },
+  // emptyListComponent
+  {
+    'agis7jk9': {
+      'ar': 'من فضلك اختار التخصص الرئيسي',
       'en': '',
     },
   },

@@ -1,12 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'upload_photo_model.dart';
 export 'upload_photo_model.dart';
 
@@ -51,6 +54,31 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
       _model.saveLoadImage = false;
       _model.isLoading = false;
       setState(() {});
+      _model.queryImage = await queryImgsRecordOnce(
+        queryBuilder: (imgsRecord) => imgsRecord.where(Filter.or(
+          Filter(
+            'e_type',
+            isEqualTo: widget.entityType,
+          ),
+          Filter(
+            'e_cde',
+            isEqualTo: widget.entityCode,
+          ),
+          Filter(
+            'i_type',
+            isEqualTo: widget.imgType,
+          ),
+          Filter(
+            'i_seq',
+            isEqualTo: widget.imgSeq,
+          ),
+        )),
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      if (_model.queryImage?.reference != null) {
+        _model.curretImage = _model.queryImage?.iRef;
+        setState(() {});
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -65,6 +93,8 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -213,6 +243,22 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                       _model.isLoading = false;
                                       _model.curretImage = _model.photoUrl;
                                       setState(() {});
+                                      if ((widget.entityType == 'doc') &&
+                                          (widget.imgType == 'p')) {
+                                        FFAppState().updateCurrentDoctorStruct(
+                                          (e) => e..img = _model.photoUrl,
+                                        );
+                                        setState(() {});
+
+                                        await FFAppState()
+                                            .currentDoctor
+                                            .dbDocRef!
+                                            .update(createDocRecordData(
+                                              img: FFAppState()
+                                                  .currentDoctor
+                                                  .img,
+                                            ));
+                                      }
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(

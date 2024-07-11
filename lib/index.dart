@@ -10,3 +10,4 @@ export '/pages/doctor/doctor_data_images/doctor_data_images_widget.dart'
     show DoctorDataImagesWidget;
 export '/pages/doctor/doctor_list/doctor_list_widget.dart'
     show DoctorListWidget;
+export '/test_appstate/test_appstate_widget.dart' show TestAppstateWidget;

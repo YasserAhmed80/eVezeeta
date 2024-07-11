@@ -1,3 +1,4 @@
+import '/components/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
@@ -89,6 +90,8 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
     return null;
   }
 
+  // Model for loadCitiesCoponent component.
+  late LoadCitiesCoponentModel loadCitiesCoponentModel;
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 
@@ -97,6 +100,8 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
     addressDescTextControllerValidator = _addressDescTextControllerValidator;
     tel1TextControllerValidator = _tel1TextControllerValidator;
     tel2TextControllerValidator = _tel2TextControllerValidator;
+    loadCitiesCoponentModel =
+        createModel(context, () => LoadCitiesCoponentModel());
     customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
@@ -112,6 +117,7 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
     tel2FocusNode?.dispose();
     tel2TextController?.dispose();
 
+    loadCitiesCoponentModel.dispose();
     customNavbarModel.dispose();
   }
 }

@@ -72,7 +72,7 @@ DtDocTypeStruct? getDocTypeItem(
 ) {
   DtDocTypeStruct? item;
 
-  if (key > 0) {
+  if (key >= 0) {
     // get itme by key
     item = typeList?.firstWhere((i) => i.typeKey == key);
   } else {
