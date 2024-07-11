@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/components/switch_title_component_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -8,6 +9,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,16 +37,48 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.onLoadDocCategories();
-    });
+      // doc name
+      setState(() {
+        _model.fullNameFieldTextController?.text =
+            FFAppState().currentDoctor.name;
+        _model.fullNameFieldTextController?.selection =
+            TextSelection.collapsed(
+                offset: _model.fullNameFieldTextController!.text.length);
+      });
+      // doc title
+      setState(() {
+        _model.docTitleFieldTextController?.text =
+            FFAppState().currentDoctor.titleDesc;
+        _model.docTitleFieldTextController?.selection =
+            TextSelection.collapsed(
+                offset: _model.docTitleFieldTextController!.text.length);
+      });
+      // doc about
+      setState(() {
+        _model.aboutFieldTextController?.text =
+            FFAppState().currentDoctor.about;
+        _model.aboutFieldTextController?.selection = TextSelection.collapsed(
+            offset: _model.aboutFieldTextController!.text.length);
+      });
+      // doc cat cde
+      setState(() {
+        _model.docCategoryValueController?.value =
+            FFAppState().currentDoctor.catId;
+      });
+      // doc sub cat codes
+      _model.docSubCategory =
+          FFAppState().currentDoctor.subCatId.toList().cast<int>();
+      setState(() {});
+        });
 
-    _model.fullNameTextController ??= TextEditingController();
-    _model.fullNameFocusNode ??= FocusNode();
+    _model.fullNameFieldTextController ??= TextEditingController();
+    _model.fullNameFieldFocusNode ??= FocusNode();
 
-    _model.descriptionTextController1 ??= TextEditingController();
-    _model.descriptionFocusNode1 ??= FocusNode();
+    _model.docTitleFieldTextController ??= TextEditingController();
+    _model.docTitleFieldFocusNode ??= FocusNode();
 
-    _model.descriptionTextController2 ??= TextEditingController();
-    _model.descriptionFocusNode2 ??= FocusNode();
+    _model.aboutFieldTextController ??= TextEditingController();
+    _model.aboutFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -74,16 +108,110 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  '36ztx53p' /* بيانات الطبيب الاساسية */,
-                ),
-                style: FlutterFlowTheme.of(context).headlineSmall.override(
-                      fontFamily: 'Cairo',
-                      color: FlutterFlowTheme.of(context).secondary,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    FFLocalizations.of(context).getText(
+                      '36ztx53p' /* بيانات الطبيب الاساسية */,
                     ),
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Cairo',
+                          color: FlutterFlowTheme.of(context).secondary,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(1.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        if (_model.formKey.currentState == null ||
+                            !_model.formKey.currentState!.validate()) {
+                          return;
+                        }
+                        if (_model.docCategoryValue == null) {
+                          return;
+                        }
+                        // update model
+                        FFAppState().updateCurrentDoctorStruct(
+                          (e) => e
+                            ..name = _model.docName
+                            ..gender = _model.docType
+                            ..titleId = _model.docTitleCde
+                            ..titleDesc = _model.docTitleDesc
+                            ..catId = _model.docCategory
+                            ..subCatId = _model.docSubCategory.toList()
+                            ..about = _model.docAbout,
+                        );
+                        setState(() {});
+                        // save model to DB
+
+                        var docRecordReference = DocRecord.collection.doc();
+                        await docRecordReference.set({
+                          ...createDocRecordData(
+                            name: FFAppState().currentDoctor.name,
+                            gender: FFAppState().currentDoctor.gender,
+                            catId: FFAppState().currentDoctor.catId,
+                            titleId: FFAppState().currentDoctor.titleId,
+                            title: FFAppState().currentDoctor.titleDesc,
+                            about: FFAppState().currentDoctor.about,
+                          ),
+                          ...mapToFirestore(
+                            {
+                              'sub_cat_id': FFAppState().currentDoctor.subCatId,
+                            },
+                          ),
+                        });
+                        _model.docReference = DocRecord.getDocumentFromData({
+                          ...createDocRecordData(
+                            name: FFAppState().currentDoctor.name,
+                            gender: FFAppState().currentDoctor.gender,
+                            catId: FFAppState().currentDoctor.catId,
+                            titleId: FFAppState().currentDoctor.titleId,
+                            title: FFAppState().currentDoctor.titleDesc,
+                            about: FFAppState().currentDoctor.about,
+                          ),
+                          ...mapToFirestore(
+                            {
+                              'sub_cat_id': FFAppState().currentDoctor.subCatId,
+                            },
+                          ),
+                        }, docRecordReference);
+                        FFAppState().updateCurrentDoctorStruct(
+                          (e) => e..dbDocRef = _model.docReference?.reference,
+                        );
+                        setState(() {});
+
+                        setState(() {});
+                      },
+                      text: FFLocalizations.of(context).getText(
+                        '9ydlp7cy' /* Save */,
+                      ),
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Cairo',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                        elevation: 3.0,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ].divide(const SizedBox(height: 4.0)),
           ),
@@ -118,6 +246,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
                                   child: SingleChildScrollView(
+                                    primary: false,
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -135,9 +264,16 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               ),
                                         ),
                                         TextFormField(
-                                          controller:
-                                              _model.fullNameTextController,
-                                          focusNode: _model.fullNameFocusNode,
+                                          controller: _model
+                                              .fullNameFieldTextController,
+                                          focusNode:
+                                              _model.fullNameFieldFocusNode,
+                                          onChanged: (_) =>
+                                              EasyDebounce.debounce(
+                                            '_model.fullNameFieldTextController',
+                                            const Duration(milliseconds: 2000),
+                                            () => setState(() {}),
+                                          ),
                                           autofocus: false,
                                           textCapitalization:
                                               TextCapitalization.words,
@@ -218,6 +354,23 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                             contentPadding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
+                                            suffixIcon: _model
+                                                    .fullNameFieldTextController!
+                                                    .text
+                                                    .isNotEmpty
+                                                ? InkWell(
+                                                    onTap: () async {
+                                                      _model
+                                                          .fullNameFieldTextController
+                                                          ?.clear();
+                                                      setState(() {});
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.clear,
+                                                      size: 22,
+                                                    ),
+                                                  )
+                                                : null,
                                           ),
                                           style: GoogleFonts.getFont(
                                             'Cairo',
@@ -229,7 +382,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .primary,
                                           validator: _model
-                                              .fullNameTextControllerValidator
+                                              .fullNameFieldTextControllerValidator
                                               .asValidator(context),
                                         ),
                                         Text(
@@ -246,87 +399,120 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                         Align(
                                           alignment:
                                               const AlignmentDirectional(0.0, 0.0),
-                                          child: FlutterFlowChoiceChips(
-                                            options: [
-                                              ChipData(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'cgudykpx' /* دكتور */,
-                                              )),
-                                              ChipData(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'f8fhku49' /* دكتورة */,
-                                              ))
-                                            ],
-                                            onChanged: (val) => setState(() =>
-                                                _model.choiceChipsValue1 =
-                                                    val?.firstOrNull),
-                                            selectedChipStyle: ChipStyle(
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .accent2,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              iconColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              iconSize: 18.0,
-                                              elevation: 0.0,
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderWidth: 2.0,
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            unselectedChipStyle: ChipStyle(
-                                              backgroundColor:
+                                          child: Container(
+                                            height: 50.0,
+                                            decoration: BoxDecoration(
+                                              color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              iconColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              iconSize: 18.0,
-                                              elevation: 0.0,
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderWidth: 1.0,
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(12.0),
                                             ),
-                                            chipSpacing: 18.0,
-                                            rowSpacing: 12.0,
-                                            multiselect: false,
-                                            alignment: WrapAlignment.start,
-                                            controller: _model
-                                                    .choiceChipsValueController1 ??=
-                                                FormFieldController<
-                                                    List<String>>(
-                                              [],
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 0.0, 10.0, 0.0),
+                                                child: FlutterFlowChoiceChips(
+                                                  options: FFAppState()
+                                                      .refDocType
+                                                      .map((e) => e.desc)
+                                                      .toList()
+                                                      .map((label) =>
+                                                          ChipData(label))
+                                                      .toList(),
+                                                  onChanged: (val) async {
+                                                    setState(() => _model
+                                                            .docTypeChoiceValue =
+                                                        val?.firstOrNull);
+                                                    if (_model
+                                                            .docTypeChoiceValue ==
+                                                        'دكتور') {
+                                                      _model.docType = 1;
+                                                      setState(() {});
+                                                    } else {
+                                                      _model.docType = 0;
+                                                      setState(() {});
+                                                    }
+                                                  },
+                                                  selectedChipStyle: ChipStyle(
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .accent2,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    iconColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    iconSize: 18.0,
+                                                    elevation: 0.0,
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    borderWidth: 2.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  unselectedChipStyle:
+                                                      ChipStyle(
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    iconColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText,
+                                                    iconSize: 18.0,
+                                                    elevation: 0.0,
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    borderWidth: 1.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  chipSpacing: 18.0,
+                                                  rowSpacing: 12.0,
+                                                  multiselect: false,
+                                                  alignment:
+                                                      WrapAlignment.start,
+                                                  controller: _model
+                                                          .docTypeChoiceValueController ??=
+                                                      FormFieldController<
+                                                          List<String>>(
+                                                    [],
+                                                  ),
+                                                  wrapped: false,
+                                                ),
+                                              ),
                                             ),
-                                            wrapped: false,
                                           ),
                                         ),
                                         Text(
@@ -343,105 +529,124 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                         Align(
                                           alignment:
                                               const AlignmentDirectional(0.0, 0.0),
-                                          child: FlutterFlowChoiceChips(
-                                            options: [
-                                              ChipData(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                '8o7ug2yh' /* أستاذ */,
-                                              )),
-                                              ChipData(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'zjgjh0yg' /* مدرس */,
-                                              )),
-                                              ChipData(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'iupucnt8' /* أخصائي */,
-                                              )),
-                                              ChipData(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'y3izu3yh' /* استشاري */,
-                                              ))
-                                            ],
-                                            onChanged: (val) => setState(() =>
-                                                _model.choiceChipsValue2 =
-                                                    val?.firstOrNull),
-                                            selectedChipStyle: ChipStyle(
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .accent2,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              iconColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              iconSize: 18.0,
-                                              elevation: 0.0,
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderWidth: 2.0,
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            unselectedChipStyle: ChipStyle(
-                                              backgroundColor:
+                                          child: Container(
+                                            width: double.infinity,
+                                            height: 50.0,
+                                            decoration: BoxDecoration(
+                                              color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              iconColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              iconSize: 18.0,
-                                              elevation: 0.0,
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderWidth: 1.0,
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(12.0),
                                             ),
-                                            chipSpacing: 12.0,
-                                            rowSpacing: 12.0,
-                                            multiselect: false,
-                                            alignment:
-                                                WrapAlignment.spaceBetween,
-                                            controller: _model
-                                                    .choiceChipsValueController2 ??=
-                                                FormFieldController<
-                                                    List<String>>(
-                                              [],
+                                            child: Align(
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 0.0, 10.0, 0.0),
+                                                child: FlutterFlowChoiceChips(
+                                                  options: FFAppState()
+                                                      .refDocTitle
+                                                      .map((e) => e.desc)
+                                                      .toList()
+                                                      .map((label) =>
+                                                          ChipData(label))
+                                                      .toList(),
+                                                  onChanged: (val) => setState(
+                                                      () => _model
+                                                              .docTitleChoiceValue =
+                                                          val?.firstOrNull),
+                                                  selectedChipStyle: ChipStyle(
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .accent2,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    iconColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    iconSize: 18.0,
+                                                    elevation: 0.0,
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    borderWidth: 2.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  unselectedChipStyle:
+                                                      ChipStyle(
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    iconColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText,
+                                                    iconSize: 18.0,
+                                                    elevation: 0.0,
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    borderWidth: 1.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  chipSpacing: 12.0,
+                                                  rowSpacing: 12.0,
+                                                  multiselect: false,
+                                                  alignment: WrapAlignment
+                                                      .spaceBetween,
+                                                  controller: _model
+                                                          .docTitleChoiceValueController ??=
+                                                      FormFieldController<
+                                                          List<String>>(
+                                                    [],
+                                                  ),
+                                                  wrapped: true,
+                                                ),
+                                              ),
                                             ),
-                                            wrapped: true,
                                           ),
                                         ),
                                         TextFormField(
-                                          controller:
-                                              _model.descriptionTextController1,
+                                          controller: _model
+                                              .docTitleFieldTextController,
                                           focusNode:
-                                              _model.descriptionFocusNode1,
+                                              _model.docTitleFieldFocusNode,
+                                          onChanged: (_) =>
+                                              EasyDebounce.debounce(
+                                            '_model.docTitleFieldTextController',
+                                            const Duration(milliseconds: 2000),
+                                            () => setState(() {}),
+                                          ),
                                           autofocus: false,
                                           textCapitalization:
                                               TextCapitalization.words,
@@ -522,6 +727,23 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                             contentPadding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
+                                            suffixIcon: _model
+                                                    .docTitleFieldTextController!
+                                                    .text
+                                                    .isNotEmpty
+                                                ? InkWell(
+                                                    onTap: () async {
+                                                      _model
+                                                          .docTitleFieldTextController
+                                                          ?.clear();
+                                                      setState(() {});
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.clear,
+                                                      size: 22,
+                                                    ),
+                                                  )
+                                                : null,
                                           ),
                                           style: GoogleFonts.getFont(
                                             'Cairo',
@@ -536,7 +758,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .primary,
                                           validator: _model
-                                              .descriptionTextController1Validator
+                                              .docTitleFieldTextControllerValidator
                                               .asValidator(context),
                                         ),
                                         Text(
@@ -552,9 +774,14 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                         ),
                                         TextFormField(
                                           controller:
-                                              _model.descriptionTextController2,
-                                          focusNode:
-                                              _model.descriptionFocusNode2,
+                                              _model.aboutFieldTextController,
+                                          focusNode: _model.aboutFieldFocusNode,
+                                          onChanged: (_) =>
+                                              EasyDebounce.debounce(
+                                            '_model.aboutFieldTextController',
+                                            const Duration(milliseconds: 2000),
+                                            () => setState(() {}),
+                                          ),
                                           autofocus: false,
                                           textCapitalization:
                                               TextCapitalization.words,
@@ -635,6 +862,23 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                             contentPadding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
+                                            suffixIcon: _model
+                                                    .aboutFieldTextController!
+                                                    .text
+                                                    .isNotEmpty
+                                                ? InkWell(
+                                                    onTap: () async {
+                                                      _model
+                                                          .aboutFieldTextController
+                                                          ?.clear();
+                                                      setState(() {});
+                                                    },
+                                                    child: const Icon(
+                                                      Icons.clear,
+                                                      size: 22,
+                                                    ),
+                                                  )
+                                                : null,
                                           ),
                                           style: GoogleFonts.getFont(
                                             'Cairo',
@@ -649,7 +893,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .primary,
                                           validator: _model
-                                              .descriptionTextController2Validator
+                                              .aboutFieldTextControllerValidator
                                               .asValidator(context),
                                         ),
                                         Text(
@@ -664,10 +908,10 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               ),
                                         ),
                                         FlutterFlowDropDown<int>(
-                                          controller:
-                                              _model.dropDownValueController ??=
-                                                  FormFieldController<int>(
-                                            _model.dropDownValue ??=
+                                          controller: _model
+                                                  .docCategoryValueController ??=
+                                              FormFieldController<int>(
+                                            _model.docCategoryValue ??=
                                                 _model.docCategory,
                                           ),
                                           options: List<int>.from(FFAppState()
@@ -680,9 +924,9 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               .toList(),
                                           onChanged: (val) async {
                                             setState(() =>
-                                                _model.dropDownValue = val);
+                                                _model.docCategoryValue = val);
                                             _model.docCategory =
-                                                _model.dropDownValue;
+                                                _model.docCategoryValue;
                                             setState(() {});
                                           },
                                           width: double.infinity,
@@ -765,8 +1009,10 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                             .toList())
                                                     ?.toList() ??
                                                 [];
+
                                             return ListView.separated(
                                               padding: EdgeInsets.zero,
+                                              primary: false,
                                               shrinkWrap: true,
                                               scrollDirection: Axis.vertical,
                                               itemCount: subCatList.length,
@@ -783,27 +1029,24 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                   inputList:
                                                       _model.docSubCategory,
                                                   actionReturnedList:
-                                                      (returenedList) async {
-                                                    _model.docSubCategory =
-                                                        returenedList
-                                                            .toList()
-                                                            .cast<int>();
-                                                    setState(() {});
+                                                      (returnItem,
+                                                          switchValue) async {
+                                                    if (switchValue) {
+                                                      _model
+                                                          .addToDocSubCategory(
+                                                              returnItem!);
+                                                      setState(() {});
+                                                    } else {
+                                                      _model
+                                                          .removeFromDocSubCategory(
+                                                              returnItem!);
+                                                      setState(() {});
+                                                    }
                                                   },
                                                 );
                                               },
                                             );
                                           },
-                                        ),
-                                        Text(
-                                          _model.docSubCategory.length
-                                              .toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                letterSpacing: 0.0,
-                                              ),
                                         ),
                                       ]
                                           .divide(const SizedBox(height: 12.0))

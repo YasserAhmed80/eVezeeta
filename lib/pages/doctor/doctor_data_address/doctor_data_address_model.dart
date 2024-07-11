@@ -39,37 +39,78 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
   // State field(s) for areaCode widget.
   int? areaCodeValue;
   FormFieldController<int>? areaCodeValueController;
-  // State field(s) for description widget.
-  FocusNode? descriptionFocusNode1;
-  TextEditingController? descriptionTextController1;
-  String? Function(BuildContext, String?)? descriptionTextController1Validator;
-  // State field(s) for description widget.
-  FocusNode? descriptionFocusNode2;
-  TextEditingController? descriptionTextController2;
-  String? Function(BuildContext, String?)? descriptionTextController2Validator;
-  // State field(s) for description widget.
-  FocusNode? descriptionFocusNode3;
-  TextEditingController? descriptionTextController3;
-  String? Function(BuildContext, String?)? descriptionTextController3Validator;
+  // State field(s) for addressDesc widget.
+  FocusNode? addressDescFocusNode;
+  TextEditingController? addressDescTextController;
+  String? Function(BuildContext, String?)? addressDescTextControllerValidator;
+  String? _addressDescTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        '6z4kdjmt' /* من فضلك ادخل عنوان الشارع و ال... */,
+      );
+    }
+
+    return null;
+  }
+
+  // State field(s) for tel1 widget.
+  FocusNode? tel1FocusNode;
+  TextEditingController? tel1TextController;
+  String? Function(BuildContext, String?)? tel1TextControllerValidator;
+  String? _tel1TextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'swbyk6o7' /* من فضلك ادخل تليفون 1 */,
+      );
+    }
+
+    if (val.length < 11) {
+      return 'Requires at least 11 characters.';
+    }
+    if (val.length > 11) {
+      return 'Maximum 11 characters allowed, currently ${val.length}.';
+    }
+
+    return null;
+  }
+
+  // State field(s) for tel2 widget.
+  FocusNode? tel2FocusNode;
+  TextEditingController? tel2TextController;
+  String? Function(BuildContext, String?)? tel2TextControllerValidator;
+  String? _tel2TextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'wg1mjq5j' /* من فضلك ادخل تليفون 2  */,
+      );
+    }
+
+    return null;
+  }
+
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 
   @override
   void initState(BuildContext context) {
+    addressDescTextControllerValidator = _addressDescTextControllerValidator;
+    tel1TextControllerValidator = _tel1TextControllerValidator;
+    tel2TextControllerValidator = _tel2TextControllerValidator;
     customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    descriptionFocusNode1?.dispose();
-    descriptionTextController1?.dispose();
+    addressDescFocusNode?.dispose();
+    addressDescTextController?.dispose();
 
-    descriptionFocusNode2?.dispose();
-    descriptionTextController2?.dispose();
+    tel1FocusNode?.dispose();
+    tel1TextController?.dispose();
 
-    descriptionFocusNode3?.dispose();
-    descriptionTextController3?.dispose();
+    tel2FocusNode?.dispose();
+    tel2TextController?.dispose();
 
     customNavbarModel.dispose();
   }

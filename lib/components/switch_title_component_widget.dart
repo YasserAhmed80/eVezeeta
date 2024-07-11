@@ -17,7 +17,7 @@ class SwitchTitleComponentWidget extends StatefulWidget {
 
   final DtSubCategoryStruct? item;
   final List<int>? inputList;
-  final Future Function(List<int> returenedList)? actionReturnedList;
+  final Future Function(int? returnItem, bool switchValue)? actionReturnedList;
 
   @override
   State<SwitchTitleComponentWidget> createState() =>
@@ -63,14 +63,15 @@ class _SwitchTitleComponentWidgetState
       onChanged: (newValue) async {
         setState(() => _model.switchListTileValue = newValue);
         if (newValue) {
-          _model.addToSelectedList(widget.item!.subKey);
-          setState(() {});
           await widget.actionReturnedList?.call(
-            _model.selectedList,
+            widget.item?.subKey,
+            true,
           );
         } else {
-          _model.removeFromSelectedList(widget.item!.subKey);
-          setState(() {});
+          await widget.actionReturnedList?.call(
+            widget.item?.subKey,
+            false,
+          );
         }
       },
       title: Text(

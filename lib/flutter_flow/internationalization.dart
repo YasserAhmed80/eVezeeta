@@ -285,45 +285,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'حفظ البانات',
       'en': 'Save data',
     },
-    '4fdfux20': {
-      'ar': 'Please enter the patients full name.',
-      'en': 'Please enter the patients full name.',
+    'wpiz9b8i': {
+      'ar': 'من فضلك ادخل اسمك كامل',
+      'en': '',
     },
     '2nfyz3v8': {
       'ar': 'Please choose an option from the dropdown',
       'en': 'Please choose an option from the dropdown',
     },
-    '3toxbyy2': {
-      'ar': 'Please enter an age for the patient.',
-      'en': 'Please enter an age for the patient.',
-    },
-    '2waz6oz5': {
-      'ar': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    'j8b8j824': {
-      'ar': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    'pj1bs6gw': {
-      'ar': 'Please enter the date of birth of the patient.',
-      'en': 'Please enter the date of birth of the patient.',
-    },
-    'hl2z3v2y': {
-      'ar': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    'g60q7v3q': {
-      'ar': 'Field is required',
-      'en': 'Field is required',
+    '6wm72l75': {
+      'ar': 'من فضلم ادخل لقبك المهني',
+      'en': '',
     },
     'dak8g6t9': {
       'ar': 'Please choose an option from the dropdown',
       'en': 'Please choose an option from the dropdown',
     },
+    '4570g8p3': {
+      'ar': 'من فضلك اكتب بعض المعلومات عنك',
+      'en': '',
+    },
+    'a9kf89oi': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
     '36ztx53p': {
       'ar': 'بيانات الطبيب الاساسية',
       'en': 'Basic doctor information',
+    },
+    '9ydlp7cy': {
+      'ar': 'Save',
+      'en': '',
     },
     '0jhzugac': {
       'ar': 'main',
@@ -428,45 +420,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'حفظ البانات',
       'en': 'Save data',
     },
-    'ahunvoqm': {
-      'ar': 'Please enter the patients full name.',
-      'en': 'Please enter the patients full name.',
-    },
-    'eem96jco': {
-      'ar': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    '4xzvoer1': {
-      'ar': 'Please enter an age for the patient.',
-      'en': 'Please enter an age for the patient.',
-    },
-    'bhaf9i8z': {
-      'ar': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    '677td51y': {
-      'ar': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    '323vhujx': {
-      'ar': 'Please enter the date of birth of the patient.',
-      'en': 'Please enter the date of birth of the patient.',
-    },
-    'xp52of87': {
-      'ar': 'Please choose an option from the dropdown',
-      'en': 'Please choose an option from the dropdown',
-    },
-    'o62khzzu': {
-      'ar': 'Field is required',
-      'en': 'Field is required',
+    '6z4kdjmt': {
+      'ar': 'من فضلك ادخل عنوان الشارع و المبني',
+      'en': '',
     },
     'bjpmmgis': {
       'ar': 'Please choose an option from the dropdown',
       'en': 'Please choose an option from the dropdown',
     },
+    'swbyk6o7': {
+      'ar': 'من فضلك ادخل تليفون 1',
+      'en': '',
+    },
+    '53enuda5': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'wg1mjq5j': {
+      'ar': 'من فضلك ادخل تليفون 2 ',
+      'en': '',
+    },
+    'jh7zlt2c': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
     '8kjzlm0z': {
       'ar': 'ادخل عنوان العمل',
       'en': 'Basic doctor information',
+    },
+    '229rzvtz': {
+      'ar': 'Save',
+      'en': '',
     },
     '54hdqaol': {
       'ar': 'address',
@@ -506,6 +490,29 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'e1umpmqd': {
       'ar': 'Shop',
       'en': 'Shop',
+    },
+  },
+  // doctor_List
+  {
+    'hcx1qnsu': {
+      'ar': 'بحث عن دكتور',
+      'en': '',
+    },
+    'mk3ixzfg': {
+      'ar': 'Patients matching search',
+      'en': '',
+    },
+    'as03cqmg': {
+      'ar': '24',
+      'en': '',
+    },
+    'xusv17x9': {
+      'ar': 'قائمة الاطباء',
+      'en': '',
+    },
+    'zrwrju63': {
+      'ar': 'Home',
+      'en': '',
     },
   },
   // Miscellaneous

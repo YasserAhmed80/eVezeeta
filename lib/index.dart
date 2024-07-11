@@ -8,3 +8,5 @@ export '/pages/doctor/doctor_data_address/doctor_data_address_widget.dart'
     show DoctorDataAddressWidget;
 export '/pages/doctor/doctor_data_images/doctor_data_images_widget.dart'
     show DoctorDataImagesWidget;
+export '/pages/doctor/doctor_list/doctor_list_widget.dart'
+    show DoctorListWidget;

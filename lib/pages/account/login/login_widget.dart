@@ -497,8 +497,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
                                     child: FFButtonWidget(
-                                      onPressed: () async {
-                                        context.pushNamed('doctor_data_main');
+                                      onPressed: () {
+                                        print('Button pressed ...');
                                       },
                                       text: FFLocalizations.of(context).getText(
                                         '8xrq1lb7' /* تسجيل بواسطة جوجل */,
@@ -537,67 +537,50 @@ class _LoginWidgetState extends State<LoginWidget>
                                       ),
                                     ),
                                   ),
-                                  isAndroid
-                                      ? Container()
-                                      : Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 16.0),
-                                          child: FFButtonWidget(
-                                            onPressed: () async {
-                                              GoRouter.of(context)
-                                                  .prepareAuthEvent();
-                                              final user = await authManager
-                                                  .signInWithApple(context);
-                                              if (user == null) {
-                                                return;
-                                              }
-
-                                              context.goNamedAuth(
-                                                  'login', context.mounted);
-                                            },
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              'lxuugrkf' /* تسجيل بواسطة ابل */,
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 16.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () {
+                                        print('Button pressed ...');
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        'lxuugrkf' /* تسجيل بواسطة ابل */,
+                                      ),
+                                      icon: const FaIcon(
+                                        FontAwesomeIcons.apple,
+                                        size: 20.0,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 44.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            icon: const FaIcon(
-                                              FontAwesomeIcons.apple,
-                                              size: 20.0,
-                                            ),
-                                            options: FFButtonOptions(
-                                              width: double.infinity,
-                                              height: 44.0,
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                              elevation: 0.0,
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                              hoverColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                            ),
-                                          ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2.0,
                                         ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        hoverColor: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

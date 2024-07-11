@@ -134,7 +134,7 @@ class LightModeTheme extends FlutterFlowTheme {
   Color get tertiaryColor => tertiary;
 
   late Color primary = const Color(0xFF4CAF50);
-  late Color secondary = const Color(0xFF303F9F);
+  late Color secondary = const Color(0xFF2257F9);
   late Color tertiary = const Color(0xFF6FAF73);
   late Color alternate = const Color(0xFFD5CBC7);
   late Color primaryText = const Color(0xFF333333);
@@ -348,6 +348,7 @@ extension TextStyleHelper on TextStyle {
     bool useGoogleFonts = true,
     TextDecoration? decoration,
     double? lineHeight,
+    List<Shadow>? shadows,
   }) =>
       useGoogleFonts
           ? GoogleFonts.getFont(
@@ -359,6 +360,7 @@ extension TextStyleHelper on TextStyle {
               fontStyle: fontStyle ?? this.fontStyle,
               decoration: decoration,
               height: lineHeight,
+              shadows: shadows,
             )
           : copyWith(
               fontFamily: fontFamily,
@@ -369,5 +371,6 @@ extension TextStyleHelper on TextStyle {
               fontStyle: fontStyle,
               decoration: decoration,
               height: lineHeight,
+              shadows: shadows,
             );
 }

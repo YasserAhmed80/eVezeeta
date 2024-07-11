@@ -13,22 +13,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-DtRefTableStruct? getRefItemLable(
-  String? itemType,
-  int? itemCode,
-  List<DtRefTableStruct> refDataAppState,
-  int? countryCode,
-) {
-  for (DtRefTableStruct item in refDataAppState) {
-    if (item.code == itemCode &&
-        item.source == itemType &&
-        item.countryCde == countryCode) {
-      return item;
-    }
-  }
-  return null;
-}
-
 List<DtAreaStruct>? getFilteredArea(
   int zoneKey,
   List<DtAreaStruct>? areaList,

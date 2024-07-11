@@ -39,14 +39,14 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
       await actions.onLoadCtitiesData();
     });
 
-    _model.descriptionTextController1 ??= TextEditingController();
-    _model.descriptionFocusNode1 ??= FocusNode();
+    _model.addressDescTextController ??= TextEditingController();
+    _model.addressDescFocusNode ??= FocusNode();
 
-    _model.descriptionTextController2 ??= TextEditingController();
-    _model.descriptionFocusNode2 ??= FocusNode();
+    _model.tel1TextController ??= TextEditingController();
+    _model.tel1FocusNode ??= FocusNode();
 
-    _model.descriptionTextController3 ??= TextEditingController();
-    _model.descriptionFocusNode3 ??= FocusNode();
+    _model.tel2TextController ??= TextEditingController();
+    _model.tel2FocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -76,16 +76,55 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                FFLocalizations.of(context).getText(
-                  '8kjzlm0z' /* ادخل عنوان العمل */,
-                ),
-                style: FlutterFlowTheme.of(context).headlineSmall.override(
-                      fontFamily: 'Cairo',
-                      color: FlutterFlowTheme.of(context).secondary,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.bold,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    FFLocalizations.of(context).getText(
+                      '8kjzlm0z' /* ادخل عنوان العمل */,
                     ),
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Cairo',
+                          color: FlutterFlowTheme.of(context).secondary,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await FFAppState()
+                          .currentDoctor
+                          .dbDocRef!
+                          .update(createDocRecordData(
+                            name: _model.countryCodeValue?.toString(),
+                          ));
+                                        },
+                    text: FFLocalizations.of(context).getText(
+                      '229rzvtz' /* Save */,
+                    ),
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Cairo',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 3.0,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ],
               ),
             ].divide(const SizedBox(height: 4.0)),
           ),
@@ -118,6 +157,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 16.0, 0.0),
                                 child: SingleChildScrollView(
+                                  primary: false,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     crossAxisAlignment:
@@ -177,6 +217,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                     List<CountryRecord>
                                                         countryCodeCountryRecordList =
                                                         snapshot.data!;
+
                                                     return FlutterFlowDropDown<
                                                         int>(
                                                       controller: _model
@@ -539,12 +580,12 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                 ),
                                                 TextFormField(
                                                   controller: _model
-                                                      .descriptionTextController1,
+                                                      .addressDescTextController,
                                                   focusNode: _model
-                                                      .descriptionFocusNode1,
+                                                      .addressDescFocusNode,
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
-                                                    '_model.descriptionTextController1',
+                                                    '_model.addressDescTextController',
                                                     const Duration(
                                                         milliseconds: 2000),
                                                     () => setState(() {}),
@@ -704,13 +745,13 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               .secondary,
                                                     ),
                                                     suffixIcon: _model
-                                                            .descriptionTextController1!
+                                                            .addressDescTextController!
                                                             .text
                                                             .isNotEmpty
                                                         ? InkWell(
                                                             onTap: () async {
                                                               _model
-                                                                  .descriptionTextController1
+                                                                  .addressDescTextController
                                                                   ?.clear();
                                                               setState(() {});
                                                             },
@@ -735,7 +776,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               context)
                                                           .primary,
                                                   validator: _model
-                                                      .descriptionTextController1Validator
+                                                      .addressDescTextControllerValidator
                                                       .asValidator(context),
                                                 ),
                                               ],
@@ -772,13 +813,13 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 TextFormField(
-                                                  controller: _model
-                                                      .descriptionTextController2,
-                                                  focusNode: _model
-                                                      .descriptionFocusNode2,
+                                                  controller:
+                                                      _model.tel1TextController,
+                                                  focusNode:
+                                                      _model.tel1FocusNode,
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
-                                                    '_model.descriptionTextController2',
+                                                    '_model.tel1TextController',
                                                     const Duration(
                                                         milliseconds: 2000),
                                                     () => setState(() {}),
@@ -941,13 +982,13 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                       size: 24.0,
                                                     ),
                                                     suffixIcon: _model
-                                                            .descriptionTextController2!
+                                                            .tel1TextController!
                                                             .text
                                                             .isNotEmpty
                                                         ? InkWell(
                                                             onTap: () async {
                                                               _model
-                                                                  .descriptionTextController2
+                                                                  .tel1TextController
                                                                   ?.clear();
                                                               setState(() {});
                                                             },
@@ -980,7 +1021,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               context)
                                                           .primary,
                                                   validator: _model
-                                                      .descriptionTextController2Validator
+                                                      .tel1TextControllerValidator
                                                       .asValidator(context),
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter
@@ -988,13 +1029,13 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   ],
                                                 ),
                                                 TextFormField(
-                                                  controller: _model
-                                                      .descriptionTextController3,
-                                                  focusNode: _model
-                                                      .descriptionFocusNode3,
+                                                  controller:
+                                                      _model.tel2TextController,
+                                                  focusNode:
+                                                      _model.tel2FocusNode,
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
-                                                    '_model.descriptionTextController3',
+                                                    '_model.tel2TextController',
                                                     const Duration(
                                                         milliseconds: 2000),
                                                     () => setState(() {}),
@@ -1157,13 +1198,13 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                       size: 24.0,
                                                     ),
                                                     suffixIcon: _model
-                                                            .descriptionTextController3!
+                                                            .tel2TextController!
                                                             .text
                                                             .isNotEmpty
                                                         ? InkWell(
                                                             onTap: () async {
                                                               _model
-                                                                  .descriptionTextController3
+                                                                  .tel2TextController
                                                                   ?.clear();
                                                               setState(() {});
                                                             },
@@ -1196,7 +1237,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               context)
                                                           .primary,
                                                   validator: _model
-                                                      .descriptionTextController3Validator
+                                                      .tel2TextControllerValidator
                                                       .asValidator(context),
                                                   inputFormatters: [
                                                     FilteringTextInputFormatter

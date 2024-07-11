@@ -16,6 +16,8 @@ import 'schema/govern_zone_record.dart';
 import 'schema/category_record.dart';
 import 'schema/category_sub_record.dart';
 import 'schema/country_record.dart';
+import 'schema/day_ref_record.dart';
+import 'schema/hour_ref_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -35,6 +37,8 @@ export 'schema/govern_zone_record.dart';
 export 'schema/category_record.dart';
 export 'schema/category_sub_record.dart';
 export 'schema/country_record.dart';
+export 'schema/day_ref_record.dart';
+export 'schema/hour_ref_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -438,6 +442,80 @@ Future<List<CountryRecord>> queryCountryRecordOnce({
     queryCollectionOnce(
       CountryRecord.collection,
       CountryRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query DayRefRecords (as a Stream and as a Future).
+Future<int> queryDayRefRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DayRefRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DayRefRecord>> queryDayRefRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DayRefRecord.collection,
+      DayRefRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DayRefRecord>> queryDayRefRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DayRefRecord.collection,
+      DayRefRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query HourRefRecords (as a Stream and as a Future).
+Future<int> queryHourRefRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      HourRefRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<HourRefRecord>> queryHourRefRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      HourRefRecord.collection,
+      HourRefRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<HourRefRecord>> queryHourRefRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      HourRefRecord.collection,
+      HourRefRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

@@ -99,8 +99,8 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                   color: FlutterFlowTheme.of(context).primary,
                   size: 24.0,
                 ),
-                onPressed: () {
-                  print('showFavorities pressed ...');
+                onPressed: () async {
+                  context.pushNamed('doctor_List');
                 },
               ),
               FlutterFlowIconButton(

@@ -112,6 +112,36 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _refSubCategory;
     });
+    _safeInit(() {
+      _refDocTitle = prefs
+              .getStringList('ff_refDocTitle')
+              ?.map((x) {
+                try {
+                  return DtDocTitleStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refDocTitle;
+    });
+    _safeInit(() {
+      _refDocType = prefs
+              .getStringList('ff_refDocType')
+              ?.map((x) {
+                try {
+                  return DtDocTypeStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refDocType;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -428,6 +458,112 @@ class FFAppState extends ChangeNotifier {
     refSubCategory.insert(index, value);
     prefs.setStringList('ff_refSubCategory',
         _refSubCategory.map((x) => x.serialize()).toList());
+  }
+
+  List<DtDocTitleStruct> _refDocTitle = [
+    DtDocTitleStruct.fromSerializableMap(jsonDecode(
+        '{\"title_key\":\"1\",\"desc\":\"أستاذ\",\"lng_cde\":\"1\"}')),
+    DtDocTitleStruct.fromSerializableMap(jsonDecode(
+        '{\"title_key\":\"2\",\"desc\":\"مدرس\",\"lng_cde\":\"1\"}')),
+    DtDocTitleStruct.fromSerializableMap(jsonDecode(
+        '{\"title_key\":\"3\",\"desc\":\"أخصائي\",\"lng_cde\":\"1\"}')),
+    DtDocTitleStruct.fromSerializableMap(jsonDecode(
+        '{\"title_key\":\"4\",\"desc\":\"استشاري\",\"lng_cde\":\"1\"}'))
+  ];
+  List<DtDocTitleStruct> get refDocTitle => _refDocTitle;
+  set refDocTitle(List<DtDocTitleStruct> value) {
+    _refDocTitle = value;
+    prefs.setStringList(
+        'ff_refDocTitle', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefDocTitle(DtDocTitleStruct value) {
+    refDocTitle.add(value);
+    prefs.setStringList(
+        'ff_refDocTitle', _refDocTitle.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefDocTitle(DtDocTitleStruct value) {
+    refDocTitle.remove(value);
+    prefs.setStringList(
+        'ff_refDocTitle', _refDocTitle.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefDocTitle(int index) {
+    refDocTitle.removeAt(index);
+    prefs.setStringList(
+        'ff_refDocTitle', _refDocTitle.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefDocTitleAtIndex(
+    int index,
+    DtDocTitleStruct Function(DtDocTitleStruct) updateFn,
+  ) {
+    refDocTitle[index] = updateFn(_refDocTitle[index]);
+    prefs.setStringList(
+        'ff_refDocTitle', _refDocTitle.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefDocTitle(int index, DtDocTitleStruct value) {
+    refDocTitle.insert(index, value);
+    prefs.setStringList(
+        'ff_refDocTitle', _refDocTitle.map((x) => x.serialize()).toList());
+  }
+
+  List<DtDocTypeStruct> _refDocType = [
+    DtDocTypeStruct.fromSerializableMap(jsonDecode(
+        '{\"type_key\":\"0\",\"desc\":\"دكتورة\",\"lng_cde\":\"1\"}')),
+    DtDocTypeStruct.fromSerializableMap(
+        jsonDecode('{\"type_key\":\"1\",\"desc\":\"دكتور\",\"lng_cde\":\"1\"}'))
+  ];
+  List<DtDocTypeStruct> get refDocType => _refDocType;
+  set refDocType(List<DtDocTypeStruct> value) {
+    _refDocType = value;
+    prefs.setStringList(
+        'ff_refDocType', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefDocType(DtDocTypeStruct value) {
+    refDocType.add(value);
+    prefs.setStringList(
+        'ff_refDocType', _refDocType.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefDocType(DtDocTypeStruct value) {
+    refDocType.remove(value);
+    prefs.setStringList(
+        'ff_refDocType', _refDocType.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefDocType(int index) {
+    refDocType.removeAt(index);
+    prefs.setStringList(
+        'ff_refDocType', _refDocType.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefDocTypeAtIndex(
+    int index,
+    DtDocTypeStruct Function(DtDocTypeStruct) updateFn,
+  ) {
+    refDocType[index] = updateFn(_refDocType[index]);
+    prefs.setStringList(
+        'ff_refDocType', _refDocType.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefDocType(int index, DtDocTypeStruct value) {
+    refDocType.insert(index, value);
+    prefs.setStringList(
+        'ff_refDocType', _refDocType.map((x) => x.serialize()).toList());
+  }
+
+  DtDoctorStruct _currentDoctor = DtDoctorStruct();
+  DtDoctorStruct get currentDoctor => _currentDoctor;
+  set currentDoctor(DtDoctorStruct value) {
+    _currentDoctor = value;
+  }
+
+  void updateCurrentDoctorStruct(Function(DtDoctorStruct) updateFn) {
+    updateFn(_currentDoctor);
   }
 }
 
