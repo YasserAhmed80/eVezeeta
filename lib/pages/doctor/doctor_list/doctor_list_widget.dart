@@ -229,14 +229,34 @@ class _DoctorListWidgetState extends State<DoctorListWidget>
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(40.0),
-                                      child: Image.network(
-                                        functions.stringToImagePath(
-                                            listViewDocRecord.img)!,
-                                        width: 60.0,
-                                        height: 60.0,
-                                        fit: BoxFit.cover,
+                                    Container(
+                                      width: 65.0,
+                                      height: 65.0,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiary,
+                                        ),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        child: Image.network(
+                                          functions.stringToImagePath(
+                                              listViewDocRecord.img)!,
+                                          width: 60.0,
+                                          height: 60.0,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            'assets/images/error_image.jpg',
+                                            width: 60.0,
+                                            height: 60.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Expanded(

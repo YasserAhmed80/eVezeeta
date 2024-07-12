@@ -23,8 +23,13 @@ import '/auth/firebase_auth/auth_util.dart';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-Future<String?> saveImageToStorage1(FFUploadedFile? fileData, String folderName,
-    String entityType, String entityCode, String imgType, int imgSeq) async {
+Future<DocumentReference?> saveImageToStorage1(
+    FFUploadedFile? fileData,
+    String folderName,
+    String entityType,
+    String entityCode,
+    String imgType,
+    int imgSeq) async {
   if (fileData == null || fileData.bytes == null) return null;
 
   print('File name$fileData.name');
@@ -68,12 +73,13 @@ Future<String?> saveImageToStorage1(FFUploadedFile? fileData, String folderName,
         'i_type': imgType,
         'i_seq': imgSeq
       });
+
+      return documentReference;
     } catch (e) {
       print(e.toString());
     }
 
     // Return the download URL
-    return downloadURL;
   } catch (e) {
     // Handle any errors that occur during the upload process
     print('Error uploading image: $e');

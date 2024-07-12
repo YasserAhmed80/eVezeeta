@@ -20,11 +20,6 @@ class ImgsRecord extends FirestoreRecord {
   String get eType => _eType ?? '';
   bool hasEType() => _eType != null;
 
-  // "e_cde" field.
-  String? _eCde;
-  String get eCde => _eCde ?? '';
-  bool hasECde() => _eCde != null;
-
   // "i_type" field.
   String? _iType;
   String get iType => _iType ?? '';
@@ -45,13 +40,18 @@ class ImgsRecord extends FirestoreRecord {
   String get iRef => _iRef ?? '';
   bool hasIRef() => _iRef != null;
 
+  // "e_code" field.
+  String? _eCode;
+  String get eCode => _eCode ?? '';
+  bool hasECode() => _eCode != null;
+
   void _initializeFields() {
     _eType = snapshotData['e_type'] as String?;
-    _eCde = snapshotData['e_cde'] as String?;
     _iType = snapshotData['i_type'] as String?;
     _iSeq = castToType<int>(snapshotData['i_seq']);
     _iVer = snapshotData['i_ver'] as bool?;
     _iRef = snapshotData['i_ref'] as String?;
+    _eCode = snapshotData['e_code'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -89,20 +89,20 @@ class ImgsRecord extends FirestoreRecord {
 
 Map<String, dynamic> createImgsRecordData({
   String? eType,
-  String? eCde,
   String? iType,
   int? iSeq,
   bool? iVer,
   String? iRef,
+  String? eCode,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'e_type': eType,
-      'e_cde': eCde,
       'i_type': iType,
       'i_seq': iSeq,
       'i_ver': iVer,
       'i_ref': iRef,
+      'e_code': eCode,
     }.withoutNulls,
   );
 
@@ -115,16 +115,16 @@ class ImgsRecordDocumentEquality implements Equality<ImgsRecord> {
   @override
   bool equals(ImgsRecord? e1, ImgsRecord? e2) {
     return e1?.eType == e2?.eType &&
-        e1?.eCde == e2?.eCde &&
         e1?.iType == e2?.iType &&
         e1?.iSeq == e2?.iSeq &&
         e1?.iVer == e2?.iVer &&
-        e1?.iRef == e2?.iRef;
+        e1?.iRef == e2?.iRef &&
+        e1?.eCode == e2?.eCode;
   }
 
   @override
   int hash(ImgsRecord? e) => const ListEquality()
-      .hash([e?.eType, e?.eCde, e?.iType, e?.iSeq, e?.iVer, e?.iRef]);
+      .hash([e?.eType, e?.iType, e?.iSeq, e?.iVer, e?.iRef, e?.eCode]);
 
   @override
   bool isValidKey(Object? o) => o is ImgsRecord;

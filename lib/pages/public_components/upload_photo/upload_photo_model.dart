@@ -14,12 +14,16 @@ class UploadPhotoModel extends FlutterFlowModel<UploadPhotoWidget> {
 
   String? curretImage;
 
+  DocumentReference? imageRef;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Firestore Query - Query a collection] action in upload_photo widget.
-  ImgsRecord? queryImage;
+  List<ImgsRecord>? queryImage;
   // Stores action output result for [Custom Action - saveImageToStorage1] action in IconButton widget.
-  String? photoUrl;
+  DocumentReference? photoRef;
+  // Stores action output result for [Backend Call - Read Document] action in IconButton widget.
+  ImgsRecord? savedImageDoc;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));

@@ -1,11 +1,8 @@
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/upload_photo/upload_photo_widget.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'doctor_data_images_model.dart';
@@ -27,23 +24,6 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DoctorDataImagesModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await queryImgsRecordOnce(
-        queryBuilder: (imgsRecord) => imgsRecord.where(Filter.or(
-          Filter(
-            'e_type',
-            isEqualTo: 'doc',
-          ),
-          Filter(
-            'e_cde',
-            isEqualTo: '',
-          ),
-        )),
-        singleRecord: true,
-      ).then((s) => s.firstOrNull);
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -142,7 +122,6 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                               children: [
                                 Container(
                                   width: 300.0,
-                                  height: 250.0,
                                   decoration: const BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel1,
@@ -238,7 +217,6 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   alignment: const AlignmentDirectional(1.0, 0.0),
                                   child: Container(
                                     width: 300.0,
-                                    height: 250.0,
                                     decoration: const BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel2,
@@ -250,8 +228,8 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                             .currentDoctor
                                             .dbDocRef!
                                             .id,
-                                        imgType: 'h',
-                                        imgSeq: 1,
+                                        imgType: 'h1',
+                                        imgSeq: 2,
                                         imgRef: '\'\'',
                                       ),
                                     ),
@@ -301,23 +279,19 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   alignment: const AlignmentDirectional(1.0, 0.0),
                                   child: Container(
                                     width: 300.0,
-                                    height: 250.0,
                                     decoration: const BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel3,
                                       updateCallback: () => setState(() {}),
                                       child: UploadPhotoWidget(
                                         storageFolder: 'doc',
-                                        entityType: FFAppState()
-                                            .currentDoctor
-                                            .dbDocRef!
-                                            .id,
+                                        entityType: 'doc',
                                         entityCode: FFAppState()
                                             .currentDoctor
                                             .dbDocRef!
                                             .id,
-                                        imgType: 'h',
-                                        imgSeq: 2,
+                                        imgType: 'h2',
+                                        imgSeq: 3,
                                         imgRef: '\'\'',
                                       ),
                                     ),
@@ -372,7 +346,6 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                               children: [
                                 Container(
                                   width: 300.0,
-                                  height: 250.0,
                                   decoration: const BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel4,
@@ -442,7 +415,6 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                 children: [
                                   Container(
                                     width: 300.0,
-                                    height: 250.0,
                                     decoration: const BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel5,

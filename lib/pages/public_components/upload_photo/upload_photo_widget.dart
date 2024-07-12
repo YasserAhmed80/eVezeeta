@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -55,28 +54,27 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
       _model.isLoading = false;
       setState(() {});
       _model.queryImage = await queryImgsRecordOnce(
-        queryBuilder: (imgsRecord) => imgsRecord.where(Filter.or(
-          Filter(
-            'e_type',
-            isEqualTo: widget.entityType,
-          ),
-          Filter(
-            'e_cde',
-            isEqualTo: widget.entityCode,
-          ),
-          Filter(
-            'i_type',
-            isEqualTo: widget.imgType,
-          ),
-          Filter(
-            'i_seq',
-            isEqualTo: widget.imgSeq,
-          ),
-        )),
-        singleRecord: true,
-      ).then((s) => s.firstOrNull);
-      if (_model.queryImage?.reference != null) {
-        _model.curretImage = _model.queryImage?.iRef;
+        queryBuilder: (imgsRecord) => imgsRecord
+            .where(
+              'e_type',
+              isEqualTo: widget.entityType,
+            )
+            .where(
+              'e_code',
+              isEqualTo: widget.entityCode,
+            )
+            .where(
+              'i_type',
+              isEqualTo: widget.imgType,
+            )
+            .where(
+              'i_seq',
+              isEqualTo: 0,
+            ),
+      );
+      if (_model.queryImage!.isNotEmpty) {
+        _model.curretImage = _model.queryImage?.first.iRef;
+        _model.imageRef = _model.queryImage?.first.reference;
         setState(() {});
       }
     });
@@ -100,22 +98,17 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
-          child: Align(
-            alignment: const AlignmentDirectional(0.0, -1.0),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-              child: Container(
-                width: double.infinity,
-                height: 300.0,
-                decoration: const BoxDecoration(),
-                child: Stack(
-                  alignment: const AlignmentDirectional(-0.0, -1.0),
-                  children: [
-                    if (_model.saveLoadImage == false)
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                        child: Material(
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+            child: Container(
+              decoration: const BoxDecoration(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Stack(
+                    children: [
+                      if (_model.saveLoadImage == false)
+                        Material(
                           color: Colors.transparent,
                           elevation: 1.0,
                           shape: RoundedRectangleBorder(
@@ -123,7 +116,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                           ),
                           child: Container(
                             width: double.infinity,
-                            height: 300.0,
+                            height: 250.0,
                             constraints: const BoxConstraints(
                               maxWidth: 400.0,
                             ),
@@ -155,12 +148,8 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                             ),
                           ),
                         ),
-                      ),
-                    if (_model.saveLoadImage == true)
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                        child: Material(
+                      if (_model.saveLoadImage == true)
+                        Material(
                           color: Colors.transparent,
                           elevation: 1.0,
                           shape: RoundedRectangleBorder(
@@ -168,7 +157,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                           ),
                           child: Container(
                             width: double.infinity,
-                            height: 300.0,
+                            height: 250.0,
                             constraints: const BoxConstraints(
                               maxWidth: 400.0,
                             ),
@@ -194,171 +183,223 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                             ),
                           ),
                         ),
+                    ],
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        borderRadius: BorderRadius.circular(24.0),
                       ),
-                    Align(
-                      alignment: const AlignmentDirectional(0.0, 1.0),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            FlutterFlowIconButton(
-                              borderColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderRadius: 100.0,
-                              borderWidth: 1.0,
-                              buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).primary,
-                              disabledColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              disabledIconColor:
-                                  FlutterFlowTheme.of(context).secondaryText,
-                              icon: Icon(
-                                Icons.save,
-                                color: FlutterFlowTheme.of(context)
+                      child: Align(
+                        alignment: const AlignmentDirectional(0.0, 1.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 5.0, 0.0, 5.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              FlutterFlowIconButton(
+                                borderColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                size: 24.0,
-                              ),
-                              showLoadingIndicator: true,
-                              onPressed: (_model.saveLoadImage == false)
-                                  ? null
-                                  : () async {
-                                      // StartSaving
-                                      _model.isLoading = true;
-                                      setState(() {});
-                                      // save_cus_photo
-                                      _model.photoUrl =
-                                          await actions.saveImageToStorage1(
-                                        _model.uplodedImage,
-                                        widget.storageFolder!,
-                                        widget.entityType!,
-                                        widget.entityCode!,
-                                        widget.imgType,
-                                        widget.imgSeq!,
-                                      );
-                                      _model.saveLoadImage = false;
-                                      _model.isLoading = false;
-                                      _model.curretImage = _model.photoUrl;
-                                      setState(() {});
-                                      if ((widget.entityType == 'doc') &&
-                                          (widget.imgType == 'p')) {
-                                        FFAppState().updateCurrentDoctorStruct(
-                                          (e) => e..img = _model.photoUrl,
+                                borderRadius: 100.0,
+                                borderWidth: 1.0,
+                                buttonSize: 30.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                disabledColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                disabledIconColor:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                icon: Icon(
+                                  Icons.remove,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  size: 15.0,
+                                ),
+                                showLoadingIndicator: true,
+                                onPressed: (_model.imageRef == null)
+                                    ? null
+                                    : () async {
+                                        await _model.imageRef!.delete();
+                                        await actions.deleteImageByURL(
+                                          _model.curretImage!,
                                         );
+                                        _model.curretImage = null;
+                                        _model.imageRef = null;
                                         setState(() {});
-
-                                        await FFAppState()
-                                            .currentDoctor
-                                            .dbDocRef!
-                                            .update(createDocRecordData(
-                                              img: FFAppState()
-                                                  .currentDoctor
-                                                  .img,
-                                            ));
-                                      }
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Data saved correctlly',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                          ),
-                                          duration:
-                                              const Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary,
-                                        ),
-                                      );
-
-                                      setState(() {});
-                                    },
-                            ),
-                            FlutterFlowIconButton(
-                              borderColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderRadius: 100.0,
-                              borderWidth: 1.0,
-                              buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).primary,
-                              disabledColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              disabledIconColor:
-                                  FlutterFlowTheme.of(context).secondaryText,
-                              icon: Icon(
-                                Icons.add,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                size: 24.0,
+                                      },
                               ),
-                              showLoadingIndicator: true,
-                              onPressed: (_model.isLoading == true)
-                                  ? null
-                                  : () async {
-                                      final selectedMedia =
-                                          await selectMediaWithSourceBottomSheet(
-                                        context: context,
-                                        allowPhoto: true,
-                                      );
-                                      if (selectedMedia != null &&
-                                          selectedMedia.every((m) =>
-                                              validateFileFormat(
-                                                  m.storagePath, context))) {
-                                        setState(() =>
-                                            _model.isDataUploading = true);
-                                        var selectedUploadedFiles =
-                                            <FFUploadedFile>[];
-
-                                        try {
-                                          selectedUploadedFiles = selectedMedia
-                                              .map((m) => FFUploadedFile(
-                                                    name: m.storagePath
-                                                        .split('/')
-                                                        .last,
-                                                    bytes: m.bytes,
-                                                    height:
-                                                        m.dimensions?.height,
-                                                    width: m.dimensions?.width,
-                                                    blurHash: m.blurHash,
-                                                  ))
-                                              .toList();
-                                        } finally {
-                                          _model.isDataUploading = false;
-                                        }
-                                        if (selectedUploadedFiles.length ==
-                                            selectedMedia.length) {
-                                          setState(() {
-                                            _model.uploadedLocalFile =
-                                                selectedUploadedFiles.first;
-                                          });
-                                        } else {
+                              FlutterFlowIconButton(
+                                borderColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: 100.0,
+                                borderWidth: 1.0,
+                                buttonSize: 30.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                disabledColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                disabledIconColor:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                icon: Icon(
+                                  Icons.save,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  size: 15.0,
+                                ),
+                                showLoadingIndicator: true,
+                                onPressed: (_model.saveLoadImage == false)
+                                    ? null
+                                    : () async {
+                                        // StartSaving
+                                        _model.isLoading = true;
+                                        setState(() {});
+                                        // save_cus_photo
+                                        _model.photoRef =
+                                            await actions.saveImageToStorage1(
+                                          _model.uplodedImage,
+                                          widget.storageFolder!,
+                                          widget.entityType!,
+                                          widget.entityCode!,
+                                          widget.imgType,
+                                          widget.imgSeq!,
+                                        );
+                                        // read image from DB
+                                        _model.savedImageDoc =
+                                            await ImgsRecord.getDocumentOnce(
+                                                _model.photoRef!);
+                                        _model.saveLoadImage = false;
+                                        _model.isLoading = false;
+                                        _model.curretImage =
+                                            _model.savedImageDoc?.iRef;
+                                        _model.imageRef = _model.photoRef;
+                                        setState(() {});
+                                        if ((widget.entityType == 'doc') &&
+                                            (widget.imgType == 'p')) {
+                                          FFAppState()
+                                              .updateCurrentDoctorStruct(
+                                            (e) => e..img = _model.curretImage,
+                                          );
                                           setState(() {});
-                                          return;
-                                        }
-                                      }
 
-                                      _model.uplodedImage =
-                                          _model.uploadedLocalFile;
-                                      _model.saveLoadImage = true;
-                                      setState(() {});
-                                    },
-                            ),
-                          ]
-                              .divide(const SizedBox(width: 20.0))
-                              .addToStart(const SizedBox(width: 0.0))
-                              .addToEnd(const SizedBox(width: 0.0)),
+                                          await FFAppState()
+                                              .currentDoctor
+                                              .dbDocRef!
+                                              .update(createDocRecordData(
+                                                img: FFAppState()
+                                                    .currentDoctor
+                                                    .img,
+                                              ));
+                                        }
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Data saved correctlly',
+                                              style: TextStyle(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ),
+                                            duration:
+                                                const Duration(milliseconds: 1450),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+
+                                        setState(() {});
+                                      },
+                              ),
+                              FlutterFlowIconButton(
+                                borderColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                borderRadius: 100.0,
+                                borderWidth: 1.0,
+                                buttonSize: 30.0,
+                                fillColor: FlutterFlowTheme.of(context).primary,
+                                disabledColor:
+                                    FlutterFlowTheme.of(context).primaryText,
+                                disabledIconColor:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                icon: Icon(
+                                  Icons.add,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  size: 15.0,
+                                ),
+                                showLoadingIndicator: true,
+                                onPressed: ((_model.isLoading == true) ||
+                                        (_model.imageRef != null))
+                                    ? null
+                                    : () async {
+                                        final selectedMedia =
+                                            await selectMediaWithSourceBottomSheet(
+                                          context: context,
+                                          allowPhoto: true,
+                                        );
+                                        if (selectedMedia != null &&
+                                            selectedMedia.every((m) =>
+                                                validateFileFormat(
+                                                    m.storagePath, context))) {
+                                          setState(() =>
+                                              _model.isDataUploading = true);
+                                          var selectedUploadedFiles =
+                                              <FFUploadedFile>[];
+
+                                          try {
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                          blurHash: m.blurHash,
+                                                        ))
+                                                    .toList();
+                                          } finally {
+                                            _model.isDataUploading = false;
+                                          }
+                                          if (selectedUploadedFiles.length ==
+                                              selectedMedia.length) {
+                                            setState(() {
+                                              _model.uploadedLocalFile =
+                                                  selectedUploadedFiles.first;
+                                            });
+                                          } else {
+                                            setState(() {});
+                                            return;
+                                          }
+                                        }
+
+                                        _model.uplodedImage =
+                                            _model.uploadedLocalFile;
+                                        _model.saveLoadImage = true;
+                                        setState(() {});
+                                      },
+                              ),
+                            ]
+                                .divide(const SizedBox(width: 20.0))
+                                .addToStart(const SizedBox(width: 0.0))
+                                .addToEnd(const SizedBox(width: 0.0)),
+                          ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
