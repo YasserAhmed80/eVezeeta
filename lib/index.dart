@@ -11,3 +11,5 @@ export '/pages/doctor/doctor_data_images/doctor_data_images_widget.dart'
 export '/pages/doctor/doctor_list/doctor_list_widget.dart'
     show DoctorListWidget;
 export '/test_appstate/test_appstate_widget.dart' show TestAppstateWidget;
+export '/pages/doctor/doctor_data_schedule/doctor_data_schedule_widget.dart'
+    show DoctorDataScheduleWidget;

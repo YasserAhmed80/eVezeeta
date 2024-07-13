@@ -153,6 +153,36 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _refDay = prefs
+              .getStringList('ff_refDay')
+              ?.map((x) {
+                try {
+                  return DtDayStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refDay;
+    });
+    _safeInit(() {
+      _refHour = prefs
+              .getStringList('ff_refHour')
+              ?.map((x) {
+                try {
+                  return DtHourStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refHour;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -577,6 +607,86 @@ class FFAppState extends ChangeNotifier {
   void updateCurrentDoctorStruct(Function(DtDoctorStruct) updateFn) {
     updateFn(_currentDoctor);
     prefs.setString('ff_currentDoctor', _currentDoctor.serialize());
+  }
+
+  List<DtDayStruct> _refDay = [];
+  List<DtDayStruct> get refDay => _refDay;
+  set refDay(List<DtDayStruct> value) {
+    _refDay = value;
+    prefs.setStringList('ff_refDay', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefDay(DtDayStruct value) {
+    refDay.add(value);
+    prefs.setStringList(
+        'ff_refDay', _refDay.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefDay(DtDayStruct value) {
+    refDay.remove(value);
+    prefs.setStringList(
+        'ff_refDay', _refDay.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefDay(int index) {
+    refDay.removeAt(index);
+    prefs.setStringList(
+        'ff_refDay', _refDay.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefDayAtIndex(
+    int index,
+    DtDayStruct Function(DtDayStruct) updateFn,
+  ) {
+    refDay[index] = updateFn(_refDay[index]);
+    prefs.setStringList(
+        'ff_refDay', _refDay.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefDay(int index, DtDayStruct value) {
+    refDay.insert(index, value);
+    prefs.setStringList(
+        'ff_refDay', _refDay.map((x) => x.serialize()).toList());
+  }
+
+  List<DtHourStruct> _refHour = [];
+  List<DtHourStruct> get refHour => _refHour;
+  set refHour(List<DtHourStruct> value) {
+    _refHour = value;
+    prefs.setStringList('ff_refHour', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefHour(DtHourStruct value) {
+    refHour.add(value);
+    prefs.setStringList(
+        'ff_refHour', _refHour.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefHour(DtHourStruct value) {
+    refHour.remove(value);
+    prefs.setStringList(
+        'ff_refHour', _refHour.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefHour(int index) {
+    refHour.removeAt(index);
+    prefs.setStringList(
+        'ff_refHour', _refHour.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefHourAtIndex(
+    int index,
+    DtHourStruct Function(DtHourStruct) updateFn,
+  ) {
+    refHour[index] = updateFn(_refHour[index]);
+    prefs.setStringList(
+        'ff_refHour', _refHour.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefHour(int index, DtHourStruct value) {
+    refHour.insert(index, value);
+    prefs.setStringList(
+        'ff_refHour', _refHour.map((x) => x.serialize()).toList());
   }
 }
 

@@ -122,6 +122,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'testAppstate',
           path: '/testAppstate',
           builder: (context, params) => const TestAppstateWidget(),
+        ),
+        FFRoute(
+          name: 'doctor_data_schedule',
+          path: '/doctorDataSchedule',
+          builder: (context, params) => const DoctorDataScheduleWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

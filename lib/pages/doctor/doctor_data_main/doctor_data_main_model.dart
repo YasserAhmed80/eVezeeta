@@ -1,6 +1,6 @@
 import '/backend/backend.dart';
-import '/components/load_categories_component_widget.dart';
 import '/components/switch_title_component_widget.dart';
+import '/data_loading_components/load_categories_component/load_categories_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';

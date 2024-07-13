@@ -530,10 +530,108 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // doctor_data_schedule
+  {
+    'je4d3pi9': {
+      'ar': 'تحديد نوع الحجز',
+      'en': '',
+    },
+    'y13ugeif': {
+      'ar': 'الحجز مسبقا و الدخول بأسبقية الحضور',
+      'en': '',
+    },
+    '8znwf8sh': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'e8s704tv': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'k05jud6y': {
+      'ar': 'الدخول بميعاد محدد',
+      'en': '',
+    },
+    'ack7v2zu': {
+      'ar': 'سعر الكشف',
+      'en': '',
+    },
+    '8e4f1sar': {
+      'ar': 'سعر الكشف',
+      'en': '',
+    },
+    'zci0rcuq': {
+      'ar': '200',
+      'en': '',
+    },
+    'sp1i0d4e': {
+      'ar': 'متوسط عدد الكشوفات في الساعة',
+      'en': '',
+    },
+    '764t5gdr': {
+      'ar': 'عدد الكشوفات',
+      'en': '',
+    },
+    'gyf54g18': {
+      'ar': '1',
+      'en': '',
+    },
+    'jea1h2ss': {
+      'ar': 'تحديد مواعيد العمل',
+      'en': '',
+    },
+    's12hc0up': {
+      'ar': 'تحديد نوع و سعر الكشف',
+      'en': '',
+    },
+    '9l5mesmo': {
+      'ar': 'Shop',
+      'en': '',
+    },
+  },
   // emptyListComponent
   {
     'agis7jk9': {
       'ar': 'من فضلك اختار التخصص الرئيسي',
+      'en': '',
+    },
+  },
+  // DayScheduleComponent
+  {
+    '5qu9dms6': {
+      'ar': '',
+      'en': '',
+    },
+    '7e60lzmb': {
+      'ar': 'من',
+      'en': '',
+    },
+    'uzy5jnfx': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'ct61wsts': {
+      'ar': 'Please select...',
+      'en': '',
+    },
+    'jhvkq47u': {
+      'ar': 'Search for an item...',
+      'en': '',
+    },
+    'wwg94a4r': {
+      'ar': 'الي',
+      'en': '',
+    },
+    '7gsir4g4': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    '632gtyll': {
+      'ar': 'Please select...',
+      'en': '',
+    },
+    'rgftlc01': {
+      'ar': 'Search for an item...',
       'en': '',
     },
   },

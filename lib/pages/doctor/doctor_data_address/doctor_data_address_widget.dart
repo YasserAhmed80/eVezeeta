@@ -1,5 +1,5 @@
 import '/backend/backend.dart';
-import '/components/load_cities_coponent_widget.dart';
+import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

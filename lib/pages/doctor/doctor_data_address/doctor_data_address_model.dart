@@ -1,4 +1,4 @@
-import '/components/load_cities_coponent_widget.dart';
+import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
