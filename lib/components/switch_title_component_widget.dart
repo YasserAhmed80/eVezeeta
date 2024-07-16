@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'switch_title_component_model.dart';
 export 'switch_title_component_model.dart';
 
@@ -62,36 +63,96 @@ class _SwitchTitleComponentWidgetState
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        SwitchListTile.adaptive(
-          value: _model.switchListTileValue ??= _model.switchValue == true,
-          onChanged: (newValue) async {
-            setState(() => _model.switchListTileValue = newValue);
-            if (newValue) {
-              await widget.actionReturnedList?.call(
-                widget.item?.subKey,
-                true,
-              );
-            } else {
+        InkWell(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: () async {
+            if (_model.switchValue == true) {
               await widget.actionReturnedList?.call(
                 widget.item?.subKey,
                 false,
               );
+              _model.switchValue = false;
+              setState(() {});
+            } else {
+              await widget.actionReturnedList?.call(
+                widget.item?.subKey,
+                true,
+              );
+              _model.switchValue = true;
+              setState(() {});
             }
           },
-          title: Text(
-            _model.switchValue.toString(),
-            style: FlutterFlowTheme.of(context).titleLarge.override(
-                  fontFamily: 'Cairo',
-                  fontSize: 14.0,
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.normal,
-                ),
+          child: Container(
+            width: double.infinity,
+            height: 50.0,
+            decoration: BoxDecoration(
+              color: FlutterFlowTheme.of(context).primaryBackground,
+            ),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    valueOrDefault<String>(
+                      widget.item?.desc,
+                      'n',
+                    ),
+                    style: TextStyle(
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  Builder(
+                    builder: (context) {
+                      if (_model.switchValue == true) {
+                        return Container(
+                          width: 35.0,
+                          height: 35.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).tertiary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.check,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              size: 24.0,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Container(
+                          width: 35.0,
+                          height: 35.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.check,
+                              color: FlutterFlowTheme.of(context).alternate,
+                              size: 24.0,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
-          tileColor: FlutterFlowTheme.of(context).primaryBackground,
-          activeColor: FlutterFlowTheme.of(context).primaryBackground,
-          activeTrackColor: FlutterFlowTheme.of(context).tertiary,
-          dense: false,
-          controlAffinity: ListTileControlAffinity.trailing,
         ),
       ],
     );

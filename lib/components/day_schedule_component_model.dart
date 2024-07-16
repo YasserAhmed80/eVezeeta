@@ -25,9 +25,7 @@ class DayScheduleComponentModel
 
   // Stores action output result for [Firestore Query - Query a collection] action in DayScheduleComponent widget.
   DocTimeRecord? savedDayRef;
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue;
-  // Stores action output result for [Backend Call - Create Document] action in IconButton widget.
+  // Stores action output result for [Backend Call - Create Document] action in Container widget.
   DocTimeRecord? createdDay;
 
   @override

@@ -590,12 +590,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // DayScheduleComponent
   {
-    '5qu9dms6': {
-      'ar': '',
-      'en': '',
-    },
     'o3hh004v': {
       'ar': 'يمكنك تحديد و حفظ  ساعات العمل ... ',
+      'en': '',
+    },
+    'ngztz39e': {
+      'ar': 'حفظ',
       'en': '',
     },
     'oz3ag78l': {
