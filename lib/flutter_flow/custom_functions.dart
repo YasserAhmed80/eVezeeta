@@ -50,7 +50,7 @@ DtDocTitleStruct? getDocTitleItem(
   List<DtDocTitleStruct>? typeList,
   int key,
 ) {
-  DtDocTitleStruct? item;
+  DtDocTitleStruct? item = DtDocTitleStruct();
 
   if (key > 0) {
     // get itme by key
@@ -61,8 +61,11 @@ DtDocTitleStruct? getDocTitleItem(
 
   if (item != null) {
     return item;
+  } else {
+    item?.desc = 'none';
+    item?.titleKey = -1;
   }
-  return null;
+  return item;
 }
 
 DtDocTypeStruct? getDocTypeItem(

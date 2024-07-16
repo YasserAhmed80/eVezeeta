@@ -565,16 +565,20 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                                   .currentDoctor
                                                                   .dbDocRef !=
                                                               null
-                                                          ? functions
-                                                              .getDocTypeItem(
-                                                                  'any',
-                                                                  FFAppState()
-                                                                      .refDocType
-                                                                      .toList(),
-                                                                  FFAppState()
-                                                                      .currentDoctor
-                                                                      .gender)!
-                                                              .desc
+                                                          ? valueOrDefault<
+                                                              String>(
+                                                              functions
+                                                                  .getDocTypeItem(
+                                                                      'any',
+                                                                      FFAppState()
+                                                                          .refDocType
+                                                                          .toList(),
+                                                                      FFAppState()
+                                                                          .currentDoctor
+                                                                          .gender)
+                                                                  ?.desc,
+                                                              'none',
+                                                            )
                                                           : 'none'
                                                     ],
                                                   ),
@@ -724,11 +728,11 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                     [
                                                       FFAppState()
                                                                   .currentDoctor
-                                                                  .dbDocRef !=
+                                                                  .titleId !=
                                                               null
                                                           ? functions
                                                               .getDocTitleItem(
-                                                                  'any',
+                                                                  'none',
                                                                   FFAppState()
                                                                       .refDocTitle
                                                                       .toList(),

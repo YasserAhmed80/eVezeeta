@@ -540,14 +540,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الحجز مسبقا و الدخول بأسبقية الحضور',
       'en': '',
     },
-    '8znwf8sh': {
-      'ar': 'Option 1',
-      'en': '',
-    },
-    'e8s704tv': {
-      'ar': 'Option 1',
-      'en': '',
-    },
     'k05jud6y': {
       'ar': 'الدخول بميعاد محدد',
       'en': '',
@@ -557,7 +549,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     '8e4f1sar': {
-      'ar': 'سعر الكشف',
+      'ar': '',
       'en': '',
     },
     'zci0rcuq': {
@@ -569,7 +561,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     '764t5gdr': {
-      'ar': 'عدد الكشوفات',
+      'ar': '',
       'en': '',
     },
     'gyf54g18': {
@@ -602,36 +594,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
       'en': '',
     },
-    '7e60lzmb': {
-      'ar': 'من',
+    'o3hh004v': {
+      'ar': 'يمكنك تحديد و حفظ  ساعات العمل ... ',
       'en': '',
     },
-    'uzy5jnfx': {
-      'ar': 'Option 1',
-      'en': '',
-    },
-    'ct61wsts': {
-      'ar': 'Please select...',
-      'en': '',
-    },
-    'jhvkq47u': {
-      'ar': 'Search for an item...',
-      'en': '',
-    },
-    'wwg94a4r': {
-      'ar': 'الي',
-      'en': '',
-    },
-    '7gsir4g4': {
-      'ar': 'Option 1',
-      'en': '',
-    },
-    '632gtyll': {
-      'ar': 'Please select...',
-      'en': '',
-    },
-    'rgftlc01': {
-      'ar': 'Search for an item...',
+    'oz3ag78l': {
+      'ar': 'لم يتم اخيار هذا اليوم',
       'en': '',
     },
   },

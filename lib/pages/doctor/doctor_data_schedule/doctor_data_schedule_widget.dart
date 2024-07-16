@@ -1,9 +1,7 @@
 import '/components/day_schedule_component_widget.dart';
 import '/data_loading_components/load_day_hours_data/load_day_hours_data_widget.dart';
-import '/flutter_flow/flutter_flow_checkbox_group.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -218,105 +216,6 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                         ListTileControlAffinity
                                                             .trailing,
                                                   ),
-                                                  FlutterFlowCheckboxGroup(
-                                                    options: [
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        '8znwf8sh' /* Option 1 */,
-                                                      )
-                                                    ],
-                                                    onChanged: (val) =>
-                                                        setState(() => _model
-                                                                .checkboxGroupValues1 =
-                                                            val),
-                                                    controller: _model
-                                                            .checkboxGroupValueController1 ??=
-                                                        FormFieldController<
-                                                            List<String>>(
-                                                      [],
-                                                    ),
-                                                    activeColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                    checkColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .info,
-                                                    checkboxBorderColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                    unselectedTextStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Cairo',
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
-                                                    checkboxBorderRadius:
-                                                        BorderRadius.circular(
-                                                            24.0),
-                                                    initialized: _model
-                                                            .checkboxGroupValues1 !=
-                                                        null,
-                                                  ),
-                                                  FlutterFlowCheckboxGroup(
-                                                    options: [
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'e8s704tv' /* Option 1 */,
-                                                      )
-                                                    ],
-                                                    onChanged: (val) =>
-                                                        setState(() => _model
-                                                                .checkboxGroupValues2 =
-                                                            val),
-                                                    controller: _model
-                                                            .checkboxGroupValueController2 ??=
-                                                        FormFieldController<
-                                                            List<String>>(
-                                                      [],
-                                                    ),
-                                                    activeColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                    checkColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .info,
-                                                    checkboxBorderColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                    checkboxBorderRadius:
-                                                        BorderRadius.circular(
-                                                            4.0),
-                                                    initialized: _model
-                                                            .checkboxGroupValues2 !=
-                                                        null,
-                                                  ),
                                                   SwitchListTile.adaptive(
                                                     value: _model
                                                             .switchListTileValue2 ??=
@@ -458,12 +357,6 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                             .words,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      labelText:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                        '8e4f1sar' /* سعر الكشف */,
-                                                      ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -691,12 +584,6 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                             .words,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      labelText:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                        '764t5gdr' /* عدد الكشوفات */,
-                                                      ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -886,13 +773,13 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
 
                                         return ListView.separated(
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 5.0),
+                                              vertical: 10.0),
                                           primary: false,
                                           shrinkWrap: true,
                                           scrollDirection: Axis.vertical,
                                           itemCount: dayDaya.length,
                                           separatorBuilder: (_, __) =>
-                                              const SizedBox(height: 5.0),
+                                              const SizedBox(height: 10.0),
                                           itemBuilder: (context, dayDayaIndex) {
                                             final dayDayaItem =
                                                 dayDaya[dayDayaIndex];
