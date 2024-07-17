@@ -1,11 +1,11 @@
 import '/backend/backend.dart';
 import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -133,76 +133,18 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                           fontWeight: FontWeight.bold,
                         ),
                   ),
-                  FFButtonWidget(
+                  FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 20.0,
+                    buttonSize: 40.0,
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 24.0,
+                    ),
                     onPressed: () async {
-                      if (FFAppState().currentDoctor.dbDocRef != null) {
-                        // update model
-                        FFAppState().updateCurrentDoctorStruct(
-                          (e) => e
-                            ..aCon = _model.countryCode
-                            ..aGov = _model.governateCode
-                            ..aZone = _model.zoneCode
-                            ..aArea = _model.areaCode
-                            ..tel1 = _model.tel1TextController.text
-                            ..tel2 = _model.tel2TextController.text
-                            ..aAddr = _model.addressDescTextController.text,
-                        );
-                        setState(() {});
-                        // save to DB
-
-                        await FFAppState()
-                            .currentDoctor
-                            .dbDocRef!
-                            .update(createDocRecordData(
-                              aCon: FFAppState().currentDoctor.aCon,
-                              aGov: FFAppState().currentDoctor.aGov,
-                              aZone: FFAppState().currentDoctor.aZone,
-                              aArea: FFAppState().currentDoctor.aArea,
-                              tel1: FFAppState().currentDoctor.tel1,
-                              tel2: FFAppState().currentDoctor.tel2,
-                              aAddr: FFAppState().currentDoctor.aAddr,
-                            ));
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: const Text('حفظ بيانات الطبيب'),
-                              content: const Text('تم حفظ البيانات بنجاح'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: const Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
+                      context.safePop();
                     },
-                    text: FFLocalizations.of(context).getText(
-                      '9ydlp7cy' /* Save */,
-                    ),
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Cairo',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
                   ),
                 ],
               ),
@@ -1421,7 +1363,50 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                           16.0, 12.0, 16.0, 12.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          setAppLanguage(context, 'ar');
+                          if (FFAppState().currentDoctor.dbDocRef != null) {
+                            // update model
+                            FFAppState().updateCurrentDoctorStruct(
+                              (e) => e
+                                ..aCon = _model.countryCode
+                                ..aGov = _model.governateCode
+                                ..aZone = _model.zoneCode
+                                ..aArea = _model.areaCode
+                                ..tel1 = _model.tel1TextController.text
+                                ..tel2 = _model.tel2TextController.text
+                                ..aAddr = _model.addressDescTextController.text,
+                            );
+                            setState(() {});
+                            // save to DB
+
+                            await FFAppState()
+                                .currentDoctor
+                                .dbDocRef!
+                                .update(createDocRecordData(
+                                  aCon: FFAppState().currentDoctor.aCon,
+                                  aGov: FFAppState().currentDoctor.aGov,
+                                  aZone: FFAppState().currentDoctor.aZone,
+                                  aArea: FFAppState().currentDoctor.aArea,
+                                  tel1: FFAppState().currentDoctor.tel1,
+                                  tel2: FFAppState().currentDoctor.tel2,
+                                  aAddr: FFAppState().currentDoctor.aAddr,
+                                ));
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('حفظ بيانات الطبيب'),
+                                  content: const Text('تم حفظ البيانات بنجاح'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         },
                         text: FFLocalizations.of(context).getText(
                           'l98y3n2a' /* حفظ البانات */,
@@ -1451,14 +1436,6 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
-              child: wrapWithModel(
-                model: _model.customNavbarModel,
-                updateCallback: () => setState(() {}),
-                child: const CustomNavbarWidget(),
               ),
             ),
           ],

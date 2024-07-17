@@ -1,7 +1,6 @@
 import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'doctor_data_address_widget.dart' show DoctorDataAddressWidget;
 import 'package:flutter/material.dart';
 
@@ -92,8 +91,6 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
 
   // Model for loadCitiesCoponent component.
   late LoadCitiesCoponentModel loadCitiesCoponentModel;
-  // Model for custom_navbar component.
-  late CustomNavbarModel customNavbarModel;
 
   @override
   void initState(BuildContext context) {
@@ -102,7 +99,6 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
     tel2TextControllerValidator = _tel2TextControllerValidator;
     loadCitiesCoponentModel =
         createModel(context, () => LoadCitiesCoponentModel());
-    customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
   @override
@@ -118,6 +114,5 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
     tel2TextController?.dispose();
 
     loadCitiesCoponentModel.dispose();
-    customNavbarModel.dispose();
   }
 }

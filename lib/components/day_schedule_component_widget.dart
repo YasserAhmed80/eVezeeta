@@ -1,12 +1,12 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'day_schedule_component_model.dart';
 export 'day_schedule_component_model.dart';
@@ -105,8 +105,36 @@ class _DayScheduleComponentWidgetState
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   if (_model.isActiveDay == true) {
-                    _model.isActiveDay = false;
-                    setState(() {});
+                    // delete_dialog
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('حذف اليوم'),
+                              content: const Text('سوف يتم الغاء هذ اليوم'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: const Text('الغاء'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: const Text('موافق'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      await _model.currentDay!.delete();
+                      _model.isActiveDay = false;
+                      _model.currentDay = null;
+                      _model.selectedHours = [];
+                      setState(() {});
+                    }
                   } else {
                     _model.isActiveDay = true;
                     setState(() {});
@@ -321,136 +349,124 @@ class _DayScheduleComponentWidgetState
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      1.0, 0.0, 0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      if (_model.currentDay != null) {
-                                        if (_model.selectedHours.isNotEmpty
-                                            ? true
-                                            : false) {
-                                          await _model.currentDay!.update({
-                                            ...mapToFirestore(
-                                              {
-                                                'hrs_id': _model.selectedHours,
-                                              },
-                                            ),
-                                          });
-                                        } else {
-                                          // not housrs selected
-                                          await _model.currentDay!.delete();
-                                        }
-
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: const Text('حفظ البيانات'),
-                                              content: const Text(
-                                                  'تم تعديل البيانات بنجاح'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: const Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      } else {
-                                        var docTimeRecordReference =
-                                            DocTimeRecord.collection.doc();
-                                        await docTimeRecordReference.set({
-                                          ...createDocTimeRecordData(
-                                            docId: FFAppState()
-                                                .currentDoctor
-                                                .dbDocRef
-                                                ?.id,
-                                            dayId: widget.dayIteam?.dayKey,
-                                          ),
+                                FFButtonWidget(
+                                  onPressed: () async {
+                                    if (_model.currentDay != null) {
+                                      if (_model.selectedHours.isNotEmpty
+                                          ? true
+                                          : false) {
+                                        await _model.currentDay!.update({
                                           ...mapToFirestore(
                                             {
                                               'hrs_id': _model.selectedHours,
                                             },
                                           ),
                                         });
-                                        _model.createdDay =
-                                            DocTimeRecord.getDocumentFromData({
-                                          ...createDocTimeRecordData(
-                                            docId: FFAppState()
-                                                .currentDoctor
-                                                .dbDocRef
-                                                ?.id,
-                                            dayId: widget.dayIteam?.dayKey,
-                                          ),
-                                          ...mapToFirestore(
-                                            {
-                                              'hrs_id': _model.selectedHours,
-                                            },
-                                          ),
-                                        }, docTimeRecordReference);
-                                        _model.currentDay =
-                                            _model.createdDay?.reference;
-                                        setState(() {});
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: const Text('حفظ البيانات'),
-                                              content:
-                                                  const Text('تم حفظ البيانات بنجاح'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: const Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
+                                      } else {
+                                        // not housrs selected
+                                        await _model.currentDay!.delete();
                                       }
 
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: const Text('حفظ البيانات'),
+                                            content:
+                                                const Text('تم تعديل البيانات بنجاح'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: const Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      var docTimeRecordReference =
+                                          DocTimeRecord.collection.doc();
+                                      await docTimeRecordReference.set({
+                                        ...createDocTimeRecordData(
+                                          docId: FFAppState()
+                                              .currentDoctor
+                                              .dbDocRef
+                                              ?.id,
+                                          dayId: widget.dayIteam?.dayKey,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'hrs_id': _model.selectedHours,
+                                          },
+                                        ),
+                                      });
+                                      _model.createdDay =
+                                          DocTimeRecord.getDocumentFromData({
+                                        ...createDocTimeRecordData(
+                                          docId: FFAppState()
+                                              .currentDoctor
+                                              .dbDocRef
+                                              ?.id,
+                                          dayId: widget.dayIteam?.dayKey,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'hrs_id': _model.selectedHours,
+                                          },
+                                        ),
+                                      }, docTimeRecordReference);
+                                      _model.currentDay =
+                                          _model.createdDay?.reference;
                                       setState(() {});
-                                    },
-                                    child: Container(
-                                      height: 35.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(14.0),
-                                        border: Border.all(
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: const Text('حفظ البيانات'),
+                                            content:
+                                                const Text('تم حفظ البيانات بنجاح'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: const Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+
+                                    setState(() {});
+                                  },
+                                  text: FFLocalizations.of(context).getText(
+                                    'mlgytsf8' /* حفظ */,
+                                  ),
+                                  options: FFButtonOptions(
+                                    height: 35.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Cairo',
                                           color: FlutterFlowTheme.of(context)
                                               .secondary,
-                                          width: 1.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                      ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 0.0, 20.0, 0.0),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            'ngztz39e' /* حفظ */,
-                                          ),
-                                          style: GoogleFonts.getFont(
-                                            'Cairo',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondary,
+                                      width: 1.0,
                                     ),
+                                    borderRadius: BorderRadius.circular(14.0),
                                   ),
                                 ),
                               ],

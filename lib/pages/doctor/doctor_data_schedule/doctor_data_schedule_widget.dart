@@ -1,8 +1,9 @@
 import '/components/day_schedule_component_widget.dart';
 import '/data_loading_components/load_day_hours_data/load_day_hours_data_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,16 +68,34 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          title: Text(
-            FFLocalizations.of(context).getText(
-              's12hc0up' /* تحديد نوع و سعر الكشف */,
-            ),
-            style: FlutterFlowTheme.of(context).headlineSmall.override(
-                  fontFamily: 'Cairo',
-                  color: FlutterFlowTheme.of(context).secondary,
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.bold,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                FFLocalizations.of(context).getText(
+                  's12hc0up' /* تحديد نوع و سعر الكشف */,
                 ),
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Cairo',
+                      color: FlutterFlowTheme.of(context).secondary,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              FlutterFlowIconButton(
+                borderRadius: 20.0,
+                buttonSize: 40.0,
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  context.safePop();
+                },
+              ),
+            ],
           ),
           actions: const [],
           centerTitle: false,

@@ -25,7 +25,7 @@ class DayScheduleComponentModel
 
   // Stores action output result for [Firestore Query - Query a collection] action in DayScheduleComponent widget.
   DocTimeRecord? savedDayRef;
-  // Stores action output result for [Backend Call - Create Document] action in Container widget.
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
   DocTimeRecord? createdDay;
 
   @override

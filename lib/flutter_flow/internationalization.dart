@@ -313,10 +313,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بيانات الطبيب الاساسية',
       'en': 'Basic doctor information',
     },
-    '229rzvtz': {
-      'ar': 'Save',
-      'en': '',
-    },
     '0jhzugac': {
       'ar': 'main',
       'en': 'Home',
@@ -448,10 +444,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'ادخل عنوان العمل',
       'en': 'Basic doctor information',
     },
-    '9ydlp7cy': {
-      'ar': 'Save',
-      'en': '',
-    },
     '54hdqaol': {
       'ar': 'address',
       'en': 'Home',
@@ -581,6 +573,52 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // doctor_profile
+  {
+    'znt7igko': {
+      'ar': '/',
+      'en': '',
+    },
+    'xhzlp0e3': {
+      'ar': 'البيانات الاساسية',
+      'en': '',
+    },
+    'x0vsvxao': {
+      'ar': 'عنوان العمل',
+      'en': '',
+    },
+    'eszibpb6': {
+      'ar': 'صورة الملف و صور العيادة و الاوراق الرسمية',
+      'en': '',
+    },
+    'vw07n2rf': {
+      'ar': 'تحديد سعر الكشف و مواعيد العمل',
+      'en': '',
+    },
+    'qkfwbr0r': {
+      'ar': 'Log Out',
+      'en': '',
+    },
+    '8bzssxpu': {
+      'ar': '__',
+      'en': '',
+    },
+  },
+  // custom_navbar
+  {
+    'i8qid52y': {
+      'ar': 'حجوزات',
+      'en': '',
+    },
+    'znzmwi2a': {
+      'ar': 'حسابات',
+      'en': '',
+    },
+    'we55qr2t': {
+      'ar': 'ملفي',
+      'en': '',
+    },
+  },
   // emptyListComponent
   {
     'agis7jk9': {
@@ -594,7 +632,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'يمكنك تحديد و حفظ  ساعات العمل ... ',
       'en': '',
     },
-    'ngztz39e': {
+    'mlgytsf8': {
       'ar': 'حفظ',
       'en': '',
     },

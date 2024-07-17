@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/upload_photo/upload_photo_widget.dart';
 import 'doctor_data_images_widget.dart' show DoctorDataImagesWidget;
 import 'package:flutter/material.dart';
@@ -29,8 +28,6 @@ class DoctorDataImagesModel extends FlutterFlowModel<DoctorDataImagesWidget> {
   late UploadPhotoModel uploadPhotoModel4;
   // Model for upload_photo component.
   late UploadPhotoModel uploadPhotoModel5;
-  // Model for custom_navbar component.
-  late CustomNavbarModel customNavbarModel;
 
   @override
   void initState(BuildContext context) {
@@ -39,7 +36,6 @@ class DoctorDataImagesModel extends FlutterFlowModel<DoctorDataImagesWidget> {
     uploadPhotoModel3 = createModel(context, () => UploadPhotoModel());
     uploadPhotoModel4 = createModel(context, () => UploadPhotoModel());
     uploadPhotoModel5 = createModel(context, () => UploadPhotoModel());
-    customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
   @override
@@ -50,6 +46,5 @@ class DoctorDataImagesModel extends FlutterFlowModel<DoctorDataImagesWidget> {
     uploadPhotoModel3.dispose();
     uploadPhotoModel4.dispose();
     uploadPhotoModel5.dispose();
-    customNavbarModel.dispose();
   }
 }

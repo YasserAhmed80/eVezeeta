@@ -4,11 +4,11 @@ import '/components/switch_title_component_widget.dart';
 import '/data_loading_components/load_categories_component/load_categories_component_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -127,122 +127,18 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                           fontWeight: FontWeight.bold,
                         ),
                   ),
-                  Align(
-                    alignment: const AlignmentDirectional(1.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        // check doc type and title selection
-                        _model.isTypeSelected =
-                            _model.docType == -1 ? false : true;
-                        _model.isTitleSelected =
-                            _model.docTitleCde == -1 ? false : true;
-                        setState(() {});
-                        if (_model.formKey.currentState == null ||
-                            !_model.formKey.currentState!.validate()) {
-                          return;
-                        }
-                        if (_model.docCategoryValue == null) {
-                          return;
-                        }
-                        // update page state
-                        _model.docName =
-                            _model.fullNameFieldTextController.text;
-                        _model.docTitleDesc =
-                            _model.docTitleFieldTextController.text;
-                        _model.docAbout = _model.aboutFieldTextController.text;
-                        setState(() {});
-                        // update model
-                        FFAppState().updateCurrentDoctorStruct(
-                          (e) => e
-                            ..name = _model.docName
-                            ..gender = _model.docType
-                            ..titleId = _model.docTitleCde
-                            ..titleDesc = _model.docTitleDesc
-                            ..catId = _model.docCategory
-                            ..subCatId = _model.docSubCategory.toList()
-                            ..about = _model.docAbout,
-                        );
-                        setState(() {});
-                        // save model to DB
-
-                        var docRecordReference = DocRecord.collection.doc();
-                        await docRecordReference.set({
-                          ...createDocRecordData(
-                            name: FFAppState().currentDoctor.name,
-                            gender: FFAppState().currentDoctor.gender,
-                            catId: FFAppState().currentDoctor.catId,
-                            titleId: FFAppState().currentDoctor.titleId,
-                            title: FFAppState().currentDoctor.titleDesc,
-                            about: FFAppState().currentDoctor.about,
-                          ),
-                          ...mapToFirestore(
-                            {
-                              'sub_cat_id': FFAppState().currentDoctor.subCatId,
-                            },
-                          ),
-                        });
-                        _model.docReference = DocRecord.getDocumentFromData({
-                          ...createDocRecordData(
-                            name: FFAppState().currentDoctor.name,
-                            gender: FFAppState().currentDoctor.gender,
-                            catId: FFAppState().currentDoctor.catId,
-                            titleId: FFAppState().currentDoctor.titleId,
-                            title: FFAppState().currentDoctor.titleDesc,
-                            about: FFAppState().currentDoctor.about,
-                          ),
-                          ...mapToFirestore(
-                            {
-                              'sub_cat_id': FFAppState().currentDoctor.subCatId,
-                            },
-                          ),
-                        }, docRecordReference);
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: const Text('حفظ بيانات الطبيب'),
-                              content: const Text('تم حفظ البيانات بنجاح'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: const Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                        FFAppState().updateCurrentDoctorStruct(
-                          (e) => e..dbDocRef = _model.docReference?.reference,
-                        );
-                        setState(() {});
-
-                        setState(() {});
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        '229rzvtz' /* Save */,
-                      ),
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Cairo',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                        elevation: 3.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
+                  FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 20.0,
+                    buttonSize: 40.0,
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 24.0,
                     ),
+                    onPressed: () async {
+                      context.safePop();
+                    },
                   ),
                 ],
               ),
@@ -1210,7 +1106,98 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                             16.0, 12.0, 16.0, 12.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            setAppLanguage(context, 'ar');
+                            // check doc type and title selection
+                            _model.isTypeSelected =
+                                _model.docType == -1 ? false : true;
+                            _model.isTitleSelected =
+                                _model.docTitleCde == -1 ? false : true;
+                            setState(() {});
+                            if (_model.formKey.currentState == null ||
+                                !_model.formKey.currentState!.validate()) {
+                              return;
+                            }
+                            if (_model.docCategoryValue == null) {
+                              return;
+                            }
+                            // update page state
+                            _model.docName =
+                                _model.fullNameFieldTextController.text;
+                            _model.docTitleDesc =
+                                _model.docTitleFieldTextController.text;
+                            _model.docAbout =
+                                _model.aboutFieldTextController.text;
+                            setState(() {});
+                            // update model
+                            FFAppState().updateCurrentDoctorStruct(
+                              (e) => e
+                                ..name = _model.docName
+                                ..gender = _model.docType
+                                ..titleId = _model.docTitleCde
+                                ..titleDesc = _model.docTitleDesc
+                                ..catId = _model.docCategory
+                                ..subCatId = _model.docSubCategory.toList()
+                                ..about = _model.docAbout,
+                            );
+                            setState(() {});
+                            // save model to DB
+
+                            var docRecordReference = DocRecord.collection.doc();
+                            await docRecordReference.set({
+                              ...createDocRecordData(
+                                name: FFAppState().currentDoctor.name,
+                                gender: FFAppState().currentDoctor.gender,
+                                catId: FFAppState().currentDoctor.catId,
+                                titleId: FFAppState().currentDoctor.titleId,
+                                title: FFAppState().currentDoctor.titleDesc,
+                                about: FFAppState().currentDoctor.about,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'sub_cat_id':
+                                      FFAppState().currentDoctor.subCatId,
+                                },
+                              ),
+                            });
+                            _model.docReference =
+                                DocRecord.getDocumentFromData({
+                              ...createDocRecordData(
+                                name: FFAppState().currentDoctor.name,
+                                gender: FFAppState().currentDoctor.gender,
+                                catId: FFAppState().currentDoctor.catId,
+                                titleId: FFAppState().currentDoctor.titleId,
+                                title: FFAppState().currentDoctor.titleDesc,
+                                about: FFAppState().currentDoctor.about,
+                              ),
+                              ...mapToFirestore(
+                                {
+                                  'sub_cat_id':
+                                      FFAppState().currentDoctor.subCatId,
+                                },
+                              ),
+                            }, docRecordReference);
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('حفظ بيانات الطبيب'),
+                                  content: const Text('تم حفظ البيانات بنجاح'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            FFAppState().updateCurrentDoctorStruct(
+                              (e) =>
+                                  e..dbDocRef = _model.docReference?.reference,
+                            );
+                            setState(() {});
+
+                            setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
                             'r2angc5b' /* حفظ البانات */,
@@ -1241,14 +1228,6 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: wrapWithModel(
-                  model: _model.customNavbarModel,
-                  updateCallback: () => setState(() {}),
-                  child: const CustomNavbarWidget(),
                 ),
               ),
             ],

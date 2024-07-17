@@ -1,19 +1,12 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
-import 'app_settings_widget.dart' show AppSettingsWidget;
+import 'doctor_profile_widget.dart' show DoctorProfileWidget;
 import 'package:flutter/material.dart';
 
-class AppSettingsModel extends FlutterFlowModel<AppSettingsWidget> {
-  ///  Local state fields for this page.
-
-  bool? darkMode;
-
+class DoctorProfileModel extends FlutterFlowModel<DoctorProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue1;
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue2;
+  final unfocusNode = FocusNode();
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 
@@ -24,6 +17,7 @@ class AppSettingsModel extends FlutterFlowModel<AppSettingsWidget> {
 
   @override
   void dispose() {
+    unfocusNode.dispose();
     customNavbarModel.dispose();
   }
 }

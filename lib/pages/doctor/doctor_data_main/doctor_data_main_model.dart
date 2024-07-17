@@ -3,7 +3,6 @@ import '/components/switch_title_component_widget.dart';
 import '/data_loading_components/load_categories_component/load_categories_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'doctor_data_main_widget.dart' show DoctorDataMainWidget;
 import 'package:flutter/material.dart';
 
@@ -105,8 +104,6 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
       switchTitleComponentModels;
   // Model for loadCategoriesComponent component.
   late LoadCategoriesComponentModel loadCategoriesComponentModel;
-  // Model for custom_navbar component.
-  late CustomNavbarModel customNavbarModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   DocRecord? docReference;
 
@@ -121,7 +118,6 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
         FlutterFlowDynamicModels(() => SwitchTitleComponentModel());
     loadCategoriesComponentModel =
         createModel(context, () => LoadCategoriesComponentModel());
-    customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
   @override
@@ -138,6 +134,5 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
 
     switchTitleComponentModels.dispose();
     loadCategoriesComponentModel.dispose();
-    customNavbarModel.dispose();
   }
 }
