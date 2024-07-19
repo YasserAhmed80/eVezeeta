@@ -288,7 +288,7 @@ class _DayScheduleComponentWidgetState
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Text(
-                                              '${hourItemItem.desc}:00',
+                                              '00:${hourItemItem.desc}',
                                               textAlign: TextAlign.center,
                                               style: FlutterFlowTheme.of(
                                                       context)

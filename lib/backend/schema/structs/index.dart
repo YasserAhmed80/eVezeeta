@@ -14,5 +14,6 @@ export 'dt_general_list_struct.dart';
 export 'dt_governate_struct.dart';
 export 'dt_hour_struct.dart';
 export 'dt_ref_cities_struct.dart';
+export 'dt_search_parameters_struct.dart';
 export 'dt_sub_category_struct.dart';
 export 'dt_zone_struct.dart';

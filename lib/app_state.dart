@@ -186,6 +186,17 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _isLightMode = prefs.getBool('ff_isLightMode') ?? _isLightMode;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_searchParameters')) {
+        try {
+          final serializedData = prefs.getString('ff_searchParameters') ?? '{}';
+          _searchParameters = DtSearchParametersStruct.fromSerializableMap(
+              jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -697,6 +708,19 @@ class FFAppState extends ChangeNotifier {
   set isLightMode(bool value) {
     _isLightMode = value;
     prefs.setBool('ff_isLightMode', value);
+  }
+
+  DtSearchParametersStruct _searchParameters = DtSearchParametersStruct();
+  DtSearchParametersStruct get searchParameters => _searchParameters;
+  set searchParameters(DtSearchParametersStruct value) {
+    _searchParameters = value;
+    prefs.setString('ff_searchParameters', value.serialize());
+  }
+
+  void updateSearchParametersStruct(
+      Function(DtSearchParametersStruct) updateFn) {
+    updateFn(_searchParameters);
+    prefs.setString('ff_searchParameters', _searchParameters.serialize());
   }
 }
 

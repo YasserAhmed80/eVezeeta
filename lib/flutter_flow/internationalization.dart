@@ -639,15 +639,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'Popular Today',
       'en': '',
     },
-    '1xb8qzbc': {
-      'ar':
-          'HSBC is getting back into consumer lending in the us according to...',
-      'en': '',
-    },
-    '26fyfdao': {
-      'ar': 'Jackson Hewiit',
-      'en': '',
-    },
     '6jyhwvg4': {
       'ar': '24',
       'en': '',
@@ -668,24 +659,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'المحافظة',
       'en': '',
     },
-    '1wky5pmi': {
-      'ar': 'القاهرة',
-      'en': '',
-    },
     '4bkr045b': {
       'ar': 'المنطقة',
       'en': '',
     },
-    'msgl1qkq': {
-      'ar': 'القاهرة',
-      'en': '',
-    },
     '2r3ilqem': {
       'ar': 'الحي',
-      'en': '',
-    },
-    'awsbft7c': {
-      'ar': 'القاهرة',
       'en': '',
     },
     'lhav9xod': {
@@ -708,13 +687,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
-  // emptyListComponent
-  {
-    'agis7jk9': {
-      'ar': 'من فضلك اختار التخصص الرئيسي',
-      'en': '',
-    },
-  },
   // DayScheduleComponent
   {
     'o3hh004v': {
@@ -727,6 +699,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'oz3ag78l': {
       'ar': 'لم يتم اخيار هذا اليوم',
+      'en': '',
+    },
+  },
+  // search_address_component
+  {
+    'btjw459l': {
+      'ar': 'اختار العنوان',
+      'en': '',
+    },
+    '7afu9atg': {
+      'ar': 'حذف التصفية',
+      'en': '',
+    },
+    'pbi9jm7j': {
+      'ar': 'حفظ التصفية',
       'en': '',
     },
   },

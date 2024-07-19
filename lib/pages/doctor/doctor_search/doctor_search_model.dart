@@ -12,6 +12,12 @@ class DoctorSearchModel extends FlutterFlowModel<DoctorSearchWidget> {
 
   int? selectedArea;
 
+  String selectedGovDesc = 'الكل';
+
+  String selectedZoneDesc = 'الكل';
+
+  String selectedAreaDesc = 'الكل';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
