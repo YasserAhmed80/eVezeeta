@@ -40,12 +40,28 @@ class SearchAddressComponentModel
 
   String selectedAreaDesc = 'الكل';
 
+  List<DtGeneralListStruct> govList = [];
+  void addToGovList(DtGeneralListStruct item) => govList.add(item);
+  void removeFromGovList(DtGeneralListStruct item) => govList.remove(item);
+  void removeAtIndexFromGovList(int index) => govList.removeAt(index);
+  void insertAtIndexInGovList(int index, DtGeneralListStruct item) =>
+      govList.insert(index, item);
+  void updateGovListAtIndex(
+          int index, Function(DtGeneralListStruct) updateFn) =>
+      govList[index] = updateFn(govList[index]);
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Custom Action - copyToList] action in search_address_component widget.
-  List<DtGeneralListStruct>? returnedList;
+  List<DtGeneralListStruct>? returnedListGov;
+  // Stores action output result for [Custom Action - copyToList] action in search_address_component widget.
+  List<DtGeneralListStruct>? returnedListZone;
+  // Stores action output result for [Custom Action - copyToList] action in search_address_component widget.
+  List<DtGeneralListStruct>? returnedListArea;
   // Stores action output result for [Custom Action - copyToList] action in Container widget.
   List<DtGeneralListStruct>? returendZones;
+  // Stores action output result for [Custom Action - copyToList] action in Container widget.
+  List<DtGeneralListStruct>? returendAreas;
   // Stores action output result for [Custom Action - copyToList] action in Container widget.
   List<DtGeneralListStruct>? returnedArea;
 

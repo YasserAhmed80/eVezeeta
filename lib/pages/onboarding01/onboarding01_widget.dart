@@ -1,8 +1,11 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'onboarding01_model.dart';
 export 'onboarding01_model.dart';
@@ -26,6 +29,12 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
   void initState() {
     super.initState();
     _model = createModel(context, () => Onboarding01Model());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setAppLanguage(context, 'ar');
+      _model.timerController.onStartTimer();
+    });
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation1': AnimationInfo(
@@ -196,7 +205,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: Image.network(
-                                  'https://media.gemini.media/img/Medium/2020/10/9/2020_10_9_20_57_58_115.jpg',
+                                  'https://api.isoa.org/docs/blog/31/Copy%20of%20ISOA%20Blog%20Sizing%20(21).png',
                                 ).image,
                               ),
                               shape: BoxShape.circle,
@@ -225,7 +234,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                               44.0, 8.0, 44.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              '0hz2qnow' /* منصة تعارف آمن بمنهج علمي لتحق... */,
+                              '0hz2qnow' /* من هنا يتواصل المريض و الطبيب */,
                             ),
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.of(context)
@@ -236,6 +245,29 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                                 ),
                           ).animateOnPageLoad(
                               animationsMap['textOnPageLoadAnimation2']!),
+                        ),
+                        FlutterFlowTimer(
+                          initialTime: _model.timerInitialTimeMs,
+                          getDisplayTime: (value) =>
+                              StopWatchTimer.getDisplayTime(
+                            value,
+                            hours: false,
+                            milliSecond: false,
+                          ),
+                          controller: _model.timerController,
+                          updateStateInterval: const Duration(milliseconds: 1000),
+                          onChanged: (value, displayTime, shouldUpdate) {
+                            _model.timerMilliseconds = value;
+                            _model.timerValue = displayTime;
+                            if (shouldUpdate) setState(() {});
+                          },
+                          textAlign: TextAlign.start,
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
+                                fontFamily: 'Cairo',
+                                letterSpacing: 0.0,
+                              ),
                         ),
                       ],
                     ),
@@ -256,8 +288,8 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 16.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('btnNewAccount pressed ...');
+                          onPressed: () async {
+                            setAppLanguage(context, 'ar');
                           },
                           text: FFLocalizations.of(context).getText(
                             'vn1dbwt6' /* انشاء حساب جديد */,
@@ -295,10 +327,49 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                             const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 16.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('login');
+                            setAppLanguage(context, 'en');
                           },
                           text: FFLocalizations.of(context).getText(
                             '7459r62u' /* تسجيل الدخول */,
+                          ),
+                          options: FFButtonOptions(
+                            width: 230.0,
+                            height: 52.0,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Cairo',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 16.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            context.pushNamed('doctor_profile');
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            'w5jwdf34' /* next */,
                           ),
                           options: FFButtonOptions(
                             width: 230.0,

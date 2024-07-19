@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/empty_list_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -36,10 +35,25 @@ class _SearchAddressComponentWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.returnedList = await actions.copyToList(
+      _model.returnedListGov = await actions.copyToList(
         'gov',
         0,
       );
+      _model.returnedListZone = await actions.copyToList(
+        'zone',
+        FFAppState().searchParameters.govCde,
+      );
+      _model.returnedListArea = await actions.copyToList(
+        'area',
+        FFAppState().searchParameters.zoneCde,
+      );
+      _model.zoneList =
+          _model.returnedListZone!.toList().cast<DtGeneralListStruct>();
+      _model.areaList =
+          _model.returnedListArea!.toList().cast<DtGeneralListStruct>();
+      _model.govList =
+          _model.returnedListGov!.toList().cast<DtGeneralListStruct>();
+      setState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -114,76 +128,100 @@ class _SearchAddressComponentWidgetState
                                         fontFamily: 'Cairo',
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  _model.selectedGov = -1;
-                                  _model.selectedZone = -1;
-                                  _model.selectedArea = -1;
-                                  _model.selectedGovDesc = 'الكل';
-                                  _model.selectedZoneDesc = 'الكل';
-                                  _model.selectedAreaDesc = 'الكل';
-                                  _model.zoneList = [];
-                                  _model.areaList = [];
-                                  setState(() {});
-                                },
-                                text: FFLocalizations.of(context).getText(
-                                  '7afu9atg' /* حذف التصفية */,
-                                ),
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        color: FlutterFlowTheme.of(context)
-                                            .accent3,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  elevation: 3.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.selectedGov = -1;
+                                    _model.selectedZone = -1;
+                                    _model.selectedArea = -1;
+                                    _model.selectedGovDesc = 'الكل';
+                                    _model.selectedZoneDesc = 'الكل';
+                                    _model.selectedAreaDesc = 'الكل';
+                                    _model.zoneList = [];
+                                    _model.areaList = [];
+                                    setState(() {});
+                                  },
+                                  text: FFLocalizations.of(context).getText(
+                                    '7afu9atg' /* حذف التصفية */,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 0.0, 5.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          color: FlutterFlowTheme.of(context)
+                                              .accent3,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).accent3,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
                                 ),
                               ),
-                              FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: FFLocalizations.of(context).getText(
-                                  'pbi9jm7j' /* حفظ التصفية */,
-                                ),
-                                options: FFButtonOptions(
-                                  height: 40.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        color: Colors.white,
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  elevation: 3.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    FFAppState().updateSearchParametersStruct(
+                                      (e) => e
+                                        ..govCde = _model.selectedGov
+                                        ..zoneCde = _model.selectedZone
+                                        ..areaCde = _model.selectedArea
+                                        ..govDesc = _model.selectedGovDesc
+                                        ..zoneDesc = _model.selectedZoneDesc
+                                        ..areaDesc = _model.selectedAreaDesc,
+                                    );
+                                    setState(() {});
+                                    Navigator.pop(context);
+                                  },
+                                  text: FFLocalizations.of(context).getText(
+                                    'pbi9jm7j' /* حذف التصفية */,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 0.0, 5.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
                                 ),
                               ),
                             ]
@@ -210,11 +248,12 @@ class _SearchAddressComponentWidgetState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
+                  flex: 2,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        width: 100.0,
+                        width: double.infinity,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(10.0),
@@ -243,14 +282,14 @@ class _SearchAddressComponentWidgetState
                   ),
                 ),
                 Expanded(
+                  flex: 3,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        width: 100.0,
+                        width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(
                             color: FlutterFlowTheme.of(context).tertiary,
@@ -277,14 +316,14 @@ class _SearchAddressComponentWidgetState
                   ),
                 ),
                 Expanded(
+                  flex: 2,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        width: 100.0,
+                        width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(
                             color: FlutterFlowTheme.of(context).tertiary,
@@ -310,7 +349,10 @@ class _SearchAddressComponentWidgetState
                         .around(const SizedBox(height: 5.0)),
                   ),
                 ),
-              ],
+              ]
+                  .divide(const SizedBox(width: 10.0))
+                  .addToStart(const SizedBox(width: 5.0))
+                  .addToEnd(const SizedBox(width: 5.0)),
             ),
           ),
           Expanded(
@@ -327,12 +369,7 @@ class _SearchAddressComponentWidgetState
                       flex: 2,
                       child: Builder(
                         builder: (context) {
-                          final govItem = FFAppState().refGovernate.toList();
-                          if (govItem.isEmpty) {
-                            return const EmptyListComponentWidget(
-                              desc: 'لم يتم اختيار دولة',
-                            );
-                          }
+                          final govItem = _model.govList.toList();
 
                           return SingleChildScrollView(
                             child: Column(
@@ -346,7 +383,7 @@ class _SearchAddressComponentWidgetState
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    _model.selectedGov = govItemItem.govKey;
+                                    _model.selectedGov = govItemItem.key;
                                     _model.selectedGovDesc = govItemItem.desc;
                                     setState(() {});
                                     // load zones
@@ -355,23 +392,36 @@ class _SearchAddressComponentWidgetState
                                       'zone',
                                       _model.selectedGov,
                                     );
+                                    // load area
+                                    _model.returendAreas =
+                                        await actions.copyToList(
+                                      'area',
+                                      -1,
+                                    );
                                     _model.zoneList = _model.returendZones!
                                         .toList()
                                         .cast<DtGeneralListStruct>();
-                                    _model.selectedZone = -1;
+                                    _model.areaList = _model.returendAreas!
+                                        .toList()
+                                        .cast<DtGeneralListStruct>();
                                     setState(() {});
+                                    if (_model.returendZones?.length == 0) {
+                                      _model.selectedZone = 0;
+                                      _model.selectedArea = 0;
+                                      setState(() {});
+                                    }
 
                                     setState(() {});
                                   },
                                   child: Container(
-                                    width: 100.0,
+                                    width: double.infinity,
                                     decoration: BoxDecoration(
-                                      color: govItemItem.govKey ==
-                                              _model.selectedGov
-                                          ? FlutterFlowTheme.of(context)
-                                              .tertiary
-                                          : FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                      color:
+                                          govItemItem.key == _model.selectedGov
+                                              ? FlutterFlowTheme.of(context)
+                                                  .tertiary
+                                              : FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
@@ -402,14 +452,6 @@ class _SearchAddressComponentWidgetState
                       child: Builder(
                         builder: (context) {
                           final zoneItem = _model.zoneList.toList();
-                          if (zoneItem.isEmpty) {
-                            return SizedBox(
-                              width: MediaQuery.sizeOf(context).width * 0.8,
-                              child: const EmptyListComponentWidget(
-                                desc: 'يجب اختيار المحافظة',
-                              ),
-                            );
-                          }
 
                           return SingleChildScrollView(
                             child: Column(
@@ -440,13 +482,15 @@ class _SearchAddressComponentWidgetState
                                     if (_model.returnedArea?.length == 1) {
                                       _model.selectedArea =
                                           _model.returnedArea?.first.key;
+                                      _model.selectedAreaDesc =
+                                          _model.returnedArea!.first.desc;
                                       setState(() {});
                                     }
 
                                     setState(() {});
                                   },
                                   child: Container(
-                                    width: 100.0,
+                                    width: double.infinity,
                                     decoration: BoxDecoration(
                                       color: zoneItemItem.key ==
                                               _model.selectedZone
@@ -484,14 +528,6 @@ class _SearchAddressComponentWidgetState
                       child: Builder(
                         builder: (context) {
                           final areaItem = _model.areaList.toList();
-                          if (areaItem.isEmpty) {
-                            return SizedBox(
-                              width: MediaQuery.sizeOf(context).width * 0.8,
-                              child: const EmptyListComponentWidget(
-                                desc: 'يجب اختيار المنطقة',
-                              ),
-                            );
-                          }
 
                           return SingleChildScrollView(
                             child: Column(
@@ -510,7 +546,7 @@ class _SearchAddressComponentWidgetState
                                     setState(() {});
                                   },
                                   child: Container(
-                                    width: 100.0,
+                                    width: double.infinity,
                                     decoration: BoxDecoration(
                                       color: areaItemItem.key ==
                                               _model.selectedArea
@@ -543,7 +579,10 @@ class _SearchAddressComponentWidgetState
                         },
                       ),
                     ),
-                  ],
+                  ]
+                      .divide(const SizedBox(width: 10.0))
+                      .addToStart(const SizedBox(width: 5.0))
+                      .addToEnd(const SizedBox(width: 5.0)),
                 ),
               ),
             ),

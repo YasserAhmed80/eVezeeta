@@ -159,9 +159,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'welcome',
     },
     '0hz2qnow': {
-      'ar': 'منصة تعارف آمن بمنهج علمي لتحقيق زواج ناجح',
-      'en':
-          'A safe dating platform with a scientific approach to achieve a successful marriage',
+      'ar': 'من هنا يتواصل المريض و الطبيب',
+      'en': 'From here the patient and doctor communicate',
     },
     'vn1dbwt6': {
       'ar': 'انشاء حساب جديد',
@@ -170,6 +169,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '7459r62u': {
       'ar': 'تسجيل الدخول',
       'en': 'sign in',
+    },
+    'w5jwdf34': {
+      'ar': 'next',
+      'en': '',
     },
     'wcmrbk29': {
       'ar': 'Home',
@@ -244,7 +247,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9et69ohs': {
       'ar': 'اختار التخصص الرئيسي',
-      'en': 'Sister main specialty',
+      'en': 'Choose your main specialty',
     },
     '6hwqf5z6': {
       'ar': 'التخصص الفرعي',
@@ -256,7 +259,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wpiz9b8i': {
       'ar': 'من فضلك ادخل اسمك كامل',
-      'en': '',
+      'en': 'Please enter your full name',
     },
     '2nfyz3v8': {
       'ar': 'Please choose an option from the dropdown',
@@ -264,7 +267,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6wm72l75': {
       'ar': 'من فضلم ادخل لقبك المهني',
-      'en': '',
+      'en': 'Please enter your professional title',
     },
     'dak8g6t9': {
       'ar': 'Please choose an option from the dropdown',
@@ -272,11 +275,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '4570g8p3': {
       'ar': 'من فضلك اكتب بعض المعلومات عنك',
-      'en': '',
+      'en': 'Please write some information about yourself',
     },
     'a9kf89oi': {
       'ar': 'Please choose an option from the dropdown',
-      'en': '',
+      'en': 'Please choose an option from the dropdown',
     },
     '36ztx53p': {
       'ar': 'بيانات الطبيب الاساسية',
@@ -284,102 +287,102 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '0jhzugac': {
       'ar': 'main',
-      'en': 'Home',
+      'en': 'main',
     },
   },
   // doctor_data_address
   {
     'mn65y5fg': {
       'ar': 'عنوان العمل',
-      'en': 'personal information',
+      'en': 'work address',
     },
     'tpioyxvu': {
       'ar': 'Option 1',
-      'en': '',
+      'en': 'Option 1',
     },
     'o18jjifm': {
       'ar': '544545',
-      'en': '',
+      'en': '544545',
     },
     '4yr1vpwp': {
       'ar': 'البلد',
-      'en': '',
+      'en': 'Country',
     },
     'pin0z8yp': {
       'ar': 'Search for an item...',
-      'en': '',
+      'en': 'Search for an item...',
     },
     'o8gcmhfx': {
       'ar': 'rttrtrtrtr',
-      'en': '',
+      'en': 'rttrtrtrtr',
     },
     '31ybbkso': {
       'ar': 'hkjh',
-      'en': '',
+      'en': 'hkjh',
     },
     'gx6jm4zr': {
       'ar': 'المحافظة',
-      'en': '',
+      'en': 'Governorate',
     },
     'xmcegdz5': {
       'ar': 'اختار المحافظة',
-      'en': '',
+      'en': 'Choose the governorate',
     },
     '9u51dwbp': {
       'ar': 'Option 1',
-      'en': '',
+      'en': 'Option 1',
     },
     'yzudth5d': {
       'ar': '544545',
-      'en': '',
+      'en': '544545',
     },
     'nbr48oan': {
       'ar': 'المنطقة / المركز',
-      'en': '',
+      'en': 'Region/center',
     },
     'onqssuu2': {
       'ar': 'اختار المنطقة',
-      'en': '',
+      'en': 'Select the region',
     },
     'jnsaxmuk': {
       'ar': 'Option 1',
-      'en': '',
+      'en': 'Option 1',
     },
     'icvimrzq': {
       'ar': '544545',
-      'en': '',
+      'en': '544545',
     },
     '6b0nzqut': {
       'ar': 'الحي',
-      'en': '',
+      'en': 'District',
     },
     'pm4psr0u': {
       'ar': 'اختار الحي',
-      'en': '',
+      'en': 'Choose the neighborhood',
     },
     'lno0cklc': {
       'ar': 'العنوان (الشارع و المبني)',
-      'en': 'Full professional title',
+      'en': 'Address (street and building)',
     },
     'n3k69oum': {
       'ar': 'تليفونات الحجز',
-      'en': 'Subspecialty',
+      'en': 'Reservation telephones',
     },
     'rjy1mmws': {
       'ar': 'تليفون عمل 1',
-      'en': 'Full professional title',
+      'en': 'Business phone 1',
     },
     '5hmaj61p': {
       'ar': 'تليفون عمل 2 ',
-      'en': 'Full professional title',
+      'en': 'Business phone 2',
     },
     'a2puizon': {
       'ar': 'موقع العمل علي الخريطة',
-      'en': 'Professional title',
+      'en': 'Work location on the map',
     },
     'y15qo9sj': {
       'ar': 'Map will be shwon here ',
-      'en': '',
+      'en': 'Map will be shown here',
     },
     'l98y3n2a': {
       'ar': 'حفظ البانات',
@@ -387,7 +390,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6z4kdjmt': {
       'ar': 'من فضلك ادخل عنوان الشارع و المبني',
-      'en': '',
+      'en': 'Please enter the street and building address',
     },
     'bjpmmgis': {
       'ar': 'Please choose an option from the dropdown',
@@ -395,58 +398,58 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'swbyk6o7': {
       'ar': 'من فضلك ادخل تليفون 1',
-      'en': '',
+      'en': 'Please enter phone 1',
     },
     '53enuda5': {
       'ar': 'Please choose an option from the dropdown',
-      'en': '',
+      'en': 'Please choose an option from the dropdown',
     },
     'wg1mjq5j': {
       'ar': 'من فضلك ادخل تليفون 2 ',
-      'en': '',
+      'en': 'Please enter phone 2',
     },
     'jh7zlt2c': {
       'ar': 'Please choose an option from the dropdown',
-      'en': '',
+      'en': 'Please choose an option from the dropdown',
     },
     '8kjzlm0z': {
       'ar': 'ادخل عنوان العمل',
-      'en': 'Basic doctor information',
+      'en': 'Enter the business address',
     },
     '54hdqaol': {
       'ar': 'address',
-      'en': 'Home',
+      'en': 'address',
     },
   },
   // doctor_data_images
   {
     'c1uxqt35': {
       'ar': 'صورة الطبيب',
-      'en': '',
+      'en': 'Image of a doctor',
     },
     'erp0r5xv': {
       'ar': 'صور العيادة',
-      'en': '',
+      'en': 'Clinic photos',
     },
     'h0mvthzk': {
       'ar': '1',
-      'en': '',
+      'en': '1',
     },
     'myvv12n7': {
       'ar': '2',
-      'en': '',
+      'en': '2',
     },
     '1qrdz17y': {
       'ar': 'صورة إثبات بطاقة مزاولة المهنة*',
-      'en': '',
+      'en': 'A copy of proof of your professional practice card*',
     },
     'g1qvau7w': {
       'ar': 'صورة إثبات اللقب المهني ',
-      'en': '',
+      'en': 'A copy of proof of professional title',
     },
     'jx7kwnlm': {
       'ar': 'ادخال صور العمل',
-      'en': 'Page Title',
+      'en': 'Insert pictures of work',
     },
     'e1umpmqd': {
       'ar': 'Shop',
@@ -457,57 +460,57 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'hcx1qnsu': {
       'ar': 'بحث عن دكتور',
-      'en': '',
+      'en': 'Search for a doctor',
     },
     'mk3ixzfg': {
       'ar': 'Patients matching search',
-      'en': '',
+      'en': 'Patients matching search',
     },
     'as03cqmg': {
       'ar': '24',
-      'en': '',
+      'en': '24',
     },
     'xusv17x9': {
       'ar': 'قائمة الاطباء',
-      'en': '',
+      'en': 'List of doctors',
     },
     'zrwrju63': {
       'ar': 'Home',
-      'en': '',
+      'en': 'Home',
     },
   },
   // testAppstate
   {
     'mu62r1ss': {
       'ar': 'Page Title',
-      'en': '',
+      'en': 'Page Title',
     },
     'mxas0rf6': {
       'ar': 'Button',
-      'en': '',
+      'en': 'Button',
     },
     'rmxrt49s': {
       'ar': 'Home',
-      'en': '',
+      'en': 'Home',
     },
   },
   // doctor_data_schedule
   {
     'je4d3pi9': {
       'ar': 'تحديد نوع الحجز',
-      'en': '',
+      'en': 'Determine the type of reservation',
     },
     'y13ugeif': {
       'ar': 'الحجز مسبقا و الدخول بأسبقية الحضور',
-      'en': '',
+      'en': 'Booking in advance and entry is first come first served',
     },
     'k05jud6y': {
       'ar': 'الدخول بميعاد محدد',
-      'en': '',
+      'en': 'Entry at a specified time',
     },
     'ack7v2zu': {
       'ar': 'سعر الكشف',
-      'en': '',
+      'en': 'Detection price',
     },
     '8e4f1sar': {
       'ar': '',
@@ -515,11 +518,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'zci0rcuq': {
       'ar': '200',
-      'en': '',
+      'en': '200',
     },
     'sp1i0d4e': {
       'ar': 'متوسط عدد الكشوفات في الساعة',
-      'en': '',
+      'en': 'Average number of statements per hour',
     },
     '764t5gdr': {
       'ar': '',
@@ -527,19 +530,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'gyf54g18': {
       'ar': '1',
-      'en': '',
+      'en': '1',
     },
     'jea1h2ss': {
       'ar': 'تحديد مواعيد العمل',
-      'en': '',
+      'en': 'Determine work hours',
     },
     's12hc0up': {
       'ar': 'تحديد نوع و سعر الكشف',
-      'en': '',
+      'en': 'Determine the type and price of the statement',
     },
     '9l5mesmo': {
       'ar': 'Shop',
-      'en': '',
+      'en': 'Shop',
     },
   },
   // doctor_profile
@@ -656,46 +659,38 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'njmm9cav': {
-      'ar': 'المحافظة',
-      'en': '',
-    },
-    '4bkr045b': {
       'ar': 'المنطقة',
-      'en': '',
-    },
-    '2r3ilqem': {
-      'ar': 'الحي',
       'en': '',
     },
     'lhav9xod': {
       'ar': 'Home',
-      'en': '',
+      'en': 'Home',
     },
   },
   // custom_navbar
   {
     'i8qid52y': {
       'ar': 'حجوزات',
-      'en': '',
+      'en': 'Reservations',
     },
     'znzmwi2a': {
       'ar': 'حسابات',
-      'en': '',
+      'en': 'Accounts',
     },
     'we55qr2t': {
       'ar': 'ملفي',
-      'en': '',
+      'en': 'My file',
     },
   },
   // DayScheduleComponent
   {
     'o3hh004v': {
       'ar': 'يمكنك تحديد و حفظ  ساعات العمل ... ',
-      'en': '',
+      'en': 'You can set and save working hours...',
     },
     'mlgytsf8': {
       'ar': 'حفظ',
-      'en': '',
+      'en': 'save',
     },
     'oz3ag78l': {
       'ar': 'لم يتم اخيار هذا اليوم',
@@ -713,7 +708,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'pbi9jm7j': {
-      'ar': 'حفظ التصفية',
+      'ar': 'حذف التصفية',
       'en': '',
     },
   },

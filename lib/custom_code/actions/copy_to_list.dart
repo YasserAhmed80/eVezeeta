@@ -17,8 +17,19 @@ Future<List<DtGeneralListStruct>> copyToList(
 
   List<DtGeneralListStruct>? returnList = [];
 
+  // add ALL item
+
+  DtGeneralListStruct newItem = DtGeneralListStruct();
+  newItem.key = -1;
+  newItem.desc = 'الكل';
+
+  returnList.add(newItem);
+
   if (dataSource == 'gov') {
     List<DtGovernateStruct> aList = FFAppState().refGovernate;
+
+    //aList?.sort((a, b) => a.seq < b.seq);
+    aList?.sort((a, b) => a.desc.compareTo(b.desc));
 
     for (DtGovernateStruct item in aList) {
       DtGeneralListStruct newItem = DtGeneralListStruct();
@@ -32,6 +43,7 @@ Future<List<DtGeneralListStruct>> copyToList(
   // zone data
   if (dataSource == 'zone') {
     List<DtZoneStruct> aList = FFAppState().refZone;
+    aList?.sort((a, b) => a.desc.compareTo(b.desc));
 
     for (DtZoneStruct item in aList) {
       if (item.govCde == filterValue) {
@@ -47,6 +59,7 @@ Future<List<DtGeneralListStruct>> copyToList(
   // area data
   if (dataSource == 'area') {
     List<DtAreaStruct> aList = FFAppState().refArea;
+    aList?.sort((a, b) => a.desc.compareTo(b.desc));
 
     for (DtAreaStruct item in aList) {
       if (item.zoneCde == filterValue) {
@@ -57,14 +70,6 @@ Future<List<DtGeneralListStruct>> copyToList(
         returnList.add(newItem);
       }
     }
-  }
-
-  if (returnList.length == 0) {
-    DtGeneralListStruct newItem = DtGeneralListStruct();
-    newItem.key = -1;
-    newItem.desc = 'الكل';
-
-    returnList.add(newItem);
   }
 
   return returnList;

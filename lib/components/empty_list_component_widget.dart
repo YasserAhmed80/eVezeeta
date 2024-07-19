@@ -59,6 +59,7 @@ class _EmptyListComponentWidgetState extends State<EmptyListComponentWidget> {
           alignment: const AlignmentDirectional(0.0, 0.0),
           child: Text(
             widget.desc,
+            textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Cairo',
                   fontSize: 12.0,

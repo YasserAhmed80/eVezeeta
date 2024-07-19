@@ -95,13 +95,6 @@ Future onProjectLoad() async {
   //---------------------------------------------------------------------------------------------------------//
 
   try {
-    // calling functions
-    //await getCollectionData('ref_data');
-    //await getRefCities('ref_cities');
-    addListOfNumbers('age', 18, 70);
-    addListOfNumbers('height', 140, 210);
-    addListOfNumbers('weight', 40, 150);
-
     //print(FFAppState().appStateRefData);
   } catch (e) {
     print('error in called functions $e');
