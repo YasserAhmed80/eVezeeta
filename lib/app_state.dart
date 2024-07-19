@@ -183,6 +183,9 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _refHour;
     });
+    _safeInit(() {
+      _isLightMode = prefs.getBool('ff_isLightMode') ?? _isLightMode;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -687,6 +690,13 @@ class FFAppState extends ChangeNotifier {
     refHour.insert(index, value);
     prefs.setStringList(
         'ff_refHour', _refHour.map((x) => x.serialize()).toList());
+  }
+
+  bool _isLightMode = true;
+  bool get isLightMode => _isLightMode;
+  set isLightMode(bool value) {
+    _isLightMode = value;
+    prefs.setBool('ff_isLightMode', value);
   }
 }
 

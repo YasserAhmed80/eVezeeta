@@ -176,37 +176,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
     },
   },
-  // appSettings
-  {
-    '6yhu1gmm': {
-      'ar': 'تغير اعدادات التطبيق',
-      'en': 'Change application settings',
-    },
-    'nbzq4bgj': {
-      'ar': 'يمكن تغير الاعدادات العامة من هنا',
-      'en': 'General settings can be changed from here',
-    },
-    'i1xngnkt': {
-      'ar': 'تغير اللغة',
-      'en': 'change the language',
-    },
-    'fiha96f0': {
-      'ar': 'تغير اللغة الي العربيه او الانجليزية',
-      'en': 'Change the language to Arabic or English',
-    },
-    'ogdv0dqu': {
-      'ar': 'تغير الي الوضع الليلي',
-      'en': 'Change to night mode',
-    },
-    'fumvhh72': {
-      'ar': 'تغير اعدادات من الوضع ليلا او نهارا',
-      'en': 'Change settings for day or night mode',
-    },
-    '2rtdap9j': {
-      'ar': 'Home',
-      'en': 'Home',
-    },
-  },
   // doctor_data_main
   {
     '8dwjbrx4': {
@@ -575,7 +544,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_profile
   {
-    'znt7igko': {
+    'yh9rfatj': {
       'ar': '/',
       'en': '',
     },
@@ -583,24 +552,144 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'البيانات الاساسية',
       'en': '',
     },
-    'x0vsvxao': {
-      'ar': 'عنوان العمل',
+    '9ji1bh67': {
+      'ar': 'تعديل البيانات الاساسية',
       'en': '',
     },
-    'eszibpb6': {
-      'ar': 'صورة الملف و صور العيادة و الاوراق الرسمية',
+    'c6lvktt1': {
+      'ar': ' تعديل عنوان العمل',
       'en': '',
     },
-    'vw07n2rf': {
+    'wsn4fi11': {
+      'ar': 'تعديل الصور و الملفات',
+      'en': '',
+    },
+    'cjvoijbi': {
       'ar': 'تحديد سعر الكشف و مواعيد العمل',
       'en': '',
     },
+    'v88doy9y': {
+      'ar': 'بيانات الحساب',
+      'en': '',
+    },
     'qkfwbr0r': {
-      'ar': 'Log Out',
+      'ar': 'تعديل كلمة المرور',
+      'en': '',
+    },
+    '3ju9mk5k': {
+      'ar': 'خروج',
+      'en': '',
+    },
+    'ty0y41np': {
+      'ar': 'وضع التطبيق',
+      'en': '',
+    },
+    '2l7vc9l1': {
+      'ar': 'نهاري',
+      'en': '',
+    },
+    'ftfu7qf5': {
+      'ar': 'ليلي',
       'en': '',
     },
     '8bzssxpu': {
       'ar': '__',
+      'en': '',
+    },
+  },
+  // doctor_search
+  {
+    'yfqdmrk9': {
+      'ar': 'Stay up to date with the latest news below.',
+      'en': '',
+    },
+    '8pz1x4or': {
+      'ar': 'Search all articles...',
+      'en': '',
+    },
+    'yr0bmyas': {
+      'ar': 'For You',
+      'en': '',
+    },
+    '2enlw07i': {
+      'ar': 'Sci-Fi',
+      'en': '',
+    },
+    'xxn5ckvk': {
+      'ar': 'Fiction',
+      'en': '',
+    },
+    '5rexdred': {
+      'ar': 'Technology',
+      'en': '',
+    },
+    'c0c85nfe': {
+      'ar': 'Ai News',
+      'en': '',
+    },
+    'all62s34': {
+      'ar': 'Startups',
+      'en': '',
+    },
+    'g6z29jv0': {
+      'ar': 'For You',
+      'en': '',
+    },
+    '0tgjnsz5': {
+      'ar': 'Popular Today',
+      'en': '',
+    },
+    '1xb8qzbc': {
+      'ar':
+          'HSBC is getting back into consumer lending in the us according to...',
+      'en': '',
+    },
+    '26fyfdao': {
+      'ar': 'Jackson Hewiit',
+      'en': '',
+    },
+    '6jyhwvg4': {
+      'ar': '24',
+      'en': '',
+    },
+    'nsd8yzlp': {
+      'ar': '12h',
+      'en': '',
+    },
+    'r7kv1r6d': {
+      'ar': 'Read Now',
+      'en': '',
+    },
+    'zwob3t67': {
+      'ar': 'اختار المنطقة',
+      'en': '',
+    },
+    'njmm9cav': {
+      'ar': 'المحافظة',
+      'en': '',
+    },
+    '1wky5pmi': {
+      'ar': 'القاهرة',
+      'en': '',
+    },
+    '4bkr045b': {
+      'ar': 'المنطقة',
+      'en': '',
+    },
+    'msgl1qkq': {
+      'ar': 'القاهرة',
+      'en': '',
+    },
+    '2r3ilqem': {
+      'ar': 'الحي',
+      'en': '',
+    },
+    'awsbft7c': {
+      'ar': 'القاهرة',
+      'en': '',
+    },
+    'lhav9xod': {
+      'ar': 'Home',
       'en': '',
     },
   },

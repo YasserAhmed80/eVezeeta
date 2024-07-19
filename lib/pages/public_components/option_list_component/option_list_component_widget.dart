@@ -1,29 +1,32 @@
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
-import 'option_list_model.dart';
-export 'option_list_model.dart';
+import 'option_list_component_model.dart';
+export 'option_list_component_model.dart';
 
-class OptionListWidget extends StatefulWidget {
-  const OptionListWidget({
+class OptionListComponentWidget extends StatefulWidget {
+  const OptionListComponentWidget({
     super.key,
     required this.dataSource,
     required this.inputICode,
-    int? countryCode,
-  }) : countryCode = countryCode ?? 0;
+    required this.returnAction,
+  });
 
   final String? dataSource;
   final int? inputICode;
-  final int countryCode;
+  final Future Function(DtGeneralListStruct returnedItem)? returnAction;
 
   @override
-  State<OptionListWidget> createState() => _OptionListWidgetState();
+  State<OptionListComponentWidget> createState() =>
+      _OptionListComponentWidgetState();
 }
 
-class _OptionListWidgetState extends State<OptionListWidget> {
-  late OptionListModel _model;
+class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
+  late OptionListComponentModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -34,11 +37,16 @@ class _OptionListWidgetState extends State<OptionListWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => OptionListModel());
+    _model = createModel(context, () => OptionListComponentModel());
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.selectedCode = widget.inputICode;
+      _model.returnedList = await actions.copyToList(
+        'gov',
+        0,
+      );
+      _model.currentList =
+          _model.returnedList!.toList().cast<DtGeneralListStruct>();
       setState(() {});
     });
 
@@ -54,8 +62,6 @@ class _OptionListWidgetState extends State<OptionListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       height: 400.0,
       decoration: BoxDecoration(
@@ -149,21 +155,14 @@ class _OptionListWidgetState extends State<OptionListWidget> {
                   padding: const EdgeInsets.all(2.0),
                   child: Builder(
                     builder: (context) {
-                      final refData = FFAppState()
-                          .appStateRefData
-                          .where((e) =>
-                              (e.source == widget.dataSource) &&
-                              (e.countryCde == widget.countryCode))
-                          .toList()
-                          .sortedList((e) => e.code)
-                          .toList();
+                      final itemData = _model.currentList.toList();
 
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         scrollDirection: Axis.vertical,
-                        itemCount: refData.length,
-                        itemBuilder: (context, refDataIndex) {
-                          final refDataItem = refData[refDataIndex];
+                        itemCount: itemData.length,
+                        itemBuilder: (context, itemDataIndex) {
+                          final itemDataItem = itemData[itemDataIndex];
                           return Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -181,18 +180,20 @@ class _OptionListWidgetState extends State<OptionListWidget> {
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
                                           _model.selectedCode =
-                                              refDataItem.code;
+                                              itemDataItem.key;
                                           setState(() {});
                                           await Future.delayed(
                                               const Duration(milliseconds: 10));
                                           Navigator.pop(
                                               context, _model.selectedCode);
+                                          await widget.returnAction?.call(
+                                            itemDataItem,
+                                          );
                                         },
                                         child: Container(
                                           width: 80.0,
-                                          height: 43.0,
                                           decoration: BoxDecoration(
-                                            color: refDataItem.code ==
+                                            color: itemDataItem.key ==
                                                     _model.selectedCode
                                                 ? FlutterFlowTheme.of(context)
                                                     .tertiary
@@ -208,9 +209,9 @@ class _OptionListWidgetState extends State<OptionListWidget> {
                                           child: Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 5.0, 5.0, 5.0),
+                                                    5.0, 0.0, 5.0, 0.0),
                                             child: Text(
-                                              refDataItem.desc,
+                                              itemDataItem.desc,
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -234,7 +235,7 @@ class _OptionListWidgetState extends State<OptionListWidget> {
                                 width: 100.0,
                                 child: Divider(
                                   thickness: 1.0,
-                                  color: FlutterFlowTheme.of(context).secondary,
+                                  color: FlutterFlowTheme.of(context).alternate,
                                 ),
                               ),
                             ],

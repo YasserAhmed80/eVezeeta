@@ -93,11 +93,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const Onboarding01Widget(),
         ),
         FFRoute(
-          name: 'appSettings',
-          path: '/appSettings',
-          builder: (context, params) => const AppSettingsWidget(),
-        ),
-        FFRoute(
           name: 'doctor_data_main',
           path: '/doctorDataMain',
           builder: (context, params) => const DoctorDataMainWidget(),
@@ -131,6 +126,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'doctor_profile',
           path: '/doctorProfile',
           builder: (context, params) => const DoctorProfileWidget(),
+        ),
+        FFRoute(
+          name: 'doctor_search',
+          path: '/doctorSearch',
+          builder: (context, params) => const DoctorSearchWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

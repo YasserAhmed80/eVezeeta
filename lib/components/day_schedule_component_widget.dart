@@ -42,16 +42,15 @@ class _DayScheduleComponentWidgetState
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.savedDayRef = await queryDocTimeRecordOnce(
-        queryBuilder: (docTimeRecord) => docTimeRecord.where(Filter.or(
-          Filter(
-            'doc_id',
-            isEqualTo: FFAppState().currentDoctor.dbDocRef?.id,
-          ),
-          Filter(
-            'day_id',
-            isEqualTo: widget.dayIteam?.dayKey,
-          ),
-        )),
+        queryBuilder: (docTimeRecord) => docTimeRecord
+            .where(
+              'doc_id',
+              isEqualTo: FFAppState().currentDoctor.dbDocRef?.id,
+            )
+            .where(
+              'day_id',
+              isEqualTo: 0,
+            ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
       if (_model.savedDayRef != null) {
@@ -83,9 +82,6 @@ class _DayScheduleComponentWidgetState
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(4.0),
-        border: Border.all(
-          color: FlutterFlowTheme.of(context).tertiary,
-        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -142,8 +138,13 @@ class _DayScheduleComponentWidgetState
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Icon(
+                      Icons.calendar_today_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
                     Text(
                       valueOrDefault<String>(
                         widget.dayIteam?.desc,
@@ -155,48 +156,58 @@ class _DayScheduleComponentWidgetState
                         fontSize: 16.0,
                       ),
                     ),
-                    Builder(
-                      builder: (context) {
-                        if (_model.isActiveDay == true) {
-                          return Container(
-                            width: 35.0,
-                            height: 35.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).secondary,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.check,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                size: 20.0,
-                              ),
-                            ),
-                          );
-                        } else {
-                          return Container(
-                            width: 35.0,
-                            height: 35.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.check,
-                                color: FlutterFlowTheme.of(context).alternate,
-                                size: 20.0,
-                              ),
-                            ),
-                          );
-                        }
-                      },
+                    Expanded(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Builder(
+                            builder: (context) {
+                              if (_model.isActiveDay == true) {
+                                return Container(
+                                  width: 35.0,
+                                  height: 35.0,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.check,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      size: 20.0,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  width: 35.0,
+                                  height: 35.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.check,
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      size: 20.0,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
+                  ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
                 ),
               ),
             ),
@@ -277,7 +288,7 @@ class _DayScheduleComponentWidgetState
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Text(
-                                              hourItemItem.desc,
+                                              '${hourItemItem.desc}:00',
                                               textAlign: TextAlign.center,
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -287,7 +298,7 @@ class _DayScheduleComponentWidgetState
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryText,
-                                                    fontSize: 16.0,
+                                                    fontSize: 14.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -304,7 +315,7 @@ class _DayScheduleComponentWidgetState
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondaryText,
-                                                        fontSize: 14.0,
+                                                        fontSize: 12.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
@@ -365,6 +376,9 @@ class _DayScheduleComponentWidgetState
                                       } else {
                                         // not housrs selected
                                         await _model.currentDay!.delete();
+                                        _model.currentDay = null;
+                                        _model.isActiveDay = false;
+                                        setState(() {});
                                       }
 
                                       await showDialog(
@@ -460,7 +474,6 @@ class _DayScheduleComponentWidgetState
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                         ),
-                                    elevation: 3.0,
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
                                           .secondary,

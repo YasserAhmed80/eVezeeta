@@ -81,7 +81,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       ),
                       onPressed: () async {
                         context.pushNamed(
-                          'doctor_data_schedule',
+                          'doctor_search',
                           extra: <String, dynamic>{
                             kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,

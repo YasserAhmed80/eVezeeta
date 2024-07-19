@@ -10,6 +10,7 @@ export 'dt_doc_title_struct.dart';
 export 'dt_doc_type_struct.dart';
 export 'dt_doc_record_struct.dart';
 export 'dt_flags_struct.dart';
+export 'dt_general_list_struct.dart';
 export 'dt_governate_struct.dart';
 export 'dt_hour_struct.dart';
 export 'dt_ref_cities_struct.dart';

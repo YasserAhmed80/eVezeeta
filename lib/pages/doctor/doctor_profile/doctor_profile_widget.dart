@@ -252,7 +252,47 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
           ),
         ],
       ),
-      'buttonOnPageLoadAnimation': AnimationInfo(
+      'containerOnPageLoadAnimation5': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 300.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 400.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 400.ms),
@@ -301,13 +341,6 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          automaticallyImplyLeading: false,
-          actions: const [],
-          centerTitle: false,
-          elevation: 0.0,
-        ),
         body: Stack(
           children: [
             SingleChildScrollView(
@@ -316,7 +349,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                 children: [
                   Card(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: FlutterFlowTheme.of(context).primary,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0),
                     ),
@@ -330,6 +363,13 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                           width: 100.0,
                           height: 100.0,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Image.asset(
+                            'assets/images/error_image.jpg',
+                            width: 100.0,
+                            height: 100.0,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -337,16 +377,26 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                       animationsMap['cardOnPageLoadAnimation']!),
                   Row(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: Text(
-                          FFAppState().currentDoctor.gender.toString(),
+                          valueOrDefault<String>(
+                            functions
+                                .getDocTypeItem(
+                                    'n',
+                                    FFAppState().refDocType.toList(),
+                                    FFAppState().currentDoctor.gender)
+                                ?.desc,
+                            'n',
+                          ),
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
                               .override(
                                 fontFamily: 'Cairo',
+                                fontSize: 12.0,
                                 letterSpacing: 0.0,
                               ),
                         ).animateOnPageLoad(
@@ -357,7 +407,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
-                            'znt7igko' /* / */,
+                            'yh9rfatj' /* / */,
                           ),
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
@@ -377,7 +427,9 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                               .headlineSmall
                               .override(
                                 fontFamily: 'Cairo',
+                                fontSize: 14.0,
                                 letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
                               ),
                         ).animateOnPageLoad(
                             animationsMap['textOnPageLoadAnimation3']!),
@@ -392,36 +444,50 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 4.0, 0.0, 0.0),
-                              child: Text(
-                                FFAppState().currentDoctor.titleId.toString(),
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Cairo',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
-                                      letterSpacing: 0.0,
-                                    ),
-                              ).animateOnPageLoad(
-                                  animationsMap['textOnPageLoadAnimation4']!),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14.0),
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).tertiary,
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 5.0, 10.0, 5.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    functions
+                                        .getDocTitleItem(
+                                            'n',
+                                            FFAppState().refDocTitle.toList(),
+                                            FFAppState().currentDoctor.titleId)
+                                        ?.desc,
+                                    'n',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineSmall
+                                      .override(
+                                        fontFamily: 'Cairo',
+                                        fontSize: 14.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ).animateOnPageLoad(
+                                    animationsMap['textOnPageLoadAnimation4']!),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 4.0, 0.0, 0.0),
+                                  0.0, 5.0, 0.0, 0.0),
                               child: Text(
                                 FFAppState().currentDoctor.titleDesc,
-                                textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
-                                    .titleSmall
+                                    .headlineSmall
                                     .override(
                                       fontFamily: 'Cairo',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondary,
+                                      fontSize: 14.0,
                                       letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
                                     ),
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation5']!),
@@ -441,7 +507,25 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                       animationsMap['dividerOnPageLoadAnimation']!),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'xhzlp0e3' /* البيانات الاساسية */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Cairo',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -453,13 +537,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(0.0),
                         ),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -472,9 +551,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                     8.0, 0.0, 0.0, 0.0),
                                 child: Icon(
                                   Icons.account_circle_outlined,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 24.0,
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  size: 25.0,
                                 ),
                               ),
                               Padding(
@@ -482,7 +560,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'xhzlp0e3' /* البيانات الاساسية */,
+                                    '9ji1bh67' /* تعديل البيانات الاساسية */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -514,8 +592,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         animationsMap['containerOnPageLoadAnimation1']!),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -527,13 +604,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(0.0),
                         ),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -545,10 +617,9 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 0.0, 0.0),
                                 child: Icon(
-                                  Icons.settings_outlined,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 24.0,
+                                  Icons.location_on,
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  size: 25.0,
                                 ),
                               ),
                               Padding(
@@ -556,7 +627,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'x0vsvxao' /* عنوان العمل */,
+                                    'c6lvktt1' /*  تعديل عنوان العمل */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -588,8 +659,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         animationsMap['containerOnPageLoadAnimation2']!),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -601,13 +671,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(0.0),
                         ),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -619,10 +684,9 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 0.0, 0.0),
                                 child: Icon(
-                                  Icons.settings_outlined,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 24.0,
+                                  Icons.image_outlined,
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  size: 25.0,
                                 ),
                               ),
                               Padding(
@@ -630,7 +694,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'eszibpb6' /* صورة الملف و صور العيادة و الا... */,
+                                    'wsn4fi11' /* تعديل الصور و الملفات */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -662,8 +726,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         animationsMap['containerOnPageLoadAnimation3']!),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -675,13 +738,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(0.0),
                         ),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -693,10 +751,9 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 0.0, 0.0),
                                 child: Icon(
-                                  Icons.settings_outlined,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 24.0,
+                                  Icons.calendar_month_rounded,
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  size: 25.0,
                                 ),
                               ),
                               Padding(
@@ -704,7 +761,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'vw07n2rf' /* تحديد سعر الكشف و مواعيد العمل */,
+                                    'cjvoijbi' /* تحديد سعر الكشف و مواعيد العمل */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -737,50 +794,342 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        GoRouter.of(context).prepareAuthEvent();
-                        await authManager.signOut();
-                        GoRouter.of(context).clearRedirectLocation();
-
-                        context.goNamedAuth('doctor_profile', context.mounted);
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        'qkfwbr0r' /* Log Out */,
-                      ),
-                      options: FFButtonOptions(
-                        width: 150.0,
-                        height: 44.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyLarge.override(
-                                  fontFamily: 'Cairo',
-                                  letterSpacing: 0.0,
-                                ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'v88doy9y' /* بيانات الحساب */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Cairo',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
-                        borderRadius: BorderRadius.circular(38.0),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('doctor_data_schedule');
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              8.0, 12.0, 8.0, 12.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
+
+                                        context.goNamedAuth(
+                                            'doctor_profile', context.mounted);
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        'qkfwbr0r' /* تعديل كلمة المرور */,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 45.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation1']!),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
+
+                                        context.goNamedAuth(
+                                            'doctor_profile', context.mounted);
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        '3ju9mk5k' /* خروج */,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 45.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation2']!),
+                                  ].divide(const SizedBox(width: 10.0)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ).animateOnPageLoad(
-                        animationsMap['buttonOnPageLoadAnimation']!),
+                        animationsMap['containerOnPageLoadAnimation5']!),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'ty0y41np' /* وضع التطبيق */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Cairo',
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(0.0, -1.0),
+                    child: Container(
+                      height: 75.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        borderRadius: BorderRadius.circular(0.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setDarkModeSetting(context, ThemeMode.light);
+                              },
+                              child: Container(
+                                width: 100.0,
+                                height: 45.0,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? FlutterFlowTheme.of(context)
+                                          .secondaryBackground
+                                      : FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    color: valueOrDefault<Color>(
+                                      Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? FlutterFlowTheme.of(context)
+                                              .alternate
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                      FlutterFlowTheme.of(context).alternate,
+                                    ),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.wb_sunny_rounded,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? FlutterFlowTheme.of(context)
+                                              .primaryText
+                                          : FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                      size: 16.0,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          4.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '2l7vc9l1' /* نهاري */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              color: Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.light
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primaryText
+                                                  : FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setDarkModeSetting(context, ThemeMode.dark);
+                              },
+                              child: Container(
+                                width: 100.0,
+                                height: 45.0,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? FlutterFlowTheme.of(context)
+                                          .secondaryBackground
+                                      : FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    color: valueOrDefault<Color>(
+                                      Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? FlutterFlowTheme.of(context)
+                                              .alternate
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                      FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                    ),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.nightlight_round,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? FlutterFlowTheme.of(context)
+                                              .primaryText
+                                          : FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                      size: 16.0,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          4.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'ftfu7qf5' /* ليلي */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              color: Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.dark
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primaryText
+                                                  : FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ].divide(const SizedBox(width: 10.0)),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
                   ),
                 ],
               ),
             ),
             Align(
               alignment: const AlignmentDirectional(0.0, 1.0),
-              child: wrapWithModel(
-                model: _model.customNavbarModel,
-                updateCallback: () => setState(() {}),
-                child: const CustomNavbarWidget(),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 1.0, 0.0),
+                child: wrapWithModel(
+                  model: _model.customNavbarModel,
+                  updateCallback: () => setState(() {}),
+                  child: const CustomNavbarWidget(),
+                ),
               ),
             ),
           ],
