@@ -845,8 +845,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                         GoRouter.of(context)
                                             .clearRedirectLocation();
 
-                                        context.goNamedAuth('doctor_data_main',
-                                            context.mounted);
+                                        context.goNamedAuth(
+                                            'Onboarding01', context.mounted);
                                       },
                                       text: FFLocalizations.of(context).getText(
                                         'qkfwbr0r' /* تعديل كلمة المرور */,
@@ -885,8 +885,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                         GoRouter.of(context)
                                             .clearRedirectLocation();
 
-                                        context.goNamedAuth('doctor_data_main',
-                                            context.mounted);
+                                        context.goNamedAuth(
+                                            'Onboarding01', context.mounted);
                                       },
                                       text: FFLocalizations.of(context).getText(
                                         '3ju9mk5k' /* خروج */,

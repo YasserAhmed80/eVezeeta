@@ -33,20 +33,6 @@ class _LoadCategoriesComponentWidgetState
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (FFAppState().refCategory.isEmpty) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              content: const Text('load cat'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: const Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
         _model.catDocss = await queryCategoryRecordOnce(
           queryBuilder: (categoryRecord) => categoryRecord.orderBy('seq'),
         );

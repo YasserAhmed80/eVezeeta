@@ -74,14 +74,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const LoginWidget() : const DoctorDataMainWidget(),
+          appStateNotifier.loggedIn ? const LoginWidget() : const Onboarding01Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? const LoginWidget()
-              : const DoctorDataMainWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? const LoginWidget() : const Onboarding01Widget(),
         ),
         FFRoute(
           name: 'login',
@@ -304,7 +303,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/doctorDataMain';
+            return '/onboarding01';
           }
           return null;
         },

@@ -379,7 +379,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                             FFAppState()
                                                                 .refDocType
                                                                 .toList(),
-                                                            0)
+                                                            -1)
                                                         ?.typeKey;
                                                     setState(() {});
                                                   },
@@ -624,7 +624,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                     [
                                                       FFAppState()
                                                                   .currentDoctor
-                                                                  .titleId !=
+                                                                  .dbDocRef !=
                                                               null
                                                           ? functions
                                                               .getDocTitleItem(
@@ -1077,13 +1077,6 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                             );
                                           },
                                         ),
-                                        wrapWithModel(
-                                          model: _model
-                                              .loadCategoriesComponentModel,
-                                          updateCallback: () => setState(() {}),
-                                          child:
-                                              const LoadCategoriesComponentWidget(),
-                                        ),
                                       ]
                                           .divide(const SizedBox(height: 12.0))
                                           .addToEnd(const SizedBox(height: 32.0)),
@@ -1091,6 +1084,11 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                   ),
                                 ),
                               ),
+                            ),
+                            wrapWithModel(
+                              model: _model.loadCategoriesComponentModel,
+                              updateCallback: () => setState(() {}),
+                              child: const LoadCategoriesComponentWidget(),
                             ),
                           ],
                         ),

@@ -170,10 +170,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تسجيل الدخول',
       'en': 'sign in',
     },
-    'w5jwdf34': {
-      'ar': 'next',
-      'en': '',
-    },
     'wcmrbk29': {
       'ar': 'Home',
       'en': 'Home',

@@ -53,6 +53,12 @@ class _SearchAddressComponentWidgetState
           _model.returnedListArea!.toList().cast<DtGeneralListStruct>();
       _model.govList =
           _model.returnedListGov!.toList().cast<DtGeneralListStruct>();
+      _model.selectedGov = FFAppState().searchParameters.govCde;
+      _model.selectedZone = FFAppState().searchParameters.zoneCde;
+      _model.selectedArea = FFAppState().searchParameters.areaCde;
+      _model.selectedGovDesc = FFAppState().searchParameters.govDesc;
+      _model.selectedZoneDesc = FFAppState().searchParameters.zoneDesc;
+      _model.selectedAreaDesc = FFAppState().searchParameters.areaDesc;
       setState(() {});
     });
 
@@ -143,8 +149,6 @@ class _SearchAddressComponentWidgetState
                                     _model.selectedGovDesc = 'الكل';
                                     _model.selectedZoneDesc = 'الكل';
                                     _model.selectedAreaDesc = 'الكل';
-                                    _model.zoneList = [];
-                                    _model.areaList = [];
                                     setState(() {});
                                   },
                                   text: FFLocalizations.of(context).getText(

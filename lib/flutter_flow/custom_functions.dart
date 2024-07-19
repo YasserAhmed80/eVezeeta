@@ -83,9 +83,13 @@ DtDocTypeStruct? getDocTypeItem(
   }
 
   if (item != null) {
-    return item;
+    //return item;
+  } else {
+    item = DtDocTypeStruct();
+    item.typeKey = -1;
+    item.desc = 'none';
   }
-  return null;
+  return item;
 }
 
 String? stringToImagePath(String? url) {
