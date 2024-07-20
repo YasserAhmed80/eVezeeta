@@ -27,10 +27,18 @@ class SearchItemComponentModel
           int index, Function(DtGeneralListStruct) updateFn) =>
       dataList[index] = updateFn(dataList[index]);
 
+  double? fromValue;
+
+  double? toValue = 3000.0;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Custom Action - copyToList] action in search_item_component widget.
   List<DtGeneralListStruct>? returnedData;
+  // State field(s) for sliderFrom widget.
+  double? sliderFromValue;
+  // State field(s) for sliderTo widget.
+  double? sliderToValue;
 
   @override
   void initState(BuildContext context) {}

@@ -117,3 +117,34 @@ bool? checkItemInList(
   }
   return itemList.contains(itemKey);
 }
+
+bool? checkSearchItemActive(
+  String? itemType,
+  DtSearchParametersStruct? searchParam,
+) {
+  if (itemType == 'type') {
+    if (searchParam?.docTypeCde.length == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  if (itemType == 'title') {
+    if (searchParam?.docTitleCde.length == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  if (itemType == 'price') {
+    if (searchParam?.filterPriceCheck == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return false;
+}

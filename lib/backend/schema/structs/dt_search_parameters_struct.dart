@@ -23,6 +23,9 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
     String? subCatDesc,
     List<int>? docTypeCde,
     List<int>? docTitleCde,
+    double? priceFrom,
+    double? priceTo,
+    bool? filterPriceCheck,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _govCde = govCde,
         _zoneCde = zoneCde,
@@ -37,6 +40,9 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         _subCatDesc = subCatDesc,
         _docTypeCde = docTypeCde,
         _docTitleCde = docTitleCde,
+        _priceFrom = priceFrom,
+        _priceTo = priceTo,
+        _filterPriceCheck = filterPriceCheck,
         super(firestoreUtilData);
 
   // "gov_cde" field.
@@ -150,6 +156,31 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
 
   bool hasDocTitleCde() => _docTitleCde != null;
 
+  // "price_from" field.
+  double? _priceFrom;
+  double get priceFrom => _priceFrom ?? 0.0;
+  set priceFrom(double? val) => _priceFrom = val;
+
+  void incrementPriceFrom(double amount) => priceFrom = priceFrom + amount;
+
+  bool hasPriceFrom() => _priceFrom != null;
+
+  // "price_to" field.
+  double? _priceTo;
+  double get priceTo => _priceTo ?? 3000.0;
+  set priceTo(double? val) => _priceTo = val;
+
+  void incrementPriceTo(double amount) => priceTo = priceTo + amount;
+
+  bool hasPriceTo() => _priceTo != null;
+
+  // "filter_price_check" field.
+  bool? _filterPriceCheck;
+  bool get filterPriceCheck => _filterPriceCheck ?? false;
+  set filterPriceCheck(bool? val) => _filterPriceCheck = val;
+
+  bool hasFilterPriceCheck() => _filterPriceCheck != null;
+
   static DtSearchParametersStruct fromMap(Map<String, dynamic> data) =>
       DtSearchParametersStruct(
         govCde: castToType<int>(data['gov_cde']),
@@ -165,6 +196,9 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         subCatDesc: data['sub_cat_desc'] as String?,
         docTypeCde: getDataList(data['doc_type_cde']),
         docTitleCde: getDataList(data['doc_title_cde']),
+        priceFrom: castToType<double>(data['price_from']),
+        priceTo: castToType<double>(data['price_to']),
+        filterPriceCheck: data['filter_price_check'] as bool?,
       );
 
   static DtSearchParametersStruct? maybeFromMap(dynamic data) => data is Map
@@ -185,6 +219,9 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         'sub_cat_desc': _subCatDesc,
         'doc_type_cde': _docTypeCde,
         'doc_title_cde': _docTitleCde,
+        'price_from': _priceFrom,
+        'price_to': _priceTo,
+        'filter_price_check': _filterPriceCheck,
       }.withoutNulls;
 
   @override
@@ -243,6 +280,18 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
           _docTitleCde,
           ParamType.int,
           isList: true,
+        ),
+        'price_from': serializeParam(
+          _priceFrom,
+          ParamType.double,
+        ),
+        'price_to': serializeParam(
+          _priceTo,
+          ParamType.double,
+        ),
+        'filter_price_check': serializeParam(
+          _filterPriceCheck,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -314,6 +363,21 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
           ParamType.int,
           true,
         ),
+        priceFrom: deserializeParam(
+          data['price_from'],
+          ParamType.double,
+          false,
+        ),
+        priceTo: deserializeParam(
+          data['price_to'],
+          ParamType.double,
+          false,
+        ),
+        filterPriceCheck: deserializeParam(
+          data['filter_price_check'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -335,7 +399,10 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         catDesc == other.catDesc &&
         subCatDesc == other.subCatDesc &&
         listEquality.equals(docTypeCde, other.docTypeCde) &&
-        listEquality.equals(docTitleCde, other.docTitleCde);
+        listEquality.equals(docTitleCde, other.docTitleCde) &&
+        priceFrom == other.priceFrom &&
+        priceTo == other.priceTo &&
+        filterPriceCheck == other.filterPriceCheck;
   }
 
   @override
@@ -352,7 +419,10 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         catDesc,
         subCatDesc,
         docTypeCde,
-        docTitleCde
+        docTitleCde,
+        priceFrom,
+        priceTo,
+        filterPriceCheck
       ]);
 }
 
@@ -367,6 +437,9 @@ DtSearchParametersStruct createDtSearchParametersStruct({
   String? areaDesc,
   String? catDesc,
   String? subCatDesc,
+  double? priceFrom,
+  double? priceTo,
+  bool? filterPriceCheck,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -383,6 +456,9 @@ DtSearchParametersStruct createDtSearchParametersStruct({
       areaDesc: areaDesc,
       catDesc: catDesc,
       subCatDesc: subCatDesc,
+      priceFrom: priceFrom,
+      priceTo: priceTo,
+      filterPriceCheck: filterPriceCheck,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

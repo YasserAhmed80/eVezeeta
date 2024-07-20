@@ -7,6 +7,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'search_item_component_model.dart';
 export 'search_item_component_model.dart';
 
@@ -51,6 +52,18 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
           _model.returnedData!.toList().cast<DtGeneralListStruct>();
       _model.selectedList = widget.inputList!.toList().cast<int>();
       setState(() {});
+      if ((widget.dataSource == 'price') &&
+          (FFAppState().searchParameters.filterPriceCheck == true)) {
+        _model.fromValue = valueOrDefault<double>(
+          FFAppState().searchParameters.priceFrom,
+          0.0,
+        );
+        _model.toValue = valueOrDefault<double>(
+          FFAppState().searchParameters.priceTo,
+          3000.0,
+        );
+        setState(() {});
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -65,6 +78,8 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -137,9 +152,18 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                     setState(() {});
                                     _model.addToSelectedList(-1);
                                     setState(() {});
+                                    if (widget.dataSource == 'price') {
+                                      FFAppState().updateSearchParametersStruct(
+                                        (e) => e..filterPriceCheck = false,
+                                      );
+                                      setState(() {});
+                                      _model.fromValue = 0.0;
+                                      _model.toValue = 3000.0;
+                                      setState(() {});
+                                    }
                                   },
                                   text: FFLocalizations.of(context).getText(
-                                    'urcreeft' /* حذف التصفية */,
+                                    '909hr4d3' /* حذف التصفية */,
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
@@ -166,26 +190,49 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if (functions.checkItemInList(
-                                            -1, _model.selectedList.toList()) ==
-                                        true) {
-                                      _model.selectedList = [];
-                                      setState(() {});
-                                    }
-                                    if (widget.dataSource == 'type') {
-                                      FFAppState().updateSearchParametersStruct(
-                                        (e) => e
-                                          ..docTypeCde =
-                                              _model.selectedList.toList(),
-                                      );
-                                      setState(() {});
-                                    } else {
-                                      if (widget.dataSource == 'title') {
+                                    if ((widget.dataSource == 'type') ||
+                                        (widget.dataSource == 'title')) {
+                                      if (functions.checkItemInList(-1,
+                                              _model.selectedList.toList()) ==
+                                          true) {
+                                        setState(() {});
+                                      }
+                                      if (widget.dataSource == 'type') {
                                         FFAppState()
                                             .updateSearchParametersStruct(
                                           (e) => e
-                                            ..docTitleCde =
+                                            ..docTypeCde =
                                                 _model.selectedList.toList(),
+                                        );
+                                        setState(() {});
+                                      } else {
+                                        if (widget.dataSource == 'title') {
+                                          FFAppState()
+                                              .updateSearchParametersStruct(
+                                            (e) => e
+                                              ..docTitleCde =
+                                                  _model.selectedList.toList(),
+                                          );
+                                          setState(() {});
+                                        }
+                                      }
+                                    } else {
+                                      if (widget.dataSource == 'price') {
+                                        if ((_model.fromValue! > 0.0) ||
+                                            (_model.toValue! < 3000.0)) {
+                                          FFAppState()
+                                              .updateSearchParametersStruct(
+                                            (e) => e
+                                              ..priceFrom = _model.fromValue
+                                              ..priceTo = _model.toValue
+                                              ..filterPriceCheck = true,
+                                          );
+                                          setState(() {});
+                                        }
+                                      } else {
+                                        FFAppState()
+                                            .updateSearchParametersStruct(
+                                          (e) => e..filterPriceCheck = false,
                                         );
                                         setState(() {});
                                       }
@@ -194,7 +241,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                     Navigator.pop(context);
                                   },
                                   text: FFLocalizations.of(context).getText(
-                                    '909hr4d3' /* حفظ التصفية */,
+                                    'xhib85h7' /* حفظ التصفية */,
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
@@ -233,103 +280,261 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
             ),
           ),
           Expanded(
-            child: Container(
-              decoration: const BoxDecoration(),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Builder(
-                        builder: (context) {
-                          final listItem = _model.dataList.toList();
+            child: Builder(
+              builder: (context) {
+                if (widget.dataSource != 'price') {
+                  return Container(
+                    decoration: const BoxDecoration(),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Builder(
+                              builder: (context) {
+                                final listItem = _model.dataList.toList();
 
-                          return SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: List.generate(listItem.length,
-                                      (listItemIndex) {
-                                final listItemItem = listItem[listItemIndex];
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    if (functions.checkItemInList(
-                                            listItemItem.key,
-                                            _model.selectedList.toList()) ==
-                                        true) {
-                                      _model.removeFromSelectedList(
-                                          listItemItem.key);
-                                      setState(() {});
-                                      if (_model.selectedList.isEmpty) {
-                                        _model.addToSelectedList(-1);
-                                        setState(() {});
-                                      }
-                                    } else {
-                                      _model
-                                          .addToSelectedList(listItemItem.key);
-                                      setState(() {});
-                                      if (listItemItem.key > 0) {
-                                        _model.removeFromSelectedList(-1);
-                                        setState(() {});
-                                      } else {
-                                        _model.selectedList = [];
-                                        setState(() {});
-                                        _model.addToSelectedList(-1);
-                                        setState(() {});
-                                      }
-                                    }
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: functions.checkItemInList(
+                                return SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: List.generate(listItem.length,
+                                            (listItemIndex) {
+                                      final listItemItem =
+                                          listItem[listItemIndex];
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          if (functions.checkItemInList(
                                                   listItemItem.key,
                                                   _model.selectedList
                                                       .toList()) ==
-                                              true
-                                          ? FlutterFlowTheme.of(context)
-                                              .tertiary
-                                          : FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          2.0, 2.0, 2.0, 2.0),
-                                      child: Text(
-                                        listItemItem.desc,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              letterSpacing: 0.0,
+                                              true) {
+                                            _model.removeFromSelectedList(
+                                                listItemItem.key);
+                                            setState(() {});
+                                            if (_model.selectedList.isEmpty) {
+                                              _model.addToSelectedList(-1);
+                                              setState(() {});
+                                            }
+                                          } else {
+                                            _model.addToSelectedList(
+                                                listItemItem.key);
+                                            setState(() {});
+                                            if (listItemItem.key > 0) {
+                                              _model.removeFromSelectedList(-1);
+                                              setState(() {});
+                                            } else {
+                                              _model.selectedList = [];
+                                              setState(() {});
+                                              _model.addToSelectedList(-1);
+                                              setState(() {});
+                                            }
+                                          }
+                                        },
+                                        child: Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: functions.checkItemInList(
+                                                        listItemItem.key,
+                                                        _model.selectedList
+                                                            .toList()) ==
+                                                    true
+                                                ? FlutterFlowTheme.of(context)
+                                                    .tertiary
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    2.0, 2.0, 2.0, 2.0),
+                                            child: Text(
+                                              listItemItem.desc,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
-                                      ),
-                                    ),
+                                          ),
+                                        ),
+                                      );
+                                    })
+                                        .divide(const SizedBox(height: 5.0))
+                                        .around(const SizedBox(height: 5.0)),
                                   ),
                                 );
-                              })
-                                  .divide(const SizedBox(height: 5.0))
-                                  .around(const SizedBox(height: 5.0)),
+                              },
                             ),
-                          );
-                        },
+                          ),
+                        ]
+                            .divide(const SizedBox(width: 10.0))
+                            .addToStart(const SizedBox(width: 5.0))
+                            .addToEnd(const SizedBox(width: 5.0)),
                       ),
                     ),
-                  ]
-                      .divide(const SizedBox(width: 10.0))
-                      .addToStart(const SizedBox(width: 5.0))
-                      .addToEnd(const SizedBox(width: 5.0)),
-                ),
-              ),
+                  );
+                } else {
+                  return Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'ip5583wu' /* من */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Cairo',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              Expanded(
+                                child: Slider(
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  inactiveColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  min: 0.0,
+                                  max: 3000.0,
+                                  value: _model.sliderFromValue ??=
+                                      valueOrDefault<double>(
+                                    _model.fromValue,
+                                    0.0,
+                                  ),
+                                  label: _model.sliderFromValue
+                                      ?.toStringAsFixed(0),
+                                  divisions: 300,
+                                  onChanged: (newValue) async {
+                                    newValue = double.parse(
+                                        newValue.toStringAsFixed(0));
+                                    setState(() =>
+                                        _model.sliderFromValue = newValue);
+                                    _model.fromValue = _model.sliderFromValue;
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                              Container(
+                                width: 50.0,
+                                decoration: const BoxDecoration(),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    _model.fromValue?.toString(),
+                                    '0',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Cairo',
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'kse66a1z' /* الي */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Cairo',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              Expanded(
+                                child: Slider(
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  inactiveColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  min: 0.0,
+                                  max: 3000.0,
+                                  value: _model.sliderToValue ??=
+                                      valueOrDefault<double>(
+                                    _model.toValue,
+                                    3000.0,
+                                  ),
+                                  label:
+                                      _model.sliderToValue?.toStringAsFixed(0),
+                                  divisions: 300,
+                                  onChanged: (newValue) async {
+                                    newValue = double.parse(
+                                        newValue.toStringAsFixed(0));
+                                    setState(
+                                        () => _model.sliderToValue = newValue);
+                                    _model.toValue = _model.sliderToValue;
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                              Container(
+                                width: 50.0,
+                                decoration: const BoxDecoration(),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    _model.toValue?.toString(),
+                                    '3000',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Cairo',
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]
+                          .divide(const SizedBox(height: 20.0))
+                          .around(const SizedBox(height: 20.0)),
+                    ),
+                  );
+                }
+              },
             ),
           ),
           Row(

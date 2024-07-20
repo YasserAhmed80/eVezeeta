@@ -618,26 +618,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'التخصص',
       'en': '',
     },
-    '7x9px90t': {
-      'ar': 'النوع',
-      'en': '',
-    },
-    '8oi4vgsh': {
-      'ar': 'اللقب',
-      'en': '',
-    },
-    '5gu0ja6l': {
-      'ar': 'سعر الكشف',
-      'en': '',
-    },
-    'hewueu4t': {
-      'ar': 'مواعيد العمل',
-      'en': '',
-    },
-    'yfbew6lv': {
-      'ar': 'كود خصم',
-      'en': '',
-    },
     'lhav9xod': {
       'ar': 'Home',
       'en': 'Home',
@@ -705,12 +685,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // search_item_component
   {
-    'urcreeft': {
+    '909hr4d3': {
       'ar': 'حذف التصفية',
       'en': '',
     },
-    '909hr4d3': {
+    'xhib85h7': {
       'ar': 'حفظ التصفية',
+      'en': '',
+    },
+    'ip5583wu': {
+      'ar': 'من',
+      'en': '',
+    },
+    'kse66a1z': {
+      'ar': 'الي',
       'en': '',
     },
   },

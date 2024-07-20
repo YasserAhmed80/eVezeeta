@@ -1,3 +1,4 @@
+import '/components/doc_search_item_list_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'doctor_search_widget.dart' show DoctorSearchWidget;
 import 'package:flutter/material.dart';
@@ -20,12 +21,18 @@ class DoctorSearchModel extends FlutterFlowModel<DoctorSearchWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Model for doc_search_item_list_component component.
+  late DocSearchItemListComponentModel docSearchItemListComponentModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    docSearchItemListComponentModel =
+        createModel(context, () => DocSearchItemListComponentModel());
+  }
 
   @override
   void dispose() {
     unfocusNode.dispose();
+    docSearchItemListComponentModel.dispose();
   }
 }

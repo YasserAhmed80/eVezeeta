@@ -197,6 +197,22 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _docSearchItems = prefs
+              .getStringList('ff_docSearchItems')
+              ?.map((x) {
+                try {
+                  return DtDocSearchItemStruct.fromSerializableMap(
+                      jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _docSearchItems;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -721,6 +737,58 @@ class FFAppState extends ChangeNotifier {
       Function(DtSearchParametersStruct) updateFn) {
     updateFn(_searchParameters);
     prefs.setString('ff_searchParameters', _searchParameters.serialize());
+  }
+
+  List<DtDocSearchItemStruct> _docSearchItems = [
+    DtDocSearchItemStruct.fromSerializableMap(jsonDecode(
+        '{\"item_type\":\"type\",\"item_desc\":\"النوع\",\"dialog_desc\":\"اختار النوع\",\"isActive\":\"false\"}')),
+    DtDocSearchItemStruct.fromSerializableMap(jsonDecode(
+        '{\"item_type\":\"title\",\"item_desc\":\"اللقب\",\"dialog_desc\":\"اختار اللقب\"}')),
+    DtDocSearchItemStruct.fromSerializableMap(jsonDecode(
+        '{\"item_type\":\"price\",\"item_desc\":\"سعر الكشف\",\"dialog_desc\":\"اختار السعر\"}')),
+    DtDocSearchItemStruct.fromSerializableMap(jsonDecode(
+        '{\"item_type\":\"time\",\"item_desc\":\"المواعيد\",\"dialog_desc\":\"اختار المواعيد\"}')),
+    DtDocSearchItemStruct.fromSerializableMap(jsonDecode(
+        '{\"item_type\":\"filter\",\"item_desc\":\"التصفية\",\"dialog_desc\":\"التصفية\",\"isActive\":\"false\"}'))
+  ];
+  List<DtDocSearchItemStruct> get docSearchItems => _docSearchItems;
+  set docSearchItems(List<DtDocSearchItemStruct> value) {
+    _docSearchItems = value;
+    prefs.setStringList(
+        'ff_docSearchItems', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToDocSearchItems(DtDocSearchItemStruct value) {
+    docSearchItems.add(value);
+    prefs.setStringList('ff_docSearchItems',
+        _docSearchItems.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromDocSearchItems(DtDocSearchItemStruct value) {
+    docSearchItems.remove(value);
+    prefs.setStringList('ff_docSearchItems',
+        _docSearchItems.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromDocSearchItems(int index) {
+    docSearchItems.removeAt(index);
+    prefs.setStringList('ff_docSearchItems',
+        _docSearchItems.map((x) => x.serialize()).toList());
+  }
+
+  void updateDocSearchItemsAtIndex(
+    int index,
+    DtDocSearchItemStruct Function(DtDocSearchItemStruct) updateFn,
+  ) {
+    docSearchItems[index] = updateFn(_docSearchItems[index]);
+    prefs.setStringList('ff_docSearchItems',
+        _docSearchItems.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInDocSearchItems(int index, DtDocSearchItemStruct value) {
+    docSearchItems.insert(index, value);
+    prefs.setStringList('ff_docSearchItems',
+        _docSearchItems.map((x) => x.serialize()).toList());
   }
 }
 
