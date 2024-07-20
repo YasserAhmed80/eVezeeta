@@ -138,10 +138,18 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                             _model.curretImage != ''
                                         ? functions.stringToImagePath(
                                             _model.curretImage)!
-                                        : 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg',
+                                        : ' ',
                                     width: double.infinity,
                                     height: double.infinity,
                                     fit: BoxFit.cover,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Image.asset(
+                                      'assets/images/error_image.jpg',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ],

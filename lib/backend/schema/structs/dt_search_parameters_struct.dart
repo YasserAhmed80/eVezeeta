@@ -3,7 +3,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
+import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class DtSearchParametersStruct extends FFFirebaseStruct {
@@ -12,25 +14,29 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
     int? zoneCde,
     int? areaCde,
     int? catCde,
-    int? subCatCde,
-    int? docTypeCde,
-    int? docTitleCde,
+    List<int>? subCatCde,
     LatLng? latlng,
     String? govDesc,
     String? zoneDesc,
     String? areaDesc,
+    String? catDesc,
+    String? subCatDesc,
+    List<int>? docTypeCde,
+    List<int>? docTitleCde,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _govCde = govCde,
         _zoneCde = zoneCde,
         _areaCde = areaCde,
         _catCde = catCde,
         _subCatCde = subCatCde,
-        _docTypeCde = docTypeCde,
-        _docTitleCde = docTitleCde,
         _latlng = latlng,
         _govDesc = govDesc,
         _zoneDesc = zoneDesc,
         _areaDesc = areaDesc,
+        _catDesc = catDesc,
+        _subCatDesc = subCatDesc,
+        _docTypeCde = docTypeCde,
+        _docTitleCde = docTitleCde,
         super(firestoreUtilData);
 
   // "gov_cde" field.
@@ -70,31 +76,15 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
   bool hasCatCde() => _catCde != null;
 
   // "sub_cat_cde" field.
-  int? _subCatCde;
-  int get subCatCde => _subCatCde ?? 0;
-  set subCatCde(int? val) => _subCatCde = val;
+  List<int>? _subCatCde;
+  List<int> get subCatCde => _subCatCde ?? const [];
+  set subCatCde(List<int>? val) => _subCatCde = val;
 
-  void incrementSubCatCde(int amount) => subCatCde = subCatCde + amount;
+  void updateSubCatCde(Function(List<int>) updateFn) {
+    updateFn(_subCatCde ??= []);
+  }
 
   bool hasSubCatCde() => _subCatCde != null;
-
-  // "doc_type_cde" field.
-  int? _docTypeCde;
-  int get docTypeCde => _docTypeCde ?? 0;
-  set docTypeCde(int? val) => _docTypeCde = val;
-
-  void incrementDocTypeCde(int amount) => docTypeCde = docTypeCde + amount;
-
-  bool hasDocTypeCde() => _docTypeCde != null;
-
-  // "doc_title_cde" field.
-  int? _docTitleCde;
-  int get docTitleCde => _docTitleCde ?? 0;
-  set docTitleCde(int? val) => _docTitleCde = val;
-
-  void incrementDocTitleCde(int amount) => docTitleCde = docTitleCde + amount;
-
-  bool hasDocTitleCde() => _docTitleCde != null;
 
   // "latlng" field.
   LatLng? _latlng;
@@ -124,19 +114,57 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
 
   bool hasAreaDesc() => _areaDesc != null;
 
+  // "cat_desc" field.
+  String? _catDesc;
+  String get catDesc => _catDesc ?? '';
+  set catDesc(String? val) => _catDesc = val;
+
+  bool hasCatDesc() => _catDesc != null;
+
+  // "sub_cat_desc" field.
+  String? _subCatDesc;
+  String get subCatDesc => _subCatDesc ?? '';
+  set subCatDesc(String? val) => _subCatDesc = val;
+
+  bool hasSubCatDesc() => _subCatDesc != null;
+
+  // "doc_type_cde" field.
+  List<int>? _docTypeCde;
+  List<int> get docTypeCde => _docTypeCde ?? const [];
+  set docTypeCde(List<int>? val) => _docTypeCde = val;
+
+  void updateDocTypeCde(Function(List<int>) updateFn) {
+    updateFn(_docTypeCde ??= []);
+  }
+
+  bool hasDocTypeCde() => _docTypeCde != null;
+
+  // "doc_title_cde" field.
+  List<int>? _docTitleCde;
+  List<int> get docTitleCde => _docTitleCde ?? const [];
+  set docTitleCde(List<int>? val) => _docTitleCde = val;
+
+  void updateDocTitleCde(Function(List<int>) updateFn) {
+    updateFn(_docTitleCde ??= []);
+  }
+
+  bool hasDocTitleCde() => _docTitleCde != null;
+
   static DtSearchParametersStruct fromMap(Map<String, dynamic> data) =>
       DtSearchParametersStruct(
         govCde: castToType<int>(data['gov_cde']),
         zoneCde: castToType<int>(data['zone_cde']),
         areaCde: castToType<int>(data['area_cde']),
         catCde: castToType<int>(data['cat_cde']),
-        subCatCde: castToType<int>(data['sub_cat_cde']),
-        docTypeCde: castToType<int>(data['doc_type_cde']),
-        docTitleCde: castToType<int>(data['doc_title_cde']),
+        subCatCde: getDataList(data['sub_cat_cde']),
         latlng: data['latlng'] as LatLng?,
         govDesc: data['gov_desc'] as String?,
         zoneDesc: data['zone_desc'] as String?,
         areaDesc: data['area_desc'] as String?,
+        catDesc: data['cat_desc'] as String?,
+        subCatDesc: data['sub_cat_desc'] as String?,
+        docTypeCde: getDataList(data['doc_type_cde']),
+        docTitleCde: getDataList(data['doc_title_cde']),
       );
 
   static DtSearchParametersStruct? maybeFromMap(dynamic data) => data is Map
@@ -149,12 +177,14 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         'area_cde': _areaCde,
         'cat_cde': _catCde,
         'sub_cat_cde': _subCatCde,
-        'doc_type_cde': _docTypeCde,
-        'doc_title_cde': _docTitleCde,
         'latlng': _latlng,
         'gov_desc': _govDesc,
         'zone_desc': _zoneDesc,
         'area_desc': _areaDesc,
+        'cat_desc': _catDesc,
+        'sub_cat_desc': _subCatDesc,
+        'doc_type_cde': _docTypeCde,
+        'doc_title_cde': _docTitleCde,
       }.withoutNulls;
 
   @override
@@ -178,14 +208,7 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         'sub_cat_cde': serializeParam(
           _subCatCde,
           ParamType.int,
-        ),
-        'doc_type_cde': serializeParam(
-          _docTypeCde,
-          ParamType.int,
-        ),
-        'doc_title_cde': serializeParam(
-          _docTitleCde,
-          ParamType.int,
+          isList: true,
         ),
         'latlng': serializeParam(
           _latlng,
@@ -202,6 +225,24 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         'area_desc': serializeParam(
           _areaDesc,
           ParamType.String,
+        ),
+        'cat_desc': serializeParam(
+          _catDesc,
+          ParamType.String,
+        ),
+        'sub_cat_desc': serializeParam(
+          _subCatDesc,
+          ParamType.String,
+        ),
+        'doc_type_cde': serializeParam(
+          _docTypeCde,
+          ParamType.int,
+          isList: true,
+        ),
+        'doc_title_cde': serializeParam(
+          _docTitleCde,
+          ParamType.int,
+          isList: true,
         ),
       }.withoutNulls;
 
@@ -228,20 +269,10 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
-        subCatCde: deserializeParam(
+        subCatCde: deserializeParam<int>(
           data['sub_cat_cde'],
           ParamType.int,
-          false,
-        ),
-        docTypeCde: deserializeParam(
-          data['doc_type_cde'],
-          ParamType.int,
-          false,
-        ),
-        docTitleCde: deserializeParam(
-          data['doc_title_cde'],
-          ParamType.int,
-          false,
+          true,
         ),
         latlng: deserializeParam(
           data['latlng'],
@@ -263,6 +294,26 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        catDesc: deserializeParam(
+          data['cat_desc'],
+          ParamType.String,
+          false,
+        ),
+        subCatDesc: deserializeParam(
+          data['sub_cat_desc'],
+          ParamType.String,
+          false,
+        ),
+        docTypeCde: deserializeParam<int>(
+          data['doc_type_cde'],
+          ParamType.int,
+          true,
+        ),
+        docTitleCde: deserializeParam<int>(
+          data['doc_title_cde'],
+          ParamType.int,
+          true,
+        ),
       );
 
   @override
@@ -270,18 +321,21 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
 
   @override
   bool operator ==(Object other) {
+    const listEquality = ListEquality();
     return other is DtSearchParametersStruct &&
         govCde == other.govCde &&
         zoneCde == other.zoneCde &&
         areaCde == other.areaCde &&
         catCde == other.catCde &&
-        subCatCde == other.subCatCde &&
-        docTypeCde == other.docTypeCde &&
-        docTitleCde == other.docTitleCde &&
+        listEquality.equals(subCatCde, other.subCatCde) &&
         latlng == other.latlng &&
         govDesc == other.govDesc &&
         zoneDesc == other.zoneDesc &&
-        areaDesc == other.areaDesc;
+        areaDesc == other.areaDesc &&
+        catDesc == other.catDesc &&
+        subCatDesc == other.subCatDesc &&
+        listEquality.equals(docTypeCde, other.docTypeCde) &&
+        listEquality.equals(docTitleCde, other.docTitleCde);
   }
 
   @override
@@ -291,12 +345,14 @@ class DtSearchParametersStruct extends FFFirebaseStruct {
         areaCde,
         catCde,
         subCatCde,
-        docTypeCde,
-        docTitleCde,
         latlng,
         govDesc,
         zoneDesc,
-        areaDesc
+        areaDesc,
+        catDesc,
+        subCatDesc,
+        docTypeCde,
+        docTitleCde
       ]);
 }
 
@@ -305,13 +361,12 @@ DtSearchParametersStruct createDtSearchParametersStruct({
   int? zoneCde,
   int? areaCde,
   int? catCde,
-  int? subCatCde,
-  int? docTypeCde,
-  int? docTitleCde,
   LatLng? latlng,
   String? govDesc,
   String? zoneDesc,
   String? areaDesc,
+  String? catDesc,
+  String? subCatDesc,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -322,13 +377,12 @@ DtSearchParametersStruct createDtSearchParametersStruct({
       zoneCde: zoneCde,
       areaCde: areaCde,
       catCde: catCde,
-      subCatCde: subCatCde,
-      docTypeCde: docTypeCde,
-      docTitleCde: docTitleCde,
       latlng: latlng,
       govDesc: govDesc,
       zoneDesc: zoneDesc,
       areaDesc: areaDesc,
+      catDesc: catDesc,
+      subCatDesc: subCatDesc,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

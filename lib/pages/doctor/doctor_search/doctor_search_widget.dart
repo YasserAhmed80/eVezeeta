@@ -1,11 +1,14 @@
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_choice_chips.dart';
+import '/components/rating_component_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/search_address_component/search_address_component_widget.dart';
+import '/pages/public_components/search_category_component/search_category_component_widget.dart';
+import '/pages/public_components/search_item_component/search_item_component_widget.dart';
+import '/pages/search_address_component/search_address_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'doctor_search_model.dart';
 export 'doctor_search_model.dart';
@@ -17,18 +20,46 @@ class DoctorSearchWidget extends StatefulWidget {
   State<DoctorSearchWidget> createState() => _DoctorSearchWidgetState();
 }
 
-class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
+class _DoctorSearchWidgetState extends State<DoctorSearchWidget>
+    with TickerProviderStateMixin {
   late DoctorSearchModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => DoctorSearchModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    animationsMap.addAll({
+      'textOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -60,194 +91,9 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 137.0,
+                    height: 150.0,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        'yfqdmrk9' /* Stay up to date with the lates... */,
-                      ),
-                      style: FlutterFlowTheme.of(context).labelMedium.override(
-                            fontFamily: 'Cairo',
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 8.0),
-                    child: TextFormField(
-                      controller: _model.textController,
-                      focusNode: _model.textFieldFocusNode,
-                      autofocus: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          '8pz1x4or' /* Search all articles... */,
-                        ),
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Cairo',
-                                  letterSpacing: 0.0,
-                                ),
-                        hintStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Cairo',
-                                  letterSpacing: 0.0,
-                                ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        contentPadding:
-                            const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
-                        suffixIcon: Icon(
-                          Icons.search_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Cairo',
-                            letterSpacing: 0.0,
-                          ),
-                      cursorColor: FlutterFlowTheme.of(context).primary,
-                      validator:
-                          _model.textControllerValidator.asValidator(context),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 8.0, 0.0, 8.0),
-                          child: FlutterFlowChoiceChips(
-                            options: [
-                              ChipData(FFLocalizations.of(context).getText(
-                                'yr0bmyas' /* For You */,
-                              )),
-                              ChipData(FFLocalizations.of(context).getText(
-                                '2enlw07i' /* Sci-Fi */,
-                              )),
-                              ChipData(FFLocalizations.of(context).getText(
-                                'xxn5ckvk' /* Fiction */,
-                              )),
-                              ChipData(FFLocalizations.of(context).getText(
-                                '5rexdred' /* Technology */,
-                              )),
-                              ChipData(FFLocalizations.of(context).getText(
-                                'c0c85nfe' /* Ai News */,
-                              )),
-                              ChipData(FFLocalizations.of(context).getText(
-                                'all62s34' /* Startups */,
-                              ))
-                            ],
-                            onChanged: (val) => setState(() =>
-                                _model.choiceChipsValue = val?.firstOrNull),
-                            selectedChipStyle: ChipStyle(
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).primary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Cairo',
-                                    color: FlutterFlowTheme.of(context).info,
-                                    letterSpacing: 0.0,
-                                  ),
-                              iconColor: FlutterFlowTheme.of(context).info,
-                              iconSize: 18.0,
-                              elevation: 2.0,
-                              borderColor: FlutterFlowTheme.of(context).accent1,
-                              borderWidth: 1.0,
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            unselectedChipStyle: ChipStyle(
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).alternate,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Cairo',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    letterSpacing: 0.0,
-                                  ),
-                              iconColor:
-                                  FlutterFlowTheme.of(context).secondaryText,
-                              iconSize: 18.0,
-                              elevation: 0.0,
-                              borderColor: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              borderWidth: 1.0,
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            chipSpacing: 8.0,
-                            rowSpacing: 12.0,
-                            multiselect: false,
-                            initialized: _model.choiceChipsValue != null,
-                            alignment: WrapAlignment.start,
-                            controller: _model.choiceChipsValueController ??=
-                                FormFieldController<List<String>>(
-                              [
-                                FFLocalizations.of(context).getText(
-                                  'g6z29jv0' /* For You */,
-                                )
-                              ],
-                            ),
-                            wrapped: true,
-                          ),
-                        ),
-                      ]
-                          .addToStart(const SizedBox(width: 16.0))
-                          .addToEnd(const SizedBox(width: 16.0)),
-                    ),
-                  ),
-                  Divider(
-                    thickness: 1.0,
-                    color: FlutterFlowTheme.of(context).alternate,
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 0.0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        '0tgjnsz5' /* Popular Today */,
-                      ),
-                      style: FlutterFlowTheme.of(context).labelMedium.override(
-                            fontFamily: 'Cairo',
-                            letterSpacing: 0.0,
-                          ),
                     ),
                   ),
                   StreamBuilder<List<DocRecord>>(
@@ -269,10 +115,10 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                       }
                       List<DocRecord> listViewDocRecordList = snapshot.data!;
 
-                      return ListView.builder(
+                      return ListView.separated(
                         padding: const EdgeInsets.fromLTRB(
                           0,
-                          8.0,
+                          0,
                           0,
                           44.0,
                         ),
@@ -280,12 +126,15 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: listViewDocRecordList.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 5.0),
                         itemBuilder: (context, listViewIndex) {
                           final listViewDocRecord =
                               listViewDocRecordList[listViewIndex];
                           return Container(
-                            width: 100.0,
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                            ),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 12.0, 16.0, 12.0),
@@ -296,8 +145,6 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                     width: 100.0,
                                     height: 100.0,
                                     decoration: BoxDecoration(
-                                      color:
-                                          FlutterFlowTheme.of(context).accent1,
                                       borderRadius: BorderRadius.circular(12.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
@@ -315,6 +162,14 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                           width: 120.0,
                                           height: 120.0,
                                           fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            'assets/images/error_image.jpg',
+                                            width: 120.0,
+                                            height: 120.0,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -326,111 +181,149 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            listViewDocRecord.name,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily: 'Cairo',
-                                                  letterSpacing: 0.0,
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  functions
+                                                      .getDocTypeItem(
+                                                          'n',
+                                                          FFAppState()
+                                                              .refDocType
+                                                              .toList(),
+                                                          listViewDocRecord
+                                                              .gender)
+                                                      ?.desc,
+                                                  'n',
                                                 ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 4.0, 0.0, 0.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineSmall
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'textOnPageLoadAnimation']!),
+                                              Expanded(
+                                                child: Padding(
                                                   padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          0.0, 0.0, 12.0, 0.0),
+                                                          5.0, 0.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    listViewDocRecord.name,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 0.0, 0.0, 0.0),
                                                   child: Text(
                                                     listViewDocRecord.title,
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .labelSmall
+                                                        .bodyLarge
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 4.0, 0.0),
-                                                  child: Icon(
-                                                    Icons
-                                                        .chat_bubble_outline_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 16.0,
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              RatingComponentWidget(
+                                                key: Key(
+                                                    'Keyuka_${listViewIndex}_of_${listViewDocRecordList.length}'),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        20.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'v0je1rj0' /* 123  */,
                                                   ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        fontSize: 12.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 16.0, 0.0),
-                                                  child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '6jyhwvg4' /* 24 */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelSmall
+                                              ),
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'cxjmtw70' /* تقيم */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'nsd8yzlp' /* 12h */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelSmall
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 4.0, 0.0),
-                                                  child: Icon(
-                                                    Icons
-                                                        .keyboard_control_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 16.0,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                           Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 8.0, 12.0, 0.0),
+                                                    0.0, 0.0, 12.0, 0.0),
                                             child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'r7kv1r6d' /* Read Now */,
+                                              valueOrDefault<String>(
+                                                functions
+                                                    .getDocTitleItem(
+                                                        'n',
+                                                        FFAppState()
+                                                            .refDocTitle
+                                                            .toList(),
+                                                        listViewDocRecord
+                                                            .titleId)
+                                                    ?.desc,
+                                                'n',
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -462,7 +355,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
             ),
             Container(
               width: double.infinity,
-              height: 120.0,
+              height: 150.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
                 borderRadius: const BorderRadius.only(
@@ -481,116 +374,25 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                         const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'zwob3t67' /* اختار المنطقة */,
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Cairo',
-                                    letterSpacing: 0.0,
-                                  ),
+                        Icon(
+                          Icons.search_sharp,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
                         ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
                         Expanded(
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                enableDrag: false,
-                                context: context,
-                                builder: (context) {
-                                  return GestureDetector(
-                                    onTap: () => _model
-                                            .unfocusNode.canRequestFocus
-                                        ? FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode)
-                                        : FocusScope.of(context).unfocus(),
-                                    child: Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: const SizedBox(
-                                        height: 600.0,
-                                        child: SearchAddressComponentWidget(),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ).then((value) => safeSetState(() {}));
-                            },
-                            child: Container(
-                              width: 100.0,
-                              height: 60.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 0.0, 0.0, 0.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'njmm9cav' /* المنطقة */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                fontSize: 12.0,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            '${FFAppState().searchParameters.govDesc}${FFAppState().searchParameters.zoneCde == -1 ? ' ' : '>${FFAppState().searchParameters.zoneDesc}'}${FFAppState().searchParameters.areaCde == -1 ? ' ' : '>${FFAppState().searchParameters.areaDesc}'}',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Cairo',
-                                                  fontSize: 14.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(0.0, -1.0),
-                                    child: Icon(
-                                      Icons.keyboard_double_arrow_down_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 30.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              '30msy7c2' /* اختار البحث  */,
                             ),
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Cairo',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ),
                         InkWell(
@@ -602,17 +404,504 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                             context.safePop();
                           },
                           child: Icon(
-                            Icons.settings_outlined,
+                            Icons.arrow_forward_ios,
                             color: FlutterFlowTheme.of(context).secondaryText,
                             size: 24.0,
                           ),
                         ),
-                      ]
-                          .divide(const SizedBox(width: 5.0))
-                          .around(const SizedBox(width: 5.0)),
+                      ],
                     ),
                   ),
-                ],
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (context) {
+                                return GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child: const SizedBox(
+                                      height: 600.0,
+                                      child: SearchAddressComponentWidget(),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
+                          },
+                          child: Container(
+                            width: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.location_pin,
+                                  color: FlutterFlowTheme.of(context).tertiary,
+                                  size: 24.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 5.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'njmm9cav' /* المنطقة */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${FFAppState().searchParameters.govDesc}${FFAppState().searchParameters.zoneCde == -1 ? ' ' : '>${FFAppState().searchParameters.zoneDesc}'}${FFAppState().searchParameters.areaCde == -1 ? ' ' : '>${FFAppState().searchParameters.areaDesc}'}',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondary,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 5.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 25.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (context) {
+                                return GestureDetector(
+                                  onTap: () =>
+                                      _model.unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                  child: Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child: const SizedBox(
+                                      height: 600.0,
+                                      child: SearchCategoryComponentWidget(),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
+                          },
+                          child: Container(
+                            width: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.category_outlined,
+                                  color: FlutterFlowTheme.of(context).tertiary,
+                                  size: 24.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 5.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'gsjq71hc' /* التخصص */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${FFAppState().searchParameters.govDesc}${FFAppState().searchParameters.zoneCde == -1 ? ' ' : '>${FFAppState().searchParameters.zoneDesc}'}${FFAppState().searchParameters.areaCde == -1 ? ' ' : '>${FFAppState().searchParameters.areaDesc}'}',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondary,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 5.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 25.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: SizedBox(
+                                          height: 600.0,
+                                          child: SearchItemComponentWidget(
+                                            dataSource: 'type',
+                                            sheetTitle: 'اختار النوع',
+                                            inputList: FFAppState()
+                                                .searchParameters
+                                                .docTypeCde,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              child: Container(
+                                constraints: const BoxConstraints(
+                                  minWidth: 60.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: FFAppState()
+                                              .searchParameters
+                                              .docTypeCde.isEmpty
+                                      ? FlutterFlowTheme.of(context)
+                                          .secondaryBackground
+                                      : FlutterFlowTheme.of(context).secondary,
+                                  borderRadius: BorderRadius.circular(14.0),
+                                ),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 5.0, 5.0, 5.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '7x9px90t' /* النوع */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: SizedBox(
+                                          height: 600.0,
+                                          child: SearchItemComponentWidget(
+                                            dataSource: 'title',
+                                            sheetTitle: 'اختار اللقب',
+                                            inputList: FFAppState()
+                                                .searchParameters
+                                                .docTitleCde,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              child: Container(
+                                constraints: const BoxConstraints(
+                                  minWidth: 60.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  borderRadius: BorderRadius.circular(14.0),
+                                ),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 5.0, 5.0, 5.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '8oi4vgsh' /* اللقب */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      size: 24.0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(14.0),
+                              ),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 5.0, 5.0, 5.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '5gu0ja6l' /* سعر الكشف */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Cairo',
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(14.0),
+                              ),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 5.0, 5.0, 5.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'hewueu4t' /* مواعيد العمل */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Cairo',
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                borderRadius: BorderRadius.circular(14.0),
+                              ),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 5.0, 5.0, 5.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'yfbew6lv' /* كود خصم */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Cairo',
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ]
+                              .divide(const SizedBox(width: 5.0))
+                              .around(const SizedBox(width: 5.0)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ].divide(const SizedBox(height: 3.0)),
               ),
             ),
           ],

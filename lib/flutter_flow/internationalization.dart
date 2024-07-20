@@ -598,64 +598,44 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_search
   {
-    'yfqdmrk9': {
-      'ar': 'Stay up to date with the latest news below.',
+    'v0je1rj0': {
+      'ar': '123 ',
       'en': '',
     },
-    '8pz1x4or': {
-      'ar': 'Search all articles...',
+    'cxjmtw70': {
+      'ar': 'تقيم',
       'en': '',
     },
-    'yr0bmyas': {
-      'ar': 'For You',
-      'en': '',
-    },
-    '2enlw07i': {
-      'ar': 'Sci-Fi',
-      'en': '',
-    },
-    'xxn5ckvk': {
-      'ar': 'Fiction',
-      'en': '',
-    },
-    '5rexdred': {
-      'ar': 'Technology',
-      'en': '',
-    },
-    'c0c85nfe': {
-      'ar': 'Ai News',
-      'en': '',
-    },
-    'all62s34': {
-      'ar': 'Startups',
-      'en': '',
-    },
-    'g6z29jv0': {
-      'ar': 'For You',
-      'en': '',
-    },
-    '0tgjnsz5': {
-      'ar': 'Popular Today',
-      'en': '',
-    },
-    '6jyhwvg4': {
-      'ar': '24',
-      'en': '',
-    },
-    'nsd8yzlp': {
-      'ar': '12h',
-      'en': '',
-    },
-    'r7kv1r6d': {
-      'ar': 'Read Now',
-      'en': '',
-    },
-    'zwob3t67': {
-      'ar': 'اختار المنطقة',
+    '30msy7c2': {
+      'ar': 'اختار البحث ',
       'en': '',
     },
     'njmm9cav': {
       'ar': 'المنطقة',
+      'en': '',
+    },
+    'gsjq71hc': {
+      'ar': 'التخصص',
+      'en': '',
+    },
+    '7x9px90t': {
+      'ar': 'النوع',
+      'en': '',
+    },
+    '8oi4vgsh': {
+      'ar': 'اللقب',
+      'en': '',
+    },
+    '5gu0ja6l': {
+      'ar': 'سعر الكشف',
+      'en': '',
+    },
+    'hewueu4t': {
+      'ar': 'مواعيد العمل',
+      'en': '',
+    },
+    'yfbew6lv': {
+      'ar': 'كود خصم',
       'en': '',
     },
     'lhav9xod': {
@@ -704,7 +684,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'pbi9jm7j': {
+      'ar': 'حفظ التصفية',
+      'en': '',
+    },
+  },
+  // search_category_component
+  {
+    'nsi0q9x1': {
+      'ar': 'اختار التخصص',
+      'en': '',
+    },
+    'y7v25toa': {
       'ar': 'حذف التصفية',
+      'en': '',
+    },
+    '77tg89tk': {
+      'ar': 'حفظ التصفية',
+      'en': '',
+    },
+  },
+  // search_item_component
+  {
+    'urcreeft': {
+      'ar': 'حذف التصفية',
+      'en': '',
+    },
+    '909hr4d3': {
+      'ar': 'حفظ التصفية',
       'en': '',
     },
   },

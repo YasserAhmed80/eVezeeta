@@ -22,7 +22,6 @@ Future<List<DtGeneralListStruct>> copyToList(
   DtGeneralListStruct newItem = DtGeneralListStruct();
   newItem.key = -1;
   newItem.desc = 'الكل';
-
   returnList.add(newItem);
 
   if (dataSource == 'gov') {
@@ -69,6 +68,67 @@ Future<List<DtGeneralListStruct>> copyToList(
 
         returnList.add(newItem);
       }
+    }
+  }
+
+  // doc category data ------------------------------------------------------
+  if (dataSource == 'cat') {
+    List<DtCategoryStruct> aList = FFAppState().refCategory;
+    aList?.sort((a, b) => a.desc.compareTo(b.desc));
+
+    // remove all item
+    returnList.clear();
+
+    for (DtCategoryStruct item in aList) {
+      DtGeneralListStruct newItem = DtGeneralListStruct();
+      newItem.key = item.catKey;
+      newItem.desc = item.desc;
+
+      returnList.add(newItem);
+    }
+  }
+
+  // doc sub cat data -------------------------------------------------------------
+  if (dataSource == 'subCat') {
+    List<DtSubCategoryStruct> aList = FFAppState().refSubCategory;
+    aList?.sort((a, b) => a.desc.compareTo(b.desc));
+
+    for (DtSubCategoryStruct item in aList) {
+      if (item.catCde == filterValue) {
+        DtGeneralListStruct newItem = DtGeneralListStruct();
+        newItem.key = item.subKey;
+        newItem.desc = item.desc;
+
+        returnList.add(newItem);
+      }
+    }
+  }
+
+  // doc type data -------------------------------------------------------------
+  if (dataSource == 'type') {
+    List<DtDocTypeStruct> aList = FFAppState().refDocType;
+    aList?.sort((a, b) => a.desc.compareTo(b.desc));
+
+    for (DtDocTypeStruct item in aList) {
+      DtGeneralListStruct newItem = DtGeneralListStruct();
+      newItem.key = item.typeKey;
+      newItem.desc = item.desc;
+
+      returnList.add(newItem);
+    }
+  }
+
+  // doc type data -------------------------------------------------------------
+  if (dataSource == 'title') {
+    List<DtDocTitleStruct> aList = FFAppState().refDocTitle;
+    aList?.sort((a, b) => a.desc.compareTo(b.desc));
+
+    for (DtDocTitleStruct item in aList) {
+      DtGeneralListStruct newItem = DtGeneralListStruct();
+      newItem.key = item.titleKey;
+      newItem.desc = item.desc;
+
+      returnList.add(newItem);
     }
   }
 

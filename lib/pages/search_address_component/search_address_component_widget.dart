@@ -155,7 +155,7 @@ class _SearchAddressComponentWidgetState
                                     '7afu9atg' /* حذف التصفية */,
                                   ),
                                   options: FFButtonOptions(
-                                    height: 40.0,
+                                    height: 35.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -167,15 +167,9 @@ class _SearchAddressComponentWidgetState
                                         .override(
                                           fontFamily: 'Cairo',
                                           color: FlutterFlowTheme.of(context)
-                                              .accent3,
+                                              .secondaryText,
                                           letterSpacing: 0.0,
                                         ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).accent3,
-                                      width: 1.0,
-                                    ),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 ),
@@ -198,10 +192,10 @@ class _SearchAddressComponentWidgetState
                                     Navigator.pop(context);
                                   },
                                   text: FFLocalizations.of(context).getText(
-                                    'pbi9jm7j' /* حذف التصفية */,
+                                    'pbi9jm7j' /* حفظ التصفية */,
                                   ),
                                   options: FFButtonOptions(
-                                    height: 40.0,
+                                    height: 35.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -214,15 +208,12 @@ class _SearchAddressComponentWidgetState
                                           fontFamily: 'Cairo',
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
-                                          fontSize: 14.0,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                         ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      width: 1.0,
+                                    borderSide: const BorderSide(
+                                      width: 0.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
@@ -408,6 +399,10 @@ class _SearchAddressComponentWidgetState
                                     _model.areaList = _model.returendAreas!
                                         .toList()
                                         .cast<DtGeneralListStruct>();
+                                    _model.selectedZone = -1;
+                                    _model.selectedArea = -1;
+                                    _model.selectedZoneDesc = 'الكل';
+                                    _model.selectedAreaDesc = 'الكل';
                                     setState(() {});
                                     if (_model.returendZones?.length == 0) {
                                       _model.selectedZone = 0;
@@ -482,6 +477,7 @@ class _SearchAddressComponentWidgetState
                                         .toList()
                                         .cast<DtGeneralListStruct>();
                                     _model.selectedArea = -1;
+                                    _model.selectedAreaDesc = 'الكل';
                                     setState(() {});
                                     if (_model.returnedArea?.length == 1) {
                                       _model.selectedArea =
