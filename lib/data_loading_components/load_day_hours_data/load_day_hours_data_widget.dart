@@ -30,7 +30,8 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().refDay.isEmpty) {
+      if ((FFAppState().refDay.isEmpty) ||
+          (FFAppState().lastDataLoading.reLoadDays == true)) {
         // day Data
         _model.dayData = await queryDayRefRecordOnce(
           queryBuilder: (dayRefRecord) => dayRefRecord.orderBy('seq'),
@@ -74,6 +75,11 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
       } else {
         return;
       }
+
+      FFAppState().updateLastDataLoadingStruct(
+        (e) => e..reLoadDays = false,
+      );
+      setState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));

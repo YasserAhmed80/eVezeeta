@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'onboarding01_widget.dart' show Onboarding01Widget;
@@ -8,6 +9,8 @@ class Onboarding01Model extends FlutterFlowModel<Onboarding01Widget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Firestore Query - Query a collection] action in Onboarding01 widget.
+  LastDataLoadingRecord? returnedLoadingData;
   // State field(s) for Timer widget.
   final timerInitialTimeMs = 3000;
   int timerMilliseconds = 3000;

@@ -32,7 +32,8 @@ class _LoadCategoriesComponentWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().refCategory.isEmpty) {
+      if ((FFAppState().refCategory.isEmpty) ||
+          (FFAppState().lastDataLoading.reLoadCategory == true)) {
         _model.catDocss = await queryCategoryRecordOnce(
           queryBuilder: (categoryRecord) => categoryRecord.orderBy('seq'),
         );
@@ -50,11 +51,7 @@ class _LoadCategoriesComponentWidgetState
           _model.loopIndex = _model.loopIndex! + 1;
           setState(() {});
         }
-      } else {
-        return;
-      }
-
-      if (FFAppState().refSubCategory.isEmpty) {
+        // sub categories
         _model.subCatDocss = await queryCategorySubRecordOnce(
           queryBuilder: (categorySubRecord) => categorySubRecord.orderBy('seq'),
         );
@@ -75,6 +72,11 @@ class _LoadCategoriesComponentWidgetState
       } else {
         return;
       }
+
+      FFAppState().updateLastDataLoadingStruct(
+        (e) => e..reLoadCategory = false,
+      );
+      setState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));

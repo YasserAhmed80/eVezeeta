@@ -2,6 +2,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -91,15 +92,30 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           _model.selectedDate = dayListItem.dayValue;
-                          _model.selectedDayHours = [].toList().cast<int>();
                           setState(() {});
                           _model.selectedDayBook = dayListItem;
-                          _model.tttttt = 0;
+                          setState(() {});
+                          _model.returnedHours = await queryDocTimeRecordOnce(
+                            queryBuilder: (docTimeRecord) => docTimeRecord
+                                .where(
+                                  'doc_id',
+                                  isEqualTo: widget.docID,
+                                )
+                                .where(
+                                  'day_id',
+                                  isEqualTo: dayListItem.dayItem.dayKey,
+                                ),
+                            singleRecord: true,
+                          ).then((s) => s.firstOrNull);
+                          _model.selectedDayHours =
+                              _model.returnedHours!.hrsId.toList().cast<int>();
                           setState(() {});
                           await widget.dayHoursAction?.call(
                             _model.selectedDayHours,
                             dayListItem,
                           );
+
+                          setState(() {});
                         },
                         child: Container(
                           width: 100.0,

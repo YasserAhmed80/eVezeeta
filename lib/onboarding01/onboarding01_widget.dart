@@ -1,9 +1,11 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -34,6 +36,36 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setAppLanguage(context, 'ar');
+      _model.returnedLoadingData = await queryLastDataLoadingRecordOnce(
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      if (_model.returnedLoadingData?.cityDate !=
+          FFAppState().lastDataLoading.ciityDate) {
+        FFAppState().updateLastDataLoadingStruct(
+          (e) => e
+            ..ciityDate = _model.returnedLoadingData?.cityDate
+            ..reLoadCities = true,
+        );
+        setState(() {});
+      }
+      if (_model.returnedLoadingData?.categoryDate !=
+          FFAppState().lastDataLoading.categoryDate) {
+        FFAppState().updateLastDataLoadingStruct(
+          (e) => e
+            ..categoryDate = _model.returnedLoadingData?.categoryDate
+            ..reLoadCategory = true,
+        );
+        setState(() {});
+      }
+      if (_model.returnedLoadingData?.daysDate !=
+          FFAppState().lastDataLoading.daysDate) {
+        FFAppState().updateLastDataLoadingStruct(
+          (e) => e
+            ..daysDate = _model.returnedLoadingData?.daysDate
+            ..reLoadDays = true,
+        );
+        setState(() {});
+      }
       _model.timerController.onStartTimer();
     });
 

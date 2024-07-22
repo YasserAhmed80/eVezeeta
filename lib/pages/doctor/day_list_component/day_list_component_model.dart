@@ -33,12 +33,12 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
     updateFn(selectedDayBook ??= DtDaysListStruct());
   }
 
-  int? tttttt;
-
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Firestore Query - Query a collection] action in DayListComponent widget.
   List<DocTimeRecord>? returnedDocTime;
+  // Stores action output result for [Firestore Query - Query a collection] action in Container widget.
+  DocTimeRecord? returnedHours;
 
   @override
   void initState(BuildContext context) {}

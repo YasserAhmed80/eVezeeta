@@ -228,6 +228,17 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _refDayList;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_lastDataLoading')) {
+        try {
+          final serializedData = prefs.getString('ff_lastDataLoading') ?? '{}';
+          _lastDataLoading = DtLastLoadingStruct.fromSerializableMap(
+              jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -845,6 +856,18 @@ class FFAppState extends ChangeNotifier {
     refDayList.insert(index, value);
     prefs.setStringList(
         'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
+  }
+
+  DtLastLoadingStruct _lastDataLoading = DtLastLoadingStruct();
+  DtLastLoadingStruct get lastDataLoading => _lastDataLoading;
+  set lastDataLoading(DtLastLoadingStruct value) {
+    _lastDataLoading = value;
+    prefs.setString('ff_lastDataLoading', value.serialize());
+  }
+
+  void updateLastDataLoadingStruct(Function(DtLastLoadingStruct) updateFn) {
+    updateFn(_lastDataLoading);
+    prefs.setString('ff_lastDataLoading', _lastDataLoading.serialize());
   }
 }
 

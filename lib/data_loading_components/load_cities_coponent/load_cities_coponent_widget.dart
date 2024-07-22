@@ -31,7 +31,8 @@ class _LoadCitiesCoponentWidgetState extends State<LoadCitiesCoponentWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().refGovernate.isEmpty) {
+      if ((FFAppState().refGovernate.isEmpty) ||
+          (FFAppState().lastDataLoading.reLoadCities == true)) {
         _model.governateDocs = await queryGovernateRecordOnce();
         _model.loopMax = _model.governateDocs?.length;
         setState(() {});
@@ -83,6 +84,10 @@ class _LoadCitiesCoponentWidgetState extends State<LoadCitiesCoponentWidget> {
         _model.loopIndex = _model.loopIndex! + 1;
         setState(() {});
       }
+      FFAppState().updateLastDataLoadingStruct(
+        (e) => e..reLoadCities = false,
+      );
+      setState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
