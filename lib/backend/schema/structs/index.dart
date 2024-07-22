@@ -6,6 +6,7 @@ export 'dt_ref_table_struct.dart';
 export 'dt_area_struct.dart';
 export 'dt_country_struct.dart';
 export 'dt_day_struct.dart';
+export 'dt_days_list_struct.dart';
 export 'dt_doc_title_struct.dart';
 export 'dt_doc_type_struct.dart';
 export 'dt_doc_record_struct.dart';

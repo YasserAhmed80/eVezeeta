@@ -1,6 +1,4 @@
 import '/backend/backend.dart';
-import '/components/empty_list_component_widget.dart';
-import '/components/switch_title_component_widget.dart';
 import '/data_loading_components/load_categories_component/load_categories_component_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -9,6 +7,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
+import '/pages/public_components/switch_title_component/switch_title_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';

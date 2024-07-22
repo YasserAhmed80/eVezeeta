@@ -7,6 +7,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'search_category_component_model.dart';
 export 'search_category_component_model.dart';
 
@@ -35,6 +36,13 @@ class _SearchCategoryComponentWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.selectedCat = valueOrDefault<int>(
+        FFAppState().searchParameters.catCde,
+        0,
+      );
+      _model.selectedSubCat =
+          FFAppState().searchParameters.subCatCde.toList().cast<int>();
+      setState(() {});
       // cophy category
       _model.returnedCat = await actions.copyToList(
         'cat',
@@ -66,6 +74,8 @@ class _SearchCategoryComponentWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -135,6 +145,7 @@ class _SearchCategoryComponentWidgetState
                                   onPressed: () async {
                                     _model.selectedCat = -1;
                                     _model.selectedSubCat = [];
+                                    _model.selectedCatDesc = 'الكل';
                                     setState(() {});
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -169,7 +180,13 @@ class _SearchCategoryComponentWidgetState
                                       (e) => e
                                         ..catCde = _model.selectedCat
                                         ..subCatCde =
-                                            _model.selectedSubCat.toList(),
+                                            _model.selectedSubCat.toList()
+                                        ..catDesc = valueOrDefault<String>(
+                                          _model.selectedCatDesc,
+                                          'n',
+                                        )
+                                        ..subCatDesc =
+                                            _model.selectedSubCatDesc,
                                     );
                                     setState(() {});
                                     Navigator.pop(context);
@@ -248,6 +265,7 @@ class _SearchCategoryComponentWidgetState
                                   onTap: () async {
                                     _model.selectedCat = catItemItem.key;
                                     _model.selectedSubCat = [];
+                                    _model.selectedCatDesc = catItemItem.desc;
                                     setState(() {});
                                     _model.filteredSubCat =
                                         await actions.copyToList(
@@ -339,6 +357,14 @@ class _SearchCategoryComponentWidgetState
 
                                     if (_model.selectedSubCat.isEmpty) {
                                       _model.addToSelectedSubCat(-1);
+                                      _model.selectedSubCatDesc = 'الكل';
+                                      setState(() {});
+                                    } else {
+                                      _model.selectedSubCatDesc =
+                                          valueOrDefault<String>(
+                                        subCatItemItem.desc,
+                                        'nnn',
+                                      );
                                       setState(() {});
                                     }
                                   },

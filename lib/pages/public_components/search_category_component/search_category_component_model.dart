@@ -42,6 +42,10 @@ class SearchCategoryComponentModel
   void updateSelectedSubCatAtIndex(int index, Function(int) updateFn) =>
       selectedSubCat[index] = updateFn(selectedSubCat[index]);
 
+  String selectedCatDesc = 'الكل';
+
+  String selectedSubCatDesc = 'الكل';
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Custom Action - copyToList] action in search_category_component widget.

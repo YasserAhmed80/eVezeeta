@@ -213,6 +213,21 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _docSearchItems;
     });
+    _safeInit(() {
+      _refDayList = prefs
+              .getStringList('ff_refDayList')
+              ?.map((x) {
+                try {
+                  return DtDaysListStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refDayList;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -789,6 +804,47 @@ class FFAppState extends ChangeNotifier {
     docSearchItems.insert(index, value);
     prefs.setStringList('ff_docSearchItems',
         _docSearchItems.map((x) => x.serialize()).toList());
+  }
+
+  List<DtDaysListStruct> _refDayList = [];
+  List<DtDaysListStruct> get refDayList => _refDayList;
+  set refDayList(List<DtDaysListStruct> value) {
+    _refDayList = value;
+    prefs.setStringList(
+        'ff_refDayList', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefDayList(DtDaysListStruct value) {
+    refDayList.add(value);
+    prefs.setStringList(
+        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefDayList(DtDaysListStruct value) {
+    refDayList.remove(value);
+    prefs.setStringList(
+        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefDayList(int index) {
+    refDayList.removeAt(index);
+    prefs.setStringList(
+        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefDayListAtIndex(
+    int index,
+    DtDaysListStruct Function(DtDaysListStruct) updateFn,
+  ) {
+    refDayList[index] = updateFn(_refDayList[index]);
+    prefs.setStringList(
+        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefDayList(int index, DtDaysListStruct value) {
+    refDayList.insert(index, value);
+    prefs.setStringList(
+        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
   }
 }
 

@@ -1,8 +1,8 @@
 import '/backend/backend.dart';
-import '/components/switch_title_component_widget.dart';
 import '/data_loading_components/load_categories_component/load_categories_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/pages/public_components/switch_title_component/switch_title_component_widget.dart';
 import 'doctor_data_main_widget.dart' show DoctorDataMainWidget;
 import 'package:flutter/material.dart';
 

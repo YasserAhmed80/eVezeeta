@@ -195,6 +195,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                       if (functions.checkItemInList(-1,
                                               _model.selectedList.toList()) ==
                                           true) {
+                                        _model.selectedList = [];
                                         setState(() {});
                                       }
                                       if (widget.dataSource == 'type') {
@@ -228,13 +229,13 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                               ..filterPriceCheck = true,
                                           );
                                           setState(() {});
+                                        } else {
+                                          FFAppState()
+                                              .updateSearchParametersStruct(
+                                            (e) => e..filterPriceCheck = false,
+                                          );
+                                          setState(() {});
                                         }
-                                      } else {
-                                        FFAppState()
-                                            .updateSearchParametersStruct(
-                                          (e) => e..filterPriceCheck = false,
-                                        );
-                                        setState(() {});
                                       }
                                     }
 
@@ -431,7 +432,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                   ),
                                   label: _model.sliderFromValue
                                       ?.toStringAsFixed(0),
-                                  divisions: 300,
+                                  divisions: 60,
                                   onChanged: (newValue) async {
                                     newValue = double.parse(
                                         newValue.toStringAsFixed(0));
@@ -496,7 +497,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                   ),
                                   label:
                                       _model.sliderToValue?.toStringAsFixed(0),
-                                  divisions: 300,
+                                  divisions: 60,
                                   onChanged: (newValue) async {
                                     newValue = double.parse(
                                         newValue.toStringAsFixed(0));

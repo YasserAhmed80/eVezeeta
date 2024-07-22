@@ -1,11 +1,12 @@
 import '/backend/backend.dart';
-import '/components/doc_search_item_list_component_widget.dart';
-import '/components/rating_component_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/public_components/rating_component/rating_component_widget.dart';
 import '/pages/public_components/search_category_component/search_category_component_widget.dart';
-import '/pages/search_address_component/search_address_component_widget.dart';
+import '/search/doc_search_item_list_component/doc_search_item_list_component_widget.dart';
+import '/search/search_address_component/search_address_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -135,198 +136,219 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget>
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 12.0, 16.0, 12.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Container(
-                                    width: 100.0,
-                                    height: 100.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: Image.network(
-                                          functions.stringToImagePath(
-                                              listViewDocRecord.img)!,
-                                          width: 120.0,
-                                          height: 120.0,
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 12.0, 16.0, 12.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            child: Image.network(
+                                              functions.stringToImagePath(
+                                                  listViewDocRecord.img)!,
+                                              width: 120.0,
+                                              height: 120.0,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error,
+                                                      stackTrace) =>
                                                   Image.asset(
-                                            'assets/images/error_image.jpg',
-                                            width: 120.0,
-                                            height: 120.0,
-                                            fit: BoxFit.cover,
+                                                'assets/images/error_image.jpg',
+                                                width: 120.0,
+                                                height: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  12.0, 0.0, 0.0, 0.0),
+                                          child: Column(
                                             mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  functions
-                                                      .getDocTypeItem(
-                                                          'n',
-                                                          FFAppState()
-                                                              .refDocType
-                                                              .toList(),
-                                                          listViewDocRecord
-                                                              .gender)
-                                                      ?.desc,
-                                                  'n',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    valueOrDefault<String>(
+                                                      functions
+                                                          .getDocTypeItem(
+                                                              'n',
+                                                              FFAppState()
+                                                                  .refDocType
+                                                                  .toList(),
+                                                              listViewDocRecord
+                                                                  .gender)
+                                                          ?.desc,
+                                                      'n',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .headlineSmall
                                                         .override(
                                                           fontFamily: 'Cairo',
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
-                                              ).animateOnPageLoad(animationsMap[
-                                                  'textOnPageLoadAnimation']!),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    listViewDocRecord.name,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    listViewDocRecord.title,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              RatingComponentWidget(
-                                                key: Key(
-                                                    'Keyuka_${listViewIndex}_of_${listViewDocRecordList.length}'),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'v0je1rj0' /* 123  */,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'textOnPageLoadAnimation']!),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  5.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        listViewDocRecord.name,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyLarge
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Cairo',
+                                                              fontSize: 14.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
                                                       ),
-                                                ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'cxjmtw70' /* تقيم */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  5.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        listViewDocRecord.title,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyLarge
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Cairo',
+                                                              fontSize: 12.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  RatingComponentWidget(
+                                                    key: Key(
+                                                        'Keyuka_${listViewIndex}_of_${listViewDocRecordList.length}'),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(20.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'v0je1rj0' /* 123  */,
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Cairo',
+                                                            fontSize: 12.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'cxjmtw70' /* تقيم */,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 12.0, 0.0),
-                                            child: Text(
-                                              valueOrDefault<String>(
-                                                functions
-                                                    .getDocTitleItem(
-                                                        'n',
-                                                        FFAppState()
-                                                            .refDocTitle
-                                                            .toList(),
-                                                        listViewDocRecord
-                                                            .titleId)
-                                                    ?.desc,
-                                                'n',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 12.0, 0.0),
+                                                child: Text(
+                                                  valueOrDefault<String>(
+                                                    functions
+                                                        .getDocTitleItem(
+                                                            'n',
+                                                            FFAppState()
+                                                                .refDocTitle
+                                                                .toList(),
+                                                            listViewDocRecord
+                                                                .titleId)
+                                                        ?.desc,
+                                                    'n',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .labelSmall
                                                       .override(
                                                         fontFamily: 'Cairo',
@@ -336,14 +358,180 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget>
                                                                 .primary,
                                                         letterSpacing: 0.0,
                                                       ),
-                                            ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Icon(
+                                                    Icons.location_on,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .tertiary,
+                                                    size: 20.0,
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            valueOrDefault<
+                                                                String>(
+                                                              functions.getFullAddress(
+                                                                  listViewDocRecord
+                                                                      .aGov,
+                                                                  listViewDocRecord
+                                                                      .aZone,
+                                                                  listViewDocRecord
+                                                                      .aArea,
+                                                                  FFAppState()
+                                                                      .refGovernate
+                                                                      .toList(),
+                                                                  FFAppState()
+                                                                      .refZone
+                                                                      .toList(),
+                                                                  FFAppState()
+                                                                      .refArea
+                                                                      .toList()),
+                                                              'full address',
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Cairo',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondary,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            listViewDocRecord
+                                                                .aAddr,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Cairo',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondary,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ].divide(const SizedBox(height: 1.0)),
                                           ),
-                                        ].divide(const SizedBox(height: 4.0)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 5.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          context.pushNamed(
+                                            'doctor_book_visit',
+                                            queryParameters: {
+                                              'docDocument': serializeParam(
+                                                listViewDocRecord,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'docDocument': listViewDocRecord,
+                                            },
+                                          );
+                                        },
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '59aurkjt' /* احجز الان */,
+                                        ),
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
+                                          iconPadding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color: Colors.white,
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: const BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                  ]
+                                      .divide(const SizedBox(width: 5.0))
+                                      .around(const SizedBox(width: 5.0)),
+                                ),
+                              ],
                             ),
                           );
                         },
@@ -582,7 +770,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget>
                                 ),
                                 Expanded(
                                   child: Text(
-                                    '${FFAppState().searchParameters.govDesc}${FFAppState().searchParameters.zoneCde == -1 ? ' ' : '>${FFAppState().searchParameters.zoneDesc}'}${FFAppState().searchParameters.areaCde == -1 ? ' ' : '>${FFAppState().searchParameters.areaDesc}'}',
+                                    FFAppState().searchParameters.catDesc,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

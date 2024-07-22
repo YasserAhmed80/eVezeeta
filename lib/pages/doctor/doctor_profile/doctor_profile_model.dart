@@ -1,5 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/custom_navbar/custom_navbar_widget.dart';
+import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'doctor_profile_widget.dart' show DoctorProfileWidget;
 import 'package:flutter/material.dart';
 

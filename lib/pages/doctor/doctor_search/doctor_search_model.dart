@@ -1,5 +1,5 @@
-import '/components/doc_search_item_list_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/search/doc_search_item_list_component/doc_search_item_list_component_widget.dart';
 import 'doctor_search_widget.dart' show DoctorSearchWidget;
 import 'package:flutter/material.dart';
 

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -113,11 +112,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const DoctorListWidget(),
         ),
         FFRoute(
-          name: 'testAppstate',
-          path: '/testAppstate',
-          builder: (context, params) => const TestAppstateWidget(),
-        ),
-        FFRoute(
           name: 'doctor_data_schedule',
           path: '/doctorDataSchedule',
           builder: (context, params) => const DoctorDataScheduleWidget(),
@@ -131,6 +125,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'doctor_search',
           path: '/doctorSearch',
           builder: (context, params) => const DoctorSearchWidget(),
+        ),
+        FFRoute(
+          name: 'doctor_book_visit',
+          path: '/doctorBookVisit',
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => DoctorBookVisitWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

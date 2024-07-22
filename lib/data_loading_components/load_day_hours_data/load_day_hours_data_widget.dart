@@ -31,6 +31,7 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (FFAppState().refDay.isEmpty) {
+        // day Data
         _model.dayData = await queryDayRefRecordOnce(
           queryBuilder: (dayRefRecord) => dayRefRecord.orderBy('seq'),
         );
@@ -44,6 +45,7 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
             desc: _model.dayData?[_model.loopIndex!].desc,
             seq: _model.dayData?[_model.loopIndex!].seq,
             lngCde: _model.dayData?[_model.loopIndex!].lngCde,
+            descEng: _model.dayData?[_model.loopIndex!].descEng,
           ));
           setState(() {});
           _model.loopIndex = _model.loopIndex! + 1;

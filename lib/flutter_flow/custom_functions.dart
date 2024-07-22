@@ -148,3 +148,74 @@ bool? checkSearchItemActive(
 
   return false;
 }
+
+String? getDayNameFromDate(DateTime? dDay) {
+  return DateFormat('EEEE').format(dDay as DateTime);
+}
+
+String? getFullAddress(
+  int? govKey,
+  int? zoneKey,
+  int? areaKey,
+  List<DtGovernateStruct> govList,
+  List<DtZoneStruct> zoneList,
+  List<DtAreaStruct> areaList,
+) {
+  String sGov = '';
+  String sZone = '';
+  String sArea = '';
+
+  try {
+    //return '{$govKey}, {$zoneKey}, {$areaKey}';
+
+    for (DtGovernateStruct item in govList) {
+      if (item.govKey == govKey) {
+        sGov = item.desc;
+      }
+    }
+
+    for (DtZoneStruct item in zoneList) {
+      if (item.zoneKey == zoneKey) {
+        sZone = item.desc;
+      }
+    }
+
+    for (DtAreaStruct item in areaList) {
+      if (item.areaKey == areaKey) {
+        sArea = item.desc;
+      }
+    }
+
+    if (sGov == '') {
+      return 'لايوجد';
+    }
+
+    String sAddress = sGov + ' > ' + sZone;
+
+    if (sArea != '' && sArea != sZone) {
+      sAddress = sAddress + ' > ' + sArea;
+    }
+
+    return sAddress;
+  } catch (e) {
+    return 'error getFullAddress: $e';
+  }
+}
+
+DtDayStruct? getDayCode(
+  DateTime dayValue,
+  List<DtDayStruct> dayRef,
+) {
+  String dayDesc = DateFormat('EEEE').format(dayValue as DateTime);
+  for (DtDayStruct item in dayRef) {
+    if (item.descEng == dayDesc) {
+      return item;
+    }
+  }
+
+  return null;
+}
+
+DateTime? dateAdd(DateTime? dDate) {
+  return dDate?.add(Duration(days: 1));
+}

@@ -475,21 +475,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
     },
   },
-  // testAppstate
-  {
-    'mu62r1ss': {
-      'ar': 'Page Title',
-      'en': 'Page Title',
-    },
-    'mxas0rf6': {
-      'ar': 'Button',
-      'en': 'Button',
-    },
-    'rmxrt49s': {
-      'ar': 'Home',
-      'en': 'Home',
-    },
-  },
   // doctor_data_schedule
   {
     'je4d3pi9': {
@@ -505,28 +490,48 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Entry at a specified time',
     },
     'ack7v2zu': {
-      'ar': 'سعر الكشف',
+      'ar': 'سعر الخدمة',
       'en': 'Detection price',
+    },
+    '9qjj5x91': {
+      'ar': 'سعر الكشف',
+      'en': '',
     },
     '8e4f1sar': {
       'ar': '',
       'en': '',
     },
     'zci0rcuq': {
-      'ar': '200',
+      'ar': '400',
+      'en': '200',
+    },
+    'd11vlahx': {
+      'ar': 'سعر الاستشارة',
+      'en': '',
+    },
+    'ex11evko': {
+      'ar': '',
+      'en': '',
+    },
+    '3tln7xty': {
+      'ar': '100',
       'en': '200',
     },
     'sp1i0d4e': {
       'ar': 'متوسط عدد الكشوفات في الساعة',
       'en': 'Average number of statements per hour',
     },
-    '764t5gdr': {
+    '8bgl4phv': {
+      'ar': 'متوسط عدد الكشف في الساعة',
+      'en': '',
+    },
+    'yx8jp0ks': {
       'ar': '',
       'en': '',
     },
-    'gyf54g18': {
+    'c6j7nwi3': {
       'ar': '1',
-      'en': '1',
+      'en': '',
     },
     'jea1h2ss': {
       'ar': 'تحديد مواعيد العمل',
@@ -606,6 +611,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تقيم',
       'en': '',
     },
+    '59aurkjt': {
+      'ar': 'احجز الان',
+      'en': 'save',
+    },
     '30msy7c2': {
       'ar': 'اختار البحث ',
       'en': '',
@@ -617,6 +626,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'gsjq71hc': {
       'ar': 'التخصص',
       'en': '',
+    },
+    'rmxrt49s': {
+      'ar': 'Home',
+      'en': 'Home',
+    },
+  },
+  // doctor_book_visit
+  {
+    'jjcwgkrh': {
+      'ar': 'book a day',
+      'en': '',
+    },
+    'mu62r1ss': {
+      'ar': 'Page Title',
+      'en': 'Page Title',
     },
     'lhav9xod': {
       'ar': 'Home',
@@ -648,7 +672,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'حفظ',
       'en': 'save',
     },
-    'oz3ag78l': {
+    'b98rywxu': {
       'ar': 'لم يتم اخيار هذا اليوم',
       'en': '',
     },
@@ -699,6 +723,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kse66a1z': {
       'ar': 'الي',
+      'en': '',
+    },
+  },
+  // DayBookingComponent
+  {
+    'oz3ag78l': {
+      'ar': 'لم يتم اخيار هذا اليوم',
       'en': '',
     },
   },

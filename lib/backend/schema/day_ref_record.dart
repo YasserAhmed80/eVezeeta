@@ -35,11 +35,17 @@ class DayRefRecord extends FirestoreRecord {
   int get lngCde => _lngCde ?? 0;
   bool hasLngCde() => _lngCde != null;
 
+  // "desc_eng" field.
+  String? _descEng;
+  String get descEng => _descEng ?? '';
+  bool hasDescEng() => _descEng != null;
+
   void _initializeFields() {
     _dayKey = castToType<int>(snapshotData['day_key']);
     _desc = snapshotData['desc'] as String?;
     _seq = castToType<int>(snapshotData['seq']);
     _lngCde = castToType<int>(snapshotData['lng_cde']);
+    _descEng = snapshotData['desc_eng'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -80,6 +86,7 @@ Map<String, dynamic> createDayRefRecordData({
   String? desc,
   int? seq,
   int? lngCde,
+  String? descEng,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -87,6 +94,7 @@ Map<String, dynamic> createDayRefRecordData({
       'desc': desc,
       'seq': seq,
       'lng_cde': lngCde,
+      'desc_eng': descEng,
     }.withoutNulls,
   );
 
@@ -101,12 +109,13 @@ class DayRefRecordDocumentEquality implements Equality<DayRefRecord> {
     return e1?.dayKey == e2?.dayKey &&
         e1?.desc == e2?.desc &&
         e1?.seq == e2?.seq &&
-        e1?.lngCde == e2?.lngCde;
+        e1?.lngCde == e2?.lngCde &&
+        e1?.descEng == e2?.descEng;
   }
 
   @override
-  int hash(DayRefRecord? e) =>
-      const ListEquality().hash([e?.dayKey, e?.desc, e?.seq, e?.lngCde]);
+  int hash(DayRefRecord? e) => const ListEquality()
+      .hash([e?.dayKey, e?.desc, e?.seq, e?.lngCde, e?.descEng]);
 
   @override
   bool isValidKey(Object? o) => o is DayRefRecord;

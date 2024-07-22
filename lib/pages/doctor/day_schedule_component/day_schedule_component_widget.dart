@@ -279,10 +279,6 @@ class _DayScheduleComponentWidgetState
                                                   .secondaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(10.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiary,
-                                          ),
                                         ),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
@@ -505,7 +501,7 @@ class _DayScheduleComponentWidgetState
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
-                          'oz3ag78l' /* لم يتم اخيار هذا اليوم */,
+                          'b98rywxu' /* لم يتم اخيار هذا اليوم */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Cairo',

@@ -12,11 +12,13 @@ class DtDayStruct extends FFFirebaseStruct {
     String? desc,
     int? seq,
     int? lngCde,
+    String? descEng,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _dayKey = dayKey,
         _desc = desc,
         _seq = seq,
         _lngCde = lngCde,
+        _descEng = descEng,
         super(firestoreUtilData);
 
   // "day_key" field.
@@ -53,11 +55,19 @@ class DtDayStruct extends FFFirebaseStruct {
 
   bool hasLngCde() => _lngCde != null;
 
+  // "desc_eng" field.
+  String? _descEng;
+  String get descEng => _descEng ?? '';
+  set descEng(String? val) => _descEng = val;
+
+  bool hasDescEng() => _descEng != null;
+
   static DtDayStruct fromMap(Map<String, dynamic> data) => DtDayStruct(
         dayKey: castToType<int>(data['day_key']),
         desc: data['desc'] as String?,
         seq: castToType<int>(data['seq']),
         lngCde: castToType<int>(data['lng_cde']),
+        descEng: data['desc_eng'] as String?,
       );
 
   static DtDayStruct? maybeFromMap(dynamic data) =>
@@ -68,6 +78,7 @@ class DtDayStruct extends FFFirebaseStruct {
         'desc': _desc,
         'seq': _seq,
         'lng_cde': _lngCde,
+        'desc_eng': _descEng,
       }.withoutNulls;
 
   @override
@@ -87,6 +98,10 @@ class DtDayStruct extends FFFirebaseStruct {
         'lng_cde': serializeParam(
           _lngCde,
           ParamType.int,
+        ),
+        'desc_eng': serializeParam(
+          _descEng,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -112,6 +127,11 @@ class DtDayStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
+        descEng: deserializeParam(
+          data['desc_eng'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -123,11 +143,13 @@ class DtDayStruct extends FFFirebaseStruct {
         dayKey == other.dayKey &&
         desc == other.desc &&
         seq == other.seq &&
-        lngCde == other.lngCde;
+        lngCde == other.lngCde &&
+        descEng == other.descEng;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([dayKey, desc, seq, lngCde]);
+  int get hashCode =>
+      const ListEquality().hash([dayKey, desc, seq, lngCde, descEng]);
 }
 
 DtDayStruct createDtDayStruct({
@@ -135,6 +157,7 @@ DtDayStruct createDtDayStruct({
   String? desc,
   int? seq,
   int? lngCde,
+  String? descEng,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -145,6 +168,7 @@ DtDayStruct createDtDayStruct({
       desc: desc,
       seq: seq,
       lngCde: lngCde,
+      descEng: descEng,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

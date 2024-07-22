@@ -1,6 +1,6 @@
 import '/data_loading_components/load_day_hours_data/load_day_hours_data_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/custom_navbar/custom_navbar_widget.dart';
+import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'doctor_data_schedule_widget.dart' show DoctorDataScheduleWidget;
 import 'package:flutter/material.dart';
 
@@ -34,6 +34,11 @@ class DoctorDataScheduleModel
   TextEditingController? fullNameFieldTextController2;
   String? Function(BuildContext, String?)?
       fullNameFieldTextController2Validator;
+  // State field(s) for fullNameField widget.
+  FocusNode? fullNameFieldFocusNode3;
+  TextEditingController? fullNameFieldTextController3;
+  String? Function(BuildContext, String?)?
+      fullNameFieldTextController3Validator;
   // Model for loadDayHoursData component.
   late LoadDayHoursDataModel loadDayHoursDataModel;
   // Model for custom_navbar component.
@@ -53,6 +58,9 @@ class DoctorDataScheduleModel
 
     fullNameFieldFocusNode2?.dispose();
     fullNameFieldTextController2?.dispose();
+
+    fullNameFieldFocusNode3?.dispose();
+    fullNameFieldTextController3?.dispose();
 
     loadDayHoursDataModel.dispose();
     customNavbarModel.dispose();
