@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -13,12 +14,14 @@ class DtHourStruct extends FFFirebaseStruct {
     String? period,
     int? seq,
     int? lngCde,
+    EnumBookHourStatus? statusCde,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _hourKey = hourKey,
         _desc = desc,
         _period = period,
         _seq = seq,
         _lngCde = lngCde,
+        _statusCde = statusCde,
         super(firestoreUtilData);
 
   // "hour_key" field.
@@ -62,12 +65,20 @@ class DtHourStruct extends FFFirebaseStruct {
 
   bool hasLngCde() => _lngCde != null;
 
+  // "status_cde" field.
+  EnumBookHourStatus? _statusCde;
+  EnumBookHourStatus? get statusCde => _statusCde;
+  set statusCde(EnumBookHourStatus? val) => _statusCde = val;
+
+  bool hasStatusCde() => _statusCde != null;
+
   static DtHourStruct fromMap(Map<String, dynamic> data) => DtHourStruct(
         hourKey: castToType<int>(data['hour_key']),
         desc: data['desc'] as String?,
         period: data['period'] as String?,
         seq: castToType<int>(data['seq']),
         lngCde: castToType<int>(data['lng_cde']),
+        statusCde: deserializeEnum<EnumBookHourStatus>(data['status_cde']),
       );
 
   static DtHourStruct? maybeFromMap(dynamic data) =>
@@ -79,6 +90,7 @@ class DtHourStruct extends FFFirebaseStruct {
         'period': _period,
         'seq': _seq,
         'lng_cde': _lngCde,
+        'status_cde': _statusCde?.serialize(),
       }.withoutNulls;
 
   @override
@@ -102,6 +114,10 @@ class DtHourStruct extends FFFirebaseStruct {
         'lng_cde': serializeParam(
           _lngCde,
           ParamType.int,
+        ),
+        'status_cde': serializeParam(
+          _statusCde,
+          ParamType.Enum,
         ),
       }.withoutNulls;
 
@@ -132,6 +148,11 @@ class DtHourStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
+        statusCde: deserializeParam<EnumBookHourStatus>(
+          data['status_cde'],
+          ParamType.Enum,
+          false,
+        ),
       );
 
   @override
@@ -144,12 +165,13 @@ class DtHourStruct extends FFFirebaseStruct {
         desc == other.desc &&
         period == other.period &&
         seq == other.seq &&
-        lngCde == other.lngCde;
+        lngCde == other.lngCde &&
+        statusCde == other.statusCde;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([hourKey, desc, period, seq, lngCde]);
+  int get hashCode => const ListEquality()
+      .hash([hourKey, desc, period, seq, lngCde, statusCde]);
 }
 
 DtHourStruct createDtHourStruct({
@@ -158,6 +180,7 @@ DtHourStruct createDtHourStruct({
   String? period,
   int? seq,
   int? lngCde,
+  EnumBookHourStatus? statusCde,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -169,6 +192,7 @@ DtHourStruct createDtHourStruct({
       period: period,
       seq: seq,
       lngCde: lngCde,
+      statusCde: statusCde,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

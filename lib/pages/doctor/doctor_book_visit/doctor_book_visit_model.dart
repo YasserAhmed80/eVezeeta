@@ -1,9 +1,11 @@
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
 import '/data_loading_components/load_day_list_component/load_day_list_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/doctor/day_booking_component/day_booking_component_widget.dart';
 import '/pages/doctor/day_list_component/day_list_component_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'doctor_book_visit_widget.dart' show DoctorBookVisitWidget;
 import 'package:flutter/material.dart';
 
@@ -12,9 +14,9 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
 
   DateTime? currentDate;
 
-  int? loopIndex = 0;
+  int? loopIndex1 = 0;
 
-  int? loopMax = 30;
+  int? loopMax1 = 20;
 
   DateTime? selectedDay;
 
@@ -32,6 +34,13 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
   void updateSelectedDaybookStruct(Function(DtDaysListStruct) updateFn) {
     updateFn(selectedDaybook ??= DtDaysListStruct());
   }
+
+  DtHourStruct? currentHourItem;
+  void updateCurrentHourItemStruct(Function(DtHourStruct) updateFn) {
+    updateFn(currentHourItem ??= DtHourStruct());
+  }
+
+  EnumBookHourStatus? currentHourStatus = EnumBookHourStatus.inActive;
 
   ///  State fields for stateful widgets in this page.
 
@@ -58,5 +67,25 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
     dayListComponentModel.dispose();
     dayBookingComponentModel.dispose();
     loadDayListComponentModel.dispose();
+  }
+
+  /// Action blocks.
+  Future updateHourStatus(BuildContext context) async {
+    loopIndex1 = 0;
+    loopMax1 = FFAppState().refHour.length;
+    while (loopIndex1! < loopMax1!) {
+      currentHourItem = FFAppState().refHour[loopIndex1!];
+      if (functions.checkItemInList(
+              currentHourItem?.hourKey, selectedDayHours.toList()) ==
+          true) {
+        currentHourStatus = EnumBookHourStatus.Active;
+      }
+      FFAppState().updateRefHourAtIndex(
+        loopIndex1!,
+        (e) => e..statusCde = currentHourStatus,
+      );
+      loopIndex1 = loopIndex1! + 1;
+      currentHourStatus = EnumBookHourStatus.inActive;
+    }
   }
 }

@@ -39,6 +39,9 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
       _model.returnedLoadingData = await queryLastDataLoadingRecordOnce(
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      if (!(_model.returnedLoadingData?.reference != null)) {
+        return;
+      }
       if (_model.returnedLoadingData?.cityDate !=
           FFAppState().lastDataLoading.ciityDate) {
         FFAppState().updateLastDataLoadingStruct(

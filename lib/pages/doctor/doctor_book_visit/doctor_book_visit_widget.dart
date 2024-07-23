@@ -117,51 +117,78 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              decoration: const BoxDecoration(),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 50.0, 0.0, 0.0),
-                                child: wrapWithModel(
-                                  model: _model.dayListComponentModel,
-                                  updateCallback: () => setState(() {}),
-                                  child: DayListComponentWidget(
-                                    docID: widget.docDocument!.reference.id,
-                                    dayHoursAction:
-                                        (dayHourse, dayItemBook) async {
-                                      _model.selectedDayHours =
-                                          dayHourse.toList().cast<int>();
-                                      _model.selectedDaybook = dayItemBook;
-                                      setState(() {});
-                                    },
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                height: 500.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(14.0),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    width: 2.0,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 5.0, 5.0, 5.0),
+                                  child: wrapWithModel(
+                                    model: _model.dayListComponentModel,
+                                    updateCallback: () => setState(() {}),
+                                    child: DayListComponentWidget(
+                                      docID: widget.docDocument!.reference.id,
+                                      dayHoursAction:
+                                          (dayHourse, dayItemBook) async {
+                                        _model.selectedDayHours =
+                                            dayHourse.toList().cast<int>();
+                                        _model.selectedDaybook = dayItemBook;
+                                        setState(() {});
+                                        await _model.updateHourStatus(context);
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              width: 100.0,
-                              height: 431.0,
-                              decoration: const BoxDecoration(),
-                              child: wrapWithModel(
-                                model: _model.dayBookingComponentModel,
-                                updateCallback: () => setState(() {}),
-                                child: DayBookingComponentWidget(
-                                  dayBookItem: _model.selectedDaybook,
-                                  dayAvilableHrs: _model.selectedDayHours,
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                width: 100.0,
+                                height: 500.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(14.0),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    width: 2.0,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 5.0, 5.0, 5.0),
+                                  child: wrapWithModel(
+                                    model: _model.dayBookingComponentModel,
+                                    updateCallback: () => setState(() {}),
+                                    child: DayBookingComponentWidget(
+                                      dayBookItem: _model.selectedDaybook,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ].divide(const SizedBox(width: 5.0)),
+                        ),
                       ),
                     ),
                   ],

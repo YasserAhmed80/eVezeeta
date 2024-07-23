@@ -70,7 +70,9 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
 
     return Container(
       height: 500.0,
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+      ),
       child: Builder(
         builder: (context) {
           final dayList = FFAppState().refDayList.toList();
