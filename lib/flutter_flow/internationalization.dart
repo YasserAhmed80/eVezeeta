@@ -498,24 +498,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     '8e4f1sar': {
-      'ar': '',
+      'ar': 'سعر الاستشارة',
       'en': '',
     },
     'zci0rcuq': {
-      'ar': '400',
+      'ar': '1',
       'en': '200',
-    },
-    'd11vlahx': {
-      'ar': 'سعر الاستشارة',
-      'en': '',
     },
     'ex11evko': {
       'ar': '',
       'en': '',
-    },
-    '3tln7xty': {
-      'ar': '100',
-      'en': '200',
     },
     'sp1i0d4e': {
       'ar': 'متوسط عدد الكشوفات في الساعة',
@@ -527,10 +519,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'yx8jp0ks': {
       'ar': '',
-      'en': '',
-    },
-    'c6j7nwi3': {
-      'ar': '1',
       'en': '',
     },
     'jea1h2ss': {
@@ -552,7 +540,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '/',
       'en': '',
     },
-    'xhzlp0e3': {
+    '9qjj5x91': {
       'ar': 'البيانات الاساسية',
       'en': '',
     },
@@ -577,10 +565,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'qkfwbr0r': {
-      'ar': 'تعديل كلمة المرور',
-      'en': '',
-    },
-    '3ju9mk5k': {
       'ar': 'خروج',
       'en': '',
     },
@@ -611,9 +595,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تقيم',
       'en': '',
     },
-    '59aurkjt': {
-      'ar': 'احجز الان',
+    'mlgytsf8': {
+      'ar': 'booked Visit',
       'en': 'save',
+    },
+    '0vljw38e': {
+      'ar': 'احجز الان',
+      'en': '',
     },
     '30msy7c2': {
       'ar': 'اختار البحث ',
@@ -634,17 +622,56 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_book_visit
   {
-    'jjcwgkrh': {
-      'ar': 'book a day',
+    '8sb6xxlx': {
+      'ar': 'يمكنك حجز ميعاد مع',
       'en': '',
     },
-    'mu62r1ss': {
-      'ar': 'Page Title',
-      'en': 'Page Title',
+    'j0d5xvx1': {
+      'ar': 'تم تخيار:',
+      'en': '',
     },
-    'lhav9xod': {
+    'xhutvc8b': {
+      'ar': 'الساعة ',
+      'en': '',
+    },
+    '7y1had1u': {
+      'ar': 'احجز الان',
+      'en': '',
+    },
+    '4gpuj5t4': {
+      'ar': 'لكي يتم الحجز يجب اختيار اليوم و الوقت من اعلي!',
+      'en': '',
+    },
+    'rmxrt49s': {
       'ar': 'Home',
       'en': 'Home',
+    },
+  },
+  // doctor_booking_center
+  {
+    '8hgydiqf': {
+      'ar': 'جدول الحجوزات',
+      'en': '',
+    },
+    '9gtne1p4': {
+      'ar': 'موعد الحجز: ',
+      'en': '',
+    },
+    'hew2lx5z': {
+      'ar': 'حاله الحجز:  ',
+      'en': '',
+    },
+    'ct1vwy38': {
+      'ar': 'تاكيد ',
+      'en': '',
+    },
+    'e0roigc0': {
+      'ar': 'الغاء',
+      'en': '',
+    },
+    'y2k7kykw': {
+      'ar': 'Home',
+      'en': '',
     },
   },
   // custom_navbar
@@ -672,7 +699,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'حفظ',
       'en': 'save',
     },
-    'b98rywxu': {
+    '9qjj5x91': {
       'ar': 'لم يتم اخيار هذا اليوم',
       'en': '',
     },

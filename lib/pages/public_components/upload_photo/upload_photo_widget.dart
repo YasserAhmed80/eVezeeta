@@ -69,7 +69,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
             )
             .where(
               'i_seq',
-              isEqualTo: 0,
+              isEqualTo: widget.imgSeq,
             ),
       );
       if (_model.queryImage!.isNotEmpty) {

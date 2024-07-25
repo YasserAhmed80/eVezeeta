@@ -138,6 +138,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'doctor_booking_center',
+          path: '/doctorBookingCenter',
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => DoctorBookingCenterWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

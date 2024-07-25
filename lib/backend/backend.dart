@@ -20,6 +20,7 @@ import 'schema/day_ref_record.dart';
 import 'schema/hour_ref_record.dart';
 import 'schema/doc_time_record.dart';
 import 'schema/last_data_loading_record.dart';
+import 'schema/doc_booked_time_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -43,6 +44,7 @@ export 'schema/day_ref_record.dart';
 export 'schema/hour_ref_record.dart';
 export 'schema/doc_time_record.dart';
 export 'schema/last_data_loading_record.dart';
+export 'schema/doc_booked_time_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -594,6 +596,43 @@ Future<List<LastDataLoadingRecord>> queryLastDataLoadingRecordOnce({
     queryCollectionOnce(
       LastDataLoadingRecord.collection,
       LastDataLoadingRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query DocBookedTimeRecords (as a Stream and as a Future).
+Future<int> queryDocBookedTimeRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DocBookedTimeRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DocBookedTimeRecord>> queryDocBookedTimeRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DocBookedTimeRecord.collection,
+      DocBookedTimeRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DocBookedTimeRecord>> queryDocBookedTimeRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DocBookedTimeRecord.collection,
+      DocBookedTimeRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

@@ -2,7 +2,7 @@ import '/data_loading_components/load_day_hours_data/load_day_hours_data_widget.
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/doctor/day_schedule_component/day_schedule_component_widget.dart';
+import '/pages/day_schedule_component/day_schedule_component_widget.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,11 +44,11 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
           );
           _model.fullNameFieldTextController2?.text =
               FFLocalizations.of(context).getText(
-            '3tln7xty' /* 100 */,
+            'zci0rcuq' /* 100 */,
           );
           _model.fullNameFieldTextController3?.text =
               FFLocalizations.of(context).getText(
-            'c6j7nwi3' /* 1 */,
+            'zci0rcuq' /* 1 */,
           );
         }));
   }
@@ -528,7 +528,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'd11vlahx' /* سعر الاستشارة */,
+                                                            '8e4f1sar' /* سعر الاستشارة */,
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)

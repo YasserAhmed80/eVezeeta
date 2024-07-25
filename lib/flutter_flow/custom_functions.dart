@@ -93,6 +93,32 @@ DtDocTypeStruct? getDocTypeItem(
   return item;
 }
 
+DateTime? concatDateTime(
+  DateTime? pDate,
+  String? pHr,
+  int? pMinute,
+  String? period,
+) {
+  // write a function with parameter datetime and return date only
+  if (pDate == null) {
+    return null;
+  }
+
+  int? nHr;
+
+  nHr = int.parse(pHr!);
+
+  if (period == 'م' && nHr! != 12) {
+    nHr = nHr + 12;
+  }
+
+  if (period == 'ص' && nHr == 12) {
+    nHr = 0;
+  }
+
+  return DateTime(pDate.year, pDate.month, pDate.day, nHr!, pMinute!);
+}
+
 String? stringToImagePath(String? url) {
   return url;
 }
@@ -219,4 +245,12 @@ DtDayStruct? getDayCode(
 
 DateTime? dateAdd(DateTime? dDate) {
   return dDate?.add(Duration(days: 1));
+}
+
+DateTime? dateOnly(DateTime? pDate) {
+  // write a function with parameter datetime and return date only
+  if (pDate == null) {
+    return null;
+  }
+  return DateTime(pDate.year, pDate.month, pDate.day);
 }

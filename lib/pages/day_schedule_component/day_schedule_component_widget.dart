@@ -501,7 +501,7 @@ class _DayScheduleComponentWidgetState
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
-                          'b98rywxu' /* لم يتم اخيار هذا اليوم */,
+                          '9qjj5x91' /* لم يتم اخيار هذا اليوم */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Cairo',

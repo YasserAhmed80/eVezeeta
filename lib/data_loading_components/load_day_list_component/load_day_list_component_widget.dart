@@ -32,7 +32,7 @@ class _LoadDayListComponentWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.currentDate = getCurrentTimestamp;
+      _model.currentDate = functions.dateOnly(getCurrentTimestamp);
       setState(() {});
       FFAppState().refDayList = [];
       setState(() {});

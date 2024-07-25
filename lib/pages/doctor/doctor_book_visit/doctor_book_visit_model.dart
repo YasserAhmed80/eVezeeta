@@ -42,6 +42,11 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
 
   EnumBookHourStatus? currentHourStatus = EnumBookHourStatus.inActive;
 
+  DtHourStruct? userSelectedHourItem;
+  void updateUserSelectedHourItemStruct(Function(DtHourStruct) updateFn) {
+    updateFn(userSelectedHourItem ??= DtHourStruct());
+  }
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

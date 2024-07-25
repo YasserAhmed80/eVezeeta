@@ -517,7 +517,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         children: [
                           Text(
                             FFLocalizations.of(context).getText(
-                              'xhzlp0e3' /* البيانات الاساسية */,
+                              '9qjj5x91' /* البيانات الاساسية */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -915,7 +915,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(
-                                          '3ju9mk5k' /* خروج */,
+                                          'qkfwbr0r' /* خروج */,
                                         ),
                                         options: FFButtonOptions(
                                           width: 150.0,

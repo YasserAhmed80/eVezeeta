@@ -13,9 +13,11 @@ class DayBookingComponentWidget extends StatefulWidget {
   const DayBookingComponentWidget({
     super.key,
     this.dayBookItem,
+    required this.selectedHourAction,
   });
 
   final DtDaysListStruct? dayBookItem;
+  final Future Function(DtHourStruct selectedHourItem)? selectedHourAction;
 
   @override
   State<DayBookingComponentWidget> createState() =>
@@ -215,30 +217,25 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                await showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      content: const Text('book me'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: const Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
+                                                _model.selectedHour =
+                                                    hourItemItem.hourKey;
+                                                setState(() {});
+                                                await widget.selectedHourAction
+                                                    ?.call(
+                                                  hourItemItem,
                                                 );
                                               },
                                               child: Container(
                                                 width: 50.0,
                                                 decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .tertiary,
+                                                  color: _model.selectedHour ==
+                                                          hourItemItem.hourKey
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondary
+                                                      : FlutterFlowTheme.of(
+                                                              context)
+                                                          .tertiary,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),

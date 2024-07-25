@@ -3,7 +3,7 @@ export '/pages/account/login/login_widget.dart' show LoginWidget;
 export '/onboarding01/onboarding01_widget.dart' show Onboarding01Widget;
 export '/pages/doctor/doctor_data_main/doctor_data_main_widget.dart'
     show DoctorDataMainWidget;
-export '/pages/doctor/doctor_data_address/doctor_data_address_widget.dart'
+export '/pages/doctor_data_address/doctor_data_address_widget.dart'
     show DoctorDataAddressWidget;
 export '/pages/doctor/doctor_data_images/doctor_data_images_widget.dart'
     show DoctorDataImagesWidget;
@@ -17,3 +17,5 @@ export '/pages/doctor/doctor_search/doctor_search_widget.dart'
     show DoctorSearchWidget;
 export '/pages/doctor/doctor_book_visit/doctor_book_visit_widget.dart'
     show DoctorBookVisitWidget;
+export '/pages/doctor/doctor_booking_center/doctor_booking_center_widget.dart'
+    show DoctorBookingCenterWidget;
