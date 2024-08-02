@@ -45,6 +45,16 @@ class DocBookedTimeRecord extends FirestoreRecord {
   DateTime? get dayTime => _dayTime;
   bool hasDayTime() => _dayTime != null;
 
+  // "status_cde" field.
+  int? _statusCde;
+  int get statusCde => _statusCde ?? 0;
+  bool hasStatusCde() => _statusCde != null;
+
+  // "c_reason" field.
+  String? _cReason;
+  String get cReason => _cReason ?? '';
+  bool hasCReason() => _cReason != null;
+
   void _initializeFields() {
     _docId = snapshotData['doc_id'] as String?;
     _date = snapshotData['date'] as DateTime?;
@@ -52,6 +62,8 @@ class DocBookedTimeRecord extends FirestoreRecord {
     _cusId = snapshotData['cus_id'] as String?;
     _hourSeq = castToType<int>(snapshotData['hour_seq']);
     _dayTime = snapshotData['day_time'] as DateTime?;
+    _statusCde = castToType<int>(snapshotData['status_cde']);
+    _cReason = snapshotData['c_reason'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -95,6 +107,8 @@ Map<String, dynamic> createDocBookedTimeRecordData({
   String? cusId,
   int? hourSeq,
   DateTime? dayTime,
+  int? statusCde,
+  String? cReason,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -104,6 +118,8 @@ Map<String, dynamic> createDocBookedTimeRecordData({
       'cus_id': cusId,
       'hour_seq': hourSeq,
       'day_time': dayTime,
+      'status_cde': statusCde,
+      'c_reason': cReason,
     }.withoutNulls,
   );
 
@@ -121,12 +137,22 @@ class DocBookedTimeRecordDocumentEquality
         e1?.hour == e2?.hour &&
         e1?.cusId == e2?.cusId &&
         e1?.hourSeq == e2?.hourSeq &&
-        e1?.dayTime == e2?.dayTime;
+        e1?.dayTime == e2?.dayTime &&
+        e1?.statusCde == e2?.statusCde &&
+        e1?.cReason == e2?.cReason;
   }
 
   @override
-  int hash(DocBookedTimeRecord? e) => const ListEquality()
-      .hash([e?.docId, e?.date, e?.hour, e?.cusId, e?.hourSeq, e?.dayTime]);
+  int hash(DocBookedTimeRecord? e) => const ListEquality().hash([
+        e?.docId,
+        e?.date,
+        e?.hour,
+        e?.cusId,
+        e?.hourSeq,
+        e?.dayTime,
+        e?.statusCde,
+        e?.cReason
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is DocBookedTimeRecord;

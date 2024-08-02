@@ -119,6 +119,13 @@ DateTime? concatDateTime(
   return DateTime(pDate.year, pDate.month, pDate.day, nHr!, pMinute!);
 }
 
+DateTime? getCurrentDate() {
+  // write a function with parameter datetime and return date only
+  DateTime pDate = DateTime.now();
+
+  return DateTime(pDate.year, pDate.month, pDate.day);
+}
+
 String? stringToImagePath(String? url) {
   return url;
 }

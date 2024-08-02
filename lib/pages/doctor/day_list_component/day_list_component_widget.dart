@@ -78,6 +78,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
           final dayList = FFAppState().refDayList.toList();
 
           return SingleChildScrollView(
+            primary: false,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: List.generate(dayList.length, (dayListIndex) {

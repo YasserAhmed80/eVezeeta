@@ -496,7 +496,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget>
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(
-                                          'mlgytsf8' /* booked Visit */,
+                                          'xax5m7ca' /* booked Visit */,
                                         ),
                                         options: FFButtonOptions(
                                           height: 40.0,

@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
+import '/pages/empty_list_component/empty_list_component_widget.dart';
 import '/pages/public_components/switch_title_component/switch_title_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';

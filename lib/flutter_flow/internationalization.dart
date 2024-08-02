@@ -498,16 +498,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     '8e4f1sar': {
-      'ar': 'سعر الاستشارة',
+      'ar': '',
       'en': '',
     },
     'zci0rcuq': {
-      'ar': '1',
+      'ar': '400',
       'en': '200',
+    },
+    'd11vlahx': {
+      'ar': 'سعر الاستشارة',
+      'en': '',
     },
     'ex11evko': {
       'ar': '',
       'en': '',
+    },
+    '3tln7xty': {
+      'ar': '100',
+      'en': '200',
     },
     'sp1i0d4e': {
       'ar': 'متوسط عدد الكشوفات في الساعة',
@@ -520,6 +528,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'yx8jp0ks': {
       'ar': '',
       'en': '',
+    },
+    'c6j7nwi3': {
+      'ar': '1',
+      'en': '200',
     },
     'jea1h2ss': {
       'ar': 'تحديد مواعيد العمل',
@@ -540,7 +552,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '/',
       'en': '',
     },
-    '9qjj5x91': {
+    'xhzlp0e3': {
       'ar': 'البيانات الاساسية',
       'en': '',
     },
@@ -565,6 +577,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'qkfwbr0r': {
+      'ar': 'تعديل كلمة المرور',
+      'en': '',
+    },
+    '3ju9mk5k': {
       'ar': 'خروج',
       'en': '',
     },
@@ -595,7 +611,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تقيم',
       'en': '',
     },
-    'mlgytsf8': {
+    'xax5m7ca': {
       'ar': 'booked Visit',
       'en': 'save',
     },
@@ -642,7 +658,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'لكي يتم الحجز يجب اختيار اليوم و الوقت من اعلي!',
       'en': '',
     },
-    'rmxrt49s': {
+    'lhav9xod': {
       'ar': 'Home',
       'en': 'Home',
     },
@@ -653,20 +669,52 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'جدول الحجوزات',
       'en': '',
     },
+    '2v6kz8vp': {
+      'ar': 'يمكن تصفية الحجوزات حسب الحاله  باخر واحدة من اسفل',
+      'en': '',
+    },
+    'z4h0z9fh': {
+      'ar': 'الكل',
+      'en': '',
+    },
+    'f0kkfdt6': {
+      'ar': 'الكل',
+      'en': '',
+    },
     '9gtne1p4': {
-      'ar': 'موعد الحجز: ',
+      'ar': 'عميل: ',
+      'en': '',
+    },
+    'zv7hc4a5': {
+      'ar': 'الوقت: ',
+      'en': '',
+    },
+    'bi918btg': {
+      'ar': 'التاريخ: ',
       'en': '',
     },
     'hew2lx5z': {
+      'ar': 'تليفون: ',
+      'en': '',
+    },
+    'zcs3d7sl': {
       'ar': 'حاله الحجز:  ',
       'en': '',
     },
     'ct1vwy38': {
-      'ar': 'تاكيد ',
+      'ar': 'تأكيد الحجز',
+      'en': '',
+    },
+    'ashzpyjf': {
+      'ar': 'تم الكشف',
       'en': '',
     },
     'e0roigc0': {
-      'ar': 'الغاء',
+      'ar': 'الغاء الحجز',
+      'en': '',
+    },
+    'dgfvzmwo': {
+      'ar': 'EOS',
       'en': '',
     },
     'y2k7kykw': {
@@ -699,7 +747,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'حفظ',
       'en': 'save',
     },
-    '9qjj5x91': {
+    'b98rywxu': {
       'ar': 'لم يتم اخيار هذا اليوم',
       'en': '',
     },

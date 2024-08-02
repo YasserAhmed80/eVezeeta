@@ -49,7 +49,10 @@ class _DayScheduleComponentWidgetState
             )
             .where(
               'day_id',
-              isEqualTo: 0,
+              isEqualTo: valueOrDefault<int>(
+                widget.dayIteam?.dayKey,
+                0,
+              ),
             ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
@@ -501,7 +504,7 @@ class _DayScheduleComponentWidgetState
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
-                          '9qjj5x91' /* لم يتم اخيار هذا اليوم */,
+                          'b98rywxu' /* لم يتم اخيار هذا اليوم */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Cairo',

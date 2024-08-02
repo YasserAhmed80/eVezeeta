@@ -21,6 +21,7 @@ import 'schema/hour_ref_record.dart';
 import 'schema/doc_time_record.dart';
 import 'schema/last_data_loading_record.dart';
 import 'schema/doc_booked_time_record.dart';
+import 'schema/ref_booking_status_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -45,6 +46,7 @@ export 'schema/hour_ref_record.dart';
 export 'schema/doc_time_record.dart';
 export 'schema/last_data_loading_record.dart';
 export 'schema/doc_booked_time_record.dart';
+export 'schema/ref_booking_status_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -633,6 +635,43 @@ Future<List<DocBookedTimeRecord>> queryDocBookedTimeRecordOnce({
     queryCollectionOnce(
       DocBookedTimeRecord.collection,
       DocBookedTimeRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query RefBookingStatusRecords (as a Stream and as a Future).
+Future<int> queryRefBookingStatusRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      RefBookingStatusRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<RefBookingStatusRecord>> queryRefBookingStatusRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      RefBookingStatusRecord.collection,
+      RefBookingStatusRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<RefBookingStatusRecord>> queryRefBookingStatusRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      RefBookingStatusRecord.collection,
+      RefBookingStatusRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

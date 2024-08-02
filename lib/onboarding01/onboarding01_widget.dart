@@ -39,7 +39,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
       _model.returnedLoadingData = await queryLastDataLoadingRecordOnce(
         singleRecord: true,
       ).then((s) => s.firstOrNull);
-      if (!(_model.returnedLoadingData?.reference != null)) {
+      if ((_model.returnedLoadingData != null) != true) {
         return;
       }
       if (_model.returnedLoadingData?.cityDate !=
@@ -69,7 +69,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
         );
         setState(() {});
       }
-      _model.timerController.onStartTimer();
+      _model.timer1Controller.onStartTimer();
     });
 
     animationsMap.addAll({
@@ -218,7 +218,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                 ),
                 child: Container(
                   width: 100.0,
-                  height: 100.0,
+                  height: 0.0,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Color(0x00FFFFFF), Colors.white],
@@ -284,38 +284,35 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                           ).animateOnPageLoad(
                               animationsMap['textOnPageLoadAnimation2']!),
                         ),
-                        Opacity(
-                          opacity: 0.0,
-                          child: FlutterFlowTimer(
-                            initialTime: _model.timerInitialTimeMs,
-                            getDisplayTime: (value) =>
-                                StopWatchTimer.getDisplayTime(
-                              value,
-                              hours: false,
-                              milliSecond: false,
-                            ),
-                            controller: _model.timerController,
-                            updateStateInterval: const Duration(milliseconds: 1000),
-                            onChanged: (value, displayTime, shouldUpdate) {
-                              _model.timerMilliseconds = value;
-                              _model.timerValue = displayTime;
-                              if (shouldUpdate) setState(() {});
-                            },
-                            onEnded: () async {
-                              if (FFAppState().currentDoctor.dbDocRef != null) {
-                                context.pushNamed('doctor_profile');
-                              } else {
-                                context.pushNamed('doctor_data_main');
-                              }
-                            },
-                            textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .headlineSmall
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  letterSpacing: 0.0,
-                                ),
+                        FlutterFlowTimer(
+                          initialTime: _model.timer1InitialTimeMs,
+                          getDisplayTime: (value) =>
+                              StopWatchTimer.getDisplayTime(
+                            value,
+                            hours: false,
+                            milliSecond: false,
                           ),
+                          controller: _model.timer1Controller,
+                          updateStateInterval: const Duration(milliseconds: 1000),
+                          onChanged: (value, displayTime, shouldUpdate) {
+                            _model.timer1Milliseconds = value;
+                            _model.timer1Value = displayTime;
+                            if (shouldUpdate) setState(() {});
+                          },
+                          onEnded: () async {
+                            if (FFAppState().currentDoctor.dbDocRef != null) {
+                              context.pushNamed('doctor_profile');
+                            } else {
+                              context.pushNamed('doctor_data_main');
+                            }
+                          },
+                          textAlign: TextAlign.start,
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
+                                fontFamily: 'Cairo',
+                                letterSpacing: 0.0,
+                              ),
                         ),
                       ],
                     ),

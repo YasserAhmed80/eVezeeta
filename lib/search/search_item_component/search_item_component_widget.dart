@@ -123,7 +123,8 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                 },
                                 child: Icon(
                                   Icons.close,
-                                  color: FlutterFlowTheme.of(context).accent3,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   size: 30.0,
                                 ),
                               ),
@@ -250,14 +251,13 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                         5.0, 0.0, 5.0, 0.0),
                                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
                                           fontFamily: 'Cairo',
                                           color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                              .primaryBackground,
                                           letterSpacing: 0.0,
                                         ),
                                     borderRadius: BorderRadius.circular(8.0),

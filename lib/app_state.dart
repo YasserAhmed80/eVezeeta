@@ -239,6 +239,21 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _refBookStatus = prefs
+              .getStringList('ff_refBookStatus')
+              ?.map((x) {
+                try {
+                  return DtBookStatusStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refBookStatus;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -858,7 +873,9 @@ class FFAppState extends ChangeNotifier {
         'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
   }
 
-  DtLastLoadingStruct _lastDataLoading = DtLastLoadingStruct();
+  DtLastLoadingStruct _lastDataLoading =
+      DtLastLoadingStruct.fromSerializableMap(jsonDecode(
+          '{\"ciity_date\":\"1722493140000\",\"category_date\":\"1722493140000\",\"days_date\":\"1722493140000\"}'));
   DtLastLoadingStruct get lastDataLoading => _lastDataLoading;
   set lastDataLoading(DtLastLoadingStruct value) {
     _lastDataLoading = value;
@@ -868,6 +885,56 @@ class FFAppState extends ChangeNotifier {
   void updateLastDataLoadingStruct(Function(DtLastLoadingStruct) updateFn) {
     updateFn(_lastDataLoading);
     prefs.setString('ff_lastDataLoading', _lastDataLoading.serialize());
+  }
+
+  List<DtBookStatusStruct> _refBookStatus = [
+    DtBookStatusStruct.fromSerializableMap(
+        jsonDecode('{\"code\":\"1\",\"color\":\"#4caf50\",\"desc\":\"جديد\"}')),
+    DtBookStatusStruct.fromSerializableMap(
+        jsonDecode('{\"code\":\"2\",\"color\":\"#2257f9\",\"desc\":\"مؤكد\"}')),
+    DtBookStatusStruct.fromSerializableMap(
+        jsonDecode('{\"code\":\"4\",\"color\":\"#f44336\",\"desc\":\"ملغي\"}')),
+    DtBookStatusStruct.fromSerializableMap(jsonDecode(
+        '{\"code\":\"3\",\"color\":\"#8bc34a\",\"desc\":\"تم الكشف\"}'))
+  ];
+  List<DtBookStatusStruct> get refBookStatus => _refBookStatus;
+  set refBookStatus(List<DtBookStatusStruct> value) {
+    _refBookStatus = value;
+    prefs.setStringList(
+        'ff_refBookStatus', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefBookStatus(DtBookStatusStruct value) {
+    refBookStatus.add(value);
+    prefs.setStringList(
+        'ff_refBookStatus', _refBookStatus.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefBookStatus(DtBookStatusStruct value) {
+    refBookStatus.remove(value);
+    prefs.setStringList(
+        'ff_refBookStatus', _refBookStatus.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefBookStatus(int index) {
+    refBookStatus.removeAt(index);
+    prefs.setStringList(
+        'ff_refBookStatus', _refBookStatus.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefBookStatusAtIndex(
+    int index,
+    DtBookStatusStruct Function(DtBookStatusStruct) updateFn,
+  ) {
+    refBookStatus[index] = updateFn(_refBookStatus[index]);
+    prefs.setStringList(
+        'ff_refBookStatus', _refBookStatus.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefBookStatus(int index, DtBookStatusStruct value) {
+    refBookStatus.insert(index, value);
+    prefs.setStringList(
+        'ff_refBookStatus', _refBookStatus.map((x) => x.serialize()).toList());
   }
 }
 

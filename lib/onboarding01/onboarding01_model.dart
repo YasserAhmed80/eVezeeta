@@ -11,15 +11,15 @@ class Onboarding01Model extends FlutterFlowModel<Onboarding01Widget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in Onboarding01 widget.
   LastDataLoadingRecord? returnedLoadingData;
-  // State field(s) for Timer widget.
-  final timerInitialTimeMs = 3000;
-  int timerMilliseconds = 3000;
-  String timerValue = StopWatchTimer.getDisplayTime(
-    3000,
+  // State field(s) for Timer1 widget.
+  final timer1InitialTimeMs = 1000;
+  int timer1Milliseconds = 1000;
+  String timer1Value = StopWatchTimer.getDisplayTime(
+    1000,
     hours: false,
     milliSecond: false,
   );
-  FlutterFlowTimerController timerController =
+  FlutterFlowTimerController timer1Controller =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
   @override
@@ -28,6 +28,6 @@ class Onboarding01Model extends FlutterFlowModel<Onboarding01Widget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    timerController.dispose();
+    timer1Controller.dispose();
   }
 }

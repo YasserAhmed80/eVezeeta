@@ -1,22 +1,3 @@
 {
-  "indexes": [
-    {
-      "collectionGroup": "doc_booked_time",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "doc_id",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "date",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "hour",
-          "order": "ASCENDING"
-        }
-      ]
-    }
-  ]
+  "indexes": []
 }

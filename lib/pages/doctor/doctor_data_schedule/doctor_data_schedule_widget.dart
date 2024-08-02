@@ -44,11 +44,11 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
           );
           _model.fullNameFieldTextController2?.text =
               FFLocalizations.of(context).getText(
-            'zci0rcuq' /* 100 */,
+            '3tln7xty' /* 100 */,
           );
           _model.fullNameFieldTextController3?.text =
               FFLocalizations.of(context).getText(
-            'zci0rcuq' /* 1 */,
+            'c6j7nwi3' /* 1 */,
           );
         }));
   }
@@ -122,6 +122,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                       ),
                       decoration: const BoxDecoration(),
                       child: SingleChildScrollView(
+                        primary: false,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -528,7 +529,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            '8e4f1sar' /* سعر الاستشارة */,
+                                                            'd11vlahx' /* سعر الاستشارة */,
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)

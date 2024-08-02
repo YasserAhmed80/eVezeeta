@@ -40,6 +40,7 @@ class _LoadCategoriesComponentWidgetState
         _model.loopMax = _model.catDocss?.length;
         setState(() {});
         FFAppState().refCategory = [];
+        FFAppState().refSubCategory = [];
         setState(() {});
         while (_model.loopIndex! < _model.loopMax!) {
           FFAppState().addToRefCategory(DtCategoryStruct(
