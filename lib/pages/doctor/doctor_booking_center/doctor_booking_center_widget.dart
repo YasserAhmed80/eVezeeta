@@ -42,7 +42,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
       await _model.getBookedList(context);
       setState(() {});
       _model.filteredStatusCde = 0;
-      _model.selectedDay = _model.bookedDays.first;
+      _model.selectedDay = null;
       setState(() {});
       await _model.getFilteredBookedList(context);
     });
@@ -701,11 +701,6 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                       color: FlutterFlowTheme.of(context)
                                           .primaryBackground,
                                       borderRadius: BorderRadius.circular(5.0),
-                                      border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                        width: 1.0,
-                                      ),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -895,31 +890,13 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
-                                              Container(
-                                                constraints: const BoxConstraints(
-                                                  minWidth: 50.0,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: valueOrDefault<Color>(
-                                                    FFAppState()
-                                                        .refBookStatus
-                                                        .where((e) =>
-                                                            e.code ==
-                                                            valueOrDefault<int>(
-                                                              bookedHoursItemItem
-                                                                  .statusCde,
-                                                              0,
-                                                            ))
-                                                        .toList()
-                                                        .first
-                                                        .color,
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiary,
+                                              Opacity(
+                                                opacity: 0.8,
+                                                child: Container(
+                                                  constraints: const BoxConstraints(
+                                                    minWidth: 50.0,
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          14.0),
-                                                  border: Border.all(
+                                                  decoration: BoxDecoration(
                                                     color:
                                                         valueOrDefault<Color>(
                                                       FFAppState()
@@ -939,45 +916,73 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                               context)
                                                           .tertiary,
                                                     ),
-                                                    width: 1.0,
-                                                  ),
-                                                ),
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          5.0, 2.0, 5.0, 2.0),
-                                                  child: Text(
-                                                    valueOrDefault<String>(
-                                                      FFAppState()
-                                                          .refBookStatus
-                                                          .where((e) =>
-                                                              e.code ==
-                                                              valueOrDefault<
-                                                                  int>(
-                                                                bookedHoursItemItem
-                                                                    .statusCde,
-                                                                0,
-                                                              ))
-                                                          .toList()
-                                                          .first
-                                                          .desc,
-                                                      '--',
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14.0),
+                                                    border: Border.all(
+                                                      color:
+                                                          valueOrDefault<Color>(
+                                                        FFAppState()
+                                                            .refBookStatus
+                                                            .where((e) =>
+                                                                e.code ==
+                                                                valueOrDefault<
+                                                                    int>(
+                                                                  bookedHoursItemItem
+                                                                      .statusCde,
+                                                                  0,
+                                                                ))
+                                                            .toList()
+                                                            .first
+                                                            .color,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .tertiary,
+                                                      ),
+                                                      width: 1.0,
                                                     ),
-                                                    textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
+                                                  ),
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(5.0, 2.0,
+                                                                5.0, 2.0),
+                                                    child: Text(
+                                                      valueOrDefault<String>(
+                                                        FFAppState()
+                                                            .refBookStatus
+                                                            .where((e) =>
+                                                                e.code ==
+                                                                valueOrDefault<
+                                                                    int>(
+                                                                  bookedHoursItemItem
+                                                                      .statusCde,
+                                                                  0,
+                                                                ))
+                                                            .toList()
+                                                            .first
+                                                            .desc,
+                                                        '--',
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Cairo',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),

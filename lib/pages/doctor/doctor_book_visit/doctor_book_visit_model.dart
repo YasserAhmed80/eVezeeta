@@ -58,6 +58,10 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
 
   int? countPerHour;
 
+  int? doctorAvergePerHour = 1;
+
+  int? hourMinutes = 0;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -107,18 +111,22 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
       );
       if (countPerHour! > 0) {
         currentHourStatus = EnumBookHourStatus.Booked;
+        if (countPerHour! < doctorAvergePerHour!) {
+          currentHourStatus = EnumBookHourStatus.PartiallyBooked;
+        }
       }
       FFAppState().updateRefHourAtIndex(
         loopIndex1!,
         (e) => e
           ..statusCde = currentHourStatus
           ..bookCount = valueOrDefault<int>(
-            currentHourItem?.bookCount,
+            countPerHour,
             0,
           ),
       );
       loopIndex1 = loopIndex1! + 1;
       currentHourStatus = EnumBookHourStatus.inActive;
+      countPerHour = 0;
     }
   }
 }

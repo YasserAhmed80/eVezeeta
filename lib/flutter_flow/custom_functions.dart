@@ -261,3 +261,29 @@ DateTime? dateOnly(DateTime? pDate) {
   }
   return DateTime(pDate.year, pDate.month, pDate.day);
 }
+
+int? calcMinutesOfHour(
+  int? nCount,
+  int? nAvg,
+) {
+  double? x = nCount! / nAvg! * 60;
+
+  return x.toInt();
+}
+
+DateTime? getDateBack(String? sPeriod) {
+  DateTime pDate = DateTime.now();
+
+  if (sPeriod == 'w') {
+    pDate = pDate.subtract(Duration(days: 7));
+  }
+  if (sPeriod == 'm') {
+    pDate = DateTime(pDate.year, pDate.month, 1);
+  }
+
+  if (sPeriod == 'y') {
+    pDate = DateTime(pDate.year, 1, 1);
+  }
+
+  return pDate;
+}

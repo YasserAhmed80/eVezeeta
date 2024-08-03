@@ -14,10 +14,12 @@ class DayBookingComponentWidget extends StatefulWidget {
     super.key,
     this.dayBookItem,
     required this.selectedHourAction,
-  });
+    int? avgCountPerHour,
+  }) : avgCountPerHour = avgCountPerHour ?? 1;
 
   final DtDaysListStruct? dayBookItem;
   final Future Function(DtHourStruct selectedHourItem)? selectedHourAction;
+  final int avgCountPerHour;
 
   @override
   State<DayBookingComponentWidget> createState() =>
@@ -314,7 +316,8 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                 ).animateOnPageLoad(animationsMap[
                                                     'containerOnPageLoadAnimation']!),
                                               );
-                                            } else {
+                                            } else if (hourItemItem.statusCde ==
+                                                EnumBookHourStatus.Booked) {
                                               return Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -356,41 +359,237 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                                           .w600,
                                                                 ),
                                                       ),
-                                                      Text(
-                                                        hourItemItem.period,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      24.0),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      10.0,
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            valueOrDefault<
+                                                                String>(
+                                                              hourItemItem
+                                                                  .bookCount
+                                                                  .toString(),
+                                                              '0',
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Cairo',
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primaryBackground,
+                                                                      .cerise,
                                                                   fontSize:
                                                                       12.0,
                                                                   letterSpacing:
                                                                       0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
                                                                 ),
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ],
+                                                    ]
+                                                        .addToStart(const SizedBox(
+                                                            height: 2.0))
+                                                        .addToEnd(const SizedBox(
+                                                            height: 2.0)),
+                                                  ),
+                                                ),
+                                              );
+                                            } else {
+                                              return Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 2.0, 0.0, 2.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    _model.selectedHour =
+                                                        hourItemItem.hourKey;
+                                                    setState(() {});
+                                                    await widget
+                                                        .selectedHourAction
+                                                        ?.call(
+                                                      hourItemItem,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    width: 50.0,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .cerise,
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary
+                                                        ],
+                                                        stops: const [0.0, 1.0],
+                                                        begin:
+                                                            const AlignmentDirectional(
+                                                                0.0, -1.0),
+                                                        end:
+                                                            const AlignmentDirectional(
+                                                                0, 1.0),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Text(
+                                                          '00:${hourItemItem.desc}',
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
+                                                                fontSize: 14.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                        ),
+                                                        Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        24.0),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.0,
+                                                                        0.0,
+                                                                        5.0,
+                                                                        0.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    widget
+                                                                        .avgCountPerHour
+                                                                        .toString(),
+                                                                    '1',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Cairo',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'wekm64o9' /* / */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Cairo',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    hourItemItem
+                                                                        .bookCount
+                                                                        .toString(),
+                                                                    '0',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Cairo',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .cerise,
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ]
+                                                          .addToStart(const SizedBox(
+                                                              height: 2.0))
+                                                          .addToEnd(const SizedBox(
+                                                              height: 2.0)),
+                                                    ),
                                                   ),
                                                 ),
                                               );
                                             }
                                           },
-                                        ),
-                                        Text(
-                                          hourItemItem.bookCount.toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                letterSpacing: 0.0,
-                                              ),
                                         ),
                                       ],
                                     );

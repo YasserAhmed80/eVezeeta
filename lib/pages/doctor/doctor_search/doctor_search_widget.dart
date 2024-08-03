@@ -482,6 +482,57 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget>
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           context.pushNamed(
+                                            'doctor_dashboard',
+                                            queryParameters: {
+                                              'docDocument': serializeParam(
+                                                listViewDocRecord,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'docDocument': listViewDocRecord,
+                                            },
+                                          );
+                                        },
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '8dmzralb' /* البيانات */,
+                                        ),
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
+                                          iconPadding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color: Colors.white,
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: const BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 5.0, 0.0, 5.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          context.pushNamed(
                                             'doctor_booking_center',
                                             queryParameters: {
                                               'docDocument': serializeParam(
@@ -496,7 +547,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget>
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(
-                                          'xax5m7ca' /* booked Visit */,
+                                          'g6zol6lq' /* الحجوزات */,
                                         ),
                                         options: FFButtonOptions(
                                           height: 40.0,

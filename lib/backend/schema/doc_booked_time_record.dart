@@ -55,6 +55,16 @@ class DocBookedTimeRecord extends FirestoreRecord {
   String get cReason => _cReason ?? '';
   bool hasCReason() => _cReason != null;
 
+  // "price" field.
+  int? _price;
+  int get price => _price ?? 0;
+  bool hasPrice() => _price != null;
+
+  // "fee" field.
+  int? _fee;
+  int get fee => _fee ?? 0;
+  bool hasFee() => _fee != null;
+
   void _initializeFields() {
     _docId = snapshotData['doc_id'] as String?;
     _date = snapshotData['date'] as DateTime?;
@@ -64,6 +74,8 @@ class DocBookedTimeRecord extends FirestoreRecord {
     _dayTime = snapshotData['day_time'] as DateTime?;
     _statusCde = castToType<int>(snapshotData['status_cde']);
     _cReason = snapshotData['c_reason'] as String?;
+    _price = castToType<int>(snapshotData['price']);
+    _fee = castToType<int>(snapshotData['fee']);
   }
 
   static CollectionReference get collection =>
@@ -109,6 +121,8 @@ Map<String, dynamic> createDocBookedTimeRecordData({
   DateTime? dayTime,
   int? statusCde,
   String? cReason,
+  int? price,
+  int? fee,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -120,6 +134,8 @@ Map<String, dynamic> createDocBookedTimeRecordData({
       'day_time': dayTime,
       'status_cde': statusCde,
       'c_reason': cReason,
+      'price': price,
+      'fee': fee,
     }.withoutNulls,
   );
 
@@ -139,7 +155,9 @@ class DocBookedTimeRecordDocumentEquality
         e1?.hourSeq == e2?.hourSeq &&
         e1?.dayTime == e2?.dayTime &&
         e1?.statusCde == e2?.statusCde &&
-        e1?.cReason == e2?.cReason;
+        e1?.cReason == e2?.cReason &&
+        e1?.price == e2?.price &&
+        e1?.fee == e2?.fee;
   }
 
   @override
@@ -151,7 +169,9 @@ class DocBookedTimeRecordDocumentEquality
         e?.hourSeq,
         e?.dayTime,
         e?.statusCde,
-        e?.cReason
+        e?.cReason,
+        e?.price,
+        e?.fee
       ]);
 
   @override

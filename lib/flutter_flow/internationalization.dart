@@ -619,9 +619,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تقيم',
       'en': '',
     },
-    'xax5m7ca': {
-      'ar': 'booked Visit',
+    '8dmzralb': {
+      'ar': 'البيانات',
       'en': 'save',
+    },
+    'g6zol6lq': {
+      'ar': 'الحجوزات',
+      'en': '',
     },
     '0vljw38e': {
       'ar': 'احجز الان',
@@ -650,8 +654,40 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'يمكنك حجز ميعاد مع',
       'en': '',
     },
+    'sa762x1x': {
+      'ar': 'يستقبل الطبيب عدد ',
+      'en': '',
+    },
+    'yx2o8ywj': {
+      'ar': 'حاله في الساعه',
+      'en': '',
+    },
+    'piqs1vm9': {
+      'ar': 'سعر الكشف',
+      'en': '',
+    },
+    'ykncurgm': {
+      'ar': 'سعر الاستشارة',
+      'en': '',
+    },
+    'vgx1x8xb': {
+      'ar': 'غير متاح',
+      'en': '',
+    },
+    'w5idfjyt': {
+      'ar': ' متاح',
+      'en': '',
+    },
+    'g5iey1q2': {
+      'ar': ' كامل العدد',
+      'en': '',
+    },
+    'gqb5d1ww': {
+      'ar': ' متاح جزئي',
+      'en': '',
+    },
     'j0d5xvx1': {
-      'ar': 'تم تخيار:',
+      'ar': 'تم أختيار بيانات الحجز الاتية:',
       'en': '',
     },
     'xhutvc8b': {
@@ -723,6 +759,69 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'y2k7kykw': {
       'ar': 'Home',
+      'en': '',
+    },
+  },
+  // doctor_dashboard
+  {
+    'i4fc6f89': {
+      'ar': 'اليوم',
+      'en': '',
+    },
+    'duou9dxb': {
+      'ar': 'الاسبوع',
+      'en': '',
+    },
+    'pmg9dnce': {
+      'ar': 'الشهر',
+      'en': '',
+    },
+    'r7n4ex3s': {
+      'ar': 'السنه',
+      'en': '',
+    },
+    '4q5ixzyp': {
+      'ar': 'في فترة معينه ',
+      'en': '',
+    },
+    'rp4qpw29': {
+      'ar': 'من: ',
+      'en': '',
+    },
+    'ehtdk25c': {
+      'ar': 'الي: ',
+      'en': '',
+    },
+    'nc72ebae': {
+      'ar': 'عدد الحجوزات',
+      'en': '',
+    },
+    'pmoe3wwx': {
+      'ar': 'قيمة الحجوزات',
+      'en': '',
+    },
+    'tm6nixo6': {
+      'ar': 'تفاصيل الحجوزات',
+      'en': '',
+    },
+    'w9cmv2h1': {
+      'ar': 'كل الحجوزات',
+      'en': '',
+    },
+    'a78qj9go': {
+      'ar': 'حجوزات منفذة',
+      'en': '',
+    },
+    'n3n0koyg': {
+      'ar': 'حجوزات ملغية',
+      'en': '',
+    },
+    's9j82ivr': {
+      'ar': 'تحاليل البيانات',
+      'en': '',
+    },
+    '052g7vpz': {
+      'ar': 'Shop',
       'en': '',
     },
   },
@@ -807,6 +906,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // DayBookingComponent
   {
+    'wekm64o9': {
+      'ar': '/',
+      'en': '',
+    },
     'oz3ag78l': {
       'ar': 'لم يتم اخيار هذا اليوم',
       'en': '',

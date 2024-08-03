@@ -60,6 +60,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Cairo',
                       color: FlutterFlowTheme.of(context).secondary,
+                      fontSize: 16.0,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.bold,
                     ),
