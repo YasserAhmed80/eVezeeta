@@ -11,9 +11,11 @@ class DtDaysListStruct extends FFFirebaseStruct {
   DtDaysListStruct({
     DateTime? dayValue,
     DtDayStruct? dayItem,
+    bool? isActive,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _dayValue = dayValue,
         _dayItem = dayItem,
+        _isActive = isActive,
         super(firestoreUtilData);
 
   // "day_value" field.
@@ -34,10 +36,18 @@ class DtDaysListStruct extends FFFirebaseStruct {
 
   bool hasDayItem() => _dayItem != null;
 
+  // "isActive" field.
+  bool? _isActive;
+  bool get isActive => _isActive ?? false;
+  set isActive(bool? val) => _isActive = val;
+
+  bool hasIsActive() => _isActive != null;
+
   static DtDaysListStruct fromMap(Map<String, dynamic> data) =>
       DtDaysListStruct(
         dayValue: data['day_value'] as DateTime?,
         dayItem: DtDayStruct.maybeFromMap(data['day_item']),
+        isActive: data['isActive'] as bool?,
       );
 
   static DtDaysListStruct? maybeFromMap(dynamic data) => data is Map
@@ -47,6 +57,7 @@ class DtDaysListStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'day_value': _dayValue,
         'day_item': _dayItem?.toMap(),
+        'isActive': _isActive,
       }.withoutNulls;
 
   @override
@@ -58,6 +69,10 @@ class DtDaysListStruct extends FFFirebaseStruct {
         'day_item': serializeParam(
           _dayItem,
           ParamType.DataStruct,
+        ),
+        'isActive': serializeParam(
+          _isActive,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -74,6 +89,11 @@ class DtDaysListStruct extends FFFirebaseStruct {
           false,
           structBuilder: DtDayStruct.fromSerializableMap,
         ),
+        isActive: deserializeParam(
+          data['isActive'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -83,16 +103,18 @@ class DtDaysListStruct extends FFFirebaseStruct {
   bool operator ==(Object other) {
     return other is DtDaysListStruct &&
         dayValue == other.dayValue &&
-        dayItem == other.dayItem;
+        dayItem == other.dayItem &&
+        isActive == other.isActive;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([dayValue, dayItem]);
+  int get hashCode => const ListEquality().hash([dayValue, dayItem, isActive]);
 }
 
 DtDaysListStruct createDtDaysListStruct({
   DateTime? dayValue,
   DtDayStruct? dayItem,
+  bool? isActive,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -101,6 +123,7 @@ DtDaysListStruct createDtDaysListStruct({
     DtDaysListStruct(
       dayValue: dayValue,
       dayItem: dayItem ?? (clearUnsetFields ? DtDayStruct() : null),
+      isActive: isActive,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

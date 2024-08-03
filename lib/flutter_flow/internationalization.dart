@@ -481,13 +481,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تحديد نوع الحجز',
       'en': 'Determine the type of reservation',
     },
-    'y13ugeif': {
+    'ul5liiua': {
       'ar': 'الحجز مسبقا و الدخول بأسبقية الحضور',
-      'en': 'Booking in advance and entry is first come first served',
+      'en': '',
     },
-    'k05jud6y': {
+    'wsmj66dd': {
       'ar': 'الدخول بميعاد محدد',
-      'en': 'Entry at a specified time',
+      'en': '',
     },
     'ack7v2zu': {
       'ar': 'سعر الخدمة',
@@ -515,7 +515,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '3tln7xty': {
       'ar': '100',
-      'en': '200',
+      'en': '',
     },
     'sp1i0d4e': {
       'ar': 'متوسط عدد الكشوفات في الساعة',
@@ -531,11 +531,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'c6j7nwi3': {
       'ar': '1',
-      'en': '200',
+      'en': '',
     },
-    'jea1h2ss': {
+    'viipde9x': {
+      'ar': 'يجب حفظ اي تعديلات من اعلي ...',
+      'en': '',
+    },
+    'sxed3ivk': {
+      'ar': 'حفظ',
+      'en': '',
+    },
+    'cebuldfc': {
       'ar': 'تحديد مواعيد العمل',
-      'en': 'Determine work hours',
+      'en': '',
     },
     's12hc0up': {
       'ar': 'تحديد نوع و سعر الكشف',
@@ -711,10 +719,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'e0roigc0': {
       'ar': 'الغاء الحجز',
-      'en': '',
-    },
-    'dgfvzmwo': {
-      'ar': 'EOS',
       'en': '',
     },
     'y2k7kykw': {

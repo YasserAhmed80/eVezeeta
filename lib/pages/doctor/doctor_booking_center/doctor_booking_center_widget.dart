@@ -107,7 +107,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 10.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
               child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
@@ -626,6 +626,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Cairo',
+                                                        fontSize: 12.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -1136,7 +1137,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                                     TextStyle(
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
+                                                                      .secondary,
                                                                   fontSize:
                                                                       10.0,
                                                                 ),
@@ -1243,28 +1244,6 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-              child: Container(
-                width: double.infinity,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
-                  child: Text(
-                    FFLocalizations.of(context).getText(
-                      'dgfvzmwo' /* EOS */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Cairo',
-                          letterSpacing: 0.0,
-                        ),
                   ),
                 ),
               ),

@@ -47,7 +47,7 @@ class DoctorBookingCenterModel
           int index, Function(DtBookedItemStruct) updateFn) =>
       filteredBookedList[index] = updateFn(filteredBookedList[index]);
 
-  bool? allDays = false;
+  bool? allDays = true;
 
   ///  State fields for stateful widgets in this page.
 

@@ -17,28 +17,31 @@ class DoctorDataScheduleModel
   void updateImageListAtIndex(int index, Function(String) updateFn) =>
       imageList[index] = updateFn(imageList[index]);
 
+  int? bookTypeCode = 1;
+
+  int? price = 400;
+
+  int? priceRevisit = 100;
+
+  int? avgVisitPerHour = 1;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue1;
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue2;
-  // State field(s) for fullNameField widget.
-  FocusNode? fullNameFieldFocusNode1;
-  TextEditingController? fullNameFieldTextController1;
+  // State field(s) for txtPrice widget.
+  FocusNode? txtPriceFocusNode;
+  TextEditingController? txtPriceTextController;
+  String? Function(BuildContext, String?)? txtPriceTextControllerValidator;
+  // State field(s) for txtPriceRevisit widget.
+  FocusNode? txtPriceRevisitFocusNode;
+  TextEditingController? txtPriceRevisitTextController;
   String? Function(BuildContext, String?)?
-      fullNameFieldTextController1Validator;
-  // State field(s) for fullNameField widget.
-  FocusNode? fullNameFieldFocusNode2;
-  TextEditingController? fullNameFieldTextController2;
+      txtPriceRevisitTextControllerValidator;
+  // State field(s) for txtAvergeVisit widget.
+  FocusNode? txtAvergeVisitFocusNode;
+  TextEditingController? txtAvergeVisitTextController;
   String? Function(BuildContext, String?)?
-      fullNameFieldTextController2Validator;
-  // State field(s) for fullNameField widget.
-  FocusNode? fullNameFieldFocusNode3;
-  TextEditingController? fullNameFieldTextController3;
-  String? Function(BuildContext, String?)?
-      fullNameFieldTextController3Validator;
+      txtAvergeVisitTextControllerValidator;
   // Model for loadDayHoursData component.
   late LoadDayHoursDataModel loadDayHoursDataModel;
   // Model for custom_navbar component.
@@ -53,14 +56,14 @@ class DoctorDataScheduleModel
   @override
   void dispose() {
     unfocusNode.dispose();
-    fullNameFieldFocusNode1?.dispose();
-    fullNameFieldTextController1?.dispose();
+    txtPriceFocusNode?.dispose();
+    txtPriceTextController?.dispose();
 
-    fullNameFieldFocusNode2?.dispose();
-    fullNameFieldTextController2?.dispose();
+    txtPriceRevisitFocusNode?.dispose();
+    txtPriceRevisitTextController?.dispose();
 
-    fullNameFieldFocusNode3?.dispose();
-    fullNameFieldTextController3?.dispose();
+    txtAvergeVisitFocusNode?.dispose();
+    txtAvergeVisitTextController?.dispose();
 
     loadDayHoursDataModel.dispose();
     customNavbarModel.dispose();

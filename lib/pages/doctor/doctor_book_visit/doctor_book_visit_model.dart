@@ -1,7 +1,6 @@
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
-import '/data_loading_components/load_day_list_component/load_day_list_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/doctor/day_booking_component/day_booking_component_widget.dart';
 import '/pages/doctor/day_list_component/day_list_component_widget.dart';
@@ -47,6 +46,18 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
     updateFn(userSelectedHourItem ??= DtHourStruct());
   }
 
+  List<int> bookedHoursList = [];
+  void addToBookedHoursList(int item) => bookedHoursList.add(item);
+  void removeFromBookedHoursList(int item) => bookedHoursList.remove(item);
+  void removeAtIndexFromBookedHoursList(int index) =>
+      bookedHoursList.removeAt(index);
+  void insertAtIndexInBookedHoursList(int index, int item) =>
+      bookedHoursList.insert(index, item);
+  void updateBookedHoursListAtIndex(int index, Function(int) updateFn) =>
+      bookedHoursList[index] = updateFn(bookedHoursList[index]);
+
+  int? countPerHour;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -54,16 +65,12 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
   late DayListComponentModel dayListComponentModel;
   // Model for DayBookingComponent component.
   late DayBookingComponentModel dayBookingComponentModel;
-  // Model for loadDayListComponent component.
-  late LoadDayListComponentModel loadDayListComponentModel;
 
   @override
   void initState(BuildContext context) {
     dayListComponentModel = createModel(context, () => DayListComponentModel());
     dayBookingComponentModel =
         createModel(context, () => DayBookingComponentModel());
-    loadDayListComponentModel =
-        createModel(context, () => LoadDayListComponentModel());
   }
 
   @override
@@ -71,7 +78,6 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
     unfocusNode.dispose();
     dayListComponentModel.dispose();
     dayBookingComponentModel.dispose();
-    loadDayListComponentModel.dispose();
   }
 
   /// Action blocks.
@@ -80,14 +86,36 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
     loopMax1 = FFAppState().refHour.length;
     while (loopIndex1! < loopMax1!) {
       currentHourItem = FFAppState().refHour[loopIndex1!];
+      currentHourStatus = EnumBookHourStatus.inActive;
       if (functions.checkItemInList(
               currentHourItem?.hourKey, selectedDayHours.toList()) ==
           true) {
         currentHourStatus = EnumBookHourStatus.Active;
       }
+      // get booked hours
+      countPerHour = valueOrDefault<int>(
+        bookedHoursList
+            .where((e) =>
+                e ==
+                valueOrDefault<int>(
+                  currentHourItem?.hourKey,
+                  0,
+                ))
+            .toList()
+            .length,
+        0,
+      );
+      if (countPerHour! > 0) {
+        currentHourStatus = EnumBookHourStatus.Booked;
+      }
       FFAppState().updateRefHourAtIndex(
         loopIndex1!,
-        (e) => e..statusCde = currentHourStatus,
+        (e) => e
+          ..statusCde = currentHourStatus
+          ..bookCount = valueOrDefault<int>(
+            currentHourItem?.bookCount,
+            0,
+          ),
       );
       loopIndex1 = loopIndex1! + 1;
       currentHourStatus = EnumBookHourStatus.inActive;

@@ -168,8 +168,8 @@ class _DayScheduleComponentWidgetState
                             builder: (context) {
                               if (_model.isActiveDay == true) {
                                 return Container(
-                                  width: 35.0,
-                                  height: 35.0,
+                                  width: 30.0,
+                                  height: 30.0,
                                   decoration: BoxDecoration(
                                     color:
                                         FlutterFlowTheme.of(context).secondary,
@@ -187,8 +187,8 @@ class _DayScheduleComponentWidgetState
                                 );
                               } else {
                                 return Container(
-                                  width: 35.0,
-                                  height: 35.0,
+                                  width: 30.0,
+                                  height: 30.0,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
@@ -294,9 +294,19 @@ class _DayScheduleComponentWidgetState
                                                   .bodyMedium
                                                   .override(
                                                     fontFamily: 'Cairo',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
+                                                    color: functions
+                                                            .checkItemInList(
+                                                                hourItemItem
+                                                                    .hourKey,
+                                                                _model
+                                                                    .selectedHours
+                                                                    .toList())!
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                     fontSize: 14.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
@@ -310,9 +320,17 @@ class _DayScheduleComponentWidgetState
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Cairo',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                        color: functions.checkItemInList(
+                                                                hourItemItem
+                                                                    .hourKey,
+                                                                _model
+                                                                    .selectedHours
+                                                                    .toList())!
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground
+                                                            : FlutterFlowTheme
+                                                                    .of(context)
                                                                 .secondaryText,
                                                         fontSize: 12.0,
                                                         letterSpacing: 0.0,

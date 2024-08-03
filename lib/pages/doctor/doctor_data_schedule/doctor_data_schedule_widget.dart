@@ -1,10 +1,13 @@
+import '/backend/backend.dart';
 import '/data_loading_components/load_day_hours_data/load_day_hours_data_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/day_schedule_component/day_schedule_component_widget.dart';
 import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_data_schedule_model.dart';
@@ -28,25 +31,25 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
     super.initState();
     _model = createModel(context, () => DoctorDataScheduleModel());
 
-    _model.fullNameFieldTextController1 ??= TextEditingController();
-    _model.fullNameFieldFocusNode1 ??= FocusNode();
+    _model.txtPriceTextController ??= TextEditingController();
+    _model.txtPriceFocusNode ??= FocusNode();
 
-    _model.fullNameFieldTextController2 ??= TextEditingController();
-    _model.fullNameFieldFocusNode2 ??= FocusNode();
+    _model.txtPriceRevisitTextController ??= TextEditingController();
+    _model.txtPriceRevisitFocusNode ??= FocusNode();
 
-    _model.fullNameFieldTextController3 ??= TextEditingController();
-    _model.fullNameFieldFocusNode3 ??= FocusNode();
+    _model.txtAvergeVisitTextController ??= TextEditingController();
+    _model.txtAvergeVisitFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.fullNameFieldTextController1?.text =
+          _model.txtPriceTextController?.text =
               FFLocalizations.of(context).getText(
             'zci0rcuq' /* 400 */,
           );
-          _model.fullNameFieldTextController2?.text =
+          _model.txtPriceRevisitTextController?.text =
               FFLocalizations.of(context).getText(
             '3tln7xty' /* 100 */,
           );
-          _model.fullNameFieldTextController3?.text =
+          _model.txtAvergeVisitTextController?.text =
               FFLocalizations.of(context).getText(
             'c6j7nwi3' /* 1 */,
           );
@@ -199,93 +202,175 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  SwitchListTile.adaptive(
-                                                    value: _model
-                                                            .switchListTileValue1 ??=
-                                                        false,
-                                                    onChanged:
-                                                        (newValue) async {
-                                                      setState(() => _model
-                                                              .switchListTileValue1 =
-                                                          newValue);
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      _model.bookTypeCode = 1;
+                                                      setState(() {});
                                                     },
-                                                    title: Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'y13ugeif' /* الحجز مسبقا و الدخول بأسبقية ا... */,
+                                                    child: Container(
+                                                      width: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
                                                       ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .titleLarge
-                                                          .override(
-                                                            fontFamily: 'Cairo',
-                                                            fontSize: 14.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    0.0,
+                                                                    5.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'ul5liiua' /* الحجز مسبقا و الدخول بأسبقية ا... */,
+                                                              ),
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 16.0,
+                                                              ),
+                                                            ),
+                                                            Builder(
+                                                              builder:
+                                                                  (context) {
+                                                                if (_model
+                                                                        .bookTypeCode ==
+                                                                    1) {
+                                                                  return Icon(
+                                                                    Icons
+                                                                        .check_circle_sharp,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                                    size: 30.0,
+                                                                  );
+                                                                } else {
+                                                                  return Icon(
+                                                                    Icons
+                                                                        .circle_outlined,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                                    size: 30.0,
+                                                                  );
+                                                                }
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
-                                                    tileColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    activeColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    activeTrackColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .tertiary,
-                                                    dense: false,
-                                                    controlAffinity:
-                                                        ListTileControlAffinity
-                                                            .trailing,
                                                   ),
-                                                  SwitchListTile.adaptive(
-                                                    value: _model
-                                                            .switchListTileValue2 ??=
-                                                        false,
-                                                    onChanged:
-                                                        (newValue) async {
-                                                      setState(() => _model
-                                                              .switchListTileValue2 =
-                                                          newValue);
+                                                  Divider(
+                                                    thickness: 1.0,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                  ),
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      _model.bookTypeCode = 2;
+                                                      setState(() {});
                                                     },
-                                                    title: Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'k05jud6y' /* الدخول بميعاد محدد */,
+                                                    child: Container(
+                                                      width: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
                                                       ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .titleLarge
-                                                          .override(
-                                                            fontFamily: 'Cairo',
-                                                            fontSize: 14.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    0.0,
+                                                                    5.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'wsmj66dd' /* الدخول بميعاد محدد */,
+                                                              ),
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 16.0,
+                                                              ),
+                                                            ),
+                                                            Builder(
+                                                              builder:
+                                                                  (context) {
+                                                                if (_model
+                                                                        .bookTypeCode ==
+                                                                    2) {
+                                                                  return Icon(
+                                                                    Icons
+                                                                        .check_circle_sharp,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                                    size: 30.0,
+                                                                  );
+                                                                } else {
+                                                                  return Icon(
+                                                                    Icons
+                                                                        .circle_outlined,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                                    size: 30.0,
+                                                                  );
+                                                                }
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
-                                                    tileColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    activeColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    activeTrackColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .tertiary,
-                                                    dense: false,
-                                                    controlAffinity:
-                                                        ListTileControlAffinity
-                                                            .trailing,
                                                   ),
                                                 ],
                                               ),
@@ -395,9 +480,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                           width: 100.0,
                                                           child: TextFormField(
                                                             controller: _model
-                                                                .fullNameFieldTextController1,
+                                                                .txtPriceTextController,
                                                             focusNode: _model
-                                                                .fullNameFieldFocusNode1,
+                                                                .txtPriceFocusNode,
                                                             autofocus: false,
                                                             textCapitalization:
                                                                 TextCapitalization
@@ -494,20 +579,28 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                             ),
                                                             textAlign: TextAlign
                                                                 .center,
-                                                            maxLength: 200,
+                                                            maxLength: 4,
                                                             buildCounter: (context,
                                                                     {required currentLength,
                                                                     required isFocused,
                                                                     maxLength}) =>
                                                                 null,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
                                                             cursorColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
                                                                     .primary,
                                                             validator: _model
-                                                                .fullNameFieldTextController1Validator
+                                                                .txtPriceTextControllerValidator
                                                                 .asValidator(
                                                                     context),
+                                                            inputFormatters: [
+                                                              FilteringTextInputFormatter
+                                                                  .allow(RegExp(
+                                                                      '[0-9]'))
+                                                            ],
                                                           ),
                                                         ),
                                                       ],
@@ -545,9 +638,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                           width: 100.0,
                                                           child: TextFormField(
                                                             controller: _model
-                                                                .fullNameFieldTextController2,
+                                                                .txtPriceRevisitTextController,
                                                             focusNode: _model
-                                                                .fullNameFieldFocusNode2,
+                                                                .txtPriceRevisitFocusNode,
                                                             autofocus: false,
                                                             textCapitalization:
                                                                 TextCapitalization
@@ -644,20 +737,28 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                             ),
                                                             textAlign: TextAlign
                                                                 .center,
-                                                            maxLength: 200,
+                                                            maxLength: 4,
                                                             buildCounter: (context,
                                                                     {required currentLength,
                                                                     required isFocused,
                                                                     maxLength}) =>
                                                                 null,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
                                                             cursorColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
                                                                     .primary,
                                                             validator: _model
-                                                                .fullNameFieldTextController2Validator
+                                                                .txtPriceRevisitTextControllerValidator
                                                                 .asValidator(
                                                                     context),
+                                                            inputFormatters: [
+                                                              FilteringTextInputFormatter
+                                                                  .allow(RegExp(
+                                                                      '[0-9]'))
+                                                            ],
                                                           ),
                                                         ),
                                                       ],
@@ -771,9 +872,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                           width: 100.0,
                                                           child: TextFormField(
                                                             controller: _model
-                                                                .fullNameFieldTextController3,
+                                                                .txtAvergeVisitTextController,
                                                             focusNode: _model
-                                                                .fullNameFieldFocusNode3,
+                                                                .txtAvergeVisitFocusNode,
                                                             autofocus: false,
                                                             textCapitalization:
                                                                 TextCapitalization
@@ -870,20 +971,28 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                             ),
                                                             textAlign: TextAlign
                                                                 .center,
-                                                            maxLength: 200,
+                                                            maxLength: 2,
                                                             buildCounter: (context,
                                                                     {required currentLength,
                                                                     required isFocused,
                                                                     maxLength}) =>
                                                                 null,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
                                                             cursorColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
                                                                     .primary,
                                                             validator: _model
-                                                                .fullNameFieldTextController3Validator
+                                                                .txtAvergeVisitTextControllerValidator
                                                                 .asValidator(
                                                                     context),
+                                                            inputFormatters: [
+                                                              FilteringTextInputFormatter
+                                                                  .allow(RegExp(
+                                                                      '[0-9]'))
+                                                            ],
                                                           ),
                                                         ),
                                                       ],
@@ -897,6 +1006,139 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                       ]
                                           .divide(const SizedBox(width: 5.0))
                                           .around(const SizedBox(width: 5.0)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 20.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'viipde9x' /* يجب حفظ اي تعديلات من اعلي ... */,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ),
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              if ((_model.txtPriceTextController.text == '') ||
+                                                  (_model.txtPriceRevisitTextController
+                                                              .text ==
+                                                          '') ||
+                                                  (_model.txtAvergeVisitTextController
+                                                              .text ==
+                                                          '')) {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          const Text('حفظ البيانات'),
+                                                      content: const Text(
+                                                          'يجب اكمال ادخال البيانات '),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: const Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              } else {
+                                                await FFAppState()
+                                                    .currentDoctor
+                                                    .dbDocRef!
+                                                    .update(createDocRecordData(
+                                                      price: int.tryParse(_model
+                                                          .txtPriceTextController
+                                                          .text),
+                                                      priceRe: int.tryParse(_model
+                                                          .txtPriceRevisitTextController
+                                                          .text),
+                                                      avgVisit: int.tryParse(_model
+                                                          .txtAvergeVisitTextController
+                                                          .text),
+                                                      bookType:
+                                                          _model.bookTypeCode,
+                                                    ));
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          const Text('حفظ البيانات'),
+                                                      content: const Text(
+                                                          'تم حفظ البيانات بنجاح'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: const Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+                                            },
+                                            text: FFLocalizations.of(context)
+                                                .getText(
+                                              'sxed3ivk' /* حفظ */,
+                                            ),
+                                            options: FFButtonOptions(
+                                              height: 35.0,
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(14.0),
+                                            ),
+                                          ),
+                                        ]
+                                            .divide(const SizedBox(width: 5.0))
+                                            .around(const SizedBox(width: 5.0)),
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -926,7 +1168,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                           ),
                                           Text(
                                             FFLocalizations.of(context).getText(
-                                              'jea1h2ss' /* تحديد مواعيد العمل */,
+                                              'cebuldfc' /* تحديد مواعيد العمل */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium

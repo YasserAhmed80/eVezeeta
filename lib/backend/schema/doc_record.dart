@@ -95,6 +95,26 @@ class DocRecord extends FirestoreRecord {
   String get img => _img ?? '';
   bool hasImg() => _img != null;
 
+  // "price" field.
+  int? _price;
+  int get price => _price ?? 0;
+  bool hasPrice() => _price != null;
+
+  // "price_re" field.
+  int? _priceRe;
+  int get priceRe => _priceRe ?? 0;
+  bool hasPriceRe() => _priceRe != null;
+
+  // "avg_visit" field.
+  int? _avgVisit;
+  int get avgVisit => _avgVisit ?? 0;
+  bool hasAvgVisit() => _avgVisit != null;
+
+  // "book_type" field.
+  int? _bookType;
+  int get bookType => _bookType ?? 0;
+  bool hasBookType() => _bookType != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _gender = castToType<int>(snapshotData['gender']);
@@ -112,6 +132,10 @@ class DocRecord extends FirestoreRecord {
     _tel1 = snapshotData['tel_1'] as String?;
     _tel2 = snapshotData['tel_2'] as String?;
     _img = snapshotData['img'] as String?;
+    _price = castToType<int>(snapshotData['price']);
+    _priceRe = castToType<int>(snapshotData['price_re']);
+    _avgVisit = castToType<int>(snapshotData['avg_visit']);
+    _bookType = castToType<int>(snapshotData['book_type']);
   }
 
   static CollectionReference get collection =>
@@ -163,6 +187,10 @@ Map<String, dynamic> createDocRecordData({
   String? tel1,
   String? tel2,
   String? img,
+  int? price,
+  int? priceRe,
+  int? avgVisit,
+  int? bookType,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -181,6 +209,10 @@ Map<String, dynamic> createDocRecordData({
       'tel_1': tel1,
       'tel_2': tel2,
       'img': img,
+      'price': price,
+      'price_re': priceRe,
+      'avg_visit': avgVisit,
+      'book_type': bookType,
     }.withoutNulls,
   );
 
@@ -208,7 +240,11 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e1?.aLatlng == e2?.aLatlng &&
         e1?.tel1 == e2?.tel1 &&
         e1?.tel2 == e2?.tel2 &&
-        e1?.img == e2?.img;
+        e1?.img == e2?.img &&
+        e1?.price == e2?.price &&
+        e1?.priceRe == e2?.priceRe &&
+        e1?.avgVisit == e2?.avgVisit &&
+        e1?.bookType == e2?.bookType;
   }
 
   @override
@@ -228,7 +264,11 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e?.aLatlng,
         e?.tel1,
         e?.tel2,
-        e?.img
+        e?.img,
+        e?.price,
+        e?.priceRe,
+        e?.avgVisit,
+        e?.bookType
       ]);
 
   @override

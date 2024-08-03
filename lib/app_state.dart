@@ -214,21 +214,6 @@ class FFAppState extends ChangeNotifier {
           _docSearchItems;
     });
     _safeInit(() {
-      _refDayList = prefs
-              .getStringList('ff_refDayList')
-              ?.map((x) {
-                try {
-                  return DtDaysListStruct.fromSerializableMap(jsonDecode(x));
-                } catch (e) {
-                  print("Can't decode persisted data type. Error: $e.");
-                  return null;
-                }
-              })
-              .withoutNulls
-              .toList() ??
-          _refDayList;
-    });
-    _safeInit(() {
       if (prefs.containsKey('ff_lastDataLoading')) {
         try {
           final serializedData = prefs.getString('ff_lastDataLoading') ?? '{}';
@@ -253,6 +238,21 @@ class FFAppState extends ChangeNotifier {
               .withoutNulls
               .toList() ??
           _refBookStatus;
+    });
+    _safeInit(() {
+      _refBookingType = prefs
+              .getStringList('ff_refBookingType')
+              ?.map((x) {
+                try {
+                  return DtGeneralListStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refBookingType;
     });
   }
 
@@ -832,47 +832,6 @@ class FFAppState extends ChangeNotifier {
         _docSearchItems.map((x) => x.serialize()).toList());
   }
 
-  List<DtDaysListStruct> _refDayList = [];
-  List<DtDaysListStruct> get refDayList => _refDayList;
-  set refDayList(List<DtDaysListStruct> value) {
-    _refDayList = value;
-    prefs.setStringList(
-        'ff_refDayList', value.map((x) => x.serialize()).toList());
-  }
-
-  void addToRefDayList(DtDaysListStruct value) {
-    refDayList.add(value);
-    prefs.setStringList(
-        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromRefDayList(DtDaysListStruct value) {
-    refDayList.remove(value);
-    prefs.setStringList(
-        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
-  }
-
-  void removeAtIndexFromRefDayList(int index) {
-    refDayList.removeAt(index);
-    prefs.setStringList(
-        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
-  }
-
-  void updateRefDayListAtIndex(
-    int index,
-    DtDaysListStruct Function(DtDaysListStruct) updateFn,
-  ) {
-    refDayList[index] = updateFn(_refDayList[index]);
-    prefs.setStringList(
-        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
-  }
-
-  void insertAtIndexInRefDayList(int index, DtDaysListStruct value) {
-    refDayList.insert(index, value);
-    prefs.setStringList(
-        'ff_refDayList', _refDayList.map((x) => x.serialize()).toList());
-  }
-
   DtLastLoadingStruct _lastDataLoading =
       DtLastLoadingStruct.fromSerializableMap(jsonDecode(
           '{\"ciity_date\":\"1722493140000\",\"category_date\":\"1722493140000\",\"days_date\":\"1722493140000\"}'));
@@ -935,6 +894,52 @@ class FFAppState extends ChangeNotifier {
     refBookStatus.insert(index, value);
     prefs.setStringList(
         'ff_refBookStatus', _refBookStatus.map((x) => x.serialize()).toList());
+  }
+
+  List<DtGeneralListStruct> _refBookingType = [
+    DtGeneralListStruct.fromSerializableMap(jsonDecode(
+        '{\"key\":\"1\",\"desc\":\"الحجز مسبقا و الدخول بأسبقية الحضور\"}')),
+    DtGeneralListStruct.fromSerializableMap(
+        jsonDecode('{\"key\":\"0\",\"desc\":\"Hello World\"}'))
+  ];
+  List<DtGeneralListStruct> get refBookingType => _refBookingType;
+  set refBookingType(List<DtGeneralListStruct> value) {
+    _refBookingType = value;
+    prefs.setStringList(
+        'ff_refBookingType', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefBookingType(DtGeneralListStruct value) {
+    refBookingType.add(value);
+    prefs.setStringList('ff_refBookingType',
+        _refBookingType.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefBookingType(DtGeneralListStruct value) {
+    refBookingType.remove(value);
+    prefs.setStringList('ff_refBookingType',
+        _refBookingType.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefBookingType(int index) {
+    refBookingType.removeAt(index);
+    prefs.setStringList('ff_refBookingType',
+        _refBookingType.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefBookingTypeAtIndex(
+    int index,
+    DtGeneralListStruct Function(DtGeneralListStruct) updateFn,
+  ) {
+    refBookingType[index] = updateFn(_refBookingType[index]);
+    prefs.setStringList('ff_refBookingType',
+        _refBookingType.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefBookingType(int index, DtGeneralListStruct value) {
+    refBookingType.insert(index, value);
+    prefs.setStringList('ff_refBookingType',
+        _refBookingType.map((x) => x.serialize()).toList());
   }
 }
 
