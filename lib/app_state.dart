@@ -257,22 +257,6 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _appBookFee = prefs.getInt('ff_appBookFee') ?? _appBookFee;
     });
-    _safeInit(() {
-      _appBookingHistory = prefs
-              .getStringList('ff_appBookingHistory')
-              ?.map((x) {
-                try {
-                  return DtBookingHistoryStruct.fromSerializableMap(
-                      jsonDecode(x));
-                } catch (e) {
-                  print("Can't decode persisted data type. Error: $e.");
-                  return null;
-                }
-              })
-              .withoutNulls
-              .toList() ??
-          _appBookingHistory;
-    });
   }
 
   void update(VoidCallback callback) {
@@ -966,48 +950,6 @@ class FFAppState extends ChangeNotifier {
   set appBookFee(int value) {
     _appBookFee = value;
     prefs.setInt('ff_appBookFee', value);
-  }
-
-  List<DtBookingHistoryStruct> _appBookingHistory = [];
-  List<DtBookingHistoryStruct> get appBookingHistory => _appBookingHistory;
-  set appBookingHistory(List<DtBookingHistoryStruct> value) {
-    _appBookingHistory = value;
-    prefs.setStringList(
-        'ff_appBookingHistory', value.map((x) => x.serialize()).toList());
-  }
-
-  void addToAppBookingHistory(DtBookingHistoryStruct value) {
-    appBookingHistory.add(value);
-    prefs.setStringList('ff_appBookingHistory',
-        _appBookingHistory.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromAppBookingHistory(DtBookingHistoryStruct value) {
-    appBookingHistory.remove(value);
-    prefs.setStringList('ff_appBookingHistory',
-        _appBookingHistory.map((x) => x.serialize()).toList());
-  }
-
-  void removeAtIndexFromAppBookingHistory(int index) {
-    appBookingHistory.removeAt(index);
-    prefs.setStringList('ff_appBookingHistory',
-        _appBookingHistory.map((x) => x.serialize()).toList());
-  }
-
-  void updateAppBookingHistoryAtIndex(
-    int index,
-    DtBookingHistoryStruct Function(DtBookingHistoryStruct) updateFn,
-  ) {
-    appBookingHistory[index] = updateFn(_appBookingHistory[index]);
-    prefs.setStringList('ff_appBookingHistory',
-        _appBookingHistory.map((x) => x.serialize()).toList());
-  }
-
-  void insertAtIndexInAppBookingHistory(
-      int index, DtBookingHistoryStruct value) {
-    appBookingHistory.insert(index, value);
-    prefs.setStringList('ff_appBookingHistory',
-        _appBookingHistory.map((x) => x.serialize()).toList());
   }
 }
 

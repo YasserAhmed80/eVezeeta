@@ -45,6 +45,34 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
 
   String? sPeriod = 'd';
 
+  List<DtDayAnalysisStruct> dayAnalysisList = [];
+  void addToDayAnalysisList(DtDayAnalysisStruct item) =>
+      dayAnalysisList.add(item);
+  void removeFromDayAnalysisList(DtDayAnalysisStruct item) =>
+      dayAnalysisList.remove(item);
+  void removeAtIndexFromDayAnalysisList(int index) =>
+      dayAnalysisList.removeAt(index);
+  void insertAtIndexInDayAnalysisList(int index, DtDayAnalysisStruct item) =>
+      dayAnalysisList.insert(index, item);
+  void updateDayAnalysisListAtIndex(
+          int index, Function(DtDayAnalysisStruct) updateFn) =>
+      dayAnalysisList[index] = updateFn(dayAnalysisList[index]);
+
+  List<DateTime> daysListTemp = [];
+  void addToDaysListTemp(DateTime item) => daysListTemp.add(item);
+  void removeFromDaysListTemp(DateTime item) => daysListTemp.remove(item);
+  void removeAtIndexFromDaysListTemp(int index) => daysListTemp.removeAt(index);
+  void insertAtIndexInDaysListTemp(int index, DateTime item) =>
+      daysListTemp.insert(index, item);
+  void updateDaysListTempAtIndex(int index, Function(DateTime) updateFn) =>
+      daysListTemp[index] = updateFn(daysListTemp[index]);
+
+  int? nCountTemp = 0;
+
+  int? nValueTemp = 0;
+
+  DateTime? currentDateTemp;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -93,6 +121,7 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
         cusId: returnedBookedData[loopIndex!].cusId,
         price: returnedBookedData[loopIndex!].price,
         fee: returnedBookedData[loopIndex!].fee,
+        time: returnedBookedData[loopIndex!].dayTime,
       ));
       loopIndex = loopIndex! + 1;
     }
@@ -143,5 +172,38 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
   Future loadDataAction(BuildContext context) async {
     await getBookingHistory(context);
     await calcTotals(context);
+    await getDayAnalysisData(context);
+  }
+
+  Future getDayAnalysisData(BuildContext context) async {
+    daysListTemp = bookingHistory
+        .map((e) => e.date)
+        .withoutNulls
+        .toList()
+        .unique((e) => e)
+        .sortedList(desc: false)
+        .toList()
+        .cast<DateTime>();
+    loopIndex = 0;
+    loopMax = valueOrDefault<int>(
+      daysListTemp.length,
+      0,
+    );
+    dayAnalysisList = [];
+    while (loopIndex! < loopMax!) {
+      currentDateTemp = daysListTemp[loopIndex!];
+      nCountTemp = valueOrDefault<int>(
+        bookingHistory
+            .where((e) => (e.date == currentDateTemp) && (e.statusCde == 3))
+            .toList()
+            .length,
+        0,
+      );
+      addToDayAnalysisList(DtDayAnalysisStruct(
+        date: currentDateTemp,
+        count: nCountTemp,
+      ));
+      loopIndex = loopIndex! + 1;
+    }
   }
 }

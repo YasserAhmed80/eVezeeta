@@ -13,12 +13,14 @@ class DtBookingHistoryStruct extends FFFirebaseStruct {
     String? cusId,
     int? price,
     int? fee,
+    DateTime? time,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _date = date,
         _statusCde = statusCde,
         _cusId = cusId,
         _price = price,
         _fee = fee,
+        _time = time,
         super(firestoreUtilData);
 
   // "date" field.
@@ -62,6 +64,13 @@ class DtBookingHistoryStruct extends FFFirebaseStruct {
 
   bool hasFee() => _fee != null;
 
+  // "time" field.
+  DateTime? _time;
+  DateTime? get time => _time;
+  set time(DateTime? val) => _time = val;
+
+  bool hasTime() => _time != null;
+
   static DtBookingHistoryStruct fromMap(Map<String, dynamic> data) =>
       DtBookingHistoryStruct(
         date: data['date'] as DateTime?,
@@ -69,6 +78,7 @@ class DtBookingHistoryStruct extends FFFirebaseStruct {
         cusId: data['cus_id'] as String?,
         price: castToType<int>(data['price']),
         fee: castToType<int>(data['fee']),
+        time: data['time'] as DateTime?,
       );
 
   static DtBookingHistoryStruct? maybeFromMap(dynamic data) => data is Map
@@ -81,6 +91,7 @@ class DtBookingHistoryStruct extends FFFirebaseStruct {
         'cus_id': _cusId,
         'price': _price,
         'fee': _fee,
+        'time': _time,
       }.withoutNulls;
 
   @override
@@ -104,6 +115,10 @@ class DtBookingHistoryStruct extends FFFirebaseStruct {
         'fee': serializeParam(
           _fee,
           ParamType.int,
+        ),
+        'time': serializeParam(
+          _time,
+          ParamType.DateTime,
         ),
       }.withoutNulls;
 
@@ -135,6 +150,11 @@ class DtBookingHistoryStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
+        time: deserializeParam(
+          data['time'],
+          ParamType.DateTime,
+          false,
+        ),
       );
 
   @override
@@ -147,12 +167,13 @@ class DtBookingHistoryStruct extends FFFirebaseStruct {
         statusCde == other.statusCde &&
         cusId == other.cusId &&
         price == other.price &&
-        fee == other.fee;
+        fee == other.fee &&
+        time == other.time;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([date, statusCde, cusId, price, fee]);
+      const ListEquality().hash([date, statusCde, cusId, price, fee, time]);
 }
 
 DtBookingHistoryStruct createDtBookingHistoryStruct({
@@ -161,6 +182,7 @@ DtBookingHistoryStruct createDtBookingHistoryStruct({
   String? cusId,
   int? price,
   int? fee,
+  DateTime? time,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -172,6 +194,7 @@ DtBookingHistoryStruct createDtBookingHistoryStruct({
       cusId: cusId,
       price: price,
       fee: fee,
+      time: time,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

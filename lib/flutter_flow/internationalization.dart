@@ -793,15 +793,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'nc72ebae': {
-      'ar': 'عدد الحجوزات',
+      'ar': 'عدد الحجوزات المنفذة',
       'en': '',
     },
     'pmoe3wwx': {
-      'ar': 'قيمة الحجوزات',
-      'en': '',
-    },
-    'tm6nixo6': {
-      'ar': 'تفاصيل الحجوزات',
+      'ar': 'قيمة الحجوزات المنفذة',
       'en': '',
     },
     'w9cmv2h1': {
@@ -814,6 +810,38 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'n3n0koyg': {
       'ar': 'حجوزات ملغية',
+      'en': '',
+    },
+    'hukzgep6': {
+      'ar': 'Y',
+      'en': '',
+    },
+    'col6lta5': {
+      'ar': 'Day',
+      'en': '',
+    },
+    '2rupwhsz': {
+      'ar': 'Count',
+      'en': '',
+    },
+    '1lj2g4jk': {
+      'ar': 'تفاصيل الحجوزات',
+      'en': '',
+    },
+    'auz2m6ux': {
+      'ar': 'اليوم',
+      'en': '',
+    },
+    '6xmrj46s': {
+      'ar': 'سعر كشف',
+      'en': '',
+    },
+    'nttaob5c': {
+      'ar': 'خدمه',
+      'en': '',
+    },
+    '883lff91': {
+      'ar': 'الحاله',
       'en': '',
     },
     's9j82ivr': {

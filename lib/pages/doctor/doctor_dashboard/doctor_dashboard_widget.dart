@@ -1,10 +1,12 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'doctor_dashboard_model.dart';
 export 'doctor_dashboard_model.dart';
 
@@ -51,6 +53,8 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -499,13 +503,21 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    width: 150.0,
+                                    width: 160.0,
                                     constraints: const BoxConstraints(
                                       minWidth: 75.0,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                          const Color(0xFF2C3A63)
+                                        ],
+                                        stops: const [0.0, 1.0],
+                                        begin: const AlignmentDirectional(0.0, -1.0),
+                                        end: const AlignmentDirectional(0, 1.0),
+                                      ),
                                       borderRadius: BorderRadius.circular(5.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
@@ -521,12 +533,15 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                         children: [
                                           Text(
                                             FFLocalizations.of(context).getText(
-                                              'nc72ebae' /* عدد الحجوزات */,
+                                              'nc72ebae' /* عدد الحجوزات المنفذة */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Cairo',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -541,7 +556,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                   fontFamily: 'Cairo',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondary,
+                                                      .primaryBackground,
                                                   fontSize: 30.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.bold,
@@ -552,13 +567,21 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     ),
                                   ),
                                   Container(
-                                    width: 150.0,
+                                    width: 160.0,
                                     constraints: const BoxConstraints(
                                       minWidth: 75.0,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                          const Color(0xFF2C3A63)
+                                        ],
+                                        stops: const [0.0, 1.0],
+                                        begin: const AlignmentDirectional(0.0, -1.0),
+                                        end: const AlignmentDirectional(0, 1.0),
+                                      ),
                                       borderRadius: BorderRadius.circular(5.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
@@ -574,12 +597,15 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                         children: [
                                           Text(
                                             FFLocalizations.of(context).getText(
-                                              'pmoe3wwx' /* قيمة الحجوزات */,
+                                              'pmoe3wwx' /* قيمة الحجوزات المنفذة */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Cairo',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
                                                   letterSpacing: 0.0,
                                                 ),
                                           ),
@@ -594,7 +620,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                   fontFamily: 'Cairo',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondary,
+                                                      .primaryBackground,
                                                   fontSize: 30.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.bold,
@@ -609,25 +635,13 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     .around(const SizedBox(width: 5.0)),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                            const Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 20.0, 10.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'tm6nixo6' /* تفاصيل الحجوزات */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Cairo',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ],
+                                children: [],
                               ),
                             ),
                             Container(
@@ -720,7 +734,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .secondary,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -803,7 +817,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primary,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -886,7 +900,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .error,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -904,17 +918,387 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(0.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 5.0, 5.0, 5.0),
+                                      child: SizedBox(
+                                        width: 370.0,
+                                        height: 198.0,
+                                        child: FlutterFlowBarChart(
+                                          barData: [
+                                            FFBarChartData(
+                                              yData: _model.dayAnalysisList
+                                                  .map((e) => e.count)
+                                                  .toList(),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                            )
+                                          ],
+                                          xLabels: _model.dayAnalysisList
+                                              .map((e) => e.date)
+                                              .withoutNulls
+                                              .toList()
+                                              .map((e) => e.toString())
+                                              .toList(),
+                                          barWidth: 16.0,
+                                          barBorderRadius:
+                                              BorderRadius.circular(8.0),
+                                          groupSpace: 8.0,
+                                          alignment:
+                                              BarChartAlignment.spaceAround,
+                                          chartStylingInfo: ChartStylingInfo(
+                                            enableTooltip: true,
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                            showGrid: true,
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryText,
+                                            borderWidth: 1.0,
+                                          ),
+                                          axisBounds: const AxisBounds(),
+                                          xAxisLabelInfo: AxisLabelInfo(
+                                            title: FFLocalizations.of(context)
+                                                .getText(
+                                              'col6lta5' /* Day */,
+                                            ),
+                                            titleTextStyle: const TextStyle(
+                                              fontSize: 14.0,
+                                            ),
+                                            reservedSize: 28.0,
+                                          ),
+                                          yAxisLabelInfo: AxisLabelInfo(
+                                            title: FFLocalizations.of(context)
+                                                .getText(
+                                              '2rupwhsz' /* Count */,
+                                            ),
+                                            titleTextStyle: const TextStyle(
+                                              fontSize: 14.0,
+                                            ),
+                                            reservedSize: 42.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      '1lj2g4jk' /* تفاصيل الحجوزات */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 16.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 5.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'auz2m6ux' /* اليوم */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '6xmrj46s' /* سعر كشف */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'nttaob5c' /* خدمه */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Opacity(
+                                        opacity: 0.8,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 2.0, 0.0, 2.0),
+                                          child: Container(
+                                            height: 20.0,
+                                            constraints: const BoxConstraints(
+                                              minWidth: 40.0,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(14.0),
+                                            ),
+                                            alignment:
+                                                const AlignmentDirectional(0.0, 0.0),
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '883lff91' /* الحاله */,
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 10.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Builder(
+                              builder: (context) {
+                                final historyItem =
+                                    _model.bookingHistory.toList();
+
+                                return ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: historyItem.length,
+                                  separatorBuilder: (_, __) =>
+                                      const SizedBox(height: 2.0),
+                                  itemBuilder: (context, historyItemIndex) {
+                                    final historyItemItem =
+                                        historyItem[historyItemIndex];
+                                    return Container(
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            5.0, 0.0, 5.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text(
+                                                dateTimeFormat(
+                                                  'M/d h:mm a',
+                                                  historyItemItem.time!,
+                                                  locale: FFLocalizations.of(
+                                                          context)
+                                                      .languageCode,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                historyItemItem.price
+                                                    .toString(),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                valueOrDefault<String>(
+                                                  historyItemItem.fee
+                                                      .toString(),
+                                                  '0',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Opacity(
+                                                opacity: 0.8,
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 2.0, 0.0, 2.0),
+                                                  child: Container(
+                                                    height: 20.0,
+                                                    constraints: const BoxConstraints(
+                                                      minWidth: 40.0,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          valueOrDefault<Color>(
+                                                        FFAppState()
+                                                            .refBookStatus
+                                                            .where((e) =>
+                                                                e.code ==
+                                                                valueOrDefault<
+                                                                    int>(
+                                                                  historyItemItem
+                                                                      .statusCde,
+                                                                  0,
+                                                                ))
+                                                            .toList()
+                                                            .first
+                                                            .color,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .tertiary,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              14.0),
+                                                    ),
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Text(
+                                                      valueOrDefault<String>(
+                                                        FFAppState()
+                                                            .refBookStatus
+                                                            .where((e) =>
+                                                                e.code ==
+                                                                valueOrDefault<
+                                                                    int>(
+                                                                  historyItemItem
+                                                                      .statusCde,
+                                                                  0,
+                                                                ))
+                                                            .toList()
+                                                            .first
+                                                            .desc,
+                                                        'status',
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Cairo',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            fontSize: 10.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 100.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 300.0,
-                                    decoration: const BoxDecoration(),
-                                  ),
-                                ]
+                                children: <Widget>[]
                                     .divide(const SizedBox(width: 5.0))
                                     .around(const SizedBox(width: 5.0)),
                               ),
