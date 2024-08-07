@@ -73,17 +73,11 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
 
   DateTime? currentDateTemp;
 
-  ///  State fields for stateful widgets in this page.
-
-  final unfocusNode = FocusNode();
-
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 
   /// Action blocks.
   Future getBookingHistory(BuildContext context) async {
@@ -181,7 +175,7 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
         .withoutNulls
         .toList()
         .unique((e) => e)
-        .sortedList(desc: false)
+        .sortedList(keyOf: (e) => e, desc: false)
         .toList()
         .cast<DateTime>();
     loopIndex = 0;

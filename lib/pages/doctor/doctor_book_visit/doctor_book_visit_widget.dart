@@ -132,9 +132,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -738,7 +736,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                               Text(
                                                 valueOrDefault<String>(
                                                   dateTimeFormat(
-                                                    'd/M/y',
+                                                    "d/M/y",
                                                     _model.selectedDaybook
                                                         ?.dayValue,
                                                     locale: FFLocalizations.of(

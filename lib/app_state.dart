@@ -951,6 +951,18 @@ class FFAppState extends ChangeNotifier {
     _appBookFee = value;
     prefs.setInt('ff_appBookFee', value);
   }
+
+  int _subscrptionFee = 200;
+  int get subscrptionFee => _subscrptionFee;
+  set subscrptionFee(int value) {
+    _subscrptionFee = value;
+  }
+
+  int _bookingFee = 5;
+  int get bookingFee => _bookingFee;
+  set bookingFee(int value) {
+    _bookingFee = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

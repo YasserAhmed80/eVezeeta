@@ -20,7 +20,6 @@ class DoctorSearchModel extends FlutterFlowModel<DoctorSearchWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for doc_search_item_list_component component.
   late DocSearchItemListComponentModel docSearchItemListComponentModel;
 
@@ -32,7 +31,6 @@ class DoctorSearchModel extends FlutterFlowModel<DoctorSearchWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     docSearchItemListComponentModel.dispose();
   }
 }

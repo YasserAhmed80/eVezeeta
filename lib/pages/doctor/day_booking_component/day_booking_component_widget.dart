@@ -99,7 +99,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                     Text(
                       valueOrDefault<String>(
                         dateTimeFormat(
-                          'd/M/y',
+                          "d/M/y",
                           widget.dayBookItem?.dayValue,
                           locale: FFLocalizations.of(context).languageCode,
                         ),

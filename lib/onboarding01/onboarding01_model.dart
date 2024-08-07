@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class Onboarding01Model extends FlutterFlowModel<Onboarding01Widget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in Onboarding01 widget.
   LastDataLoadingRecord? returnedLoadingData;
   // State field(s) for Timer1 widget.
@@ -27,7 +26,6 @@ class Onboarding01Model extends FlutterFlowModel<Onboarding01Widget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     timer1Controller.dispose();
   }
 }

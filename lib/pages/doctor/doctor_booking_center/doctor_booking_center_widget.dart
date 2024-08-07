@@ -97,9 +97,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -612,7 +610,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                 child: Text(
                                                   valueOrDefault<String>(
                                                     dateTimeFormat(
-                                                      'd/M/y',
+                                                      "d/M/y",
                                                       bookedDaysItemItem,
                                                       locale:
                                                           FFLocalizations.of(
@@ -639,7 +637,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                 child: Text(
                                                   valueOrDefault<String>(
                                                     dateTimeFormat(
-                                                      'EEEE',
+                                                      "EEEE",
                                                       bookedDaysItemItem,
                                                       locale:
                                                           FFLocalizations.of(
@@ -761,7 +759,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                               Text(
                                                 valueOrDefault<String>(
                                                   dateTimeFormat(
-                                                    'jm',
+                                                    "jm",
                                                     bookedHoursItemItem.time,
                                                     locale: FFLocalizations.of(
                                                             context)
@@ -801,7 +799,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                               Text(
                                                 valueOrDefault<String>(
                                                   dateTimeFormat(
-                                                    'd/M/y',
+                                                    "d/M/y",
                                                     bookedHoursItemItem.date,
                                                     locale: FFLocalizations.of(
                                                             context)

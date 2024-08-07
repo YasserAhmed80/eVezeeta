@@ -164,6 +164,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'congratultion',
+          path: '/congratultion',
+          builder: (context, params) => const CongratultionWidget(),
+        ),
+        FFRoute(
+          name: 'doctor_payment',
+          path: '/doctorPayment',
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => DoctorPaymentWidget(
+            subsrciptionStatus: params.getParam(
+              'subsrciptionStatus',
+              ParamType.int,
+            ),
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'doctor_billing',
+          path: '/doctorBilling',
+          builder: (context, params) => const DoctorBillingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

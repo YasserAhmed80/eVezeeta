@@ -620,8 +620,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     '8dmzralb': {
-      'ar': 'البيانات',
+      'ar': 'اشترك',
       'en': 'save',
+    },
+    '19rz7uum': {
+      'ar': 'البيانات',
+      'en': '',
     },
     'g6zol6lq': {
       'ar': 'الحجوزات',
@@ -768,16 +772,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اليوم',
       'en': '',
     },
+    '5ui3vb00': {
+      'ar': 'امس',
+      'en': '',
+    },
     'duou9dxb': {
-      'ar': 'الاسبوع',
+      'ar': 'اسبوع',
       'en': '',
     },
     'pmg9dnce': {
-      'ar': 'الشهر',
+      'ar': 'شهر',
       'en': '',
     },
     'r7n4ex3s': {
-      'ar': 'السنه',
+      'ar': 'سنة',
       'en': '',
     },
     '4q5ixzyp': {
@@ -850,6 +858,243 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '052g7vpz': {
       'ar': 'Shop',
+      'en': '',
+    },
+  },
+  // congratultion
+  {
+    '8bvm3x03': {
+      'ar': 'Congrats!',
+      'en': '',
+    },
+    'tic0o98j': {
+      'ar': 'Quiz Results Submitted',
+      'en': '',
+    },
+    'xri1wd5q': {
+      'ar': 'Go Home',
+      'en': '',
+    },
+    'llio5c17': {
+      'ar': 'Home',
+      'en': 'Home',
+    },
+  },
+  // doctor_payment
+  {
+    '09xbqlcw': {
+      'ar': 'مدة الاشتراك ',
+      'en': '',
+    },
+    'rr5ews9r': {
+      'ar': 'من تاريخ:',
+      'en': '',
+    },
+    'qu15npbq': {
+      'ar': 'الي تاريخ:',
+      'en': '',
+    },
+    'c1zfj8ws': {
+      'ar': 'قيمة الشتراك',
+      'en': '',
+    },
+    'gjcedkj7': {
+      'ar': ' جنية',
+      'en': '',
+    },
+    'sde5ojob': {
+      'ar': 'اجمالي خدمة الحجوزات',
+      'en': '',
+    },
+    '3k9igkml': {
+      'ar': ' جنية',
+      'en': '',
+    },
+    'g4v6qhil': {
+      'ar': 'الاجمالي',
+      'en': '',
+    },
+    'w17e4nu9': {
+      'ar': 'هل يوجد معكك كود خصم',
+      'en': '',
+    },
+    'qhku7rum': {
+      'ar': 'كود خصم',
+      'en': '',
+    },
+    'mcqu9s6j': {
+      'ar': 'كود خصمك',
+      'en': '',
+    },
+    'v3amwzua': {
+      'ar': '1234567899999',
+      'en': '',
+    },
+    'pmr4nktu': {
+      'ar': 'قيمة خصمك',
+      'en': '',
+    },
+    'ktz0alzq': {
+      'ar': 'الاجمالي بعد الخصم',
+      'en': '',
+    },
+    'ocj7khjr': {
+      'ar': 'طريقة الدفع',
+      'en': '',
+    },
+    'mdpsr83k': {
+      'ar': 'فودافون كاش',
+      'en': '',
+    },
+    'pjovy5yc': {
+      'ar': 'فوري',
+      'en': '',
+    },
+    'z0i4kvhc': {
+      'ar': 'ادخل كود الدفع',
+      'en': '',
+    },
+    'd0eqwg6t': {
+      'ar': '',
+      'en': '',
+    },
+    'gyf54g18': {
+      'ar': '1234567890',
+      'en': '',
+    },
+    'sn0smvi1': {
+      'ar': 'تأكيد',
+      'en': '',
+    },
+    '54yrsvgo': {
+      'ar': 'اشترك الان',
+      'en': '',
+    },
+    'yo2baa07': {
+      'ar': 'تسجيل الاشتراك',
+      'en': '',
+    },
+    '271lfrvo': {
+      'ar': 'Home',
+      'en': '',
+    },
+  },
+  // doctor_billing
+  {
+    'nb5qrywx': {
+      'ar': 'مدة الاشتراك الحالية',
+      'en': '',
+    },
+    'ffj88nfe': {
+      'ar': 'من تاريخ:',
+      'en': '',
+    },
+    'fwhy8fh1': {
+      'ar': 'الي تاريخ:',
+      'en': '',
+    },
+    'kltmtloy': {
+      'ar': 'قيمة الشتراك',
+      'en': '',
+    },
+    'zminikox': {
+      'ar': ' جنية',
+      'en': '',
+    },
+    'rim45eah': {
+      'ar': 'ينتهي اشتراكك خلال',
+      'en': '',
+    },
+    '5x9ku6l0': {
+      'ar': '10',
+      'en': '',
+    },
+    'otf5s07v': {
+      'ar': ' يوم',
+      'en': '',
+    },
+    'fpydbfuj': {
+      'ar': 'اجمالي خدمة الحجوزات المنفذة',
+      'en': '',
+    },
+    'mezjkhbl': {
+      'ar': 'من تاريخ:',
+      'en': '',
+    },
+    'u3kf9esy': {
+      'ar': 'الي تاريخ:',
+      'en': '',
+    },
+    '5wuo5uhh': {
+      'ar': 'حتي اليوم',
+      'en': '',
+    },
+    '8puyncx2': {
+      'ar': 'اجمالي خدمة الحجوزات',
+      'en': '',
+    },
+    'vyydih2q': {
+      'ar': '30',
+      'en': '',
+    },
+    'uiga72sf': {
+      'ar': ' حجز',
+      'en': '',
+    },
+    'n5bssffr': {
+      'ar': 'X',
+      'en': '',
+    },
+    '2rcjfrtv': {
+      'ar': '5',
+      'en': '',
+    },
+    'bnjfrdg8': {
+      'ar': '=',
+      'en': '',
+    },
+    'vjvq8l7s': {
+      'ar': '150',
+      'en': '',
+    },
+    '9cfx8q4l': {
+      'ar': ' جنية',
+      'en': '',
+    },
+    'q21li23p': {
+      'ar': 'الاجمالي',
+      'en': '',
+    },
+    't6marse4': {
+      'ar': '500',
+      'en': '',
+    },
+    'uoiwvfc5': {
+      'ar': '+',
+      'en': '',
+    },
+    'j9nj2f03': {
+      'ar': '150',
+      'en': '',
+    },
+    '1tbh0xfa': {
+      'ar': '=',
+      'en': '',
+    },
+    '6tdlbdp3': {
+      'ar': '650',
+      'en': '',
+    },
+    '0anvnavx': {
+      'ar': ' جنية',
+      'en': '',
+    },
+    'gsbqvb9a': {
+      'ar': 'جدد اشتراكك الاان',
+      'en': '',
+    },
+    'plzbjr4l': {
+      'ar': 'Home',
       'en': '',
     },
   },
@@ -940,6 +1185,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'oz3ag78l': {
       'ar': 'لم يتم اخيار هذا اليوم',
+      'en': '',
+    },
+  },
+  // calender_component
+  {
+    'c78yp9g1': {
+      'ar': 'Ok',
       'en': '',
     },
   },

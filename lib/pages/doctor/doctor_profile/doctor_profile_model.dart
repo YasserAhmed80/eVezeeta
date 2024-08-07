@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class DoctorProfileModel extends FlutterFlowModel<DoctorProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 
@@ -17,7 +16,6 @@ class DoctorProfileModel extends FlutterFlowModel<DoctorProfileWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     customNavbarModel.dispose();
   }
 }

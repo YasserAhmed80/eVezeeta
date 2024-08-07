@@ -64,7 +64,6 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for DayListComponent component.
   late DayListComponentModel dayListComponentModel;
   // Model for DayBookingComponent component.
@@ -79,7 +78,6 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     dayListComponentModel.dispose();
     dayBookingComponentModel.dispose();
   }

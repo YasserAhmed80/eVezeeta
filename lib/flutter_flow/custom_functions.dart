@@ -274,6 +274,11 @@ int? calcMinutesOfHour(
 DateTime? getDateBack(String? sPeriod) {
   DateTime pDate = DateTime.now();
 
+  if (sPeriod == 'ld') {
+    // last day
+    pDate = pDate.subtract(Duration(days: 1));
+  }
+
   if (sPeriod == 'w') {
     pDate = pDate.subtract(Duration(days: 7));
   }
@@ -286,4 +291,13 @@ DateTime? getDateBack(String? sPeriod) {
   }
 
   return pDate;
+}
+
+DateTime? addMonths(
+  DateTime? pDate,
+  int? nMonths,
+) {
+  var newDate = DateTime(pDate!.year, pDate!.month + nMonths!, pDate!.day);
+
+  return newDate;
 }

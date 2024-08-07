@@ -21,3 +21,8 @@ export '/pages/doctor/doctor_booking_center/doctor_booking_center_widget.dart'
     show DoctorBookingCenterWidget;
 export '/pages/doctor/doctor_dashboard/doctor_dashboard_widget.dart'
     show DoctorDashboardWidget;
+export '/congratultion/congratultion_widget.dart' show CongratultionWidget;
+export '/pages/doctor/doctor_payment/doctor_payment_widget.dart'
+    show DoctorPaymentWidget;
+export '/pages/doctor/doctor_billing/doctor_billing_widget.dart'
+    show DoctorBillingWidget;

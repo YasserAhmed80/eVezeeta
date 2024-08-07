@@ -130,7 +130,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
                                 children: [
                                   Text(
                                     dateTimeFormat(
-                                      'd/M/y',
+                                      "d/M/y",
                                       dayListItem.dayValue!,
                                       locale: FFLocalizations.of(context)
                                           .languageCode,
@@ -182,7 +182,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
                               children: [
                                 Text(
                                   dateTimeFormat(
-                                    'd/M/y',
+                                    "d/M/y",
                                     dayListItem.dayValue!,
                                     locale: FFLocalizations.of(context)
                                         .languageCode,
