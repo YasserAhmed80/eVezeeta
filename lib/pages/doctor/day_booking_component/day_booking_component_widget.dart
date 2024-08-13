@@ -143,7 +143,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                   alignment: WrapAlignment.spaceBetween,
                                   crossAxisAlignment: WrapCrossAlignment.start,
                                   direction: Axis.horizontal,
-                                  runAlignment: WrapAlignment.spaceBetween,
+                                  runAlignment: WrapAlignment.start,
                                   verticalDirection: VerticalDirection.down,
                                   clipBehavior: Clip.none,
                                   children: List.generate(hourItem.length,
@@ -443,9 +443,20 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                     decoration: BoxDecoration(
                                                       gradient: LinearGradient(
                                                         colors: [
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .cerise,
+                                                          valueOrDefault<Color>(
+                                                            hourItemItem.hourKey ==
+                                                                    _model
+                                                                        .selectedHour
+                                                                ? FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .error,
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                          ),
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primary

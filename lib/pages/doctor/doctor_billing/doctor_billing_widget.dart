@@ -559,8 +559,8 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                       .primaryBackground,
                                   borderRadius: BorderRadius.circular(14.0),
                                   border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     width: 2.0,
                                   ),
                                 ),

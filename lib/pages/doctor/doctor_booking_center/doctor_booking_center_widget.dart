@@ -283,7 +283,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 0.0, 5.0, 0.0),
+                                  5.0, 2.0, 5.0, 2.0),
                               child: Builder(
                                 builder: (context) {
                                   final bookStatusItem =
@@ -494,179 +494,186 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                _model.allDays = true;
-                                _model.selectedDay = null;
-                                setState(() {});
-                                await _model.getFilteredBookedList(context);
-                                setState(() {});
-                              },
-                              child: Container(
-                                height: 35.0,
-                                constraints: const BoxConstraints(
-                                  minWidth: 50.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: _model.allDays == true
-                                      ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(14.0),
-                                  border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
-                                    width: 1.0,
+                        child: SingleChildScrollView(
+                          primary: false,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  _model.allDays = true;
+                                  _model.selectedDay = null;
+                                  setState(() {});
+                                  await _model.getFilteredBookedList(context);
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  height: 35.0,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 50.0,
                                   ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 0.0, 5.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'f0kkfdt6' /* الكل */,
+                                  decoration: BoxDecoration(
+                                    color: _model.allDays == true
+                                        ? FlutterFlowTheme.of(context).primary
+                                        : FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    border: Border.all(
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 0.0, 5.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'f0kkfdt6' /* الكل */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Builder(
-                              builder: (context) {
-                                final bookedDaysItem =
-                                    _model.bookedDays.toList();
+                              Builder(
+                                builder: (context) {
+                                  final bookedDaysItem =
+                                      _model.bookedDays.toList();
 
-                                return SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children:
-                                        List.generate(bookedDaysItem.length,
-                                                (bookedDaysItemIndex) {
-                                      final bookedDaysItemItem =
-                                          bookedDaysItem[bookedDaysItemIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          _model.selectedDay =
-                                              bookedDaysItemItem;
-                                          _model.allDays = false;
-                                          setState(() {});
-                                          await _model
-                                              .getFilteredBookedList(context);
-                                          setState(() {});
-                                        },
-                                        child: Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.95,
-                                          height: 72.0,
-                                          decoration: BoxDecoration(
-                                            color: bookedDaysItemItem ==
-                                                    _model.selectedDay
-                                                ? FlutterFlowTheme.of(context)
-                                                    .tertiary
-                                                : FlutterFlowTheme.of(context)
-                                                    .primaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiary,
-                                              width: 1.0,
+                                  return SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children:
+                                          List.generate(bookedDaysItem.length,
+                                                  (bookedDaysItemIndex) {
+                                        final bookedDaysItemItem =
+                                            bookedDaysItem[bookedDaysItemIndex];
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            _model.selectedDay =
+                                                bookedDaysItemItem;
+                                            _model.allDays = false;
+                                            setState(() {});
+                                            await _model
+                                                .getFilteredBookedList(context);
+                                            setState(() {});
+                                          },
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.95,
+                                            height: 72.0,
+                                            decoration: BoxDecoration(
+                                              color: bookedDaysItemItem ==
+                                                      _model.selectedDay
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .tertiary
+                                                  : FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              border: Border.all(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiary,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      dateTimeFormat(
+                                                        "d/M/y",
+                                                        bookedDaysItemItem,
+                                                        locale:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .languageCode,
+                                                      ),
+                                                      'n',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      dateTimeFormat(
+                                                        "EEEE",
+                                                        bookedDaysItemItem,
+                                                        locale:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .languageCode,
+                                                      ),
+                                                      'n',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Text(
-                                                  valueOrDefault<String>(
-                                                    dateTimeFormat(
-                                                      "d/M/y",
-                                                      bookedDaysItemItem,
-                                                      locale:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .languageCode,
-                                                    ),
-                                                    'n',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Text(
-                                                  valueOrDefault<String>(
-                                                    dateTimeFormat(
-                                                      "EEEE",
-                                                      bookedDaysItemItem,
-                                                      locale:
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .languageCode,
-                                                    ),
-                                                    'n',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Cairo',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    })
-                                            .divide(const SizedBox(height: 5.0))
-                                            .around(const SizedBox(height: 5.0)),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                                        );
+                                      })
+                                              .divide(const SizedBox(height: 5.0))
+                                              .around(const SizedBox(height: 5.0)),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
@@ -975,6 +982,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .primaryBackground,
+                                                            fontSize: 12.0,
                                                             letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight

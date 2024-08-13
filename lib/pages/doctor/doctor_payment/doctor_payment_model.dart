@@ -9,7 +9,7 @@ class DoctorPaymentModel extends FlutterFlowModel<DoctorPaymentWidget> {
 
   int? paymentMethod = 1;
 
-  bool hasCapounDiscount = true;
+  bool hasCapounDiscount = false;
 
   int? priceAmount = 100;
 

@@ -11,6 +11,24 @@
         {
           "fieldPath": "date",
           "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status_cde",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "doc_booked_time",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "doc_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
         }
       ]
     }

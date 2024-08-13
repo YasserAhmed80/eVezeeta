@@ -886,6 +886,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مدة الاشتراك ',
       'en': '',
     },
+    '2zrnqpx5': {
+      'ar': 'شهري',
+      'en': '',
+    },
     'rr5ews9r': {
       'ar': 'من تاريخ:',
       'en': '',
@@ -910,10 +914,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': ' جنية',
       'en': '',
     },
-    'g4v6qhil': {
-      'ar': 'الاجمالي',
-      'en': '',
-    },
     'w17e4nu9': {
       'ar': 'هل يوجد معكك كود خصم',
       'en': '',
@@ -934,19 +934,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'قيمة خصمك',
       'en': '',
     },
-    'ktz0alzq': {
-      'ar': 'الاجمالي بعد الخصم',
+    'g4v6qhil': {
+      'ar': 'الاجمالي',
       'en': '',
     },
     'ocj7khjr': {
       'ar': 'طريقة الدفع',
       'en': '',
     },
-    'mdpsr83k': {
+    'p9iq3cc8': {
       'ar': 'فودافون كاش',
       'en': '',
     },
-    'pjovy5yc': {
+    'su49mfy6': {
       'ar': 'فوري',
       'en': '',
     },
@@ -970,7 +970,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اشترك الان',
       'en': '',
     },
-    'yo2baa07': {
+    '4iqlx6x3': {
       'ar': 'تسجيل الاشتراك',
       'en': '',
     },

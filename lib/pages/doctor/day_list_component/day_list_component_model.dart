@@ -126,6 +126,10 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
           .where(
             'date',
             isEqualTo: selectedDate,
+          )
+          .where(
+            'status_cde',
+            isNotEqualTo: 3,
           ),
     );
     // update booked hours list
