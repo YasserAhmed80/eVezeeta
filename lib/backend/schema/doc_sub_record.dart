@@ -60,6 +60,11 @@ class DocSubRecord extends FirestoreRecord {
   int get discount => _discount ?? 0;
   bool hasDiscount() => _discount != null;
 
+  // "fee_per_book" field.
+  int? _feePerBook;
+  int get feePerBook => _feePerBook ?? 0;
+  bool hasFeePerBook() => _feePerBook != null;
+
   void _initializeFields() {
     _docId = snapshotData['doc_id'] as String?;
     _amount = castToType<int>(snapshotData['amount']);
@@ -70,6 +75,7 @@ class DocSubRecord extends FirestoreRecord {
     _capoun = snapshotData['capoun'] as String?;
     _payRef = snapshotData['pay_ref'] as String?;
     _discount = castToType<int>(snapshotData['discount']);
+    _feePerBook = castToType<int>(snapshotData['fee_per_book']);
   }
 
   static CollectionReference get collection =>
@@ -115,6 +121,7 @@ Map<String, dynamic> createDocSubRecordData({
   String? capoun,
   String? payRef,
   int? discount,
+  int? feePerBook,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -127,6 +134,7 @@ Map<String, dynamic> createDocSubRecordData({
       'capoun': capoun,
       'pay_ref': payRef,
       'discount': discount,
+      'fee_per_book': feePerBook,
     }.withoutNulls,
   );
 
@@ -146,7 +154,8 @@ class DocSubRecordDocumentEquality implements Equality<DocSubRecord> {
         e1?.method == e2?.method &&
         e1?.capoun == e2?.capoun &&
         e1?.payRef == e2?.payRef &&
-        e1?.discount == e2?.discount;
+        e1?.discount == e2?.discount &&
+        e1?.feePerBook == e2?.feePerBook;
   }
 
   @override
@@ -159,7 +168,8 @@ class DocSubRecordDocumentEquality implements Equality<DocSubRecord> {
         e?.method,
         e?.capoun,
         e?.payRef,
-        e?.discount
+        e?.discount,
+        e?.feePerBook
       ]);
 
   @override

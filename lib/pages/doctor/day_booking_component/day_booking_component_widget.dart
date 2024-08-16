@@ -140,7 +140,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                 return Wrap(
                                   spacing: 5.0,
                                   runSpacing: 5.0,
-                                  alignment: WrapAlignment.spaceBetween,
+                                  alignment: WrapAlignment.center,
                                   crossAxisAlignment: WrapCrossAlignment.start,
                                   direction: Axis.horizontal,
                                   runAlignment: WrapAlignment.start,

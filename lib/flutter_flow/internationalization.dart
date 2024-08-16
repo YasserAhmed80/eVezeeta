@@ -623,6 +623,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اشترك',
       'en': 'save',
     },
+    's77iz3sm': {
+      'ar': 'فاتورة',
+      'en': '',
+    },
     '19rz7uum': {
       'ar': 'البيانات',
       'en': '',
@@ -907,10 +911,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'sde5ojob': {
-      'ar': 'اجمالي خدمة الحجوزات',
+      'ar': 'قيمة خدمة كل حجز',
       'en': '',
     },
     '3k9igkml': {
+      'ar': ' جنية',
+      'en': '',
+    },
+    'pnwfi74v': {
+      'ar': 'اجمالي خدمة الحجوزات السابقة',
+      'en': '',
+    },
+    '2kibxlvy': {
       'ar': ' جنية',
       'en': '',
     },
@@ -936,6 +948,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'g4v6qhil': {
       'ar': 'الاجمالي',
+      'en': '',
+    },
+    'jx1m2e24': {
+      'ar': ' جنية',
       'en': '',
     },
     'ocj7khjr': {
@@ -1005,10 +1021,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'ينتهي اشتراكك خلال',
       'en': '',
     },
-    '5x9ku6l0': {
-      'ar': '10',
-      'en': '',
-    },
     'otf5s07v': {
       'ar': ' يوم',
       'en': '',
@@ -1025,16 +1037,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الي تاريخ:',
       'en': '',
     },
-    '5wuo5uhh': {
-      'ar': 'حتي اليوم',
-      'en': '',
-    },
     '8puyncx2': {
       'ar': 'اجمالي خدمة الحجوزات',
-      'en': '',
-    },
-    'vyydih2q': {
-      'ar': '30',
       'en': '',
     },
     'uiga72sf': {
@@ -1045,16 +1049,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'X',
       'en': '',
     },
-    '2rcjfrtv': {
-      'ar': '5',
-      'en': '',
-    },
     'bnjfrdg8': {
       'ar': '=',
-      'en': '',
-    },
-    'vjvq8l7s': {
-      'ar': '150',
       'en': '',
     },
     '9cfx8q4l': {
@@ -1065,24 +1061,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الاجمالي',
       'en': '',
     },
-    't6marse4': {
-      'ar': '500',
-      'en': '',
-    },
     'uoiwvfc5': {
       'ar': '+',
       'en': '',
     },
-    'j9nj2f03': {
-      'ar': '150',
-      'en': '',
-    },
     '1tbh0xfa': {
       'ar': '=',
-      'en': '',
-    },
-    '6tdlbdp3': {
-      'ar': '650',
       'en': '',
     },
     '0anvnavx': {
@@ -1091,6 +1075,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'gsbqvb9a': {
       'ar': 'جدد اشتراكك الاان',
+      'en': '',
+    },
+    'mu62r1ss': {
+      'ar': 'الفاتورة الحالية',
       'en': '',
     },
     'plzbjr4l': {

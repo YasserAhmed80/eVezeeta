@@ -190,7 +190,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'doctor_billing',
           path: '/doctorBilling',
-          builder: (context, params) => const DoctorBillingWidget(),
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => DoctorBillingWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

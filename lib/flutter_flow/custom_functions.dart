@@ -301,3 +301,21 @@ DateTime? addMonths(
 
   return newDate;
 }
+
+int? dateDifference(
+  DateTime? fDate,
+  DateTime? toDate,
+) {
+  // get difference between two date in days
+  if (fDate == null || toDate == null) {
+    return null;
+  }
+  final difference = toDate.difference(fDate);
+  int x = difference.inDays;
+
+  if (x < 0) {
+    return 0;
+  }
+
+  return x;
+}

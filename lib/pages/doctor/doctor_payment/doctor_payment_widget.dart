@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,13 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      // get subscription cost
+      _model.returnedSubFees = await querySubscriptionFeesRecordOnce(
+        singleRecord: true,
+      ).then((s) => s.firstOrNull);
+      _model.priceAmount = _model.returnedSubFees?.monthlyCost;
+      _model.feePerBook = _model.returnedSubFees?.bookFee;
+      setState(() {});
       if (widget.subsrciptionStatus == 1) {
         _model.fromDate = functions.getCurrentDate();
         _model.toDate = functions.addMonths(_model.fromDate, 1);
@@ -115,7 +123,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed('doctor_search');
+                  context.safePop();
                 },
               ),
             ],
@@ -160,12 +168,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(0.0),
-                                  bottomRight: Radius.circular(0.0),
-                                  topLeft: Radius.circular(0.0),
-                                  topRight: Radius.circular(0.0),
-                                ),
+                                borderRadius: BorderRadius.circular(14.0),
                               ),
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
@@ -185,19 +188,36 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                     ),
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        '2zrnqpx5' /* شهري */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Cairo',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondary,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
+                                    Opacity(
+                                      opacity: 0.8,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondary,
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 2.0, 10.0, 2.0),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              '2zrnqpx5' /* شهري */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Cairo',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
+                                        ),
+                                      ),
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -327,7 +347,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'sde5ojob' /* اجمالي خدمة الحجوزات */,
+                                            'sde5ojob' /* قيمة خدمة كل حجز */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
@@ -340,7 +360,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                         Expanded(
                                           child: Text(
                                             valueOrDefault<String>(
-                                              _model.feeAmount?.toString(),
+                                              _model.feePerBook?.toString(),
                                               '0',
                                             ),
                                             textAlign: TextAlign.end,
@@ -368,6 +388,55 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                         ),
                                       ],
                                     ),
+                                    if (_model.feeAmount! > 0)
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'pnwfi74v' /* اجمالي خدمة الحجوزات السابقة */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Cairo',
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                _model.feeAmount?.toString(),
+                                                '0',
+                                              ),
+                                              textAlign: TextAlign.end,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                            ),
+                                          ),
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              '2kibxlvy' /*  جنية */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Cairo',
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
                                   ],
                                 ),
                               ),
@@ -622,13 +691,13 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                     ),
-                                    Align(
-                                      alignment: const AlignmentDirectional(1.0, 0.0),
+                                    Expanded(
                                       child: Text(
                                         valueOrDefault<String>(
                                           _model.totAmount?.toString(),
                                           '0',
                                         ),
+                                        textAlign: TextAlign.end,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -641,6 +710,18 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                               fontWeight: FontWeight.bold,
                                             ),
                                       ),
+                                    ),
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'jx1m2e24' /*  جنية */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Cairo',
+                                            fontSize: 12.0,
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -1066,7 +1147,23 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                               capoun: _model.capoun,
                                               payRef: _model.payReference,
                                               discount: _model.discountAmount,
+                                              feePerBook: _model.feePerBook,
                                             ));
+
+                                        await widget.docDocument!.reference
+                                            .update(createDocRecordData(
+                                          freqCde: 12,
+                                          sFDate: _model.fromDate,
+                                          sToDate: _model.toDate,
+                                          sCost: valueOrDefault<int>(
+                                            _model.priceAmount,
+                                            200,
+                                          ),
+                                          sFee: valueOrDefault<int>(
+                                            _model.feePerBook,
+                                            5,
+                                          ),
+                                        ));
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {

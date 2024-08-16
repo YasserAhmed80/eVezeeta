@@ -115,6 +115,36 @@ class DocRecord extends FirestoreRecord {
   int get bookType => _bookType ?? 0;
   bool hasBookType() => _bookType != null;
 
+  // "status_cde" field.
+  int? _statusCde;
+  int get statusCde => _statusCde ?? 0;
+  bool hasStatusCde() => _statusCde != null;
+
+  // "freq_cde" field.
+  int? _freqCde;
+  int get freqCde => _freqCde ?? 0;
+  bool hasFreqCde() => _freqCde != null;
+
+  // "s_f_date" field.
+  DateTime? _sFDate;
+  DateTime? get sFDate => _sFDate;
+  bool hasSFDate() => _sFDate != null;
+
+  // "s_to_date" field.
+  DateTime? _sToDate;
+  DateTime? get sToDate => _sToDate;
+  bool hasSToDate() => _sToDate != null;
+
+  // "s_cost" field.
+  int? _sCost;
+  int get sCost => _sCost ?? 0;
+  bool hasSCost() => _sCost != null;
+
+  // "s_fee" field.
+  int? _sFee;
+  int get sFee => _sFee ?? 0;
+  bool hasSFee() => _sFee != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _gender = castToType<int>(snapshotData['gender']);
@@ -136,6 +166,12 @@ class DocRecord extends FirestoreRecord {
     _priceRe = castToType<int>(snapshotData['price_re']);
     _avgVisit = castToType<int>(snapshotData['avg_visit']);
     _bookType = castToType<int>(snapshotData['book_type']);
+    _statusCde = castToType<int>(snapshotData['status_cde']);
+    _freqCde = castToType<int>(snapshotData['freq_cde']);
+    _sFDate = snapshotData['s_f_date'] as DateTime?;
+    _sToDate = snapshotData['s_to_date'] as DateTime?;
+    _sCost = castToType<int>(snapshotData['s_cost']);
+    _sFee = castToType<int>(snapshotData['s_fee']);
   }
 
   static CollectionReference get collection =>
@@ -191,6 +227,12 @@ Map<String, dynamic> createDocRecordData({
   int? priceRe,
   int? avgVisit,
   int? bookType,
+  int? statusCde,
+  int? freqCde,
+  DateTime? sFDate,
+  DateTime? sToDate,
+  int? sCost,
+  int? sFee,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -213,6 +255,12 @@ Map<String, dynamic> createDocRecordData({
       'price_re': priceRe,
       'avg_visit': avgVisit,
       'book_type': bookType,
+      'status_cde': statusCde,
+      'freq_cde': freqCde,
+      's_f_date': sFDate,
+      's_to_date': sToDate,
+      's_cost': sCost,
+      's_fee': sFee,
     }.withoutNulls,
   );
 
@@ -244,7 +292,13 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e1?.price == e2?.price &&
         e1?.priceRe == e2?.priceRe &&
         e1?.avgVisit == e2?.avgVisit &&
-        e1?.bookType == e2?.bookType;
+        e1?.bookType == e2?.bookType &&
+        e1?.statusCde == e2?.statusCde &&
+        e1?.freqCde == e2?.freqCde &&
+        e1?.sFDate == e2?.sFDate &&
+        e1?.sToDate == e2?.sToDate &&
+        e1?.sCost == e2?.sCost &&
+        e1?.sFee == e2?.sFee;
   }
 
   @override
@@ -268,7 +322,13 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e?.price,
         e?.priceRe,
         e?.avgVisit,
-        e?.bookType
+        e?.bookType,
+        e?.statusCde,
+        e?.freqCde,
+        e?.sFDate,
+        e?.sToDate,
+        e?.sCost,
+        e?.sFee
       ]);
 
   @override

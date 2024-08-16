@@ -9,11 +9,11 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "date",
+          "fieldPath": "status_cde",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "status_cde",
+          "fieldPath": "date",
           "order": "ASCENDING"
         }
       ]

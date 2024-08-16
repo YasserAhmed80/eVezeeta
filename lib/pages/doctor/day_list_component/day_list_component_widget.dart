@@ -55,7 +55,8 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
           .toList()
           .first
           .dayValue;
-      _model.selectedDayBook = _model.refDayList.first;
+      _model.selectedDayBook =
+          _model.refDayList.where((e) => e.isActive == true).toList().first;
       setState(() {});
       await _model.getHrsFromDbAction(context);
       await widget.dayHoursAction?.call(

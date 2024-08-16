@@ -46,6 +46,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
         1,
       );
       setState(() {});
+      await _model.updateHourStatus(context);
     });
 
     animationsMap.addAll({
@@ -564,46 +565,44 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 1.0, 0.0, 0.0),
-                                child: Container(
-                                  height: 445.0,
-                                  decoration: BoxDecoration(
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 1.0, 0.0, 0.0),
+                              child: Container(
+                                height: 445.0,
+                                constraints: const BoxConstraints(
+                                  maxWidth: 120.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  borderRadius: BorderRadius.circular(14.0),
+                                  border: Border.all(
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(14.0),
-                                    border: Border.all(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
+                                        .secondaryBackground,
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        5.0, 10.0, 5.0, 10.0),
-                                    child: wrapWithModel(
-                                      model: _model.dayListComponentModel,
-                                      updateCallback: () => setState(() {}),
-                                      child: DayListComponentWidget(
-                                        docID:
-                                            widget.docDocument!.reference.id,
-                                        dayHoursAction: (dayHourse, dayItemBook,
-                                            bookedHoursList) async {
-                                          _model.selectedDayHours =
-                                              dayHourse.toList().cast<int>();
-                                          _model.selectedDaybook = dayItemBook;
-                                          _model.userSelectedHourItem = null;
-                                          _model.bookedHoursList =
-                                              bookedHoursList
-                                                  .toList()
-                                                  .cast<int>();
-                                          setState(() {});
-                                          await _model
-                                              .updateHourStatus(context);
-                                        },
-                                      ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 10.0, 5.0, 10.0),
+                                  child: wrapWithModel(
+                                    model: _model.dayListComponentModel,
+                                    updateCallback: () => setState(() {}),
+                                    child: DayListComponentWidget(
+                                      docID: widget.docDocument!.reference.id,
+                                      dayHoursAction: (dayHourse, dayItemBook,
+                                          bookedHoursList) async {
+                                        _model.selectedDayHours =
+                                            dayHourse.toList().cast<int>();
+                                        _model.selectedDaybook = dayItemBook;
+                                        _model.userSelectedHourItem = null;
+                                        _model.bookedHoursList = bookedHoursList
+                                            .toList()
+                                            .cast<int>();
+                                        setState(() {});
+                                        await _model.updateHourStatus(context);
+                                        setState(() {});
+                                      },
                                     ),
                                   ),
                                 ),
@@ -864,8 +863,14 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                                     ?.price,
                                                                 0,
                                                               ),
-                                                              fee: FFAppState()
-                                                                  .appBookFee,
+                                                              fee:
+                                                                  valueOrDefault<
+                                                                      int>(
+                                                                widget
+                                                                    .docDocument
+                                                                    ?.sFee,
+                                                                5,
+                                                              ),
                                                             ));
                                                         _model.loopIndex1 = 0;
                                                         _model.loopMax1 =

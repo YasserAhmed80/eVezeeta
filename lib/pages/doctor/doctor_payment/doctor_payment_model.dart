@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'doctor_payment_widget.dart' show DoctorPaymentWidget;
 import 'package:flutter/material.dart';
@@ -27,8 +28,12 @@ class DoctorPaymentModel extends FlutterFlowModel<DoctorPaymentWidget> {
 
   String? payReference = '0';
 
+  int? feePerBook;
+
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Firestore Query - Query a collection] action in doctor_payment widget.
+  SubscriptionFeesRecord? returnedSubFees;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;

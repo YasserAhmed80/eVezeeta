@@ -23,6 +23,7 @@ import 'schema/last_data_loading_record.dart';
 import 'schema/doc_booked_time_record.dart';
 import 'schema/ref_booking_status_record.dart';
 import 'schema/doc_sub_record.dart';
+import 'schema/subscription_fees_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -49,6 +50,7 @@ export 'schema/last_data_loading_record.dart';
 export 'schema/doc_booked_time_record.dart';
 export 'schema/ref_booking_status_record.dart';
 export 'schema/doc_sub_record.dart';
+export 'schema/subscription_fees_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -711,6 +713,43 @@ Future<List<DocSubRecord>> queryDocSubRecordOnce({
     queryCollectionOnce(
       DocSubRecord.collection,
       DocSubRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query SubscriptionFeesRecords (as a Stream and as a Future).
+Future<int> querySubscriptionFeesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      SubscriptionFeesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<SubscriptionFeesRecord>> querySubscriptionFeesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      SubscriptionFeesRecord.collection,
+      SubscriptionFeesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<SubscriptionFeesRecord>> querySubscriptionFeesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      SubscriptionFeesRecord.collection,
+      SubscriptionFeesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
