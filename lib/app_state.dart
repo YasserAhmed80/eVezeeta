@@ -255,7 +255,23 @@ class FFAppState extends ChangeNotifier {
           _refBookingType;
     });
     _safeInit(() {
-      _appBookFee = prefs.getInt('ff_appBookFee') ?? _appBookFee;
+      _refGender = prefs
+              .getStringList('ff_refGender')
+              ?.map((x) {
+                try {
+                  return DtGeneralListStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refGender;
+    });
+    _safeInit(() {
+      _currentProfileType =
+          prefs.getInt('ff_currentProfileType') ?? _currentProfileType;
     });
   }
 
@@ -945,23 +961,63 @@ class FFAppState extends ChangeNotifier {
         _refBookingType.map((x) => x.serialize()).toList());
   }
 
-  int _appBookFee = 5;
-  int get appBookFee => _appBookFee;
-  set appBookFee(int value) {
-    _appBookFee = value;
-    prefs.setInt('ff_appBookFee', value);
-  }
-
   int _subscrptionFee = 200;
   int get subscrptionFee => _subscrptionFee;
   set subscrptionFee(int value) {
     _subscrptionFee = value;
   }
 
-  int _bookingFee = 5;
-  int get bookingFee => _bookingFee;
-  set bookingFee(int value) {
-    _bookingFee = value;
+  List<DtGeneralListStruct> _refGender = [
+    DtGeneralListStruct.fromSerializableMap(
+        jsonDecode('{\"key\":\"0\",\"desc\":\"انثي\",\"lng_cde\":\"0\"}')),
+    DtGeneralListStruct.fromSerializableMap(
+        jsonDecode('{\"key\":\"1\",\"desc\":\"ذكر\",\"lng_cde\":\"0\"}'))
+  ];
+  List<DtGeneralListStruct> get refGender => _refGender;
+  set refGender(List<DtGeneralListStruct> value) {
+    _refGender = value;
+    prefs.setStringList(
+        'ff_refGender', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefGender(DtGeneralListStruct value) {
+    refGender.add(value);
+    prefs.setStringList(
+        'ff_refGender', _refGender.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefGender(DtGeneralListStruct value) {
+    refGender.remove(value);
+    prefs.setStringList(
+        'ff_refGender', _refGender.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefGender(int index) {
+    refGender.removeAt(index);
+    prefs.setStringList(
+        'ff_refGender', _refGender.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefGenderAtIndex(
+    int index,
+    DtGeneralListStruct Function(DtGeneralListStruct) updateFn,
+  ) {
+    refGender[index] = updateFn(_refGender[index]);
+    prefs.setStringList(
+        'ff_refGender', _refGender.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefGender(int index, DtGeneralListStruct value) {
+    refGender.insert(index, value);
+    prefs.setStringList(
+        'ff_refGender', _refGender.map((x) => x.serialize()).toList());
+  }
+
+  int _currentProfileType = 2;
+  int get currentProfileType => _currentProfileType;
+  set currentProfileType(int value) {
+    _currentProfileType = value;
+    prefs.setInt('ff_currentProfileType', value);
   }
 }
 

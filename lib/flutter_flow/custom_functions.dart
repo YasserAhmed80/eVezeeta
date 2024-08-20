@@ -319,3 +319,50 @@ int? dateDifference(
 
   return x;
 }
+
+int? getMonthDayCount(
+  int? pYear,
+  int? pMonth,
+) {
+  // calculate last day of the month
+  if (pYear == null || pMonth == null) {
+    return null;
+  }
+  final year = (pYear);
+  final month = (pMonth);
+  if (month < 1 || month > 12) {
+    return null;
+  }
+  final date = DateTime(year, month + 1, 0);
+  return date.day;
+}
+
+int? stringToInteger(String? pValue) {
+  final v = int.parse(pValue!);
+
+  return v;
+}
+
+DateTime? createDate(
+  int? pYear,
+  int? pMonth,
+  int? pDay,
+) {
+  final date = DateTime(pYear!, pMonth!, pDay!);
+  return date;
+}
+
+int? getDatePart(
+  DateTime? pDate,
+  String? pPart,
+) {
+  if (pPart == 'd') {
+    return pDate!.day;
+  }
+  if (pPart == 'm') {
+    return pDate!.month;
+  }
+  if (pPart == 'y') {
+    return pDate!.year;
+  }
+}

@@ -1086,6 +1086,156 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // cus_main_data
+  {
+    'ibhspn37': {
+      'ar': 'المعلومات الشخصية',
+      'en': '',
+    },
+    '5sd0nr5m': {
+      'ar': 'الاسم كامل',
+      'en': '',
+    },
+    'flafidis': {
+      'ar': 'موبيل',
+      'en': '',
+    },
+    'drwiirp4': {
+      'ar': 'تاريخ الميلاد',
+      'en': '',
+    },
+    'blh14bwy': {
+      'ar': 'النوع',
+      'en': '',
+    },
+    'zo2i4453': {
+      'ar': 'ذكر',
+      'en': '',
+    },
+    '5a3tkyfc': {
+      'ar': 'انثي',
+      'en': '',
+    },
+    '0ncl2uhg': {
+      'ar': 'العنوان',
+      'en': '',
+    },
+    'f4x5jwyj': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'fq84ghwq': {
+      'ar': '544545',
+      'en': '',
+    },
+    'i1kb6uuu': {
+      'ar': 'البلد',
+      'en': '',
+    },
+    'mqq90pso': {
+      'ar': 'Search for an item...',
+      'en': '',
+    },
+    'pyzgrddl': {
+      'ar': 'rttrtrtrtr',
+      'en': '',
+    },
+    '82pcuzjo': {
+      'ar': 'hkjh',
+      'en': '',
+    },
+    'n7hix88u': {
+      'ar': 'المحافظة',
+      'en': '',
+    },
+    'w1239pa8': {
+      'ar': 'اختار المحافظة',
+      'en': '',
+    },
+    'zp2pioya': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'pdqh0rwe': {
+      'ar': '544545',
+      'en': '',
+    },
+    'cbr3jfup': {
+      'ar': 'المنطقة / المركز',
+      'en': '',
+    },
+    'smz3u44f': {
+      'ar': 'اختار المنطقة',
+      'en': '',
+    },
+    '46n6yx4k': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    '9ihs0wsx': {
+      'ar': '544545',
+      'en': '',
+    },
+    'jb6lhcex': {
+      'ar': 'الحي',
+      'en': '',
+    },
+    '7000jkfx': {
+      'ar': 'اختار الحي',
+      'en': '',
+    },
+    'yyvgdz1e': {
+      'ar': 'العنوان (الشارع و المبني)',
+      'en': '',
+    },
+    '9mg8oamp': {
+      'ar': 'حفظ البانات',
+      'en': '',
+    },
+    't43wvfwa': {
+      'ar': 'من فضلك ادخل اسمك كامل',
+      'en': '',
+    },
+    'hjwpprh6': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    '45bth3kr': {
+      'ar': 'من فضلم ادخل لقبك المهني',
+      'en': '',
+    },
+    '4dzpl2pu': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    '5vsyg8ue': {
+      'ar': 'من فضلك اكتب بعض المعلومات عنك',
+      'en': '',
+    },
+    'plcue2px': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'xniji3aq': {
+      'ar': 'بيانات العميل',
+      'en': '',
+    },
+    'xa8yec3v': {
+      'ar': 'main',
+      'en': '',
+    },
+  },
+  // cus_master_page
+  {
+    'oidffcjk': {
+      'ar': 'صفحة العميل',
+      'en': '',
+    },
+    'nxpno2lc': {
+      'ar': 'main',
+      'en': '',
+    },
+  },
   // custom_navbar
   {
     'i8qid52y': {
@@ -1099,6 +1249,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'we55qr2t': {
       'ar': 'ملفي',
       'en': 'My file',
+    },
+    'p3cwjrxj': {
+      'ar': 'بحث',
+      'en': '',
+    },
+    'dzii04je': {
+      'ar': 'دكتوري',
+      'en': '',
+    },
+    'ntm3lsnw': {
+      'ar': 'ملفي',
+      'en': '',
     },
   },
   // DayScheduleComponent
@@ -1180,6 +1342,49 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'c78yp9g1': {
       'ar': 'Ok',
+      'en': '',
+    },
+  },
+  // calender_component_2
+  {
+    'y8ryd57z': {
+      'ar': 'Ok',
+      'en': '',
+    },
+    'sn408nt8': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    '2ablvt8b': {
+      'ar': 'السنة',
+      'en': '',
+    },
+    '9vlwcx76': {
+      'ar': 'السنة',
+      'en': '',
+    },
+    'gtf68ado': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'hhl8qq33': {
+      'ar': 'الشهر',
+      'en': '',
+    },
+    'oapzu05w': {
+      'ar': 'الشهر',
+      'en': '',
+    },
+    'mlide2si': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'x2bdc5go': {
+      'ar': 'اليوم',
+      'en': '',
+    },
+    'd2hst4z8': {
+      'ar': 'اليوم',
       'en': '',
     },
   },

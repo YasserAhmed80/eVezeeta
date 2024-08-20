@@ -26,3 +26,7 @@ export '/pages/doctor/doctor_payment/doctor_payment_widget.dart'
     show DoctorPaymentWidget;
 export '/pages/doctor/doctor_billing/doctor_billing_widget.dart'
     show DoctorBillingWidget;
+export '/pages/doctor/cus_main_data/cus_main_data_widget.dart'
+    show CusMainDataWidget;
+export '/pages/doctor/cus_master_page/cus_master_page_widget.dart'
+    show CusMasterPageWidget;

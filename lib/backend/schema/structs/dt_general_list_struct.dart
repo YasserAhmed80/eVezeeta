@@ -10,9 +10,11 @@ class DtGeneralListStruct extends FFFirebaseStruct {
   DtGeneralListStruct({
     int? key,
     String? desc,
+    int? lngCde,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _key = key,
         _desc = desc,
+        _lngCde = lngCde,
         super(firestoreUtilData);
 
   // "key" field.
@@ -31,10 +33,20 @@ class DtGeneralListStruct extends FFFirebaseStruct {
 
   bool hasDesc() => _desc != null;
 
+  // "lng_cde" field.
+  int? _lngCde;
+  int get lngCde => _lngCde ?? 0;
+  set lngCde(int? val) => _lngCde = val;
+
+  void incrementLngCde(int amount) => lngCde = lngCde + amount;
+
+  bool hasLngCde() => _lngCde != null;
+
   static DtGeneralListStruct fromMap(Map<String, dynamic> data) =>
       DtGeneralListStruct(
         key: castToType<int>(data['key']),
         desc: data['desc'] as String?,
+        lngCde: castToType<int>(data['lng_cde']),
       );
 
   static DtGeneralListStruct? maybeFromMap(dynamic data) => data is Map
@@ -44,6 +56,7 @@ class DtGeneralListStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'key': _key,
         'desc': _desc,
+        'lng_cde': _lngCde,
       }.withoutNulls;
 
   @override
@@ -55,6 +68,10 @@ class DtGeneralListStruct extends FFFirebaseStruct {
         'desc': serializeParam(
           _desc,
           ParamType.String,
+        ),
+        'lng_cde': serializeParam(
+          _lngCde,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -70,6 +87,11 @@ class DtGeneralListStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        lngCde: deserializeParam(
+          data['lng_cde'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -79,16 +101,18 @@ class DtGeneralListStruct extends FFFirebaseStruct {
   bool operator ==(Object other) {
     return other is DtGeneralListStruct &&
         key == other.key &&
-        desc == other.desc;
+        desc == other.desc &&
+        lngCde == other.lngCde;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([key, desc]);
+  int get hashCode => const ListEquality().hash([key, desc, lngCde]);
 }
 
 DtGeneralListStruct createDtGeneralListStruct({
   int? key,
   String? desc,
+  int? lngCde,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -97,6 +121,7 @@ DtGeneralListStruct createDtGeneralListStruct({
     DtGeneralListStruct(
       key: key,
       desc: desc,
+      lngCde: lngCde,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

@@ -298,10 +298,14 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                             if (shouldUpdate) setState(() {});
                           },
                           onEnded: () async {
-                            if (FFAppState().currentDoctor.dbDocRef != null) {
-                              context.pushNamed('doctor_profile');
+                            if (FFAppState().currentProfileType == 1) {
+                              if (FFAppState().currentDoctor.dbDocRef != null) {
+                                context.pushNamed('doctor_profile');
+                              } else {
+                                context.pushNamed('doctor_data_main');
+                              }
                             } else {
-                              context.pushNamed('doctor_data_main');
+                              context.pushNamed('cus_master_page');
                             }
                           },
                           textAlign: TextAlign.start,

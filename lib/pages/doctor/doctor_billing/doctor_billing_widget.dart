@@ -79,7 +79,10 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
               _model.totBookingCount,
               0,
             ) *
-            FFAppState().bookingFee,
+            valueOrDefault<int>(
+              widget.docDocument?.sFee,
+              0,
+            ),
         0,
       );
       _model.totCost = valueOrDefault<int>(

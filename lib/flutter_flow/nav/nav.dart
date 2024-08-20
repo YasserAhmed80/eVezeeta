@@ -199,6 +199,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'cus_main_data',
+          path: '/cusMainData',
+          builder: (context, params) => const CusMainDataWidget(),
+        ),
+        FFRoute(
+          name: 'cus_master_page',
+          path: '/cusMasterPage',
+          builder: (context, params) => const CusMasterPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
