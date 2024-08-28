@@ -26,7 +26,11 @@ export '/pages/doctor/doctor_payment/doctor_payment_widget.dart'
     show DoctorPaymentWidget;
 export '/pages/doctor/doctor_billing/doctor_billing_widget.dart'
     show DoctorBillingWidget;
-export '/pages/doctor/cus_main_data/cus_main_data_widget.dart'
+export '/customer/cus_main_data/cus_main_data_widget.dart'
     show CusMainDataWidget;
-export '/pages/doctor/cus_master_page/cus_master_page_widget.dart'
+export '/customer/cus_master_page/cus_master_page_widget.dart'
     show CusMasterPageWidget;
+export '/customer/customer_list/customer_list_widget.dart'
+    show CustomerListWidget;
+export '/customer/customer_profile/customer_profile_widget.dart'
+    show CustomerProfileWidget;

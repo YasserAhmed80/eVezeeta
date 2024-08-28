@@ -203,12 +203,38 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'cus_main_data',
           path: '/cusMainData',
-          builder: (context, params) => const CusMainDataWidget(),
+          asyncParams: {
+            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
+          },
+          builder: (context, params) => CusMainDataWidget(
+            cusDocument: params.getParam(
+              'cusDocument',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: 'cus_master_page',
           path: '/cusMasterPage',
           builder: (context, params) => const CusMasterPageWidget(),
+        ),
+        FFRoute(
+          name: 'customer_List',
+          path: '/customerList',
+          builder: (context, params) => const CustomerListWidget(),
+        ),
+        FFRoute(
+          name: 'customer_profile',
+          path: '/customerProfile',
+          asyncParams: {
+            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
+          },
+          builder: (context, params) => CustomerProfileWidget(
+            cusDocument: params.getParam(
+              'cusDocument',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

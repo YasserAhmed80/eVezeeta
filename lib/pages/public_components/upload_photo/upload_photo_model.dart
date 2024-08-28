@@ -28,6 +28,9 @@ class UploadPhotoModel extends FlutterFlowModel<UploadPhotoWidget> {
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
+  // Stores action output result for [Custom Action - getFileSize] action in IconButton widget.
+  int? nFileSize;
+
   @override
   void initState(BuildContext context) {}
 

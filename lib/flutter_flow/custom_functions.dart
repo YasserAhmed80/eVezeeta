@@ -366,3 +366,7 @@ int? getDatePart(
     return pDate!.year;
   }
 }
+
+String? toString(int? pValue) {
+  return pValue!.toString();
+}

@@ -32,6 +32,7 @@ class DoctorPaymentModel extends FlutterFlowModel<DoctorPaymentWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in doctor_payment widget.
   SubscriptionFeesRecord? returnedSubFees;
   // State field(s) for TextField widget.

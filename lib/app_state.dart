@@ -273,6 +273,17 @@ class FFAppState extends ChangeNotifier {
       _currentProfileType =
           prefs.getInt('ff_currentProfileType') ?? _currentProfileType;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_currentCustomer')) {
+        try {
+          final serializedData = prefs.getString('ff_currentCustomer') ?? '{}';
+          _currentCustomer =
+              DtCusStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1018,6 +1029,18 @@ class FFAppState extends ChangeNotifier {
   set currentProfileType(int value) {
     _currentProfileType = value;
     prefs.setInt('ff_currentProfileType', value);
+  }
+
+  DtCusStruct _currentCustomer = DtCusStruct();
+  DtCusStruct get currentCustomer => _currentCustomer;
+  set currentCustomer(DtCusStruct value) {
+    _currentCustomer = value;
+    prefs.setString('ff_currentCustomer', value.serialize());
+  }
+
+  void updateCurrentCustomerStruct(Function(DtCusStruct) updateFn) {
+    updateFn(_currentCustomer);
+    prefs.setString('ff_currentCustomer', _currentCustomer.serialize());
   }
 }
 

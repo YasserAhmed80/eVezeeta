@@ -64,6 +64,7 @@ class DoctorBookVisitModel extends FlutterFlowModel<DoctorBookVisitWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for DayListComponent component.
   late DayListComponentModel dayListComponentModel;
   // Model for DayBookingComponent component.

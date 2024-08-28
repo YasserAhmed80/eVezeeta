@@ -93,7 +93,7 @@ class CalenderComponent2Model
       0,
     );
     dayList = [];
-    while (loopIndex! < loopMax!) {
+    while (loopIndex! <= loopMax!) {
       addToDayList(loopIndex!.toString());
       loopIndex = loopIndex! + 1;
     }

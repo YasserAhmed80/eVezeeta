@@ -304,6 +304,56 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                           ],
                         ),
                       ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('customer_List');
+                        },
+                        child: Stack(
+                          alignment: const AlignmentDirectional(-0.0, 0.0),
+                          children: [
+                            FlutterFlowIconButton(
+                              borderColor: FFAppState().selectedNavTab == 2
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                              borderRadius: 30.0,
+                              borderWidth: 0.5,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              icon: Icon(
+                                Icons.calculate_sharp,
+                                color: FlutterFlowTheme.of(context).primary,
+                                size: 24.0,
+                              ),
+                              onPressed: () {
+                                print('showSearchResults pressed ...');
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 30.0, 0.0, 0.0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'dzii04je' /* list */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Cairo',
+                                      fontSize: 12.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Stack(
                         alignment: const AlignmentDirectional(-0.0, 0.0),
                         children: [
@@ -331,7 +381,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                                 0.0, 30.0, 0.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                'dzii04je' /* دكتوري */,
+                                '7297m3oc' /* دكتوري */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium

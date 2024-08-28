@@ -1116,7 +1116,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'انثي',
       'en': '',
     },
-    '0ncl2uhg': {
+    '4mxjhtjm': {
       'ar': 'العنوان',
       'en': '',
     },
@@ -1188,6 +1188,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'العنوان (الشارع و المبني)',
       'en': '',
     },
+    'ju40bfoh': {
+      'ar': 'صورة الملف',
+      'en': '',
+    },
+    'mdvj9oh1': {
+      'ar': 'لكي يتم اختيار صورة يجب تسجيل البيانات اولا',
+      'en': '',
+    },
     '9mg8oamp': {
       'ar': 'حفظ البانات',
       'en': '',
@@ -1196,23 +1204,43 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'من فضلك ادخل اسمك كامل',
       'en': '',
     },
+    'jhaafpy5': {
+      'ar': 'اسم طويل جدا',
+      'en': '',
+    },
     'hjwpprh6': {
       'ar': 'Please choose an option from the dropdown',
       'en': '',
     },
-    '45bth3kr': {
-      'ar': 'من فضلم ادخل لقبك المهني',
+    'lx91dy02': {
+      'ar': 'من فضلك ادخل اسمك الموبيل',
       'en': '',
     },
-    '4dzpl2pu': {
+    's4yi5wep': {
+      'ar': 'رقم الموبيل خطأ',
+      'en': '',
+    },
+    'khsvk2kd': {
+      'ar': 'رقم الموبيل خطأ',
+      'en': '',
+    },
+    '06exg81z': {
       'ar': 'Please choose an option from the dropdown',
       'en': '',
     },
-    '5vsyg8ue': {
-      'ar': 'من فضلك اكتب بعض المعلومات عنك',
+    'tc3t5q5u': {
+      'ar': 'Field is required',
       'en': '',
     },
-    'plcue2px': {
+    'evxfe1nk': {
+      'ar': 'يجب ادخال عنوان كامل',
+      'en': '',
+    },
+    '8q5iqyfl': {
+      'ar': 'العنوان طويل جدا',
+      'en': '',
+    },
+    'upxfn82c': {
       'ar': 'Please choose an option from the dropdown',
       'en': '',
     },
@@ -1236,6 +1264,72 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // customer_List
+  {
+    'l844gr33': {
+      'ar': 'Page Title',
+      'en': '',
+    },
+    'ans47m2s': {
+      'ar': 'Home',
+      'en': '',
+    },
+  },
+  // customer_profile
+  {
+    '0v9sorvu': {
+      'ar': 'البيانات الاساسية',
+      'en': '',
+    },
+    'p5uw9yd7': {
+      'ar': 'تعديل البيانات الاساسية',
+      'en': '',
+    },
+    'o8ift4hh': {
+      'ar': 'اطبائي',
+      'en': '',
+    },
+    '598l5kys': {
+      'ar': 'ملفاتي',
+      'en': '',
+    },
+    'ibt4yg2f': {
+      'ar': 'حجوزاتي',
+      'en': '',
+    },
+    '8bb5eygz': {
+      'ar': 'بيانات الحساب',
+      'en': '',
+    },
+    '1hebnzrg': {
+      'ar': 'تعديل كلمة المرور',
+      'en': '',
+    },
+    '6elc08i0': {
+      'ar': 'خروج',
+      'en': '',
+    },
+    'o7ov5plp': {
+      'ar': 'وضع التطبيق',
+      'en': '',
+    },
+    'xoiaw504': {
+      'ar': 'نهاري',
+      'en': '',
+    },
+    'zgit4hr2': {
+      'ar': 'ليلي',
+      'en': '',
+    },
+    'th5p7d74': {
+      'ar': 'ملفي',
+      'en': '',
+    },
+    'rmsmbtwi': {
+      'ar': '__',
+      'en': '',
+    },
+  },
   // custom_navbar
   {
     'i8qid52y': {
@@ -1255,6 +1349,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'dzii04je': {
+      'ar': 'list',
+      'en': '',
+    },
+    '7297m3oc': {
       'ar': 'دكتوري',
       'en': '',
     },
@@ -1347,8 +1445,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // calender_component_2
   {
-    'y8ryd57z': {
-      'ar': 'Ok',
+    'h589iqm5': {
+      'ar': '',
       'en': '',
     },
     'sn408nt8': {
@@ -1385,6 +1483,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'd2hst4z8': {
       'ar': 'اليوم',
+      'en': '',
+    },
+    '679fcb8i': {
+      'ar': 'موافق',
       'en': '',
     },
   },

@@ -73,6 +73,10 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
 
   DateTime? currentDateTemp;
 
+  ///  State fields for stateful widgets in this page.
+
+  final unfocusNode = FocusNode();
+
   @override
   void initState(BuildContext context) {}
 

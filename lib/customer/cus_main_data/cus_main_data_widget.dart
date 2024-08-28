@@ -8,16 +8,24 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/calender_component_2/calender_component2_widget.dart';
+import '/pages/public_components/upload_photo/upload_photo_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'cus_main_data_model.dart';
 export 'cus_main_data_model.dart';
 
 class CusMainDataWidget extends StatefulWidget {
-  const CusMainDataWidget({super.key});
+  const CusMainDataWidget({
+    super.key,
+    this.cusDocument,
+  });
+
+  final CusRecord? cusDocument;
 
   @override
   State<CusMainDataWidget> createState() => _CusMainDataWidgetState();
@@ -32,6 +40,97 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CusMainDataModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if ((widget.cusDocument != null) == true) {
+        _model.cusNmae = valueOrDefault<String>(
+          widget.cusDocument?.name,
+          'n',
+        );
+        _model.tel = valueOrDefault<String>(
+          widget.cusDocument?.tel,
+          'n',
+        );
+        _model.countryKey = valueOrDefault<int>(
+          widget.cusDocument?.conCde,
+          -1,
+        );
+        _model.govKey = valueOrDefault<int>(
+          widget.cusDocument?.govCde,
+          -1,
+        );
+        _model.zoneKey = valueOrDefault<int>(
+          widget.cusDocument?.zoneCde,
+          -1,
+        );
+        _model.areaKey = valueOrDefault<int>(
+          widget.cusDocument?.areaCde,
+          -1,
+        );
+        _model.addressDesc = valueOrDefault<String>(
+          widget.cusDocument?.addr,
+          'n',
+        );
+        _model.cusDOB = widget.cusDocument?.dob;
+        _model.cusID = valueOrDefault<String>(
+          widget.cusDocument?.reference.id,
+          'none',
+        );
+        _model.cusImage = valueOrDefault<String>(
+          widget.cusDocument?.img,
+          'n',
+        );
+        _model.genderKey = valueOrDefault<int>(
+          widget.cusDocument?.sex,
+          -1,
+        );
+        _model.isDataSaved = true;
+        setState(() {});
+        setState(() {
+          _model.cboCountryCodeValueController?.value = _model.countryKey!;
+        });
+        setState(() {
+          _model.cboGovCodeValueController?.value = _model.govKey!;
+        });
+        setState(() {
+          _model.cboZoneCodeValueController?.value = _model.zoneKey!;
+        });
+        setState(() {
+          _model.cboAreaCodeValueController?.value = _model.areaKey!;
+        });
+        setState(() {
+          _model.txtFullNameFieldTextController?.text = _model.cusNmae;
+          _model.txtFullNameFieldTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.txtFullNameFieldTextController!.text.length);
+        });
+        setState(() {
+          _model.txtMobileTextController?.text = _model.tel;
+          _model.txtMobileTextController?.selection = TextSelection.collapsed(
+              offset: _model.txtMobileTextController!.text.length);
+        });
+        setState(() {
+          _model.txtAddressDescTextController?.text = _model.addressDesc;
+          _model.txtAddressDescTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.txtAddressDescTextController!.text.length);
+        });
+        setState(() {
+          _model.optGenderValueController?.value = [
+            valueOrDefault<String>(
+              FFAppState()
+                  .refGender
+                  .where((e) => e.key == _model.genderKey)
+                  .toList()
+                  .first
+                  .desc,
+              'n',
+            )
+          ];
+        });
+      }
+    });
 
     _model.txtFullNameFieldTextController ??= TextEditingController();
     _model.txtFullNameFieldFocusNode ??= FocusNode();
@@ -276,6 +375,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                   required isFocused,
                                                   maxLength}) =>
                                               null,
+                                          keyboardType: TextInputType.name,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primary,
@@ -398,12 +498,16 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14.0,
                                           ),
-                                          maxLength: 200,
+                                          textAlign: TextAlign.center,
+                                          maxLength: 15,
+                                          maxLengthEnforcement:
+                                              MaxLengthEnforcement.none,
                                           buildCounter: (context,
                                                   {required currentLength,
                                                   required isFocused,
                                                   maxLength}) =>
                                               null,
+                                          keyboardType: TextInputType.phone,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primary,
@@ -447,6 +551,8 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                             (actionReturnedDate) async {
                                                           _model.cusDOB =
                                                               actionReturnedDate;
+                                                          _model.isValidDOB =
+                                                              true;
                                                           setState(() {});
                                                         },
                                                       ),
@@ -458,12 +564,23 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 (value) => safeSetState(() {}));
                                           },
                                           child: Container(
+                                            height: 50.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                               borderRadius:
                                                   BorderRadius.circular(14.0),
+                                              border: Border.all(
+                                                color:
+                                                    _model.isValidDOB == false
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .error
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                              ),
                                             ),
                                             child: Padding(
                                               padding: const EdgeInsetsDirectional
@@ -496,7 +613,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                                       context)
                                                                   .languageCode,
                                                         ),
-                                                        '0',
+                                                        '---',
                                                       ),
                                                       textAlign:
                                                           TextAlign.center,
@@ -534,11 +651,19 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
+                                        Text(
+                                          _model.isValidZoneKey.toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
                                         Align(
                                           alignment:
                                               const AlignmentDirectional(0.0, 0.0),
                                           child: Container(
-                                            height: 50.0,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -546,13 +671,14 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
                                               border: Border.all(
-                                                color: _model.genderKey != -1
+                                                color: _model.isValidGenger ==
+                                                        false
                                                     ? FlutterFlowTheme.of(
                                                             context)
-                                                        .alternate
+                                                        .error
                                                     : FlutterFlowTheme.of(
                                                             context)
-                                                        .error,
+                                                        .alternate,
                                                 width: 0.5,
                                               ),
                                             ),
@@ -562,7 +688,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               child: Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        10.0, 0.0, 10.0, 0.0),
+                                                        10.0, 10.0, 10.0, 10.0),
                                                 child: FlutterFlowChoiceChips(
                                                   options: FFAppState()
                                                       .refGender
@@ -576,15 +702,31 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                       .map((label) =>
                                                           ChipData(label))
                                                       .toList(),
-                                                  onChanged: (val) => setState(
-                                                      () => _model
-                                                              .optGenderValue =
-                                                          val?.firstOrNull),
+                                                  onChanged: (val) async {
+                                                    setState(() =>
+                                                        _model.optGenderValue =
+                                                            val?.firstOrNull);
+                                                    if (_model.optGenderValue ==
+                                                        'انثي') {
+                                                      _model.genderKey = 0;
+                                                      setState(() {});
+                                                    } else {
+                                                      if (_model
+                                                              .optGenderValue ==
+                                                          'ذكر') {
+                                                        _model.genderKey = 1;
+                                                        setState(() {});
+                                                      }
+                                                    }
+
+                                                    _model.isValidGenger = true;
+                                                    setState(() {});
+                                                  },
                                                   selectedChipStyle: ChipStyle(
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .accent2,
+                                                            .tertiary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .bodyMedium
@@ -654,14 +796,17 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                       FormFieldController<
                                                           List<String>>(
                                                     [
-                                                      FFAppState()
-                                                          .refGender
-                                                          .where((e) =>
-                                                              e.key ==
-                                                              _model.genderKey)
-                                                          .toList()
-                                                          .first
-                                                          .desc
+                                                      _model.genderKey == -1
+                                                          ? 'none'
+                                                          : FFAppState()
+                                                              .refGender
+                                                              .where((e) =>
+                                                                  e.key ==
+                                                                  _model
+                                                                      .genderKey)
+                                                              .toList()
+                                                              .first
+                                                              .desc
                                                     ],
                                                   ),
                                                   wrapped: false,
@@ -672,7 +817,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            '0ncl2uhg' /* العنوان */,
+                                            '4mxjhtjm' /* العنوان */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
@@ -795,7 +940,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .alternate,
-                                                        borderWidth: 0.5,
+                                                        borderWidth: 1.0,
                                                         borderRadius: 0.0,
                                                         margin:
                                                             const EdgeInsetsDirectional
@@ -835,6 +980,8 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           val);
                                                       _model.govKey = _model
                                                           .cboGovCodeValue;
+                                                      _model.isValidGovKey =
+                                                          true;
                                                       setState(() {});
                                                     },
                                                     width: double.infinity,
@@ -850,6 +997,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .primaryText,
+                                                              fontSize: 14.0,
                                                               letterSpacing:
                                                                   0.0,
                                                               fontWeight:
@@ -899,11 +1047,21 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                             .primaryBackground,
                                                     elevation: 2.0,
                                                     borderColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate,
-                                                    borderWidth: 0.5,
-                                                    borderRadius: 0.0,
+                                                        valueOrDefault<Color>(
+                                                      _model.isValidGovKey ==
+                                                              false
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                    ),
+                                                    borderWidth: 1.0,
+                                                    borderRadius: 1.0,
                                                     margin:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
@@ -945,6 +1103,8 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           val);
                                                       _model.zoneKey = _model
                                                           .cboZoneCodeValue;
+                                                      _model.isValidZoneKey =
+                                                          true;
                                                       setState(() {});
                                                     },
                                                     width: double.infinity,
@@ -1009,11 +1169,21 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                             .primaryBackground,
                                                     elevation: 2.0,
                                                     borderColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate,
-                                                    borderWidth: 0.5,
-                                                    borderRadius: 0.0,
+                                                        valueOrDefault<Color>(
+                                                      _model.isValidZoneKey ==
+                                                              false
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                    ),
+                                                    borderWidth: 1.0,
+                                                    borderRadius: 1.0,
                                                     margin:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
@@ -1053,11 +1223,10 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                       setState(() => _model
                                                               .cboAreaCodeValue =
                                                           val);
-                                                      _model.zoneKey =
-                                                          valueOrDefault<int>(
-                                                        _model.areaKey,
-                                                        0,
-                                                      );
+                                                      _model.isValideAreaKey =
+                                                          true;
+                                                      _model.areaKey = _model
+                                                          .cboAreaCodeValue;
                                                       setState(() {});
                                                     },
                                                     width: double.infinity,
@@ -1125,11 +1294,21 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                             .primaryBackground,
                                                     elevation: 2.0,
                                                     borderColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .alternate,
-                                                    borderWidth: 0.5,
-                                                    borderRadius: 0.0,
+                                                        valueOrDefault<Color>(
+                                                      _model.isValideAreaKey ==
+                                                              false
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                    ),
+                                                    borderWidth: 1.0,
+                                                    borderRadius: 1.0,
                                                     margin:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
@@ -1331,14 +1510,20 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     ),
                                                     style: GoogleFonts.getFont(
                                                       'Cairo',
-                                                      color: Colors.black,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontSize: 14.0,
                                                     ),
                                                     maxLines: 4,
                                                     minLines: 2,
-                                                    maxLength: 500,
+                                                    maxLength: 100,
+                                                    maxLengthEnforcement:
+                                                        MaxLengthEnforcement
+                                                            .none,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -1350,6 +1535,76 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 ],
                                               ),
                                             ),
+                                          ),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    -1.0, 0.0),
+                                                child: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'ju40bfoh' /* صورة الملف */,
+                                                  ),
+                                                  textAlign: TextAlign.end,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    -1.0, 0.0),
+                                                child: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'mdvj9oh1' /* لكي يتم اختيار صورة يجب تسجيل ... */,
+                                                  ),
+                                                  textAlign: TextAlign.end,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        fontSize: 12.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                              wrapWithModel(
+                                                model: _model.uploadPhotoModel,
+                                                updateCallback: () =>
+                                                    setState(() {}),
+                                                child: UploadPhotoWidget(
+                                                  storageFolder: 'cus',
+                                                  entityType: 'cus',
+                                                  entityCode: widget
+                                                              .cusDocument !=
+                                                          null
+                                                      ? valueOrDefault<String>(
+                                                          widget.cusDocument
+                                                              ?.reference.id,
+                                                          'nnn',
+                                                        )
+                                                      : 'nn',
+                                                  imgType: 'p',
+                                                  imgSeq: 1,
+                                                  imgRef: 'nnn',
+                                                  isActive: _model.isDataSaved,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         wrapWithModel(
@@ -1378,8 +1633,104 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 12.0, 16.0, 12.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            _model.isValidData =
+                                await _model.validateData(context);
+                            _model.formIsValid = true;
+                            if (_model.formKey.currentState == null ||
+                                !_model.formKey.currentState!.validate()) {
+                              setState(() => _model.formIsValid = false);
+                              return;
+                            }
+                            if (_model.cboCountryCodeValue == null) {
+                              _model.formIsValid = false;
+                              setState(() {});
+                              return;
+                            }
+                            if (_model.cboGovCodeValue == null) {
+                              _model.formIsValid = false;
+                              setState(() {});
+                              return;
+                            }
+                            if (_model.cboZoneCodeValue == null) {
+                              _model.formIsValid = false;
+                              setState(() {});
+                              return;
+                            }
+                            if (_model.cboAreaCodeValue == null) {
+                              _model.formIsValid = false;
+                              setState(() {});
+                              return;
+                            }
+                            if ((_model.formIsValid == true) &&
+                                (_model.isValidData == true)) {
+                              _model.savedRecord =
+                                  await _model.createOrUpdateAction(context);
+                              if (_model.savedRecord?.reference != null) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: const Text('تسجيل البيانات'),
+                                      content: const Text('تم حفظ البيانات بنجاح'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: const Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                _model.isDataSaved = true;
+                                _model.cusID = _model.savedRecord!.reference.id;
+                                setState(() {});
+                                FFAppState().updateCurrentCustomerStruct(
+                                  (e) => e
+                                    ..cusDocRef = _model.savedRecord?.reference,
+                                );
+                                setState(() {});
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: const Text('حفظ البيانات'),
+                                      content: const Text(
+                                          'خطأ في حفظ البيانات ... من فضلك حاول مةمرة ثانية'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: const Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: const Text('تسجيل البيانات'),
+                                    content:
+                                        const Text('من فضلك اكمل ادخال البيانات '),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: const Text('اوك'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+
+                            setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
                             '9mg8oamp' /* حفظ البانات */,
