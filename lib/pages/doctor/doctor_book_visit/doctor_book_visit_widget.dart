@@ -835,7 +835,10 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                               hour: _model
                                                                   .userSelectedHourItem
                                                                   ?.hourKey,
-                                                              cusId: '10000',
+                                                              cusId: FFAppState()
+                                                                  .currentCustomer
+                                                                  .cusDocRef
+                                                                  ?.id,
                                                               hourSeq: 1,
                                                               dayTime: functions
                                                                   .concatDateTime(

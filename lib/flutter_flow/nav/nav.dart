@@ -235,6 +235,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'customer_favorit_doc',
+          path: '/customerFavoritDoc',
+          asyncParams: {
+            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
+          },
+          builder: (context, params) => CustomerFavoritDocWidget(
+            cusDocument: params.getParam(
+              'cusDocument',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

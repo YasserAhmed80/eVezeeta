@@ -57,20 +57,6 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
       _model.isLoading = false;
       _model.curretImage = widget.imgRef;
       setState(() {});
-      await showDialog(
-        context: context,
-        builder: (alertDialogContext) {
-          return AlertDialog(
-            content: Text(widget.entityCode!),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(alertDialogContext),
-                child: const Text('Ok'),
-              ),
-            ],
-          );
-        },
-      );
       _model.queryImage = await queryImgsRecordOnce(
         queryBuilder: (imgsRecord) => imgsRecord
             .where(

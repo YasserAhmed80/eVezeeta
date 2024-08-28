@@ -611,14 +611,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_search
   {
-    'v0je1rj0': {
-      'ar': '123 ',
-      'en': '',
-    },
-    'cxjmtw70': {
-      'ar': 'تقيم',
-      'en': '',
-    },
     '8dmzralb': {
       'ar': 'اشترك',
       'en': 'save',
@@ -1266,8 +1258,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // customer_List
   {
+    'hxc40b58': {
+      'ar': 'سنة',
+      'en': '',
+    },
     'l844gr33': {
-      'ar': 'Page Title',
+      'ar': 'العملاء',
       'en': '',
     },
     'ans47m2s': {
@@ -1277,6 +1273,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // customer_profile
   {
+    'wvbhqjb5': {
+      'ar': 'سنة',
+      'en': '',
+    },
     '0v9sorvu': {
       'ar': 'البيانات الاساسية',
       'en': '',
@@ -1327,6 +1327,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'rmsmbtwi': {
       'ar': '__',
+      'en': '',
+    },
+  },
+  // customer_favorit_doc
+  {
+    '7nrxvhuc': {
+      'ar': 'اطبائي',
+      'en': '',
+    },
+    '4cjjo6x6': {
+      'ar': 'Home',
       'en': '',
     },
   },
@@ -1487,6 +1498,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '679fcb8i': {
       'ar': 'موافق',
+      'en': '',
+    },
+  },
+  // doctor_data_component
+  {
+    'sx1exypl': {
+      'ar': '123 ',
+      'en': '',
+    },
+    'blusaqkl': {
+      'ar': 'تقيم',
+      'en': '',
+    },
+    's39hdf14': {
+      'ar': 'Read Now',
       'en': '',
     },
   },

@@ -798,15 +798,19 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     [
                                                       _model.genderKey == -1
                                                           ? 'none'
-                                                          : FFAppState()
-                                                              .refGender
-                                                              .where((e) =>
-                                                                  e.key ==
-                                                                  _model
-                                                                      .genderKey)
-                                                              .toList()
-                                                              .first
-                                                              .desc
+                                                          : valueOrDefault<
+                                                              String>(
+                                                              FFAppState()
+                                                                  .refGender
+                                                                  .where((e) =>
+                                                                      e.key ==
+                                                                      _model
+                                                                          .genderKey)
+                                                                  .toList()
+                                                                  .first
+                                                                  .desc,
+                                                              'n',
+                                                            )
                                                     ],
                                                   ),
                                                   wrapped: false,

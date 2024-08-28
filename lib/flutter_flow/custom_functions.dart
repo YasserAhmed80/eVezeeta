@@ -370,3 +370,17 @@ int? getDatePart(
 String? toString(int? pValue) {
   return pValue!.toString();
 }
+
+int? calcAge(DateTime? pDOB) {
+  // calculate age from date
+  if (pDOB == null) {
+    return null;
+  }
+  final now = DateTime.now();
+  int age = now.year - pDOB.year;
+  if (now.month < pDOB.month ||
+      (now.month == pDOB.month && now.day < pDOB.day)) {
+    age--;
+  }
+  return age;
+}

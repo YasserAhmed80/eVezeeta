@@ -56,9 +56,7 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
     context.watch<FFAppState>();
 
     return Container(
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-      ),
+      decoration: const BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -68,26 +66,30 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
               Icon(
                 Icons.location_on,
                 color: FlutterFlowTheme.of(context).secondary,
-                size: 20.0,
+                size: 14.0,
               ),
-              Text(
-                valueOrDefault<String>(
-                  FFAppState()
-                      .refGovernate
-                      .where((e) => e.govKey == widget.govKey)
-                      .toList()
-                      .first
-                      .desc,
-                  'n',
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                child: Text(
+                  valueOrDefault<String>(
+                    FFAppState()
+                        .refGovernate
+                        .where((e) => e.govKey == widget.govKey)
+                        .toList()
+                        .first
+                        .desc,
+                    'n',
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Cairo',
+                        fontSize: 12.0,
+                        letterSpacing: 0.0,
+                      ),
                 ),
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Cairo',
-                      letterSpacing: 0.0,
-                    ),
               ),
               Icon(
                 Icons.arrow_right,
-                color: FlutterFlowTheme.of(context).secondary,
+                color: FlutterFlowTheme.of(context).primaryText,
                 size: 24.0,
               ),
               Text(
@@ -102,12 +104,13 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Cairo',
+                      fontSize: 12.0,
                       letterSpacing: 0.0,
                     ),
               ),
               Icon(
                 Icons.arrow_right,
-                color: FlutterFlowTheme.of(context).secondary,
+                color: FlutterFlowTheme.of(context).primaryText,
                 size: 24.0,
               ),
               Text(
@@ -122,6 +125,7 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Cairo',
+                      fontSize: 12.0,
                       letterSpacing: 0.0,
                     ),
               ),
@@ -132,13 +136,17 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
             children: [
               Icon(
                 Icons.arrow_right,
-                color: FlutterFlowTheme.of(context).secondary,
+                color: FlutterFlowTheme.of(context).primaryText,
                 size: 24.0,
               ),
               Text(
-                widget.addressDesc,
+                valueOrDefault<String>(
+                  widget.addressDesc,
+                  'nn',
+                ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Cairo',
+                      fontSize: 12.0,
                       letterSpacing: 0.0,
                     ),
               ),

@@ -34,3 +34,5 @@ export '/customer/customer_list/customer_list_widget.dart'
     show CustomerListWidget;
 export '/customer/customer_profile/customer_profile_widget.dart'
     show CustomerProfileWidget;
+export '/customer/customer_favorit_doc/customer_favorit_doc_widget.dart'
+    show CustomerFavoritDocWidget;

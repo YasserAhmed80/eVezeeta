@@ -722,6 +722,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -735,10 +736,10 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
-                                                          fontSize: 16.0,
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.bold,
                                                         ),
                                               ),
                                             ],
@@ -756,6 +757,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -796,6 +798,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -836,6 +839,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
@@ -888,6 +892,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
