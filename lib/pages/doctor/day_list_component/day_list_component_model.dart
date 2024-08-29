@@ -105,8 +105,8 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
     returnedHoursData = await queryDocTimeRecordOnce(
       queryBuilder: (docTimeRecord) => docTimeRecord
           .where(
-            'doc_id',
-            isEqualTo: widget!.docID,
+            'doc_ref',
+            isEqualTo: FFAppState().currentDoctor.dbDocRef,
           )
           .where(
             'day_id',
@@ -120,8 +120,8 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
     returnedBookedHours = await queryDocBookedTimeRecordOnce(
       queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord
           .where(
-            'doc_id',
-            isEqualTo: widget!.docID,
+            'doc_ref',
+            isEqualTo: FFAppState().currentDoctor.dbDocRef,
           )
           .where(
             'date',

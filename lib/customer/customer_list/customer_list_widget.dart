@@ -273,6 +273,14 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                             'cusDocument': listViewCusRecord,
                                           },
                                         );
+
+                                        FFAppState()
+                                            .updateCurrentCustomerStruct(
+                                          (e) => e
+                                            ..cusDocRef =
+                                                listViewCusRecord.reference,
+                                        );
+                                        setState(() {});
                                       },
                                       child: Container(
                                         decoration: const BoxDecoration(

@@ -1137,8 +1137,6 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                         await DocSubRecord.collection
                                             .doc()
                                             .set(createDocSubRecordData(
-                                              docId: widget
-                                                  .docDocument?.reference.id,
                                               amount: _model.totAfterDiscount,
                                               fee: _model.feeAmount,
                                               fDate: _model.fromDate,
@@ -1148,6 +1146,8 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                               payRef: _model.payReference,
                                               discount: _model.discountAmount,
                                               feePerBook: _model.feePerBook,
+                                              docRef: widget
+                                                  .docDocument?.reference,
                                             ));
 
                                         await widget.docDocument!.reference

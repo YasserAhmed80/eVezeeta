@@ -15,11 +15,6 @@ class DocBookedTimeRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "doc_id" field.
-  String? _docId;
-  String get docId => _docId ?? '';
-  bool hasDocId() => _docId != null;
-
   // "date" field.
   DateTime? _date;
   DateTime? get date => _date;
@@ -29,11 +24,6 @@ class DocBookedTimeRecord extends FirestoreRecord {
   int? _hour;
   int get hour => _hour ?? 0;
   bool hasHour() => _hour != null;
-
-  // "cus_id" field.
-  String? _cusId;
-  String get cusId => _cusId ?? '';
-  bool hasCusId() => _cusId != null;
 
   // "hour_seq" field.
   int? _hourSeq;
@@ -65,17 +55,27 @@ class DocBookedTimeRecord extends FirestoreRecord {
   int get fee => _fee ?? 0;
   bool hasFee() => _fee != null;
 
+  // "cus_ref" field.
+  DocumentReference? _cusRef;
+  DocumentReference? get cusRef => _cusRef;
+  bool hasCusRef() => _cusRef != null;
+
+  // "doc_ref" field.
+  DocumentReference? _docRef;
+  DocumentReference? get docRef => _docRef;
+  bool hasDocRef() => _docRef != null;
+
   void _initializeFields() {
-    _docId = snapshotData['doc_id'] as String?;
     _date = snapshotData['date'] as DateTime?;
     _hour = castToType<int>(snapshotData['hour']);
-    _cusId = snapshotData['cus_id'] as String?;
     _hourSeq = castToType<int>(snapshotData['hour_seq']);
     _dayTime = snapshotData['day_time'] as DateTime?;
     _statusCde = castToType<int>(snapshotData['status_cde']);
     _cReason = snapshotData['c_reason'] as String?;
     _price = castToType<int>(snapshotData['price']);
     _fee = castToType<int>(snapshotData['fee']);
+    _cusRef = snapshotData['cus_ref'] as DocumentReference?;
+    _docRef = snapshotData['doc_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -113,29 +113,29 @@ class DocBookedTimeRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createDocBookedTimeRecordData({
-  String? docId,
   DateTime? date,
   int? hour,
-  String? cusId,
   int? hourSeq,
   DateTime? dayTime,
   int? statusCde,
   String? cReason,
   int? price,
   int? fee,
+  DocumentReference? cusRef,
+  DocumentReference? docRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'doc_id': docId,
       'date': date,
       'hour': hour,
-      'cus_id': cusId,
       'hour_seq': hourSeq,
       'day_time': dayTime,
       'status_cde': statusCde,
       'c_reason': cReason,
       'price': price,
       'fee': fee,
+      'cus_ref': cusRef,
+      'doc_ref': docRef,
     }.withoutNulls,
   );
 
@@ -148,30 +148,30 @@ class DocBookedTimeRecordDocumentEquality
 
   @override
   bool equals(DocBookedTimeRecord? e1, DocBookedTimeRecord? e2) {
-    return e1?.docId == e2?.docId &&
-        e1?.date == e2?.date &&
+    return e1?.date == e2?.date &&
         e1?.hour == e2?.hour &&
-        e1?.cusId == e2?.cusId &&
         e1?.hourSeq == e2?.hourSeq &&
         e1?.dayTime == e2?.dayTime &&
         e1?.statusCde == e2?.statusCde &&
         e1?.cReason == e2?.cReason &&
         e1?.price == e2?.price &&
-        e1?.fee == e2?.fee;
+        e1?.fee == e2?.fee &&
+        e1?.cusRef == e2?.cusRef &&
+        e1?.docRef == e2?.docRef;
   }
 
   @override
   int hash(DocBookedTimeRecord? e) => const ListEquality().hash([
-        e?.docId,
         e?.date,
         e?.hour,
-        e?.cusId,
         e?.hourSeq,
         e?.dayTime,
         e?.statusCde,
         e?.cReason,
         e?.price,
-        e?.fee
+        e?.fee,
+        e?.cusRef,
+        e?.docRef
       ]);
 
   @override

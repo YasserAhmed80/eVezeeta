@@ -105,30 +105,33 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Builder(
-                    builder: (context) {
-                      final docitem = _model.doctorDocumentList.toList();
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Builder(
+                      builder: (context) {
+                        final docitem = _model.doctorDocumentList.toList();
 
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: docitem.length,
-                        itemBuilder: (context, docitemIndex) {
-                          final docitemItem = docitem[docitemIndex];
-                          return DoctorDataComponentWidget(
-                            key: Key(
-                                'Keyvxk_${docitemIndex}_of_${docitem.length}'),
-                            docDocument: docitemItem,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+                        return ListView.separated(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: docitem.length,
+                          separatorBuilder: (_, __) => const SizedBox(height: 5.0),
+                          itemBuilder: (context, docitemIndex) {
+                            final docitemItem = docitem[docitemIndex];
+                            return DoctorDataComponentWidget(
+                              key: Key(
+                                  'Keyvxk_${docitemIndex}_of_${docitem.length}'),
+                              docDocument: docitemItem,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

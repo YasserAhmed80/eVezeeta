@@ -121,101 +121,107 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Opacity(
-                  opacity: 0.5,
-                  child: FaIcon(
-                    FontAwesomeIcons.solidArrowAltCircleLeft,
-                    color: FlutterFlowTheme.of(context).cerise,
-                    size: 20.0,
-                  ),
-                ),
-                Text(
-                  valueOrDefault<String>(
-                    FFAppState()
-                        .refDocType
-                        .where((e) =>
-                            e.typeKey ==
-                            valueOrDefault<int>(
-                              widget.docDocument?.gender,
-                              -1,
-                            ))
-                        .toList()
-                        .first
-                        .desc,
-                    'n',
-                  ),
-                  style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Cairo',
-                        fontSize: 12.0,
-                        letterSpacing: 0.0,
-                      ),
-                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      valueOrDefault<String>(
-                        widget.docDocument?.name,
-                        'nn',
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily: 'Cairo',
-                            color: FlutterFlowTheme.of(context).secondary,
-                            fontSize: 14.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Opacity(
+                    opacity: 0.5,
+                    child: FaIcon(
+                      FontAwesomeIcons.solidArrowAltCircleLeft,
+                      color: FlutterFlowTheme.of(context).cerise,
+                      size: 20.0,
                     ),
                   ),
-                ),
-                Builder(
-                  builder: (context) {
-                    if (_model.isFavorite == true) {
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await _model.fafDocRef!.delete();
-                          _model.isFavorite = false;
-                          setState(() {});
-                        },
-                        child: Icon(
-                          Icons.favorite_sharp,
-                          color: FlutterFlowTheme.of(context).primary,
-                          size: 24.0,
+                  Text(
+                    valueOrDefault<String>(
+                      FFAppState()
+                          .refDocType
+                          .where((e) =>
+                              e.typeKey ==
+                              valueOrDefault<int>(
+                                widget.docDocument?.gender,
+                                -1,
+                              ))
+                          .toList()
+                          .first
+                          .desc,
+                      'n',
+                    ),
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Cairo',
+                          fontSize: 12.0,
+                          letterSpacing: 0.0,
                         ),
-                      );
-                    } else {
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await CusFavDocRecord.collection
-                              .doc()
-                              .set(createCusFavDocRecordData(
-                                cusRef: FFAppState().currentCustomer.cusDocRef,
-                                docRef: widget.docDocument?.reference,
-                              ));
-                          _model.isFavorite = true;
-                          setState(() {});
-                        },
-                        child: Icon(
-                          Icons.favorite_border,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
+                  ).animateOnPageLoad(
+                      animationsMap['textOnPageLoadAnimation']!),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.docDocument?.name,
+                          'nn',
                         ),
-                      );
-                    }
-                  },
-                ),
-              ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily: 'Cairo',
+                              color: FlutterFlowTheme.of(context).secondary,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Builder(
+                    builder: (context) {
+                      if (_model.isFavorite == true) {
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await _model.fafDocRef!.delete();
+                            _model.isFavorite = false;
+                            setState(() {});
+                          },
+                          child: Icon(
+                            Icons.favorite_sharp,
+                            color: FlutterFlowTheme.of(context).primary,
+                            size: 24.0,
+                          ),
+                        );
+                      } else {
+                        return InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await CusFavDocRecord.collection
+                                .doc()
+                                .set(createCusFavDocRecordData(
+                                  cusRef:
+                                      FFAppState().currentCustomer.cusDocRef,
+                                  docRef: widget.docDocument?.reference,
+                                ));
+                            _model.isFavorite = true;
+                            setState(() {});
+                          },
+                          child: Icon(
+                            Icons.favorite_border,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+              ),
             ),
           ),
           Container(
@@ -223,7 +229,7 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'day_list_component_model.dart';
 export 'day_list_component_model.dart';
 
@@ -39,8 +40,8 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.returnedDocTime = await queryDocTimeRecordOnce(
         queryBuilder: (docTimeRecord) => docTimeRecord.where(
-          'doc_id',
-          isEqualTo: widget.docID,
+          'doc_ref',
+          isEqualTo: FFAppState().currentDoctor.dbDocRef,
         ),
       );
       _model.docActiveDays = _model.returnedDocTime!
@@ -78,6 +79,8 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       height: 500.0,
       decoration: const BoxDecoration(),

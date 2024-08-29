@@ -8,38 +8,24 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class DtBookedItemStruct extends FFFirebaseStruct {
   DtBookedItemStruct({
-    String? cusId,
-    String? docId,
     DateTime? date,
     DateTime? time,
     int? statusCde,
     String? cusName,
     String? cusTel,
     DocumentReference? itemRef,
+    DocumentReference? docRef,
+    DocumentReference? cusRef,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
-  })  : _cusId = cusId,
-        _docId = docId,
-        _date = date,
+  })  : _date = date,
         _time = time,
         _statusCde = statusCde,
         _cusName = cusName,
         _cusTel = cusTel,
         _itemRef = itemRef,
+        _docRef = docRef,
+        _cusRef = cusRef,
         super(firestoreUtilData);
-
-  // "cus_id" field.
-  String? _cusId;
-  String get cusId => _cusId ?? '';
-  set cusId(String? val) => _cusId = val;
-
-  bool hasCusId() => _cusId != null;
-
-  // "doc_id" field.
-  String? _docId;
-  String get docId => _docId ?? '';
-  set docId(String? val) => _docId = val;
-
-  bool hasDocId() => _docId != null;
 
   // "date" field.
   DateTime? _date;
@@ -85,16 +71,30 @@ class DtBookedItemStruct extends FFFirebaseStruct {
 
   bool hasItemRef() => _itemRef != null;
 
+  // "doc_ref" field.
+  DocumentReference? _docRef;
+  DocumentReference? get docRef => _docRef;
+  set docRef(DocumentReference? val) => _docRef = val;
+
+  bool hasDocRef() => _docRef != null;
+
+  // "cus_ref" field.
+  DocumentReference? _cusRef;
+  DocumentReference? get cusRef => _cusRef;
+  set cusRef(DocumentReference? val) => _cusRef = val;
+
+  bool hasCusRef() => _cusRef != null;
+
   static DtBookedItemStruct fromMap(Map<String, dynamic> data) =>
       DtBookedItemStruct(
-        cusId: data['cus_id'] as String?,
-        docId: data['doc_id'] as String?,
         date: data['date'] as DateTime?,
         time: data['time'] as DateTime?,
         statusCde: castToType<int>(data['status_cde']),
         cusName: data['cus_name'] as String?,
         cusTel: data['cus_tel'] as String?,
         itemRef: data['item_ref'] as DocumentReference?,
+        docRef: data['doc_ref'] as DocumentReference?,
+        cusRef: data['cus_ref'] as DocumentReference?,
       );
 
   static DtBookedItemStruct? maybeFromMap(dynamic data) => data is Map
@@ -102,26 +102,18 @@ class DtBookedItemStruct extends FFFirebaseStruct {
       : null;
 
   Map<String, dynamic> toMap() => {
-        'cus_id': _cusId,
-        'doc_id': _docId,
         'date': _date,
         'time': _time,
         'status_cde': _statusCde,
         'cus_name': _cusName,
         'cus_tel': _cusTel,
         'item_ref': _itemRef,
+        'doc_ref': _docRef,
+        'cus_ref': _cusRef,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'cus_id': serializeParam(
-          _cusId,
-          ParamType.String,
-        ),
-        'doc_id': serializeParam(
-          _docId,
-          ParamType.String,
-        ),
         'date': serializeParam(
           _date,
           ParamType.DateTime,
@@ -146,20 +138,18 @@ class DtBookedItemStruct extends FFFirebaseStruct {
           _itemRef,
           ParamType.DocumentReference,
         ),
+        'doc_ref': serializeParam(
+          _docRef,
+          ParamType.DocumentReference,
+        ),
+        'cus_ref': serializeParam(
+          _cusRef,
+          ParamType.DocumentReference,
+        ),
       }.withoutNulls;
 
   static DtBookedItemStruct fromSerializableMap(Map<String, dynamic> data) =>
       DtBookedItemStruct(
-        cusId: deserializeParam(
-          data['cus_id'],
-          ParamType.String,
-          false,
-        ),
-        docId: deserializeParam(
-          data['doc_id'],
-          ParamType.String,
-          false,
-        ),
         date: deserializeParam(
           data['date'],
           ParamType.DateTime,
@@ -191,6 +181,18 @@ class DtBookedItemStruct extends FFFirebaseStruct {
           false,
           collectionNamePath: ['doc_booked_time'],
         ),
+        docRef: deserializeParam(
+          data['doc_ref'],
+          ParamType.DocumentReference,
+          false,
+          collectionNamePath: ['doc'],
+        ),
+        cusRef: deserializeParam(
+          data['cus_ref'],
+          ParamType.DocumentReference,
+          false,
+          collectionNamePath: ['cus'],
+        ),
       );
 
   @override
@@ -199,44 +201,44 @@ class DtBookedItemStruct extends FFFirebaseStruct {
   @override
   bool operator ==(Object other) {
     return other is DtBookedItemStruct &&
-        cusId == other.cusId &&
-        docId == other.docId &&
         date == other.date &&
         time == other.time &&
         statusCde == other.statusCde &&
         cusName == other.cusName &&
         cusTel == other.cusTel &&
-        itemRef == other.itemRef;
+        itemRef == other.itemRef &&
+        docRef == other.docRef &&
+        cusRef == other.cusRef;
   }
 
   @override
   int get hashCode => const ListEquality()
-      .hash([cusId, docId, date, time, statusCde, cusName, cusTel, itemRef]);
+      .hash([date, time, statusCde, cusName, cusTel, itemRef, docRef, cusRef]);
 }
 
 DtBookedItemStruct createDtBookedItemStruct({
-  String? cusId,
-  String? docId,
   DateTime? date,
   DateTime? time,
   int? statusCde,
   String? cusName,
   String? cusTel,
   DocumentReference? itemRef,
+  DocumentReference? docRef,
+  DocumentReference? cusRef,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
   bool delete = false,
 }) =>
     DtBookedItemStruct(
-      cusId: cusId,
-      docId: docId,
       date: date,
       time: time,
       statusCde: statusCde,
       cusName: cusName,
       cusTel: cusTel,
       itemRef: itemRef,
+      docRef: docRef,
+      cusRef: cusRef,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

@@ -15,11 +15,6 @@ class DocSubRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "doc_id" field.
-  String? _docId;
-  String get docId => _docId ?? '';
-  bool hasDocId() => _docId != null;
-
   // "amount" field.
   int? _amount;
   int get amount => _amount ?? 0;
@@ -65,8 +60,12 @@ class DocSubRecord extends FirestoreRecord {
   int get feePerBook => _feePerBook ?? 0;
   bool hasFeePerBook() => _feePerBook != null;
 
+  // "doc_ref" field.
+  DocumentReference? _docRef;
+  DocumentReference? get docRef => _docRef;
+  bool hasDocRef() => _docRef != null;
+
   void _initializeFields() {
-    _docId = snapshotData['doc_id'] as String?;
     _amount = castToType<int>(snapshotData['amount']);
     _fee = castToType<int>(snapshotData['fee']);
     _fDate = snapshotData['f_date'] as DateTime?;
@@ -76,6 +75,7 @@ class DocSubRecord extends FirestoreRecord {
     _payRef = snapshotData['pay_ref'] as String?;
     _discount = castToType<int>(snapshotData['discount']);
     _feePerBook = castToType<int>(snapshotData['fee_per_book']);
+    _docRef = snapshotData['doc_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -112,7 +112,6 @@ class DocSubRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createDocSubRecordData({
-  String? docId,
   int? amount,
   int? fee,
   DateTime? fDate,
@@ -122,10 +121,10 @@ Map<String, dynamic> createDocSubRecordData({
   String? payRef,
   int? discount,
   int? feePerBook,
+  DocumentReference? docRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'doc_id': docId,
       'amount': amount,
       'fee': fee,
       'f_date': fDate,
@@ -135,6 +134,7 @@ Map<String, dynamic> createDocSubRecordData({
       'pay_ref': payRef,
       'discount': discount,
       'fee_per_book': feePerBook,
+      'doc_ref': docRef,
     }.withoutNulls,
   );
 
@@ -146,8 +146,7 @@ class DocSubRecordDocumentEquality implements Equality<DocSubRecord> {
 
   @override
   bool equals(DocSubRecord? e1, DocSubRecord? e2) {
-    return e1?.docId == e2?.docId &&
-        e1?.amount == e2?.amount &&
+    return e1?.amount == e2?.amount &&
         e1?.fee == e2?.fee &&
         e1?.fDate == e2?.fDate &&
         e1?.tDate == e2?.tDate &&
@@ -155,12 +154,12 @@ class DocSubRecordDocumentEquality implements Equality<DocSubRecord> {
         e1?.capoun == e2?.capoun &&
         e1?.payRef == e2?.payRef &&
         e1?.discount == e2?.discount &&
-        e1?.feePerBook == e2?.feePerBook;
+        e1?.feePerBook == e2?.feePerBook &&
+        e1?.docRef == e2?.docRef;
   }
 
   @override
   int hash(DocSubRecord? e) => const ListEquality().hash([
-        e?.docId,
         e?.amount,
         e?.fee,
         e?.fDate,
@@ -169,7 +168,8 @@ class DocSubRecordDocumentEquality implements Equality<DocSubRecord> {
         e?.capoun,
         e?.payRef,
         e?.discount,
-        e?.feePerBook
+        e?.feePerBook,
+        e?.docRef
       ]);
 
   @override

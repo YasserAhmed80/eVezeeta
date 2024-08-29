@@ -91,11 +91,8 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
     returnedBookedData = await queryDocBookedTimeRecordOnce(
       queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord
           .where(
-            'doc_id',
-            isEqualTo: valueOrDefault<String>(
-              widget!.docDocument?.reference.id,
-              '111',
-            ),
+            'doc_ref',
+            isEqualTo: widget!.docDocument?.reference,
           )
           .where(
             'date',
@@ -116,7 +113,7 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
       addToBookingHistory(DtBookingHistoryStruct(
         date: returnedBookedData[loopIndex!].date,
         statusCde: returnedBookedData[loopIndex!].statusCde,
-        cusId: returnedBookedData[loopIndex!].cusId,
+        cusId: returnedBookedData[loopIndex!].cusRef?.id,
         price: returnedBookedData[loopIndex!].price,
         fee: returnedBookedData[loopIndex!].fee,
         time: returnedBookedData[loopIndex!].dayTime,

@@ -1024,7 +1024,7 @@ class FFAppState extends ChangeNotifier {
         'ff_refGender', _refGender.map((x) => x.serialize()).toList());
   }
 
-  int _currentProfileType = 2;
+  int _currentProfileType = 1;
   int get currentProfileType => _currentProfileType;
   set currentProfileType(int value) {
     _currentProfileType = value;

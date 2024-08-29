@@ -825,20 +825,12 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                             .doc()
                                                             .set(
                                                                 createDocBookedTimeRecordData(
-                                                              docId: widget
-                                                                  .docDocument
-                                                                  ?.reference
-                                                                  .id,
                                                               date: _model
                                                                   .selectedDaybook
                                                                   ?.dayValue,
                                                               hour: _model
                                                                   .userSelectedHourItem
                                                                   ?.hourKey,
-                                                              cusId: FFAppState()
-                                                                  .currentCustomer
-                                                                  .cusDocRef
-                                                                  ?.id,
                                                               hourSeq: 1,
                                                               dayTime: functions
                                                                   .concatDateTime(
@@ -874,6 +866,12 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                                     ?.sFee,
                                                                 5,
                                                               ),
+                                                              cusRef: FFAppState()
+                                                                  .currentCustomer
+                                                                  .cusDocRef,
+                                                              docRef: widget
+                                                                  .docDocument
+                                                                  ?.reference,
                                                             ));
                                                         _model.loopIndex1 = 0;
                                                         _model.loopMax1 =

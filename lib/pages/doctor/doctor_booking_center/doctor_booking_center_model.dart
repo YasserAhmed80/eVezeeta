@@ -66,8 +66,8 @@ class DoctorBookingCenterModel
     // get all booked days
     returnedBookedItems = await queryDocBookedTimeRecordOnce(
       queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord.where(
-        'doc_id',
-        isEqualTo: widget!.docDocument?.reference.id,
+        'doc_ref',
+        isEqualTo: widget!.docDocument?.reference,
       ),
     );
     // get distinct days
@@ -87,14 +87,6 @@ class DoctorBookingCenterModel
     bookedList = [];
     while (loopIndex! < loopMax!) {
       addToBookedList(DtBookedItemStruct(
-        cusId: valueOrDefault<String>(
-          returnedBookedItems[loopIndex!].cusId,
-          '0',
-        ),
-        docId: valueOrDefault<String>(
-          returnedBookedItems[loopIndex!].docId,
-          '0',
-        ),
         date: returnedBookedItems[loopIndex!].date,
         time: returnedBookedItems[loopIndex!].dayTime,
         statusCde: valueOrDefault<int>(
@@ -104,6 +96,8 @@ class DoctorBookingCenterModel
         cusName: 'yasser',
         cusTel: '01022222222220',
         itemRef: returnedBookedItems[loopIndex!].reference,
+        docRef: widget!.docDocument?.reference,
+        cusRef: FFAppState().currentCustomer.cusDocRef,
       ));
       loopIndex = loopIndex! + 1;
     }

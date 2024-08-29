@@ -44,15 +44,15 @@ class _DayScheduleComponentWidgetState
       _model.savedDayRef = await queryDocTimeRecordOnce(
         queryBuilder: (docTimeRecord) => docTimeRecord
             .where(
-              'doc_id',
-              isEqualTo: FFAppState().currentDoctor.dbDocRef?.id,
-            )
-            .where(
               'day_id',
               isEqualTo: valueOrDefault<int>(
                 widget.dayIteam?.dayKey,
                 0,
               ),
+            )
+            .where(
+              'doc_ref',
+              isEqualTo: FFAppState().currentDoctor.dbDocRef,
             ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
@@ -420,11 +420,10 @@ class _DayScheduleComponentWidgetState
                                           DocTimeRecord.collection.doc();
                                       await docTimeRecordReference.set({
                                         ...createDocTimeRecordData(
-                                          docId: FFAppState()
-                                              .currentDoctor
-                                              .dbDocRef
-                                              ?.id,
                                           dayId: widget.dayIteam?.dayKey,
+                                          docRef: FFAppState()
+                                              .currentDoctor
+                                              .dbDocRef,
                                         ),
                                         ...mapToFirestore(
                                           {
@@ -435,11 +434,10 @@ class _DayScheduleComponentWidgetState
                                       _model.createdDay =
                                           DocTimeRecord.getDocumentFromData({
                                         ...createDocTimeRecordData(
-                                          docId: FFAppState()
-                                              .currentDoctor
-                                              .dbDocRef
-                                              ?.id,
                                           dayId: widget.dayIteam?.dayKey,
+                                          docRef: FFAppState()
+                                              .currentDoctor
+                                              .dbDocRef,
                                         ),
                                         ...mapToFirestore(
                                           {

@@ -42,8 +42,8 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
       _model.returnedBookedData = await queryDocBookedTimeRecordOnce(
         queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord
             .where(
-              'doc_id',
-              isEqualTo: widget.docDocument?.reference.id,
+              'doc_ref',
+              isEqualTo: widget.docDocument?.reference,
             )
             .where(
               'date',

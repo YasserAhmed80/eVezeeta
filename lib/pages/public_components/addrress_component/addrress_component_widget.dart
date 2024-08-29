@@ -134,10 +134,13 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Icon(
-                Icons.arrow_right,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 24.0,
+              Opacity(
+                opacity: 0.0,
+                child: Icon(
+                  Icons.arrow_right,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24.0,
+                ),
               ),
               Text(
                 valueOrDefault<String>(
