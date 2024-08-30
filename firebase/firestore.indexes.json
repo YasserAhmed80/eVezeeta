@@ -23,6 +23,20 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "cus_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "day_time",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "doc_booked_time",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "doc_ref",
           "order": "ASCENDING"
         },

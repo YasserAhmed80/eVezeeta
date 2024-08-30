@@ -1,14 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/image_component_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/addrress_component/addrress_component_widget.dart';
+import '/pages/public_components/image_component/image_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'customer_profile_model.dart';
@@ -17,10 +19,10 @@ export 'customer_profile_model.dart';
 class CustomerProfileWidget extends StatefulWidget {
   const CustomerProfileWidget({
     super.key,
-    required this.cusDocument,
+    required this.cusRef,
   });
 
-  final CusRecord? cusDocument;
+  final DocumentReference? cusRef;
 
   @override
   State<CustomerProfileWidget> createState() => _CustomerProfileWidgetState();
@@ -38,6 +40,14 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => CustomerProfileModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.returnedCustomer =
+          await CusRecord.getDocumentOnce(widget.cusRef!);
+      _model.cusDocument = _model.returnedCustomer;
+      setState(() {});
+    });
 
     animationsMap.addAll({
       'textOnPageLoadAnimation1': AnimationInfo(
@@ -331,66 +341,11 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                   model: _model.imageComponentModel,
                                   updateCallback: () => setState(() {}),
                                   child: ImageComponentWidget(
-                                    imgRef: widget.cusDocument!.img,
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      valueOrDefault<String>(
-                                        functions
-                                            .calcAge(widget.cusDocument?.dob)
-                                            .toString(),
-                                        '0',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Cairo',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondary,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                    imgRef: valueOrDefault<String>(
+                                      _model.cusDocument?.img,
+                                      '0',
                                     ),
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'wvbhqjb5' /* سنة */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Cairo',
-                                            fontSize: 12.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ].divide(const SizedBox(width: 2.0)),
-                                ),
-                                Text(
-                                  valueOrDefault<String>(
-                                    FFAppState()
-                                        .refGender
-                                        .where((e) =>
-                                            e.key ==
-                                            valueOrDefault<int>(
-                                              widget.cusDocument?.sex,
-                                              -1,
-                                            ))
-                                        .toList()
-                                        .first
-                                        .desc,
-                                    'n',
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
                                 ),
                               ],
                             ),
@@ -416,8 +371,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                             0.0, 0.0, 5.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
-                                            widget.cusDocument?.name,
-                                            'nn',
+                                            _model.cusDocument?.name,
+                                            'n',
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall
@@ -442,31 +397,90 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                           .secondary,
                                       size: 14.0,
                                     ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 5.0, 0.0),
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            dateTimeFormat(
-                                              "d/M/y",
-                                              widget.cusDocument?.dob,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
-                                            ),
-                                            'nn',
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          dateTimeFormat(
+                                            "yMd",
+                                            _model.cusDocument?.dob,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineSmall
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ).animateOnPageLoad(animationsMap[
-                                            'textOnPageLoadAnimation2']!),
+                                          'n',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'textOnPageLoadAnimation2']!),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          functions
+                                              .calcAge(_model.cusDocument?.dob)
+                                              .toString(),
+                                          '0',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 1.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'wvbhqjb5' /* سنة */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 5.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          FFAppState()
+                                              .refGender
+                                              .where((e) =>
+                                                  e.key ==
+                                                  _model.cusDocument?.sex)
+                                              .toList()
+                                              .first
+                                              .desc,
+                                          'n',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -486,8 +500,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                             0.0, 0.0, 5.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
-                                            widget.cusDocument?.tel,
-                                            'nn',
+                                            _model.cusDocument?.tel,
+                                            '0',
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall
@@ -512,20 +526,20 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                         updateCallback: () => setState(() {}),
                                         child: AddrressComponentWidget(
                                           govKey: valueOrDefault<int>(
-                                            widget.cusDocument?.govCde,
-                                            -1,
+                                            _model.cusDocument?.govCde,
+                                            0,
                                           ),
                                           zoneKey: valueOrDefault<int>(
-                                            widget.cusDocument?.zoneCde,
-                                            -1,
+                                            _model.cusDocument?.zoneCde,
+                                            0,
                                           ),
                                           areaKey: valueOrDefault<int>(
-                                            widget.cusDocument?.areaCde,
-                                            -1,
+                                            _model.cusDocument?.areaCde,
+                                            0,
                                           ),
                                           addressDesc: valueOrDefault<String>(
-                                            widget.cusDocument?.addr,
-                                            'none',
+                                            _model.cusDocument?.addr,
+                                            '0',
                                           ),
                                         ),
                                       ),
@@ -538,10 +552,29 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                         ].divide(const SizedBox(width: 10.0)),
                       ),
                     ),
-                    const Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Divider(
+                                  thickness: 2.0,
+                                  indent: 50.0,
+                                  endIndent: 50.0,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding:
@@ -577,22 +610,18 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           FFAppState().updateCurrentCustomerStruct(
-                            (e) =>
-                                e..cusDocRef = widget.cusDocument?.reference,
+                            (e) => e..cusDocRef = widget.cusRef,
                           );
                           setState(() {});
 
                           context.pushNamed(
                             'cus_main_data',
                             queryParameters: {
-                              'cusDocument': serializeParam(
-                                widget.cusDocument,
-                                ParamType.Document,
+                              'cusRef': serializeParam(
+                                _model.cusDocument?.reference,
+                                ParamType.DocumentReference,
                               ),
                             }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'cusDocument': widget.cusDocument,
-                            },
                           );
                         },
                         child: Container(
@@ -666,14 +695,11 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                           context.pushNamed(
                             'customer_favorit_doc',
                             queryParameters: {
-                              'cusDocument': serializeParam(
-                                widget.cusDocument,
-                                ParamType.Document,
+                              'cusRef': serializeParam(
+                                widget.cusRef,
+                                ParamType.DocumentReference,
                               ),
                             }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'cusDocument': widget.cusDocument,
-                            },
                           );
                         },
                         child: Container(
@@ -738,6 +764,84 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'customer_doc_booked',
+                            queryParameters: {
+                              'cusRef': serializeParam(
+                                widget.cusRef,
+                                ParamType.DocumentReference,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            borderRadius: BorderRadius.circular(0.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8.0, 12.0, 8.0, 12.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 0.0, 0.0, 0.0),
+                                  child: Icon(
+                                    Icons.calendar_month_rounded,
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    size: 25.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'ibt4yg2f' /* حجوزاتي */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation3']!),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -765,65 +869,6 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     '598l5kys' /* ملفاتي */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation3']!),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              8.0, 12.0, 8.0, 12.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 0.0, 0.0, 0.0),
-                                child: Icon(
-                                  Icons.calendar_month_rounded,
-                                  color: FlutterFlowTheme.of(context).secondary,
-                                  size: 25.0,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'ibt4yg2f' /* حجوزاتي */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -880,125 +925,107 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('doctor_data_schedule');
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 12.0, 8.0, 12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
-                                          await authManager.signOut();
-                                          GoRouter.of(context)
-                                              .clearRedirectLocation();
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              8.0, 12.0, 8.0, 12.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
 
-                                          context.goNamedAuth(
-                                              'Onboarding01', context.mounted);
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '1hebnzrg' /* تعديل كلمة المرور */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 150.0,
-                                          height: 45.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                        context.goNamedAuth(
+                                            'Onboarding01', context.mounted);
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        '1hebnzrg' /* تعديل كلمة المرور */,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 45.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 0.0,
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(38.0),
+                                              .alternate,
+                                          width: 1.0,
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'buttonOnPageLoadAnimation1']!),
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
-                                          await authManager.signOut();
-                                          GoRouter.of(context)
-                                              .clearRedirectLocation();
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation1']!),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
 
-                                          context.goNamedAuth(
-                                              'Onboarding01', context.mounted);
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '6elc08i0' /* خروج */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 150.0,
-                                          height: 45.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                        context.goNamedAuth(
+                                            'Onboarding01', context.mounted);
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        '6elc08i0' /* خروج */,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 45.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 0.0,
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(38.0),
+                                              .alternate,
+                                          width: 1.0,
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'buttonOnPageLoadAnimation2']!),
-                                    ].divide(const SizedBox(width: 10.0)),
-                                  ),
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation2']!),
+                                  ].divide(const SizedBox(width: 10.0)),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ).animateOnPageLoad(
@@ -1205,6 +1232,14 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                   ],
                 ),
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0.0, 1.0),
+              child: wrapWithModel(
+                model: _model.customNavbarModel,
+                updateCallback: () => setState(() {}),
+                child: const CustomNavbarWidget(),
               ),
             ),
           ],

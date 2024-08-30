@@ -9,7 +9,12 @@ import 'doctor_data_images_model.dart';
 export 'doctor_data_images_model.dart';
 
 class DoctorDataImagesWidget extends StatefulWidget {
-  const DoctorDataImagesWidget({super.key});
+  const DoctorDataImagesWidget({
+    super.key,
+    required this.docRef,
+  });
+
+  final DocumentReference? docRef;
 
   @override
   State<DoctorDataImagesWidget> createState() => _DoctorDataImagesWidgetState();
@@ -147,13 +152,14 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     child: UploadPhotoWidget(
                                       storageFolder: 'doc',
                                       entityType: 'doc',
-                                      entityCode: FFAppState()
-                                          .currentDoctor
-                                          .dbDocRef!
-                                          .id,
+                                      entityCode: valueOrDefault<String>(
+                                        widget.docRef?.id,
+                                        'n',
+                                      ),
                                       imgType: 'p',
                                       imgSeq: 1,
                                       imgRef: '\'\'',
+                                      isActive: true,
                                     ),
                                   ),
                                 ),
@@ -242,13 +248,14 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                       child: UploadPhotoWidget(
                                         storageFolder: 'doc',
                                         entityType: 'doc',
-                                        entityCode: FFAppState()
-                                            .currentDoctor
-                                            .dbDocRef!
-                                            .id,
+                                        entityCode: valueOrDefault<String>(
+                                          widget.docRef?.id,
+                                          'n',
+                                        ),
                                         imgType: 'h1',
                                         imgSeq: 2,
                                         imgRef: '\'\'',
+                                        isActive: true,
                                       ),
                                     ),
                                   ),
@@ -304,13 +311,14 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                       child: UploadPhotoWidget(
                                         storageFolder: 'doc',
                                         entityType: 'doc',
-                                        entityCode: FFAppState()
-                                            .currentDoctor
-                                            .dbDocRef!
-                                            .id,
+                                        entityCode: valueOrDefault<String>(
+                                          widget.docRef?.id,
+                                          'n',
+                                        ),
                                         imgType: 'h2',
                                         imgSeq: 3,
                                         imgRef: '\'\'',
+                                        isActive: true,
                                       ),
                                     ),
                                   ),
@@ -371,13 +379,14 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     child: UploadPhotoWidget(
                                       storageFolder: 'doc',
                                       entityType: 'doc',
-                                      entityCode: FFAppState()
-                                          .currentDoctor
-                                          .dbDocRef!
-                                          .id,
+                                      entityCode: valueOrDefault<String>(
+                                        widget.docRef?.id,
+                                        'n',
+                                      ),
                                       imgType: 'r1',
                                       imgSeq: 1,
                                       imgRef: '\'\'',
+                                      isActive: true,
                                     ),
                                   ),
                                 ),
@@ -447,6 +456,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                         imgType: 'r2',
                                         imgSeq: 1,
                                         imgRef: '\'\'',
+                                        isActive: true,
                                       ),
                                     ),
                                   ),

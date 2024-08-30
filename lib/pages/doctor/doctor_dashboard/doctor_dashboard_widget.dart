@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/calender_component/calender_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -14,10 +15,10 @@ export 'doctor_dashboard_model.dart';
 class DoctorDashboardWidget extends StatefulWidget {
   const DoctorDashboardWidget({
     super.key,
-    required this.docDocument,
+    required this.docRef,
   });
 
-  final DocRecord? docDocument;
+  final DocumentReference? docRef;
 
   @override
   State<DoctorDashboardWidget> createState() => _DoctorDashboardWidgetState();
@@ -124,295 +125,331 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      _model.fromDate =
-                                          functions.getCurrentDate();
-                                      _model.toDate =
-                                          functions.getCurrentDate();
-                                      setState(() {});
-                                      await _model.loadDataAction(context);
-                                      setState(() {});
-                                      _model.sPeriod = 'd';
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 41.0,
-                                      constraints: const BoxConstraints(
-                                        minWidth: 60.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: _model.sPeriod == 'd'
-                                            ? FlutterFlowTheme.of(context)
-                                                .secondary
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(14.0),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 2.0, 0.0, 2.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.fromDate =
+                                            functions.getCurrentDate();
+                                        _model.toDate =
+                                            functions.getCurrentDate();
+                                        setState(() {});
+                                        await _model.loadDataAction(context);
+                                        setState(() {});
+                                        _model.sPeriod = 'd';
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        width: 65.0,
+                                        height: 35.0,
+                                        constraints: const BoxConstraints(
+                                          minWidth: 60.0,
                                         ),
-                                      ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'i4fc6f89' /* اليوم */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Cairo',
-                                                  color: _model.sPeriod == 'd'
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      _model.fromDate =
-                                          functions.getDateBack('ld');
-                                      _model.toDate =
-                                          functions.getDateBack('ld');
-                                      setState(() {});
-                                      await _model.loadDataAction(context);
-                                      setState(() {});
-                                      _model.sPeriod = 'ld';
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 41.0,
-                                      constraints: const BoxConstraints(
-                                        minWidth: 60.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: valueOrDefault<Color>(
-                                          _model.sPeriod == 'ld'
+                                        decoration: BoxDecoration(
+                                          color: _model.sPeriod == 'd'
                                               ? FlutterFlowTheme.of(context)
                                                   .secondary
                                               : FlutterFlowTheme.of(context)
                                                   .primaryBackground,
-                                          FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(14.0),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                        ),
-                                      ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '5ui3vb00' /* امس */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Cairo',
-                                                  color: _model.sPeriod == 'ld'
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
-                                                  letterSpacing: 0.0,
-                                                ),
+                                          borderRadius:
+                                              BorderRadius.circular(14.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
                                           ),
-                                        ],
+                                        ),
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'i4fc6f89' /* اليوم */,
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color: _model.sPeriod == 'd'
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      _model.fromDate =
-                                          functions.getDateBack('w');
-                                      _model.toDate =
-                                          functions.getCurrentDate();
-                                      setState(() {});
-                                      await _model.loadDataAction(context);
-                                      setState(() {});
-                                      _model.sPeriod = 'w';
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 41.0,
-                                      constraints: const BoxConstraints(
-                                        minWidth: 60.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: _model.sPeriod == 'w'
-                                            ? FlutterFlowTheme.of(context)
-                                                .secondary
-                                            : FlutterFlowTheme.of(context)
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 2.0, 0.0, 2.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.fromDate =
+                                            functions.getDateBack('ld');
+                                        _model.toDate =
+                                            functions.getDateBack('ld');
+                                        setState(() {});
+                                        await _model.loadDataAction(context);
+                                        setState(() {});
+                                        _model.sPeriod = 'ld';
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        width: 65.0,
+                                        height: 35.0,
+                                        constraints: const BoxConstraints(
+                                          minWidth: 60.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: valueOrDefault<Color>(
+                                            _model.sPeriod == 'ld'
+                                                ? FlutterFlowTheme.of(context)
+                                                    .secondary
+                                                : FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                            FlutterFlowTheme.of(context)
                                                 .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(14.0),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(14.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
                                         ),
-                                      ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'duou9dxb' /* اسبوع */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              color: _model.sPeriod == 'w'
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .primaryBackground
-                                                  : FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '5ui3vb00' /* امس */,
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color: _model.sPeriod ==
+                                                            'ld'
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    letterSpacing: 0.0,
+                                                  ),
                                             ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      _model.fromDate =
-                                          functions.getDateBack('m');
-                                      _model.toDate =
-                                          functions.getCurrentDate();
-                                      setState(() {});
-                                      await _model.loadDataAction(context);
-                                      setState(() {});
-                                      _model.sPeriod = 'm';
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 41.0,
-                                      constraints: const BoxConstraints(
-                                        minWidth: 60.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: _model.sPeriod == 'm'
-                                            ? FlutterFlowTheme.of(context)
-                                                .secondary
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(14.0),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 2.0, 0.0, 2.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.fromDate =
+                                            functions.getDateBack('w');
+                                        _model.toDate =
+                                            functions.getCurrentDate();
+                                        setState(() {});
+                                        await _model.loadDataAction(context);
+                                        setState(() {});
+                                        _model.sPeriod = 'w';
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        width: 65.0,
+                                        height: 35.0,
+                                        constraints: const BoxConstraints(
+                                          minWidth: 60.0,
                                         ),
-                                      ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'pmg9dnce' /* شهر */,
+                                        decoration: BoxDecoration(
+                                          color: _model.sPeriod == 'w'
+                                              ? FlutterFlowTheme.of(context)
+                                                  .secondary
+                                              : FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(14.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              color: _model.sPeriod == 'm'
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .primaryBackground
-                                                  : FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                            ),
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'duou9dxb' /* اسبوع */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                color: _model.sPeriod == 'w'
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      _model.fromDate =
-                                          functions.getDateBack('y');
-                                      _model.toDate =
-                                          functions.getCurrentDate();
-                                      setState(() {});
-                                      await _model.loadDataAction(context);
-                                      setState(() {});
-                                      _model.sPeriod = 'y';
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      width: 65.0,
-                                      height: 41.0,
-                                      constraints: const BoxConstraints(
-                                        minWidth: 60.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: _model.sPeriod == 'y'
-                                            ? FlutterFlowTheme.of(context)
-                                                .secondary
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(14.0),
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 2.0, 0.0, 2.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.fromDate =
+                                            functions.getDateBack('m');
+                                        _model.toDate =
+                                            functions.getCurrentDate();
+                                        setState(() {});
+                                        await _model.loadDataAction(context);
+                                        setState(() {});
+                                        _model.sPeriod = 'm';
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        width: 65.0,
+                                        height: 35.0,
+                                        constraints: const BoxConstraints(
+                                          minWidth: 60.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: _model.sPeriod == 'm'
+                                              ? FlutterFlowTheme.of(context)
+                                                  .secondary
+                                              : FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(14.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                        ),
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'pmg9dnce' /* شهر */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                color: _model.sPeriod == 'm'
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                       ),
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'r7n4ex3s' /* سنة */,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 2.0, 0.0, 2.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.fromDate =
+                                            functions.getDateBack('y');
+                                        _model.toDate =
+                                            functions.getCurrentDate();
+                                        setState(() {});
+                                        await _model.loadDataAction(context);
+                                        setState(() {});
+                                        _model.sPeriod = 'y';
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        width: 65.0,
+                                        height: 35.0,
+                                        constraints: const BoxConstraints(
+                                          minWidth: 60.0,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              color: _model.sPeriod == 'y'
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .primaryBackground
-                                                  : FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                            ),
+                                        decoration: BoxDecoration(
+                                          color: _model.sPeriod == 'y'
+                                              ? FlutterFlowTheme.of(context)
+                                                  .secondary
+                                              : FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(14.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                        ),
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'r7n4ex3s' /* سنة */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                color: _model.sPeriod == 'y'
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -703,16 +740,8 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       minWidth: 75.0,
                                     ),
                                     decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                          const Color(0xFF2C3A63)
-                                        ],
-                                        stops: const [0.0, 1.0],
-                                        begin: const AlignmentDirectional(0.0, -1.0),
-                                        end: const AlignmentDirectional(0, 1.0),
-                                      ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondary,
                                       borderRadius: BorderRadius.circular(5.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
@@ -767,16 +796,8 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       minWidth: 75.0,
                                     ),
                                     decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                          const Color(0xFF2C3A63)
-                                        ],
-                                        stops: const [0.0, 1.0],
-                                        begin: const AlignmentDirectional(0.0, -1.0),
-                                        end: const AlignmentDirectional(0, 1.0),
-                                      ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondary,
                                       borderRadius: BorderRadius.circular(5.0),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
@@ -1511,6 +1532,14 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0.0, 1.0),
+              child: wrapWithModel(
+                model: _model.customNavbarModel,
+                updateCallback: () => setState(() {}),
+                child: const CustomNavbarWidget(),
               ),
             ),
           ],

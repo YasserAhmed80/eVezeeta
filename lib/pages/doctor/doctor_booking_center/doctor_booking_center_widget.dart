@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
+import '/pages/public_components/phone_icon_component/phone_icon_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -14,10 +15,10 @@ export 'doctor_booking_center_model.dart';
 class DoctorBookingCenterWidget extends StatefulWidget {
   const DoctorBookingCenterWidget({
     super.key,
-    required this.docDocument,
+    required this.docRef,
   });
 
-  final DocRecord? docDocument;
+  final DocumentReference? docRef;
 
   @override
   State<DoctorBookingCenterWidget> createState() =>
@@ -228,55 +229,60 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                _model.filteredStatusCde = 0;
-                                setState(() {});
-                                await _model.getFilteredBookedList(context);
-                              },
-                              child: Container(
-                                height: 35.0,
-                                constraints: const BoxConstraints(
-                                  minWidth: 50.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: _model.filteredStatusCde == 0
-                                      ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(14.0),
-                                  border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
-                                    width: 1.0,
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 2.0, 0.0, 2.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  _model.filteredStatusCde = 0;
+                                  setState(() {});
+                                  await _model.getFilteredBookedList(context);
+                                },
+                                child: Container(
+                                  height: 35.0,
+                                  constraints: const BoxConstraints(
+                                    minWidth: 50.0,
                                   ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 0.0, 5.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'z4h0z9fh' /* الكل */,
+                                  decoration: BoxDecoration(
+                                    color: _model.filteredStatusCde == 0
+                                        ? FlutterFlowTheme.of(context).primary
+                                        : FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    border: Border.all(
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        5.0, 0.0, 5.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'z4h0z9fh' /* الكل */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Cairo',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -320,24 +326,18 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                   bookStatusItemItem.code) {
                                                 return Opacity(
                                                   opacity: 0.8,
-                                                  child: Container(
-                                                    height: 35.0,
-                                                    constraints: const BoxConstraints(
-                                                      minWidth: 50.0,
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          valueOrDefault<Color>(
-                                                        bookStatusItemItem
-                                                            .color,
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .tertiary,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 2.0,
+                                                                0.0, 2.0),
+                                                    child: Container(
+                                                      height: 35.0,
+                                                      constraints:
+                                                          const BoxConstraints(
+                                                        minWidth: 50.0,
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              14.0),
-                                                      border: Border.all(
+                                                      decoration: BoxDecoration(
                                                         color: valueOrDefault<
                                                             Color>(
                                                           bookStatusItemItem
@@ -346,48 +346,61 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                                   context)
                                                               .tertiary,
                                                         ),
-                                                        width: 1.0,
-                                                      ),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5.0,
-                                                                  0.0,
-                                                                  5.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              bookStatusItemItem
-                                                                  .desc,
-                                                              '--',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Cairo',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(14.0),
+                                                        border: Border.all(
+                                                          color: valueOrDefault<
+                                                              Color>(
+                                                            bookStatusItemItem
+                                                                .color,
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .tertiary,
                                                           ),
-                                                        ],
+                                                          width: 1.0,
+                                                        ),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    0.0,
+                                                                    5.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                bookStatusItemItem
+                                                                    .desc,
+                                                                '--',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Cairo',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -395,66 +408,73 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                               } else {
                                                 return Opacity(
                                                   opacity: 0.8,
-                                                  child: Container(
-                                                    height: 35.0,
-                                                    constraints: const BoxConstraints(
-                                                      minWidth: 50.0,
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              14.0),
-                                                      border: Border.all(
-                                                        color: valueOrDefault<
-                                                            Color>(
-                                                          bookStatusItemItem
-                                                              .color,
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .tertiary,
-                                                        ),
-                                                        width: 1.0,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 2.0,
+                                                                0.0, 2.0),
+                                                    child: Container(
+                                                      height: 35.0,
+                                                      constraints:
+                                                          const BoxConstraints(
+                                                        minWidth: 50.0,
                                                       ),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5.0,
-                                                                  0.0,
-                                                                  5.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              bookStatusItemItem
-                                                                  .desc,
-                                                              '--',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Cairo',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(14.0),
+                                                        border: Border.all(
+                                                          color: valueOrDefault<
+                                                              Color>(
+                                                            bookStatusItemItem
+                                                                .color,
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .tertiary,
                                                           ),
-                                                        ],
+                                                          width: 1.0,
+                                                        ),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    5.0,
+                                                                    0.0,
+                                                                    5.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                bookStatusItemItem
+                                                                    .desc,
+                                                                '--',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Cairo',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -742,7 +762,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                               FontWeight.bold,
                                                         ),
                                               ),
-                                            ],
+                                            ].divide(const SizedBox(width: 3.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -783,7 +803,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                               FontWeight.w500,
                                                         ),
                                               ),
-                                            ],
+                                            ].divide(const SizedBox(width: 3.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -824,7 +844,29 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                               FontWeight.w500,
                                                         ),
                                               ),
-                                            ],
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  dateTimeFormat(
+                                                    "relative",
+                                                    bookedHoursItemItem.date,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  ),
+                                                  '0',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          fontSize: 16.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                              ),
+                                            ].divide(const SizedBox(width: 3.0)),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -843,21 +885,26 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  bookedHoursItemItem.cusTel,
-                                                  '00',
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 3.0, 0.0),
+                                                child: Text(
+                                                  valueOrDefault<String>(
+                                                    bookedHoursItemItem.cusTel,
+                                                    '00',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
                                               ),
                                               Expanded(
                                                 child: Row(
@@ -866,13 +913,9 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Icon(
-                                                      Icons.phone,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 25.0,
+                                                    PhoneIconComponentWidget(
+                                                      key: Key(
+                                                          'Key5rq_${bookedHoursItemIndex}_of_${bookedHoursItem.length}'),
                                                     ),
                                                   ],
                                                 ),
@@ -1061,7 +1104,6 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                               ),
                                                               options:
                                                                   FFButtonOptions(
-                                                                height: 40.0,
                                                                 padding: const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
@@ -1128,7 +1170,6 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                               ),
                                                               options:
                                                                   FFButtonOptions(
-                                                                height: 40.0,
                                                                 padding: const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
@@ -1195,7 +1236,6 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                               ),
                                                               options:
                                                                   FFButtonOptions(
-                                                                height: 40.0,
                                                                 padding: const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,

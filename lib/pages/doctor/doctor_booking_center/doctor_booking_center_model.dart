@@ -62,12 +62,13 @@ class DoctorBookingCenterModel
   /// Action blocks.
   Future getBookedList(BuildContext context) async {
     List<DocBookedTimeRecord>? returnedBookedItems;
+    CusRecord? returnedCustomer;
 
     // get all booked days
     returnedBookedItems = await queryDocBookedTimeRecordOnce(
       queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord.where(
         'doc_ref',
-        isEqualTo: widget!.docDocument?.reference,
+        isEqualTo: widget!.docRef,
       ),
     );
     // get distinct days
@@ -96,9 +97,18 @@ class DoctorBookingCenterModel
         cusName: 'yasser',
         cusTel: '01022222222220',
         itemRef: returnedBookedItems[loopIndex!].reference,
-        docRef: widget!.docDocument?.reference,
+        docRef: widget!.docRef,
         cusRef: FFAppState().currentCustomer.cusDocRef,
       ));
+      // get customer data
+      returnedCustomer = await CusRecord.getDocumentOnce(
+          returnedBookedItems[loopIndex!].cusRef!);
+      insertAtIndexInBookedList(
+          loopIndex!,
+          DtBookedItemStruct(
+            cusName: returnedCustomer.name,
+            cusTel: returnedCustomer.tel,
+          ));
       loopIndex = loopIndex! + 1;
     }
   }

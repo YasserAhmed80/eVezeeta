@@ -128,10 +128,6 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                               color: FlutterFlowTheme.of(context).secondaryText,
                               borderRadius: BorderRadius.circular(12.0),
                               shape: BoxShape.rectangle,
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 1.0,
-                              ),
                             ),
                             child: Stack(
                               children: [
@@ -176,10 +172,6 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.0),
                               shape: BoxShape.rectangle,
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 1.0,
-                              ),
                             ),
                             child: AuthUserStreamWidget(
                               builder: (context) => ClipRRect(
@@ -298,20 +290,11 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                           setState(() {});
                                           if ((widget.entityType == 'doc') &&
                                               (widget.imgType == 'p')) {
-                                            FFAppState()
-                                                .updateCurrentDoctorStruct(
-                                              (e) =>
-                                                  e..img = _model.curretImage,
-                                            );
-                                            setState(() {});
-
                                             await FFAppState()
                                                 .currentDoctor
                                                 .dbDocRef!
                                                 .update(createDocRecordData(
-                                                  img: FFAppState()
-                                                      .currentDoctor
-                                                      .img,
+                                                  img: _model.curretImage,
                                                 ));
                                           } else {
                                             if ((widget.entityType == 'cus') &&

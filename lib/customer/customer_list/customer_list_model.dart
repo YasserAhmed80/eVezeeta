@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import 'customer_list_widget.dart' show CustomerListWidget;
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -14,8 +15,13 @@ class CustomerListModel extends FlutterFlowModel<CustomerListWidget> {
   Query? listViewPagingQuery;
   List<StreamSubscription?> listViewStreamSubscriptions = [];
 
+  // Model for custom_navbar component.
+  late CustomNavbarModel customNavbarModel;
+
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    customNavbarModel = createModel(context, () => CustomNavbarModel());
+  }
 
   @override
   void dispose() {
@@ -23,6 +29,8 @@ class CustomerListModel extends FlutterFlowModel<CustomerListWidget> {
       s?.cancel();
     }
     listViewPagingController?.dispose();
+
+    customNavbarModel.dispose();
   }
 
   /// Additional helper methods.

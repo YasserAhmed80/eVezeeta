@@ -46,7 +46,7 @@ class _RatingComponentWidgetState extends State<RatingComponentWidget> {
         color: FlutterFlowTheme.of(context).tertiary,
       ),
       direction: Axis.horizontal,
-      initialRating: _model.ratingBarValue ??= 4.0,
+      initialRating: _model.ratingBarValue ??= 3.0,
       unratedColor: FlutterFlowTheme.of(context).accent3,
       itemCount: 5,
       itemSize: 20.0,

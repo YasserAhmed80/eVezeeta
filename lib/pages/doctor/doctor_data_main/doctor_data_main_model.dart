@@ -39,11 +39,12 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // State field(s) for fullNameField widget.
-  FocusNode? fullNameFieldFocusNode;
-  TextEditingController? fullNameFieldTextController;
-  String? Function(BuildContext, String?)? fullNameFieldTextControllerValidator;
-  String? _fullNameFieldTextControllerValidator(
+  // State field(s) for txtFullNameField widget.
+  FocusNode? txtFullNameFieldFocusNode;
+  TextEditingController? txtFullNameFieldTextController;
+  String? Function(BuildContext, String?)?
+      txtFullNameFieldTextControllerValidator;
+  String? _txtFullNameFieldTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
@@ -66,11 +67,12 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
       docTitleChoiceValueController?.value?.firstOrNull;
   set docTitleChoiceValue(String? val) =>
       docTitleChoiceValueController?.value = val != null ? [val] : [];
-  // State field(s) for docTitleField widget.
-  FocusNode? docTitleFieldFocusNode;
-  TextEditingController? docTitleFieldTextController;
-  String? Function(BuildContext, String?)? docTitleFieldTextControllerValidator;
-  String? _docTitleFieldTextControllerValidator(
+  // State field(s) for txtDocTitleField widget.
+  FocusNode? txtDocTitleFieldFocusNode;
+  TextEditingController? txtDocTitleFieldTextController;
+  String? Function(BuildContext, String?)?
+      txtDocTitleFieldTextControllerValidator;
+  String? _txtDocTitleFieldTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
@@ -81,11 +83,11 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
     return null;
   }
 
-  // State field(s) for aboutField widget.
-  FocusNode? aboutFieldFocusNode;
-  TextEditingController? aboutFieldTextController;
-  String? Function(BuildContext, String?)? aboutFieldTextControllerValidator;
-  String? _aboutFieldTextControllerValidator(
+  // State field(s) for txtAboutField widget.
+  FocusNode? txtAboutFieldFocusNode;
+  TextEditingController? txtAboutFieldTextController;
+  String? Function(BuildContext, String?)? txtAboutFieldTextControllerValidator;
+  String? _txtAboutFieldTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
@@ -105,15 +107,16 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   // Model for loadCategoriesComponent component.
   late LoadCategoriesComponentModel loadCategoriesComponentModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  DocRecord? docReference;
+  DocRecord? createdDoc;
 
   @override
   void initState(BuildContext context) {
-    fullNameFieldTextControllerValidator =
-        _fullNameFieldTextControllerValidator;
-    docTitleFieldTextControllerValidator =
-        _docTitleFieldTextControllerValidator;
-    aboutFieldTextControllerValidator = _aboutFieldTextControllerValidator;
+    txtFullNameFieldTextControllerValidator =
+        _txtFullNameFieldTextControllerValidator;
+    txtDocTitleFieldTextControllerValidator =
+        _txtDocTitleFieldTextControllerValidator;
+    txtAboutFieldTextControllerValidator =
+        _txtAboutFieldTextControllerValidator;
     switchTitleComponentModels =
         FlutterFlowDynamicModels(() => SwitchTitleComponentModel());
     loadCategoriesComponentModel =
@@ -122,14 +125,14 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
 
   @override
   void dispose() {
-    fullNameFieldFocusNode?.dispose();
-    fullNameFieldTextController?.dispose();
+    txtFullNameFieldFocusNode?.dispose();
+    txtFullNameFieldTextController?.dispose();
 
-    docTitleFieldFocusNode?.dispose();
-    docTitleFieldTextController?.dispose();
+    txtDocTitleFieldFocusNode?.dispose();
+    txtDocTitleFieldTextController?.dispose();
 
-    aboutFieldFocusNode?.dispose();
-    aboutFieldTextController?.dispose();
+    txtAboutFieldFocusNode?.dispose();
+    txtAboutFieldTextController?.dispose();
 
     switchTitleComponentModels.dispose();
     loadCategoriesComponentModel.dispose();

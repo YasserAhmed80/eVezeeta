@@ -94,17 +94,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'doctor_data_main',
           path: '/doctorDataMain',
-          builder: (context, params) => const DoctorDataMainWidget(),
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => DoctorDataMainWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: 'doctor_data_address',
           path: '/doctorDataAddress',
-          builder: (context, params) => const DoctorDataAddressWidget(),
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => DoctorDataAddressWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: 'doctor_data_images',
           path: '/doctorDataImages',
-          builder: (context, params) => const DoctorDataImagesWidget(),
+          builder: (context, params) => DoctorDataImagesWidget(
+            docRef: params.getParam(
+              'docRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['doc'],
+            ),
+          ),
         ),
         FFRoute(
           name: 'doctor_List',
@@ -114,12 +137,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'doctor_data_schedule',
           path: '/doctorDataSchedule',
-          builder: (context, params) => const DoctorDataScheduleWidget(),
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => DoctorDataScheduleWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: 'doctor_profile',
           path: '/doctorProfile',
-          builder: (context, params) => const DoctorProfileWidget(),
+          builder: (context, params) => DoctorProfileWidget(
+            docRef: params.getParam(
+              'docRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['doc'],
+            ),
+          ),
         ),
         FFRoute(
           name: 'doctor_search',
@@ -142,26 +180,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'doctor_booking_center',
           path: '/doctorBookingCenter',
-          asyncParams: {
-            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
-          },
           builder: (context, params) => DoctorBookingCenterWidget(
-            docDocument: params.getParam(
-              'docDocument',
-              ParamType.Document,
+            docRef: params.getParam(
+              'docRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['doc'],
             ),
           ),
         ),
         FFRoute(
           name: 'doctor_dashboard',
           path: '/doctorDashboard',
-          asyncParams: {
-            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
-          },
           builder: (context, params) => DoctorDashboardWidget(
-            docDocument: params.getParam(
-              'docDocument',
-              ParamType.Document,
+            docRef: params.getParam(
+              'docRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['doc'],
             ),
           ),
         ),
@@ -203,13 +239,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'cus_main_data',
           path: '/cusMainData',
-          asyncParams: {
-            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
-          },
           builder: (context, params) => CusMainDataWidget(
-            cusDocument: params.getParam(
-              'cusDocument',
-              ParamType.Document,
+            cusRef: params.getParam(
+              'cusRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['cus'],
             ),
           ),
         ),
@@ -226,26 +261,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'customer_profile',
           path: '/customerProfile',
-          asyncParams: {
-            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
-          },
           builder: (context, params) => CustomerProfileWidget(
-            cusDocument: params.getParam(
-              'cusDocument',
-              ParamType.Document,
+            cusRef: params.getParam(
+              'cusRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['cus'],
             ),
           ),
         ),
         FFRoute(
           name: 'customer_favorit_doc',
           path: '/customerFavoritDoc',
-          asyncParams: {
-            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
-          },
           builder: (context, params) => CustomerFavoritDocWidget(
-            cusDocument: params.getParam(
-              'cusDocument',
-              ParamType.Document,
+            cusRef: params.getParam(
+              'cusRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['cus'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'customer_doc_booked',
+          path: '/customerDocBooked',
+          builder: (context, params) => CustomerDocBookedWidget(
+            cusRef: params.getParam(
+              'cusRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['cus'],
             ),
           ),
         )

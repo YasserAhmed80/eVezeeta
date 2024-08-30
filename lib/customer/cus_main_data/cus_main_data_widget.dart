@@ -22,10 +22,10 @@ export 'cus_main_data_model.dart';
 class CusMainDataWidget extends StatefulWidget {
   const CusMainDataWidget({
     super.key,
-    this.cusDocument,
+    this.cusRef,
   });
 
-  final CusRecord? cusDocument;
+  final DocumentReference? cusRef;
 
   @override
   State<CusMainDataWidget> createState() => _CusMainDataWidgetState();
@@ -43,48 +43,22 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((widget.cusDocument != null) == true) {
-        _model.cusNmae = valueOrDefault<String>(
-          widget.cusDocument?.name,
-          'n',
-        );
-        _model.tel = valueOrDefault<String>(
-          widget.cusDocument?.tel,
-          'n',
-        );
-        _model.countryKey = valueOrDefault<int>(
-          widget.cusDocument?.conCde,
-          -1,
-        );
-        _model.govKey = valueOrDefault<int>(
-          widget.cusDocument?.govCde,
-          -1,
-        );
-        _model.zoneKey = valueOrDefault<int>(
-          widget.cusDocument?.zoneCde,
-          -1,
-        );
-        _model.areaKey = valueOrDefault<int>(
-          widget.cusDocument?.areaCde,
-          -1,
-        );
-        _model.addressDesc = valueOrDefault<String>(
-          widget.cusDocument?.addr,
-          'n',
-        );
-        _model.cusDOB = widget.cusDocument?.dob;
-        _model.cusID = valueOrDefault<String>(
-          widget.cusDocument?.reference.id,
-          'none',
-        );
-        _model.cusImage = valueOrDefault<String>(
-          widget.cusDocument?.img,
-          'n',
-        );
-        _model.genderKey = valueOrDefault<int>(
-          widget.cusDocument?.sex,
-          -1,
-        );
+      if (widget.cusRef != null) {
+        _model.returnedReadCustomer =
+            await CusRecord.getDocumentOnce(widget.cusRef!);
+        _model.cusDocument = _model.returnedReadCustomer;
+        setState(() {});
+        _model.cusNmae = _model.cusDocument!.name;
+        _model.tel = _model.cusDocument!.tel;
+        _model.countryKey = _model.cusDocument?.conCde;
+        _model.govKey = _model.cusDocument?.govCde;
+        _model.zoneKey = _model.cusDocument?.zoneCde;
+        _model.areaKey = _model.cusDocument?.areaCde;
+        _model.addressDesc = _model.cusDocument!.addr;
+        _model.cusDOB = _model.cusDocument?.dob;
+        _model.cusID = _model.cusDocument!.reference.id;
+        _model.cusImage = _model.cusDocument!.img;
+        _model.genderKey = _model.cusDocument?.sex;
         _model.isDataSaved = true;
         setState(() {});
         setState(() {
@@ -1593,14 +1567,14 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 child: UploadPhotoWidget(
                                                   storageFolder: 'cus',
                                                   entityType: 'cus',
-                                                  entityCode: widget
-                                                              .cusDocument !=
+                                                  entityCode: FFAppState()
+                                                              .currentCustomer
+                                                              .cusDocRef !=
                                                           null
-                                                      ? valueOrDefault<String>(
-                                                          widget.cusDocument
-                                                              ?.reference.id,
-                                                          'nnn',
-                                                        )
+                                                      ? FFAppState()
+                                                          .currentCustomer
+                                                          .cusDocRef!
+                                                          .id
                                                       : 'nn',
                                                   imgType: 'p',
                                                   imgSeq: 1,
@@ -1668,9 +1642,9 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                             }
                             if ((_model.formIsValid == true) &&
                                 (_model.isValidData == true)) {
-                              _model.savedRecord =
+                              _model.savedRef =
                                   await _model.createOrUpdateAction(context);
-                              if (_model.savedRecord?.reference != null) {
+                              if (_model.savedRef != null) {
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
@@ -1688,11 +1662,10 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                   },
                                 );
                                 _model.isDataSaved = true;
-                                _model.cusID = _model.savedRecord!.reference.id;
+                                _model.cusID = _model.savedRef!.id;
                                 setState(() {});
                                 FFAppState().updateCurrentCustomerStruct(
-                                  (e) => e
-                                    ..cusDocRef = _model.savedRecord?.reference,
+                                  (e) => e..cusDocRef = _model.savedRef,
                                 );
                                 setState(() {});
                               } else {

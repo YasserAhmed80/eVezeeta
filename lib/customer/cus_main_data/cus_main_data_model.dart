@@ -43,10 +43,14 @@ class CusMainDataModel extends FlutterFlowModel<CusMainDataWidget> {
 
   String cusImage = '-';
 
+  CusRecord? cusDocument;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
+  // Stores action output result for [Backend Call - Read Document] action in cus_main_data widget.
+  CusRecord? returnedReadCustomer;
   // State field(s) for txtFullNameField widget.
   FocusNode? txtFullNameFieldFocusNode;
   TextEditingController? txtFullNameFieldTextController;
@@ -147,7 +151,7 @@ class CusMainDataModel extends FlutterFlowModel<CusMainDataWidget> {
   // Stores action output result for [Validate Form] action in Button widget.
   bool? formIsValid;
   // Stores action output result for [Action Block - CreateOrUpdateAction] action in Button widget.
-  CusRecord? savedRecord;
+  DocumentReference? savedRef;
 
   @override
   void initState(BuildContext context) {
@@ -209,16 +213,13 @@ class CusMainDataModel extends FlutterFlowModel<CusMainDataWidget> {
     return true;
   }
 
-  Future<CusRecord?> createOrUpdateAction(
-    BuildContext context, {
-    CusRecord? cusDoc,
-  }) async {
+  Future<DocumentReference?> createOrUpdateAction(BuildContext context) async {
     CusRecord? createdRecord;
 
-    if (widget!.cusDocument != null) {
+    if (widget!.cusRef != null) {
       // update data
 
-      await widget!.cusDocument!.reference.update(createCusRecordData(
+      await widget!.cusRef!.update(createCusRecordData(
         name: valueOrDefault<String>(
           txtFullNameFieldTextController.text,
           'n',
@@ -235,7 +236,7 @@ class CusMainDataModel extends FlutterFlowModel<CusMainDataWidget> {
         areaCde: areaKey,
         addr: txtAddressDescTextController.text,
       ));
-      return widget!.cusDocument;
+      return widget!.cusRef;
     } else {
       var cusRecordReference = CusRecord.collection.doc();
       await cusRecordReference.set(createCusRecordData(
@@ -262,7 +263,7 @@ class CusMainDataModel extends FlutterFlowModel<CusMainDataWidget> {
             addr: txtAddressDescTextController.text,
           ),
           cusRecordReference);
-      return createdRecord;
+      return createdRecord.reference;
     }
   }
 }

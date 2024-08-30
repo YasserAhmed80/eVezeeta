@@ -69,7 +69,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
         );
         setState(() {});
       }
-      _model.timer1Controller.onStartTimer();
+      _model.timerController.onStartTimer();
     });
 
     animationsMap.addAll({
@@ -217,12 +217,15 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                 child: Container(
                   width: 100.0,
                   height: 0.0,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color(0x00FFFFFF), Colors.white],
-                      stops: [0.0, 1.0],
-                      begin: AlignmentDirectional(0.0, -1.0),
-                      end: AlignmentDirectional(0, 1.0),
+                      colors: [
+                        FlutterFlowTheme.of(context).primary,
+                        Colors.white
+                      ],
+                      stops: const [0.0, 1.0],
+                      begin: const AlignmentDirectional(0.0, -1.0),
+                      end: const AlignmentDirectional(0, 1.0),
                     ),
                   ),
                   child: SingleChildScrollView(
@@ -282,31 +285,92 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                           ).animateOnPageLoad(
                               animationsMap['textOnPageLoadAnimation2']!),
                         ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 30.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  FFAppState().currentProfileType = 1;
+                                  setState(() {});
+                                  await _model.profileTypeAction(context);
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  'syf05cif' /* Dcotor */,
+                                ),
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Cairo',
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  FFAppState().currentProfileType = 2;
+                                  setState(() {});
+                                  await _model.profileTypeAction(context);
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  'v1eloqo4' /* Customr */,
+                                ),
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Cairo',
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                            ].divide(const SizedBox(width: 5.0)),
+                          ),
+                        ),
                         FlutterFlowTimer(
-                          initialTime: _model.timer1InitialTimeMs,
+                          initialTime: _model.timerInitialTimeMs,
                           getDisplayTime: (value) =>
                               StopWatchTimer.getDisplayTime(
                             value,
                             hours: false,
                             milliSecond: false,
                           ),
-                          controller: _model.timer1Controller,
+                          controller: _model.timerController,
                           updateStateInterval: const Duration(milliseconds: 1000),
                           onChanged: (value, displayTime, shouldUpdate) {
-                            _model.timer1Milliseconds = value;
-                            _model.timer1Value = displayTime;
+                            _model.timerMilliseconds = value;
+                            _model.timerValue = displayTime;
                             if (shouldUpdate) setState(() {});
-                          },
-                          onEnded: () async {
-                            if (FFAppState().currentProfileType == 1) {
-                              if (FFAppState().currentDoctor.dbDocRef != null) {
-                                context.pushNamed('doctor_profile');
-                              } else {
-                                context.pushNamed('doctor_data_main');
-                              }
-                            } else {
-                              context.pushNamed('cus_master_page');
-                            }
                           },
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context)

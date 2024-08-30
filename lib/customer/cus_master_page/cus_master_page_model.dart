@@ -1,5 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import 'cus_master_page_widget.dart' show CusMasterPageWidget;
 import 'package:flutter/material.dart';
 

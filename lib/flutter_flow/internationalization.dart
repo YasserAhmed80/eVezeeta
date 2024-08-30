@@ -162,6 +162,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'من هنا يتواصل المريض و الطبيب',
       'en': 'From here the patient and doctor communicate',
     },
+    'syf05cif': {
+      'ar': 'Dcotor',
+      'en': '',
+    },
+    'v1eloqo4': {
+      'ar': 'Customr',
+      'en': '',
+    },
     'vn1dbwt6': {
       'ar': 'انشاء حساب جديد',
       'en': 'Create a new account',
@@ -1258,7 +1266,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // customer_List
   {
-    'hxc40b58': {
+    'c90uo00k': {
       'ar': 'سنة',
       'en': '',
     },
@@ -1289,12 +1297,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اطبائي',
       'en': '',
     },
-    '598l5kys': {
-      'ar': 'ملفاتي',
-      'en': '',
-    },
     'ibt4yg2f': {
       'ar': 'حجوزاتي',
+      'en': '',
+    },
+    '598l5kys': {
+      'ar': 'ملفاتي',
       'en': '',
     },
     '8bb5eygz': {
@@ -1333,7 +1341,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // customer_favorit_doc
   {
     '7nrxvhuc': {
-      'ar': 'اطبائي',
+      'ar': 'اطبائي المفضلين',
       'en': '',
     },
     '4cjjo6x6': {
@@ -1341,34 +1349,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
-  // custom_navbar
+  // customer_doc_booked
   {
-    'i8qid52y': {
-      'ar': 'حجوزات',
-      'en': 'Reservations',
-    },
-    'znzmwi2a': {
-      'ar': 'حسابات',
-      'en': 'Accounts',
-    },
-    'we55qr2t': {
-      'ar': 'ملفي',
-      'en': 'My file',
-    },
-    'p3cwjrxj': {
-      'ar': 'بحث',
+    '7p5a75k8': {
+      'ar': 'تاريخ: ',
       'en': '',
     },
-    'dzii04je': {
-      'ar': 'list',
+    'dq5zuofb': {
+      'ar': 'سعر الكشف',
       'en': '',
     },
-    '7297m3oc': {
-      'ar': 'دكتوري',
+    '792hc1ou': {
+      'ar': 'حاله الحجز',
       'en': '',
     },
-    'ntm3lsnw': {
-      'ar': 'ملفي',
+    'xq01tr13': {
+      'ar': 'حجوزاتي',
+      'en': '',
+    },
+    'pt35zsco': {
+      'ar': 'Home',
       'en': '',
     },
   },

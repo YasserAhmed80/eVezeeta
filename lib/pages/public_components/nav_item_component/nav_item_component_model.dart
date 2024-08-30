@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'custom_navbar_widget.dart' show CustomNavbarWidget;
+import 'nav_item_component_widget.dart' show NavItemComponentWidget;
 import 'package:flutter/material.dart';
 
-class CustomNavbarModel extends FlutterFlowModel<CustomNavbarWidget> {
+class NavItemComponentModel extends FlutterFlowModel<NavItemComponentWidget> {
   @override
   void initState(BuildContext context) {}
 

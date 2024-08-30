@@ -1,20 +1,19 @@
 import '/backend/backend.dart';
-import '/components/doctor_data_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/doctor/doctor_data_component/doctor_data_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'customer_favorit_doc_model.dart';
 export 'customer_favorit_doc_model.dart';
 
 class CustomerFavoritDocWidget extends StatefulWidget {
   const CustomerFavoritDocWidget({
     super.key,
-    required this.cusDocument,
+    required this.cusRef,
   });
 
-  final CusRecord? cusDocument;
+  final DocumentReference? cusRef;
 
   @override
   State<CustomerFavoritDocWidget> createState() =>
@@ -36,7 +35,7 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
       _model.returnedDocRef = await queryCusFavDocRecordOnce(
         queryBuilder: (cusFavDocRecord) => cusFavDocRecord.where(
           'cus_ref',
-          isEqualTo: FFAppState().currentCustomer.cusDocRef,
+          isEqualTo: widget.cusRef,
         ),
       );
       _model.loopIndex = 0;
@@ -67,8 +66,6 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -77,16 +74,38 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          title: Text(
-            FFLocalizations.of(context).getText(
-              '7nrxvhuc' /* اطبائي */,
-            ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Cairo',
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Text(
+                  FFLocalizations.of(context).getText(
+                    '7nrxvhuc' /* اطبائي المفضلين */,
+                  ),
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Cairo',
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        fontSize: 16.0,
+                        letterSpacing: 0.0,
+                      ),
                 ),
+              ),
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.safePop();
+                },
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24.0,
+                ),
+              ),
+            ],
           ),
           actions: const [],
           centerTitle: false,
@@ -124,7 +143,7 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
                             return DoctorDataComponentWidget(
                               key: Key(
                                   'Keyvxk_${docitemIndex}_of_${docitem.length}'),
-                              docDocument: docitemItem,
+                              docDocumentInput: docitemItem,
                             );
                           },
                         );

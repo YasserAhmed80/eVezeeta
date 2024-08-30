@@ -1,9 +1,10 @@
 import '/backend/backend.dart';
-import '/components/image_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/public_components/addrress_component/addrress_component_widget.dart';
+import '/pages/public_components/image_component/image_component_widget.dart';
 import '/pages/public_components/rating_component/rating_component_widget.dart';
 import 'doctor_data_component_widget.dart' show DoctorDataComponentWidget;
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class DoctorDataComponentModel
@@ -12,12 +13,14 @@ class DoctorDataComponentModel
 
   bool isFavorite = false;
 
-  DocumentReference? fafDocRef;
+  DocumentReference? favDocRef;
+
+  DocRecord? docDocument;
 
   ///  State fields for stateful widgets in this component.
 
-  // Stores action output result for [Firestore Query - Query a collection] action in doctor_data_component widget.
-  CusFavDocRecord? returnedFavRef;
+  // Stores action output result for [Backend Call - Create Document] action in Icon widget.
+  CusFavDocRecord? createdFavDoc;
   // Model for image_component component.
   late ImageComponentModel imageComponentModel;
   // Model for rating_Component component.
@@ -38,5 +41,40 @@ class DoctorDataComponentModel
     imageComponentModel.dispose();
     ratingComponentModel.dispose();
     addrressComponentModel.dispose();
+  }
+
+  /// Action blocks.
+  Future getFavAction(BuildContext context) async {
+    CusFavDocRecord? returnedFavRef;
+
+    returnedFavRef = await queryCusFavDocRecordOnce(
+      queryBuilder: (cusFavDocRecord) => cusFavDocRecord
+          .where(
+            'cus_ref',
+            isEqualTo: FFAppState().currentCustomer.cusDocRef,
+          )
+          .where(
+            'doc_ref',
+            isEqualTo: widget!.docDocumentInput?.reference,
+          ),
+      singleRecord: true,
+    ).then((s) => s.firstOrNull);
+    if (returnedFavRef?.reference != null) {
+      isFavorite = true;
+      favDocRef = returnedFavRef?.reference;
+    } else {
+      isFavorite = false;
+    }
+  }
+
+  Future getDocDocumentAction(BuildContext context) async {
+    DocRecord? returnedDoc;
+
+    if (widget!.docRef != null) {
+      returnedDoc = await DocRecord.getDocumentOnce(widget!.docRef!);
+      docDocument = returnedDoc;
+    } else {
+      docDocument = widget!.docDocumentInput;
+    }
   }
 }

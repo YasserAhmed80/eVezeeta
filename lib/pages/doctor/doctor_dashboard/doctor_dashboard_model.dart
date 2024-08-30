@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import 'doctor_dashboard_widget.dart' show DoctorDashboardWidget;
 import 'package:flutter/material.dart';
 
@@ -76,12 +77,18 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Model for custom_navbar component.
+  late CustomNavbarModel customNavbarModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    customNavbarModel = createModel(context, () => CustomNavbarModel());
+  }
 
   @override
-  void dispose() {}
+  void dispose() {
+    customNavbarModel.dispose();
+  }
 
   /// Action blocks.
   Future getBookingHistory(BuildContext context) async {
@@ -92,7 +99,7 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
       queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord
           .where(
             'doc_ref',
-            isEqualTo: widget!.docDocument?.reference,
+            isEqualTo: widget!.docRef,
           )
           .where(
             'date',

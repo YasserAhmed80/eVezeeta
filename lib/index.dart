@@ -36,3 +36,5 @@ export '/customer/customer_profile/customer_profile_widget.dart'
     show CustomerProfileWidget;
 export '/customer/customer_favorit_doc/customer_favorit_doc_widget.dart'
     show CustomerFavoritDocWidget;
+export '/customer/customer_doc_booked/customer_doc_booked_widget.dart'
+    show CustomerDocBookedWidget;

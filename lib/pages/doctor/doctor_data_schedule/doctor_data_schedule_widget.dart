@@ -4,9 +4,10 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/day_schedule_component/day_schedule_component_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,12 @@ import 'doctor_data_schedule_model.dart';
 export 'doctor_data_schedule_model.dart';
 
 class DoctorDataScheduleWidget extends StatefulWidget {
-  const DoctorDataScheduleWidget({super.key});
+  const DoctorDataScheduleWidget({
+    super.key,
+    required this.docDocument,
+  });
+
+  final DocRecord? docDocument;
 
   @override
   State<DoctorDataScheduleWidget> createState() =>
@@ -30,6 +36,29 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DoctorDataScheduleModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (widget.docDocument?.price != null) {
+        _model.bookTypeCode = valueOrDefault<int>(
+          widget.docDocument?.bookType,
+          -1,
+        );
+        _model.price = valueOrDefault<int>(
+          widget.docDocument?.price,
+          -1,
+        );
+        _model.priceRevisit = valueOrDefault<int>(
+          widget.docDocument?.priceRe,
+          -1,
+        );
+        _model.avgVisitPerHour = valueOrDefault<int>(
+          widget.docDocument?.avgVisit,
+          -1,
+        );
+        setState(() {});
+      }
+    });
 
     _model.txtPriceTextController ??= TextEditingController();
     _model.txtPriceFocusNode ??= FocusNode();
@@ -1060,22 +1089,20 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                   },
                                                 );
                                               } else {
-                                                await FFAppState()
-                                                    .currentDoctor
-                                                    .dbDocRef!
+                                                await widget
+                                                    .docDocument!.reference
                                                     .update(createDocRecordData(
-                                                      price: int.tryParse(_model
-                                                          .txtPriceTextController
-                                                          .text),
-                                                      priceRe: int.tryParse(_model
-                                                          .txtPriceRevisitTextController
-                                                          .text),
-                                                      avgVisit: int.tryParse(_model
-                                                          .txtAvergeVisitTextController
-                                                          .text),
-                                                      bookType:
-                                                          _model.bookTypeCode,
-                                                    ));
+                                                  price: int.tryParse(_model
+                                                      .txtPriceTextController
+                                                      .text),
+                                                  priceRe: int.tryParse(_model
+                                                      .txtPriceRevisitTextController
+                                                      .text),
+                                                  avgVisit: int.tryParse(_model
+                                                      .txtAvergeVisitTextController
+                                                      .text),
+                                                  bookType: _model.bookTypeCode,
+                                                ));
                                                 await showDialog(
                                                   context: context,
                                                   builder:
@@ -1202,6 +1229,8 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                               key: Key(
                                                   'Keyzle_${dayDayaIndex}_of_${dayDaya.length}'),
                                               dayIteam: dayDayaItem,
+                                              docRef: widget
+                                                  .docDocument!.reference,
                                             );
                                           },
                                         );

@@ -1,18 +1,25 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'doctor_profile_model.dart';
 export 'doctor_profile_model.dart';
 
 class DoctorProfileWidget extends StatefulWidget {
-  const DoctorProfileWidget({super.key});
+  const DoctorProfileWidget({
+    super.key,
+    required this.docRef,
+  });
+
+  final DocumentReference? docRef;
 
   @override
   State<DoctorProfileWidget> createState() => _DoctorProfileWidgetState();
@@ -30,6 +37,17 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => DoctorProfileModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.returnnedDoc = await DocRecord.getDocumentOnce(widget.docRef!);
+      _model.docDocument = _model.returnnedDoc;
+      setState(() {});
+      FFAppState().updateCurrentDoctorStruct(
+        (e) => e..dbDocRef = widget.docRef,
+      );
+      setState(() {});
+    });
 
     animationsMap.addAll({
       'cardOnPageLoadAnimation': AnimationInfo(
@@ -356,8 +374,10 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(24.0),
                         child: Image.network(
-                          functions.stringToImagePath(
-                              FFAppState().currentDoctor.img)!,
+                          functions.stringToImagePath(valueOrDefault<String>(
+                            _model.docDocument?.img,
+                            'n',
+                          ))!,
                           width: 130.0,
                           height: 130.0,
                           fit: BoxFit.cover,
@@ -387,7 +407,10 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                   .getDocTypeItem(
                                       'n',
                                       FFAppState().refDocType.toList(),
-                                      FFAppState().currentDoctor.gender)
+                                      valueOrDefault<int>(
+                                        _model.docDocument?.gender,
+                                        -1,
+                                      ))
                                   ?.desc,
                               'n',
                             ),
@@ -421,7 +444,10 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 0.0, 0.0),
                           child: Text(
-                            FFAppState().currentDoctor.name,
+                            valueOrDefault<String>(
+                              _model.docDocument?.name,
+                              'nn',
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
@@ -461,9 +487,10 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                           .getDocTitleItem(
                                               'n',
                                               FFAppState().refDocTitle.toList(),
-                                              FFAppState()
-                                                  .currentDoctor
-                                                  .titleId)
+                                              valueOrDefault<int>(
+                                                _model.docDocument?.titleId,
+                                                -1,
+                                              ))
                                           ?.desc,
                                       'n',
                                     ),
@@ -482,7 +509,10 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 0.0),
                                 child: Text(
-                                  FFAppState().currentDoctor.titleDesc,
+                                  valueOrDefault<String>(
+                                    _model.docDocument?.title,
+                                    'n',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .headlineSmall
                                       .override(
@@ -536,7 +566,18 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('doctor_data_main');
+                          context.pushNamed(
+                            'doctor_data_main',
+                            queryParameters: {
+                              'docDocument': serializeParam(
+                                _model.docDocument,
+                                ParamType.Document,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              'docDocument': _model.docDocument,
+                            },
+                          );
                         },
                         child: Container(
                           width: double.infinity,
@@ -606,7 +647,18 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('doctor_data_address');
+                          context.pushNamed(
+                            'doctor_data_address',
+                            queryParameters: {
+                              'docDocument': serializeParam(
+                                _model.docDocument,
+                                ParamType.Document,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              'docDocument': _model.docDocument,
+                            },
+                          );
                         },
                         child: Container(
                           width: double.infinity,
@@ -676,7 +728,15 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('doctor_data_images');
+                          context.pushNamed(
+                            'doctor_data_images',
+                            queryParameters: {
+                              'docRef': serializeParam(
+                                _model.docDocument?.reference,
+                                ParamType.DocumentReference,
+                              ),
+                            }.withoutNulls,
+                          );
                         },
                         child: Container(
                           width: double.infinity,
@@ -746,7 +806,18 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('doctor_data_schedule');
+                          context.pushNamed(
+                            'doctor_data_schedule',
+                            queryParameters: {
+                              'docDocument': serializeParam(
+                                _model.docDocument,
+                                ParamType.Document,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              'docDocument': _model.docDocument,
+                            },
+                          );
                         },
                         child: Container(
                           width: double.infinity,
@@ -830,125 +901,107 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('doctor_data_schedule');
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 12.0, 8.0, 12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
-                                          await authManager.signOut();
-                                          GoRouter.of(context)
-                                              .clearRedirectLocation();
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              8.0, 12.0, 8.0, 12.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
 
-                                          context.goNamedAuth(
-                                              'Onboarding01', context.mounted);
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'qkfwbr0r' /* تعديل كلمة المرور */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 150.0,
-                                          height: 45.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                        context.goNamedAuth(
+                                            'Onboarding01', context.mounted);
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        'qkfwbr0r' /* تعديل كلمة المرور */,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 45.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 0.0,
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(38.0),
+                                              .alternate,
+                                          width: 1.0,
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'buttonOnPageLoadAnimation1']!),
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
-                                          await authManager.signOut();
-                                          GoRouter.of(context)
-                                              .clearRedirectLocation();
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation1']!),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
 
-                                          context.goNamedAuth(
-                                              'Onboarding01', context.mounted);
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '3ju9mk5k' /* خروج */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 150.0,
-                                          height: 45.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                        context.goNamedAuth(
+                                            'Onboarding01', context.mounted);
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        '3ju9mk5k' /* خروج */,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 150.0,
+                                        height: 45.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 0.0,
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(38.0),
+                                              .alternate,
+                                          width: 1.0,
                                         ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'buttonOnPageLoadAnimation2']!),
-                                    ].divide(const SizedBox(width: 10.0)),
-                                  ),
+                                        borderRadius:
+                                            BorderRadius.circular(38.0),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'buttonOnPageLoadAnimation2']!),
+                                  ].divide(const SizedBox(width: 10.0)),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ).animateOnPageLoad(

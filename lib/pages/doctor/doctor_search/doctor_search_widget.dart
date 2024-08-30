@@ -1,8 +1,10 @@
 import '/backend/backend.dart';
-import '/components/doctor_data_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
+import '/pages/doctor/doctor_data_component/doctor_data_component_widget.dart';
+import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
 import '/search/doc_search_item_list_component/doc_search_item_list_component_widget.dart';
 import '/search/search_address_component/search_address_component_widget.dart';
 import '/search/search_category_component/search_category_component_widget.dart';
@@ -79,6 +81,11 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                         );
                       }
                       List<DocRecord> listViewDocRecordList = snapshot.data!;
+                      if (listViewDocRecordList.isEmpty) {
+                        return const EmptyListComponentWidget(
+                          desc: 'لايوجد بيانات',
+                        );
+                      }
 
                       return ListView.separated(
                         padding: const EdgeInsets.fromLTRB(
@@ -109,10 +116,20 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                DoctorDataComponentWidget(
-                                  key: Key(
-                                      'Keydy0_${listViewIndex}_of_${listViewDocRecordList.length}'),
-                                  docDocument: listViewDocRecord,
+                                wrapWithModel(
+                                  model:
+                                      _model.doctorDataComponentModels.getModel(
+                                    listViewDocRecord.reference.id,
+                                    listViewIndex,
+                                  ),
+                                  updateCallback: () => setState(() {}),
+                                  child: DoctorDataComponentWidget(
+                                    key: Key(
+                                      'Keydy0_${listViewDocRecord.reference.id}',
+                                    ),
+                                    docDocumentInput: listViewDocRecord,
+                                    docRef: null,
+                                  ),
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -217,14 +234,11 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                           context.pushNamed(
                                             'doctor_dashboard',
                                             queryParameters: {
-                                              'docDocument': serializeParam(
-                                                listViewDocRecord,
-                                                ParamType.Document,
+                                              'docRef': serializeParam(
+                                                listViewDocRecord.reference,
+                                                ParamType.DocumentReference,
                                               ),
                                             }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              'docDocument': listViewDocRecord,
-                                            },
                                           );
                                         },
                                         text:
@@ -267,14 +281,11 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                           context.pushNamed(
                                             'doctor_booking_center',
                                             queryParameters: {
-                                              'docDocument': serializeParam(
-                                                listViewDocRecord,
-                                                ParamType.Document,
+                                              'docRef': serializeParam(
+                                                listViewDocRecord.reference,
+                                                ParamType.DocumentReference,
                                               ),
                                             }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              'docDocument': listViewDocRecord,
-                                            },
                                           );
                                         },
                                         text:
@@ -642,6 +653,14 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                     color: FlutterFlowTheme.of(context).alternate,
                   ),
                 ].divide(const SizedBox(height: 3.0)),
+              ),
+            ),
+            Align(
+              alignment: const AlignmentDirectional(0.0, 1.0),
+              child: wrapWithModel(
+                model: _model.customNavbarModel,
+                updateCallback: () => setState(() {}),
+                child: const CustomNavbarWidget(),
               ),
             ),
           ],

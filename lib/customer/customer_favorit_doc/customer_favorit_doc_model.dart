@@ -7,16 +7,6 @@ class CustomerFavoritDocModel
     extends FlutterFlowModel<CustomerFavoritDocWidget> {
   ///  Local state fields for this page.
 
-  List<DocumentReference> favDocList = [];
-  void addToFavDocList(DocumentReference item) => favDocList.add(item);
-  void removeFromFavDocList(DocumentReference item) => favDocList.remove(item);
-  void removeAtIndexFromFavDocList(int index) => favDocList.removeAt(index);
-  void insertAtIndexInFavDocList(int index, DocumentReference item) =>
-      favDocList.insert(index, item);
-  void updateFavDocListAtIndex(
-          int index, Function(DocumentReference) updateFn) =>
-      favDocList[index] = updateFn(favDocList[index]);
-
   List<DocRecord> doctorDocumentList = [];
   void addToDoctorDocumentList(DocRecord item) => doctorDocumentList.add(item);
   void removeFromDoctorDocumentList(DocRecord item) =>

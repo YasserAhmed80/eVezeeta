@@ -15,9 +15,11 @@ class DayScheduleComponentWidget extends StatefulWidget {
   const DayScheduleComponentWidget({
     super.key,
     required this.dayIteam,
+    required this.docRef,
   });
 
   final DtDayStruct? dayIteam;
+  final DocumentReference? docRef;
 
   @override
   State<DayScheduleComponentWidget> createState() =>
@@ -52,7 +54,7 @@ class _DayScheduleComponentWidgetState
             )
             .where(
               'doc_ref',
-              isEqualTo: FFAppState().currentDoctor.dbDocRef,
+              isEqualTo: widget.docRef,
             ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
@@ -421,9 +423,7 @@ class _DayScheduleComponentWidgetState
                                       await docTimeRecordReference.set({
                                         ...createDocTimeRecordData(
                                           dayId: widget.dayIteam?.dayKey,
-                                          docRef: FFAppState()
-                                              .currentDoctor
-                                              .dbDocRef,
+                                          docRef: widget.docRef,
                                         ),
                                         ...mapToFirestore(
                                           {
@@ -435,9 +435,7 @@ class _DayScheduleComponentWidgetState
                                           DocTimeRecord.getDocumentFromData({
                                         ...createDocTimeRecordData(
                                           dayId: widget.dayIteam?.dayKey,
-                                          docRef: FFAppState()
-                                              .currentDoctor
-                                              .dbDocRef,
+                                          docRef: widget.docRef,
                                         ),
                                         ...mapToFirestore(
                                           {

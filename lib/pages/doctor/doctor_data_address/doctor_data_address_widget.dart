@@ -17,7 +17,12 @@ import 'doctor_data_address_model.dart';
 export 'doctor_data_address_model.dart';
 
 class DoctorDataAddressWidget extends StatefulWidget {
-  const DoctorDataAddressWidget({super.key});
+  const DoctorDataAddressWidget({
+    super.key,
+    required this.docDocument,
+  });
+
+  final DocRecord? docDocument;
 
   @override
   State<DoctorDataAddressWidget> createState() =>
@@ -36,45 +41,73 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().currentDoctor.dbDocRef != null) {
-        _model.countryCode = FFAppState().currentDoctor.aCon;
-        _model.governateCode = FFAppState().currentDoctor.aGov;
-        _model.zoneCode = FFAppState().currentDoctor.aZone;
-        _model.areaCode = FFAppState().currentDoctor.aArea;
-        _model.addrDesc = FFAppState().currentDoctor.aAddr;
-        _model.tel1 = FFAppState().currentDoctor.tel1;
-        _model.tel2 = FFAppState().currentDoctor.tel2;
+      if (widget.docDocument?.aGov != null) {
+        _model.countryCode = valueOrDefault<int>(
+          widget.docDocument?.aCon,
+          1,
+        );
+        _model.governateCode = valueOrDefault<int>(
+          widget.docDocument?.aGov,
+          -1,
+        );
+        _model.zoneCode = valueOrDefault<int>(
+          widget.docDocument?.aZone,
+          -1,
+        );
+        _model.areaCode = valueOrDefault<int>(
+          widget.docDocument?.aArea,
+          -1,
+        );
+        _model.addrDesc = widget.docDocument?.aAddr;
+        _model.tel1 = widget.docDocument?.tel1;
+        _model.tel2 = widget.docDocument?.tel2;
         setState(() {});
         // contry field
         setState(() {
-          _model.countryCodeValueController?.value =
-              FFAppState().currentDoctor.aCon;
+          _model.countryCodeValueController?.value = valueOrDefault<int>(
+            widget.docDocument?.aCon,
+            -1,
+          );
         });
         setState(() {
-          _model.govCodeValueController?.value =
-              FFAppState().currentDoctor.aGov;
+          _model.govCodeValueController?.value = valueOrDefault<int>(
+            widget.docDocument?.aGov,
+            -1,
+          );
         });
         setState(() {
-          _model.zoneCodeValueController?.value =
-              FFAppState().currentDoctor.aZone;
+          _model.zoneCodeValueController?.value = valueOrDefault<int>(
+            widget.docDocument?.aZone,
+            -1,
+          );
         });
         setState(() {
-          _model.areaCodeValueController?.value =
-              FFAppState().currentDoctor.aArea;
+          _model.areaCodeValueController?.value = valueOrDefault<int>(
+            widget.docDocument?.aArea,
+            -1,
+          );
         });
         setState(() {
-          _model.addressDescTextController?.text =
-              FFAppState().currentDoctor.aAddr;
+          _model.addressDescTextController?.text = valueOrDefault<String>(
+            widget.docDocument?.aAddr,
+            '-1',
+          );
           _model.addressDescTextController?.selection = TextSelection.collapsed(
               offset: _model.addressDescTextController!.text.length);
         });
         setState(() {
-          _model.tel1TextController?.text = FFAppState().currentDoctor.tel1;
+          _model.tel1TextController?.text = valueOrDefault<String>(
+            widget.docDocument?.tel1,
+            '-1',
+          );
           _model.tel1TextController?.selection = TextSelection.collapsed(
               offset: _model.tel1TextController!.text.length);
         });
         setState(() {
-          _model.tel2TextController?.text = FFAppState().currentDoctor.tel2;
+          _model.tel2TextController?.text = valueOrDefault<String>(
+            widget.docDocument?.tel2,
+            '-1',
+          );
           _model.tel2TextController?.selection = TextSelection.collapsed(
               offset: _model.tel2TextController!.text.length);
         });
@@ -789,7 +822,9 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   ),
                                                   style: GoogleFonts.getFont(
                                                     'Cairo',
-                                                    color: Colors.black,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 14.0,
                                                   ),
@@ -1026,7 +1061,9 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   ),
                                                   style: GoogleFonts.getFont(
                                                     'Cairo',
-                                                    color: Colors.black,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 14.0,
                                                   ),
@@ -1242,7 +1279,9 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   ),
                                                   style: GoogleFonts.getFont(
                                                     'Cairo',
-                                                    color: Colors.black,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 14.0,
                                                   ),
@@ -1362,32 +1401,29 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                           16.0, 12.0, 16.0, 12.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          if (FFAppState().currentDoctor.dbDocRef != null) {
-                            // update model
-                            FFAppState().updateCurrentDoctorStruct(
-                              (e) => e
-                                ..aCon = _model.countryCode
-                                ..aGov = _model.governateCode
-                                ..aZone = _model.zoneCode
-                                ..aArea = _model.areaCode
-                                ..tel1 = _model.tel1TextController.text
-                                ..tel2 = _model.tel2TextController.text
-                                ..aAddr = _model.addressDescTextController.text,
-                            );
-                            setState(() {});
+                          if (widget.docDocument?.reference != null) {
                             // save to DB
 
                             await FFAppState()
                                 .currentDoctor
                                 .dbDocRef!
                                 .update(createDocRecordData(
-                                  aCon: FFAppState().currentDoctor.aCon,
-                                  aGov: FFAppState().currentDoctor.aGov,
-                                  aZone: FFAppState().currentDoctor.aZone,
-                                  aArea: FFAppState().currentDoctor.aArea,
-                                  tel1: FFAppState().currentDoctor.tel1,
-                                  tel2: FFAppState().currentDoctor.tel2,
-                                  aAddr: FFAppState().currentDoctor.aAddr,
+                                  aCon: _model.countryCode,
+                                  aGov: _model.govCodeValue,
+                                  aZone: _model.zoneCode,
+                                  aArea: _model.areaCode,
+                                  tel1: valueOrDefault<String>(
+                                    _model.tel1TextController.text,
+                                    '-1',
+                                  ),
+                                  tel2: valueOrDefault<String>(
+                                    _model.tel2TextController.text,
+                                    '-1',
+                                  ),
+                                  aAddr: valueOrDefault<String>(
+                                    _model.addressDescTextController.text,
+                                    'none',
+                                  ),
                                 ));
                             await showDialog(
                               context: context,

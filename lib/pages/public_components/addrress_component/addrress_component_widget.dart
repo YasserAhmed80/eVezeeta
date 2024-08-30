@@ -72,12 +72,17 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
-                    FFAppState()
-                        .refGovernate
-                        .where((e) => e.govKey == widget.govKey)
-                        .toList()
-                        .first
-                        .desc,
+                    widget.govKey > 0
+                        ? valueOrDefault<String>(
+                            FFAppState()
+                                .refGovernate
+                                .where((e) => e.govKey == widget.govKey)
+                                .toList()
+                                .first
+                                .desc,
+                            'n',
+                          )
+                        : 'n',
                     'n',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -94,13 +99,18 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  FFAppState()
-                      .refZone
-                      .where((e) => e.zoneKey == widget.zoneKey)
-                      .toList()
-                      .first
-                      .desc,
-                  'none',
+                  widget.zoneKey > 0
+                      ? valueOrDefault<String>(
+                          FFAppState()
+                              .refZone
+                              .where((e) => e.zoneKey == widget.zoneKey)
+                              .toList()
+                              .first
+                              .desc,
+                          'none',
+                        )
+                      : 'n',
+                  'n',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Cairo',
@@ -114,15 +124,17 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
                 size: 24.0,
               ),
               Text(
-                valueOrDefault<String>(
-                  FFAppState()
-                      .refArea
-                      .where((e) => e.areaKey == widget.areaKey)
-                      .toList()
-                      .first
-                      .desc,
-                  'none',
-                ),
+                widget.areaKey > 0
+                    ? valueOrDefault<String>(
+                        FFAppState()
+                            .refArea
+                            .where((e) => e.areaKey == widget.areaKey)
+                            .toList()
+                            .first
+                            .desc,
+                        'none',
+                      )
+                    : 'n',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Cairo',
                       fontSize: 12.0,

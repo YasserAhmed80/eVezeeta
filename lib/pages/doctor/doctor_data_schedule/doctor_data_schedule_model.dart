@@ -1,21 +1,12 @@
 import '/data_loading_components/load_day_hours_data/load_day_hours_data_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import 'doctor_data_schedule_widget.dart' show DoctorDataScheduleWidget;
 import 'package:flutter/material.dart';
 
 class DoctorDataScheduleModel
     extends FlutterFlowModel<DoctorDataScheduleWidget> {
   ///  Local state fields for this page.
-
-  List<String> imageList = [];
-  void addToImageList(String item) => imageList.add(item);
-  void removeFromImageList(String item) => imageList.remove(item);
-  void removeAtIndexFromImageList(int index) => imageList.removeAt(index);
-  void insertAtIndexInImageList(int index, String item) =>
-      imageList.insert(index, item);
-  void updateImageListAtIndex(int index, Function(String) updateFn) =>
-      imageList[index] = updateFn(imageList[index]);
 
   int? bookTypeCode = 1;
 

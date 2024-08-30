@@ -3,20 +3,19 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'day_list_component_model.dart';
 export 'day_list_component_model.dart';
 
 class DayListComponentWidget extends StatefulWidget {
   const DayListComponentWidget({
     super.key,
-    String? docID,
     required this.dayHoursAction,
-  }) : docID = docID ?? '0';
+    required this.docDocument,
+  });
 
-  final String docID;
   final Future Function(List<int> dayHourse, DtDaysListStruct dayItemBook,
       List<int> bookedHoursList)? dayHoursAction;
+  final DocRecord? docDocument;
 
   @override
   State<DayListComponentWidget> createState() => _DayListComponentWidgetState();
@@ -41,7 +40,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
       _model.returnedDocTime = await queryDocTimeRecordOnce(
         queryBuilder: (docTimeRecord) => docTimeRecord.where(
           'doc_ref',
-          isEqualTo: FFAppState().currentDoctor.dbDocRef,
+          isEqualTo: widget.docDocument?.reference,
         ),
       );
       _model.docActiveDays = _model.returnedDocTime!
@@ -79,8 +78,6 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       height: 500.0,
       decoration: const BoxDecoration(),

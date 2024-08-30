@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -284,6 +285,12 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _selectedNavTab = prefs.containsKey('ff_selectedNavTab')
+          ? deserializeEnum<EnumSelectedTab>(
+              prefs.getString('ff_selectedNavTab'))
+          : _selectedNavTab;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -391,12 +398,6 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInRefCities(int index, DtRefCitiesStruct value) {
     refCities.insert(index, value);
-  }
-
-  int _selectedNavTab = 0;
-  int get selectedNavTab => _selectedNavTab;
-  set selectedNavTab(int value) {
-    _selectedNavTab = value;
   }
 
   List<DtGovernateStruct> _refGovernate = [];
@@ -1041,6 +1042,15 @@ class FFAppState extends ChangeNotifier {
   void updateCurrentCustomerStruct(Function(DtCusStruct) updateFn) {
     updateFn(_currentCustomer);
     prefs.setString('ff_currentCustomer', _currentCustomer.serialize());
+  }
+
+  EnumSelectedTab? _selectedNavTab;
+  EnumSelectedTab? get selectedNavTab => _selectedNavTab;
+  set selectedNavTab(EnumSelectedTab? value) {
+    _selectedNavTab = value;
+    value != null
+        ? prefs.setString('ff_selectedNavTab', value.serialize())
+        : prefs.remove('ff_selectedNavTab');
   }
 }
 

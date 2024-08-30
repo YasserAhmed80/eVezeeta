@@ -589,7 +589,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                     model: _model.dayListComponentModel,
                                     updateCallback: () => setState(() {}),
                                     child: DayListComponentWidget(
-                                      docID: widget.docDocument!.reference.id,
+                                      docDocument: widget.docDocument!,
                                       dayHoursAction: (dayHourse, dayItemBook,
                                           bookedHoursList) async {
                                         _model.selectedDayHours =

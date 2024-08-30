@@ -106,7 +106,7 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
       queryBuilder: (docTimeRecord) => docTimeRecord
           .where(
             'doc_ref',
-            isEqualTo: FFAppState().currentDoctor.dbDocRef,
+            isEqualTo: widget!.docDocument?.reference,
           )
           .where(
             'day_id',
@@ -121,7 +121,7 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
       queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord
           .where(
             'doc_ref',
-            isEqualTo: FFAppState().currentDoctor.dbDocRef,
+            isEqualTo: widget!.docDocument?.reference,
           )
           .where(
             'date',

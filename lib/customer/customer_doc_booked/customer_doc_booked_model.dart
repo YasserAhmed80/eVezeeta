@@ -1,19 +1,15 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
-import 'doctor_profile_widget.dart' show DoctorProfileWidget;
+import 'customer_doc_booked_widget.dart' show CustomerDocBookedWidget;
 import 'package:flutter/material.dart';
 
-class DoctorProfileModel extends FlutterFlowModel<DoctorProfileWidget> {
-  ///  Local state fields for this page.
-
-  DocRecord? docDocument;
-
+class CustomerDocBookedModel extends FlutterFlowModel<CustomerDocBookedWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - Read Document] action in doctor_profile widget.
-  DocRecord? returnnedDoc;
+  // Stores action output result for [Firestore Query - Query a collection] action in customer_doc_booked widget.
+  List<DocBookedTimeRecord>? returnedBookedItems;
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 

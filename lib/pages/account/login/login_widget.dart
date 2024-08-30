@@ -388,9 +388,6 @@ class _LoginWidgetState extends State<LoginWidget>
                               if (user == null) {
                                 return;
                               }
-
-                              context.goNamedAuth(
-                                  'doctor_data_main', context.mounted);
                             },
                             text: FFLocalizations.of(context).getText(
                               '2k6yfsd7' /* تسجيل */,
