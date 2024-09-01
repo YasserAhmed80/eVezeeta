@@ -1162,6 +1162,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                   titleId: _model.docTitleCde,
                                   title: _model.docTitleDesc,
                                   about: _model.docAbout,
+                                  uAt: functions.getCurrentDate(),
                                 ),
                                 ...mapToFirestore(
                                   {
@@ -1190,6 +1191,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                       .txtDocTitleFieldTextController.text,
                                   about:
                                       _model.txtAboutFieldTextController.text,
+                                  cAt: functions.getCurrentDate(),
                                 ),
                                 ...mapToFirestore(
                                   {
@@ -1209,6 +1211,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                       .txtDocTitleFieldTextController.text,
                                   about:
                                       _model.txtAboutFieldTextController.text,
+                                  cAt: functions.getCurrentDate(),
                                 ),
                                 ...mapToFirestore(
                                   {

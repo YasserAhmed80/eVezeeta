@@ -130,11 +130,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'doctor_List',
-          path: '/doctorList',
-          builder: (context, params) => const DoctorListWidget(),
-        ),
-        FFRoute(
           name: 'doctor_data_schedule',
           path: '/doctorDataSchedule',
           asyncParams: {
@@ -148,9 +143,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'doctor_profile',
-          path: '/doctorProfile',
-          builder: (context, params) => DoctorProfileWidget(
+          name: 'doctor_account',
+          path: '/doctorAccount',
+          builder: (context, params) => DoctorAccountWidget(
             docRef: params.getParam(
               'docRef',
               ParamType.DocumentReference,
@@ -291,6 +286,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.DocumentReference,
               isList: false,
               collectionNamePath: ['cus'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Show_image',
+          path: '/showImage',
+          builder: (context, params) => ShowImageWidget(
+            imageURL: params.getParam(
+              'imageURL',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'doctor_profile',
+          path: '/doctorProfile',
+          builder: (context, params) => DoctorProfileWidget(
+            docRef: params.getParam(
+              'docRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['doc'],
             ),
           ),
         )

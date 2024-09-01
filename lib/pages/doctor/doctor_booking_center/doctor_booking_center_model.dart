@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/custom_navbar/custom_navbar_widget.dart';
 import 'doctor_booking_center_widget.dart' show DoctorBookingCenterWidget;
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class DoctorBookingCenterModel
 
   int? loopMax = 0;
 
-  int? filteredStatusCde = 1;
+  int? filteredStatusCde = 0;
 
   List<DtBookedItemStruct> filteredBookedList = [];
   void addToFilteredBookedList(DtBookedItemStruct item) =>
@@ -52,12 +53,18 @@ class DoctorBookingCenterModel
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Model for custom_navbar component.
+  late CustomNavbarModel customNavbarModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    customNavbarModel = createModel(context, () => CustomNavbarModel());
+  }
 
   @override
-  void dispose() {}
+  void dispose() {
+    customNavbarModel.dispose();
+  }
 
   /// Action blocks.
   Future getBookedList(BuildContext context) async {
@@ -103,12 +110,12 @@ class DoctorBookingCenterModel
       // get customer data
       returnedCustomer = await CusRecord.getDocumentOnce(
           returnedBookedItems[loopIndex!].cusRef!);
-      insertAtIndexInBookedList(
-          loopIndex!,
-          DtBookedItemStruct(
-            cusName: returnedCustomer.name,
-            cusTel: returnedCustomer.tel,
-          ));
+      updateBookedListAtIndex(
+        loopIndex!,
+        (e) => e
+          ..cusName = returnedCustomer?.name
+          ..cusTel = returnedCustomer?.tel,
+      );
       loopIndex = loopIndex! + 1;
     }
   }

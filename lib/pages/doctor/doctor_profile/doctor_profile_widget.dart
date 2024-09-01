@@ -1,14 +1,11 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/custom_navbar/custom_navbar_widget.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/pages/public_components/addrress_component/addrress_component_widget.dart';
+import '/pages/public_components/image_component/image_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'doctor_profile_model.dart';
 export 'doctor_profile_model.dart';
@@ -25,13 +22,10 @@ class DoctorProfileWidget extends StatefulWidget {
   State<DoctorProfileWidget> createState() => _DoctorProfileWidgetState();
 }
 
-class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
-    with TickerProviderStateMixin {
+class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
   late DoctorProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -40,303 +34,27 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.returnnedDoc = await DocRecord.getDocumentOnce(widget.docRef!);
-      _model.docDocument = _model.returnnedDoc;
+      _model.returnedDoc = await DocRecord.getDocumentOnce(widget.docRef!);
+      _model.docDocument = _model.returnedDoc;
       setState(() {});
-      FFAppState().updateCurrentDoctorStruct(
-        (e) => e..dbDocRef = widget.docRef,
+      _model.returnedImages = await queryImgsRecordOnce(
+        queryBuilder: (imgsRecord) => imgsRecord
+            .where(
+              'e_type',
+              isEqualTo: 'doc',
+            )
+            .where(
+              'e_code',
+              isEqualTo: widget.docRef?.id,
+            ),
       );
+      _model.imageList = _model.returnedImages!
+          .map((e) => e.iRef)
+          .toList()
+          .toList()
+          .cast<String>();
       setState(() {});
     });
-
-    animationsMap.addAll({
-      'cardOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          ScaleEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.6, 0.6),
-            end: const Offset(1.0, 1.0),
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation4': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation5': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'dividerOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 200.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 200.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 200.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 300.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation3': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 300.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation4': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 300.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation5': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 300.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 300.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'buttonOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 400.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 400.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 400.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'buttonOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 400.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 400.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 400.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-    });
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -357,867 +75,543 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        body: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Text(
+                  FFLocalizations.of(context).getText(
+                    'sta6k62x' /* ملف الدكتور */,
+                  ),
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Cairo',
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        fontSize: 16.0,
+                        letterSpacing: 0.0,
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(24.0),
-                        child: Image.network(
-                          functions.stringToImagePath(valueOrDefault<String>(
-                            _model.docDocument?.img,
-                            'n',
-                          ))!,
-                          width: 130.0,
-                          height: 130.0,
-                          fit: BoxFit.cover,
-                          alignment: const Alignment(0.0, 0.0),
-                          errorBuilder: (context, error, stackTrace) =>
-                              Image.asset(
-                            'assets/images/error_image.jpg',
-                            width: 130.0,
-                            height: 130.0,
-                            fit: BoxFit.cover,
-                            alignment: const Alignment(0.0, 0.0),
+                ),
+              ),
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.safePop();
+                },
+                child: Icon(
+                  Icons.close,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24.0,
+                ),
+              ),
+            ],
+          ),
+          actions: const [],
+          centerTitle: false,
+          elevation: 0.0,
+        ),
+        body: SafeArea(
+          top: true,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          wrapWithModel(
+                            model: _model.imageComponentModel1,
+                            updateCallback: () => setState(() {}),
+                            child: ImageComponentWidget(
+                              imgRef: valueOrDefault<String>(
+                                _model.docDocument?.img,
+                                'n',
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ).animateOnPageLoad(
-                        animationsMap['cardOnPageLoadAnimation']!),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 12.0, 0.0, 0.0),
-                          child: Text(
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
                             valueOrDefault<String>(
-                              functions
-                                  .getDocTypeItem(
-                                      'n',
-                                      FFAppState().refDocType.toList(),
+                              FFAppState()
+                                  .refDocType
+                                  .where((e) =>
+                                      e.typeKey ==
                                       valueOrDefault<int>(
                                         _model.docDocument?.gender,
                                         -1,
                                       ))
-                                  ?.desc,
+                                  .toList()
+                                  .first
+                                  .desc,
                               'n',
                             ),
                             style: FlutterFlowTheme.of(context)
-                                .headlineSmall
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  fontSize: 12.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ).animateOnPageLoad(
-                              animationsMap['textOnPageLoadAnimation1']!),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 12.0, 0.0, 0.0),
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'yh9rfatj' /* / */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .headlineSmall
+                                .bodyMedium
                                 .override(
                                   fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
                                 ),
-                          ).animateOnPageLoad(
-                              animationsMap['textOnPageLoadAnimation2']!),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 12.0, 0.0, 0.0),
-                          child: Text(
+                          ),
+                          Text(
                             valueOrDefault<String>(
                               _model.docDocument?.name,
-                              'nn',
+                              'n',
                             ),
                             style: FlutterFlowTheme.of(context)
-                                .headlineSmall
+                                .bodyMedium
                                 .override(
                                   fontFamily: 'Cairo',
-                                  fontSize: 14.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
                                 ),
-                          ).animateOnPageLoad(
-                              animationsMap['textOnPageLoadAnimation3']!),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(14.0),
-                                  border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 5.0, 10.0, 5.0),
-                                  child: Text(
-                                    valueOrDefault<String>(
-                                      functions
-                                          .getDocTitleItem(
-                                              'n',
-                                              FFAppState().refDocTitle.toList(),
-                                              valueOrDefault<int>(
-                                                _model.docDocument?.titleId,
-                                                -1,
-                                              ))
-                                          ?.desc,
-                                      'n',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineSmall
-                                        .override(
-                                          fontFamily: 'Cairo',
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ).animateOnPageLoad(animationsMap[
-                                      'textOnPageLoadAnimation4']!),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    _model.docDocument?.title,
-                                    'n',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineSmall
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        fontSize: 14.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ).animateOnPageLoad(
-                                    animationsMap['textOnPageLoadAnimation5']!),
-                              ),
-                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      height: 44.0,
-                      thickness: 1.0,
-                      indent: 24.0,
-                      endIndent: 24.0,
-                      color: FlutterFlowTheme.of(context).alternate,
-                    ).animateOnPageLoad(
-                        animationsMap['dividerOnPageLoadAnimation']!),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
-                      child: Row(
+                        ].divide(const SizedBox(width: 3.0)),
+                      ),
+                      Row(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            FFLocalizations.of(context).getText(
-                              'xhzlp0e3' /* البيانات الاساسية */,
+                            valueOrDefault<String>(
+                              _model.docDocument?.title,
+                              'n',
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Cairo',
                                   letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
                           ),
                         ],
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'doctor_data_main',
-                            queryParameters: {
-                              'docDocument': serializeParam(
-                                _model.docDocument,
-                                ParamType.Document,
-                              ),
-                            }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'docDocument': _model.docDocument,
-                            },
-                          );
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 12.0, 8.0, 12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 0.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.account_circle_outlined,
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    size: 25.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      '9ji1bh67' /* تعديل البيانات الاساسية */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Cairo',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation1']!),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'doctor_data_address',
-                            queryParameters: {
-                              'docDocument': serializeParam(
-                                _model.docDocument,
-                                ParamType.Document,
-                              ),
-                            }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'docDocument': _model.docDocument,
-                            },
-                          );
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 12.0, 8.0, 12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 0.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.location_on,
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    size: 25.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'c6lvktt1' /*  تعديل عنوان العمل */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Cairo',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation2']!),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'doctor_data_images',
-                            queryParameters: {
-                              'docRef': serializeParam(
-                                _model.docDocument?.reference,
-                                ParamType.DocumentReference,
-                              ),
-                            }.withoutNulls,
-                          );
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 12.0, 8.0, 12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 0.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.image_outlined,
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    size: 25.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'wsn4fi11' /* تعديل الصور و الملفات */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Cairo',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation3']!),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'doctor_data_schedule',
-                            queryParameters: {
-                              'docDocument': serializeParam(
-                                _model.docDocument,
-                                ParamType.Document,
-                              ),
-                            }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'docDocument': _model.docDocument,
-                            },
-                          );
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            borderRadius: BorderRadius.circular(0.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 12.0, 8.0, 12.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 0.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.calendar_month_rounded,
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    size: 25.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'cjvoijbi' /* تحديد سعر الكشف و مواعيد العمل */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Cairo',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation4']!),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              'v88doy9y' /* بيانات الحساب */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: Container(
-                        width: double.infinity,
+                      Container(
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
-                          borderRadius: BorderRadius.circular(0.0),
+                          borderRadius: BorderRadius.circular(14.0),
                         ),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              8.0, 12.0, 8.0, 12.0),
-                          child: Row(
+                              0.0, 5.0, 0.0, 5.0),
+                          child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-                                        await authManager.signOut();
-                                        GoRouter.of(context)
-                                            .clearRedirectLocation();
-
-                                        context.goNamedAuth(
-                                            'Onboarding01', context.mounted);
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        'qkfwbr0r' /* تعديل كلمة المرور */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: 150.0,
-                                        height: 45.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 0.0,
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 1.0,
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      '6z69vc4b' /* تخصص:  */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(38.0),
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'buttonOnPageLoadAnimation1']!),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-                                        await authManager.signOut();
-                                        GoRouter.of(context)
-                                            .clearRedirectLocation();
-
-                                        context.goNamedAuth(
-                                            'Onboarding01', context.mounted);
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        '3ju9mk5k' /* خروج */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: 150.0,
-                                        height: 45.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 0.0,
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 1.0,
+                                  ),
+                                  Text(
+                                    valueOrDefault<String>(
+                                      FFAppState()
+                                          .refCategory
+                                          .where((e) =>
+                                              e.catKey ==
+                                              valueOrDefault<int>(
+                                                _model.docDocument?.catId,
+                                                -1,
+                                              ))
+                                          .toList()
+                                          .first
+                                          .desc,
+                                      'n',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(38.0),
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'buttonOnPageLoadAnimation2']!),
-                                  ].divide(const SizedBox(width: 10.0)),
-                                ),
+                                  ),
+                                ]
+                                    .divide(const SizedBox(width: 5.0))
+                                    .around(const SizedBox(width: 5.0)),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'u3egcbzm' /* تخصص فرعي:  */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Expanded(
+                                    child: Builder(
+                                      builder: (context) {
+                                        final subCatItem = _model
+                                                .docDocument?.subCatId
+                                                .toList() ??
+                                            [];
+
+                                        return Wrap(
+                                          spacing: 2.0,
+                                          runSpacing: 0.0,
+                                          alignment: WrapAlignment.start,
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.start,
+                                          direction: Axis.horizontal,
+                                          runAlignment: WrapAlignment.start,
+                                          verticalDirection:
+                                              VerticalDirection.down,
+                                          clipBehavior: Clip.none,
+                                          children:
+                                              List.generate(subCatItem.length,
+                                                  (subCatItemIndex) {
+                                            final subCatItemItem =
+                                                subCatItem[subCatItemIndex];
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(14.0),
+                                                border: Border.all(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  width: 0.5,
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 0.0, 5.0, 0.0),
+                                                child: Text(
+                                                  valueOrDefault<String>(
+                                                    FFAppState()
+                                                        .refSubCategory
+                                                        .where((e) =>
+                                                            e.subKey ==
+                                                            subCatItemItem)
+                                                        .toList()
+                                                        .first
+                                                        .desc,
+                                                    'none',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        fontSize: 10.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ]
+                                    .divide(const SizedBox(width: 5.0))
+                                    .around(const SizedBox(width: 5.0)),
                               ),
                             ],
                           ),
                         ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation5']!),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              'ty0y41np' /* وضع التطبيق */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                        ],
                       ),
-                    ),
-                    Align(
-                      alignment: const AlignmentDirectional(0.0, -1.0),
-                      child: Container(
-                        height: 75.0,
+                      Container(
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
-                          borderRadius: BorderRadius.circular(0.0),
+                          borderRadius: BorderRadius.circular(14.0),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  setDarkModeSetting(context, ThemeMode.light);
-                                },
-                                child: Container(
-                                  width: 100.0,
-                                  height: 45.0,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? FlutterFlowTheme.of(context)
-                                            .secondaryBackground
-                                        : FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      color: valueOrDefault<Color>(
-                                        Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? FlutterFlowTheme.of(context)
-                                                .alternate
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        FlutterFlowTheme.of(context).alternate,
-                                      ),
-                                      width: 1.0,
-                                    ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                'foek11ne' /* نبذه عنه:  */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Cairo',
+                                    fontSize: 12.0,
+                                    letterSpacing: 0.0,
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.wb_sunny_rounded,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? FlutterFlowTheme.of(context)
-                                                .primaryText
-                                            : FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                        size: 16.0,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            4.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            '2l7vc9l1' /* نهاري */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                color: Theme.of(context)
-                                                            .brightness ==
-                                                        Brightness.light
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                letterSpacing: 0.0,
-                                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                constraints: const BoxConstraints(
+                                  minHeight: 60.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 5.0, 5.0, 5.0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      _model.docDocument?.about,
+                                      'n',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  setDarkModeSetting(context, ThemeMode.dark);
-                                },
-                                child: Container(
-                                  width: 100.0,
-                                  height: 45.0,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? FlutterFlowTheme.of(context)
-                                            .secondaryBackground
-                                        : FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      color: valueOrDefault<Color>(
-                                        Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? FlutterFlowTheme.of(context)
-                                                .alternate
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                      width: 1.0,
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.nightlight_round,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? FlutterFlowTheme.of(context)
-                                                .primaryText
-                                            : FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                        size: 16.0,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            4.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            'ftfu7qf5' /* ليلي */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                color: Theme.of(context)
-                                                            .brightness ==
-                                                        Brightness.dark
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ].divide(const SizedBox(width: 10.0)),
-                          ),
+                            ),
+                          ]
+                              .divide(const SizedBox(width: 5.0))
+                              .around(const SizedBox(width: 5.0)),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(14.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                'd5a52iw8' /* عنوان:  */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Cairo',
+                                    fontSize: 12.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            Expanded(
+                              child: wrapWithModel(
+                                model: _model.addrressComponentModel,
+                                updateCallback: () => setState(() {}),
+                                child: AddrressComponentWidget(
+                                  govKey: valueOrDefault<int>(
+                                    _model.docDocument?.aGov,
+                                    0,
+                                  ),
+                                  zoneKey: valueOrDefault<int>(
+                                    _model.docDocument?.aZone,
+                                    0,
+                                  ),
+                                  areaKey: valueOrDefault<int>(
+                                    _model.docDocument?.aArea,
+                                    0,
+                                  ),
+                                  addressDesc: valueOrDefault<String>(
+                                    _model.docDocument?.aAddr,
+                                    'n',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]
+                              .divide(const SizedBox(width: 5.0))
+                              .around(const SizedBox(width: 5.0)),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(14.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'kws49eck' /* سعر الكشف:  */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      Text(
+                                        valueOrDefault<String>(
+                                          _model.docDocument?.price.toString(),
+                                          '0',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        valueOrDefault<String>(
+                                          FFAppState()
+                                              .refBookingType
+                                              .where((e) =>
+                                                  e.key ==
+                                                  _model.docDocument?.bookType)
+                                              .toList()
+                                              .first
+                                              .desc,
+                                          'n',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Cairo',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ]
+                              .divide(const SizedBox(width: 5.0))
+                              .around(const SizedBox(width: 5.0)),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        child: Builder(
+                          builder: (context) {
+                            final imageItem = _model.imageList.toList();
+
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List.generate(imageItem.length,
+                                        (imageItemIndex) {
+                                  final imageItemItem =
+                                      imageItem[imageItemIndex];
+                                  return ImageComponentWidget(
+                                    key: Key(
+                                        'Keyx2c_${imageItemIndex}_of_${imageItem.length}'),
+                                    imgRef: valueOrDefault<String>(
+                                      imageItemItem,
+                                      'n',
+                                    ),
+                                  );
+                                })
+                                    .divide(const SizedBox(width: 5.0))
+                                    .around(const SizedBox(width: 5.0)),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ]
+                        .divide(const SizedBox(height: 5.0))
+                        .around(const SizedBox(height: 5.0)),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(0.0, 1.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: FFLocalizations.of(context).getText(
+                        'f6zt5bsu' /* احجز الان */,
+                      ),
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Cairo',
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                ),
+                        elevation: 3.0,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 1.0, 0.0),
-                child: wrapWithModel(
-                  model: _model.customNavbarModel,
-                  updateCallback: () => setState(() {}),
-                  child: const CustomNavbarWidget(),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

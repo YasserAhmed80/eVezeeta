@@ -131,24 +131,44 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                             ),
                             child: Stack(
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.network(
-                                    _model.curretImage != null &&
-                                            _model.curretImage != ''
-                                        ? functions.stringToImagePath(
-                                            _model.curretImage)!
-                                        : ' ',
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            Image.asset(
-                                      'assets/images/error_image.jpg',
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    if (_model.curretImage != null &&
+                                        _model.curretImage != '') {
+                                      context.pushNamed(
+                                        'Show_image',
+                                        queryParameters: {
+                                          'imageURL': serializeParam(
+                                            _model.curretImage,
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    }
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    child: Image.network(
+                                      _model.curretImage != null &&
+                                              _model.curretImage != ''
+                                          ? functions.stringToImagePath(
+                                              _model.curretImage)!
+                                          : ' ',
                                       width: double.infinity,
                                       height: double.infinity,
                                       fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Image.asset(
+                                        'assets/images/error_image.jpg',
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),

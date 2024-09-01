@@ -8,7 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/calender_component_2/calender_component2_widget.dart';
-import '/pages/public_components/upload_photo/upload_photo_widget.dart';
+import '/pages/upload_photo/upload_photo_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';

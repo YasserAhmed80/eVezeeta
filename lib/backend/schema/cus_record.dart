@@ -65,6 +65,16 @@ class CusRecord extends FirestoreRecord {
   String get img => _img ?? '';
   bool hasImg() => _img != null;
 
+  // "c_at" field.
+  DateTime? _cAt;
+  DateTime? get cAt => _cAt;
+  bool hasCAt() => _cAt != null;
+
+  // "u_at" field.
+  DateTime? _uAt;
+  DateTime? get uAt => _uAt;
+  bool hasUAt() => _uAt != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _tel = snapshotData['tel'] as String?;
@@ -76,6 +86,8 @@ class CusRecord extends FirestoreRecord {
     _areaCde = castToType<int>(snapshotData['area_cde']);
     _addr = snapshotData['addr'] as String?;
     _img = snapshotData['img'] as String?;
+    _cAt = snapshotData['c_at'] as DateTime?;
+    _uAt = snapshotData['u_at'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -122,6 +134,8 @@ Map<String, dynamic> createCusRecordData({
   int? areaCde,
   String? addr,
   String? img,
+  DateTime? cAt,
+  DateTime? uAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -135,6 +149,8 @@ Map<String, dynamic> createCusRecordData({
       'area_cde': areaCde,
       'addr': addr,
       'img': img,
+      'c_at': cAt,
+      'u_at': uAt,
     }.withoutNulls,
   );
 
@@ -155,7 +171,9 @@ class CusRecordDocumentEquality implements Equality<CusRecord> {
         e1?.conCde == e2?.conCde &&
         e1?.areaCde == e2?.areaCde &&
         e1?.addr == e2?.addr &&
-        e1?.img == e2?.img;
+        e1?.img == e2?.img &&
+        e1?.cAt == e2?.cAt &&
+        e1?.uAt == e2?.uAt;
   }
 
   @override
@@ -169,7 +187,9 @@ class CusRecordDocumentEquality implements Equality<CusRecord> {
         e?.conCde,
         e?.areaCde,
         e?.addr,
-        e?.img
+        e?.img,
+        e?.cAt,
+        e?.uAt
       ]);
 
   @override

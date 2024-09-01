@@ -1163,6 +1163,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                             _model.feePerBook,
                                             5,
                                           ),
+                                          statusCde: 1,
                                         ));
                                         await showDialog(
                                           context: context,

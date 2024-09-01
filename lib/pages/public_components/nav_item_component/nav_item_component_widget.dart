@@ -103,7 +103,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
               } else {
                 if (widget.navType == EnumSelectedTab.dotor_profile) {
                   context.pushNamed(
-                    'doctor_profile',
+                    'doctor_account',
                     queryParameters: {
                       'docRef': serializeParam(
                         FFAppState().currentDoctor.dbDocRef,

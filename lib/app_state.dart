@@ -291,6 +291,21 @@ class FFAppState extends ChangeNotifier {
               prefs.getString('ff_selectedNavTab'))
           : _selectedNavTab;
     });
+    _safeInit(() {
+      _refDoctorStatus = prefs
+              .getStringList('ff_refDoctorStatus')
+              ?.map((x) {
+                try {
+                  return DtGeneralListStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refDoctorStatus;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1051,6 +1066,47 @@ class FFAppState extends ChangeNotifier {
     value != null
         ? prefs.setString('ff_selectedNavTab', value.serialize())
         : prefs.remove('ff_selectedNavTab');
+  }
+
+  List<DtGeneralListStruct> _refDoctorStatus = [];
+  List<DtGeneralListStruct> get refDoctorStatus => _refDoctorStatus;
+  set refDoctorStatus(List<DtGeneralListStruct> value) {
+    _refDoctorStatus = value;
+    prefs.setStringList(
+        'ff_refDoctorStatus', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefDoctorStatus(DtGeneralListStruct value) {
+    refDoctorStatus.add(value);
+    prefs.setStringList('ff_refDoctorStatus',
+        _refDoctorStatus.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefDoctorStatus(DtGeneralListStruct value) {
+    refDoctorStatus.remove(value);
+    prefs.setStringList('ff_refDoctorStatus',
+        _refDoctorStatus.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefDoctorStatus(int index) {
+    refDoctorStatus.removeAt(index);
+    prefs.setStringList('ff_refDoctorStatus',
+        _refDoctorStatus.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefDoctorStatusAtIndex(
+    int index,
+    DtGeneralListStruct Function(DtGeneralListStruct) updateFn,
+  ) {
+    refDoctorStatus[index] = updateFn(_refDoctorStatus[index]);
+    prefs.setStringList('ff_refDoctorStatus',
+        _refDoctorStatus.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefDoctorStatus(int index, DtGeneralListStruct value) {
+    refDoctorStatus.insert(index, value);
+    prefs.setStringList('ff_refDoctorStatus',
+        _refDoctorStatus.map((x) => x.serialize()).toList());
   }
 }
 

@@ -460,29 +460,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
     },
   },
-  // doctor_List
-  {
-    'hcx1qnsu': {
-      'ar': 'بحث عن دكتور',
-      'en': 'Search for a doctor',
-    },
-    'mk3ixzfg': {
-      'ar': 'Patients matching search',
-      'en': 'Patients matching search',
-    },
-    'as03cqmg': {
-      'ar': '24',
-      'en': '24',
-    },
-    'xusv17x9': {
-      'ar': 'قائمة الاطباء',
-      'en': 'List of doctors',
-    },
-    'zrwrju63': {
-      'ar': 'Home',
-      'en': 'Home',
-    },
-  },
   // doctor_data_schedule
   {
     'je4d3pi9': {
@@ -562,10 +539,30 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
     },
   },
-  // doctor_profile
+  // doctor_account
   {
     'yh9rfatj': {
       'ar': '/',
+      'en': '',
+    },
+    'qiz74anp': {
+      'ar': 'يمكنك الاشتراك الان لكي تسفيد من خدماتنا',
+      'en': '',
+    },
+    'x9rflpgd': {
+      'ar': 'اشترك الان',
+      'en': '',
+    },
+    'y0fywy1a': {
+      'ar': 'حاله اشتراك فعالة ',
+      'en': '',
+    },
+    'uuc4s6t5': {
+      'ar': 'ستنتهي',
+      'en': '',
+    },
+    'orkbicxt': {
+      'ar': 'حاله اشتراك غير فعاله ',
       'en': '',
     },
     'xhzlp0e3': {
@@ -589,6 +586,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'v88doy9y': {
+      'ar': 'اشتراكي',
+      'en': '',
+    },
+    'bj2eghvz': {
+      'ar': 'تجديد الاشتراك',
+      'en': '',
+    },
+    'xa04spla': {
+      'ar': 'فواتيري',
+      'en': '',
+    },
+    'd8ghcrj4': {
       'ar': 'بيانات الحساب',
       'en': '',
     },
@@ -619,22 +628,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_search
   {
-    '8dmzralb': {
-      'ar': 'اشترك',
-      'en': 'save',
-    },
-    's77iz3sm': {
-      'ar': 'فاتورة',
-      'en': '',
-    },
-    '19rz7uum': {
-      'ar': 'البيانات',
-      'en': '',
-    },
-    'g6zol6lq': {
-      'ar': 'الحجوزات',
-      'en': '',
-    },
     '0vljw38e': {
       'ar': 'احجز الان',
       'en': '',
@@ -710,7 +703,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'لكي يتم الحجز يجب اختيار اليوم و الوقت من اعلي!',
       'en': '',
     },
-    'lhav9xod': {
+    'zrwrju63': {
       'ar': 'Home',
       'en': 'Home',
     },
@@ -718,7 +711,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // doctor_booking_center
   {
     '8hgydiqf': {
-      'ar': 'جدول الحجوزات',
+      'ar': 'مركز الحجوزات',
       'en': '',
     },
     '2v6kz8vp': {
@@ -1344,7 +1337,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اطبائي المفضلين',
       'en': '',
     },
-    '4cjjo6x6': {
+    'lhav9xod': {
       'ar': 'Home',
       'en': '',
     },
@@ -1370,6 +1363,48 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'pt35zsco': {
       'ar': 'Home',
       'en': '',
+    },
+  },
+  // Show_image
+  {
+    'ulm3uoi5': {
+      'ar': 'Home',
+      'en': 'Home',
+    },
+  },
+  // doctor_profile
+  {
+    '6z69vc4b': {
+      'ar': 'تخصص: ',
+      'en': '',
+    },
+    'u3egcbzm': {
+      'ar': 'تخصص فرعي: ',
+      'en': '',
+    },
+    'foek11ne': {
+      'ar': 'نبذه عنه: ',
+      'en': '',
+    },
+    'd5a52iw8': {
+      'ar': 'عنوان: ',
+      'en': '',
+    },
+    'kws49eck': {
+      'ar': 'سعر الكشف: ',
+      'en': '',
+    },
+    'f6zt5bsu': {
+      'ar': 'احجز الان',
+      'en': '',
+    },
+    'sta6k62x': {
+      'ar': 'ملف الدكتور',
+      'en': '',
+    },
+    'hijzss1o': {
+      'ar': 'Home',
+      'en': 'Home',
     },
   },
   // DayScheduleComponent
@@ -1503,16 +1538,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_data_component
   {
+    'ypb59s00': {
+      'ar': 'تخصص رئيسي: ',
+      'en': '',
+    },
+    '03b9v6br': {
+      'ar': 'تخصص فرعي:  ',
+      'en': '',
+    },
     'sx1exypl': {
       'ar': '123 ',
       'en': '',
     },
     'blusaqkl': {
       'ar': 'تقيم',
-      'en': '',
-    },
-    's39hdf14': {
-      'ar': 'Read Now',
       'en': '',
     },
   },

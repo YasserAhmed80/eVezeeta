@@ -2,7 +2,7 @@ import '/backend/backend.dart';
 import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/upload_photo/upload_photo_widget.dart';
+import '/pages/upload_photo/upload_photo_widget.dart';
 import 'cus_main_data_widget.dart' show CusMainDataWidget;
 import 'package:flutter/material.dart';
 

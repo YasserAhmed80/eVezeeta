@@ -59,6 +59,7 @@ Future<DocumentReference?> saveImageToStorage1(
 
     // Get the download URL for the uploaded image
     String downloadURL = await storageRef.child(fileName).getDownloadURL();
+    print('storage url: $downloadURL');
 
     // save image to photo collection
 

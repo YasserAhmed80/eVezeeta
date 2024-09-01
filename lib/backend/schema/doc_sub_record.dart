@@ -65,6 +65,11 @@ class DocSubRecord extends FirestoreRecord {
   DocumentReference? get docRef => _docRef;
   bool hasDocRef() => _docRef != null;
 
+  // "c_at" field.
+  DateTime? _cAt;
+  DateTime? get cAt => _cAt;
+  bool hasCAt() => _cAt != null;
+
   void _initializeFields() {
     _amount = castToType<int>(snapshotData['amount']);
     _fee = castToType<int>(snapshotData['fee']);
@@ -76,6 +81,7 @@ class DocSubRecord extends FirestoreRecord {
     _discount = castToType<int>(snapshotData['discount']);
     _feePerBook = castToType<int>(snapshotData['fee_per_book']);
     _docRef = snapshotData['doc_ref'] as DocumentReference?;
+    _cAt = snapshotData['c_at'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -122,6 +128,7 @@ Map<String, dynamic> createDocSubRecordData({
   int? discount,
   int? feePerBook,
   DocumentReference? docRef,
+  DateTime? cAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -135,6 +142,7 @@ Map<String, dynamic> createDocSubRecordData({
       'discount': discount,
       'fee_per_book': feePerBook,
       'doc_ref': docRef,
+      'c_at': cAt,
     }.withoutNulls,
   );
 
@@ -155,7 +163,8 @@ class DocSubRecordDocumentEquality implements Equality<DocSubRecord> {
         e1?.payRef == e2?.payRef &&
         e1?.discount == e2?.discount &&
         e1?.feePerBook == e2?.feePerBook &&
-        e1?.docRef == e2?.docRef;
+        e1?.docRef == e2?.docRef &&
+        e1?.cAt == e2?.cAt;
   }
 
   @override
@@ -169,7 +178,8 @@ class DocSubRecordDocumentEquality implements Equality<DocSubRecord> {
         e?.payRef,
         e?.discount,
         e?.feePerBook,
-        e?.docRef
+        e?.docRef,
+        e?.cAt
       ]);
 
   @override

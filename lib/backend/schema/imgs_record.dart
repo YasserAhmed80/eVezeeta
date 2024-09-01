@@ -45,6 +45,11 @@ class ImgsRecord extends FirestoreRecord {
   String get eCode => _eCode ?? '';
   bool hasECode() => _eCode != null;
 
+  // "c_at" field.
+  DateTime? _cAt;
+  DateTime? get cAt => _cAt;
+  bool hasCAt() => _cAt != null;
+
   void _initializeFields() {
     _eType = snapshotData['e_type'] as String?;
     _iType = snapshotData['i_type'] as String?;
@@ -52,6 +57,7 @@ class ImgsRecord extends FirestoreRecord {
     _iVer = snapshotData['i_ver'] as bool?;
     _iRef = snapshotData['i_ref'] as String?;
     _eCode = snapshotData['e_code'] as String?;
+    _cAt = snapshotData['c_at'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -94,6 +100,7 @@ Map<String, dynamic> createImgsRecordData({
   bool? iVer,
   String? iRef,
   String? eCode,
+  DateTime? cAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,6 +110,7 @@ Map<String, dynamic> createImgsRecordData({
       'i_ver': iVer,
       'i_ref': iRef,
       'e_code': eCode,
+      'c_at': cAt,
     }.withoutNulls,
   );
 
@@ -119,12 +127,13 @@ class ImgsRecordDocumentEquality implements Equality<ImgsRecord> {
         e1?.iSeq == e2?.iSeq &&
         e1?.iVer == e2?.iVer &&
         e1?.iRef == e2?.iRef &&
-        e1?.eCode == e2?.eCode;
+        e1?.eCode == e2?.eCode &&
+        e1?.cAt == e2?.cAt;
   }
 
   @override
   int hash(ImgsRecord? e) => const ListEquality()
-      .hash([e?.eType, e?.iType, e?.iSeq, e?.iVer, e?.iRef, e?.eCode]);
+      .hash([e?.eType, e?.iType, e?.iSeq, e?.iVer, e?.iRef, e?.eCode, e?.cAt]);
 
   @override
   bool isValidKey(Object? o) => o is ImgsRecord;

@@ -56,11 +56,14 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: double.infinity,
-                    height: 160.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 160.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
                     ),
                   ),
                   StreamBuilder<List<DocRecord>>(
@@ -92,7 +95,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                           0,
                           0,
                           0,
-                          44.0,
+                          70.0,
                         ),
                         primary: false,
                         shrinkWrap: true,
@@ -135,191 +138,6 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        context.pushNamed(
-                                          'doctor_payment',
-                                          queryParameters: {
-                                            'subsrciptionStatus':
-                                                serializeParam(
-                                              1,
-                                              ParamType.int,
-                                            ),
-                                            'docDocument': serializeParam(
-                                              listViewDocRecord,
-                                              ParamType.Document,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            'docDocument': listViewDocRecord,
-                                          },
-                                        );
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        '8dmzralb' /* اشترك */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              color: Colors.white,
-                                              fontSize: 12.0,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 3.0,
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        context.pushNamed(
-                                          'doctor_billing',
-                                          queryParameters: {
-                                            'docDocument': serializeParam(
-                                              listViewDocRecord,
-                                              ParamType.Document,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            'docDocument': listViewDocRecord,
-                                          },
-                                        );
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        's77iz3sm' /* فاتورة */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Cairo',
-                                              color: Colors.white,
-                                              fontSize: 12.0,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 3.0,
-                                        borderSide: const BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 5.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          context.pushNamed(
-                                            'doctor_dashboard',
-                                            queryParameters: {
-                                              'docRef': serializeParam(
-                                                listViewDocRecord.reference,
-                                                ParamType.DocumentReference,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '19rz7uum' /* البيانات */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    color: Colors.white,
-                                                    fontSize: 12.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 5.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          context.pushNamed(
-                                            'doctor_booking_center',
-                                            queryParameters: {
-                                              'docRef': serializeParam(
-                                                listViewDocRecord.reference,
-                                                ParamType.DocumentReference,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'g6zol6lq' /* الحجوزات */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    color: Colors.white,
-                                                    fontSize: 12.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                    ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 5.0),
@@ -342,10 +160,14 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                             FFLocalizations.of(context).getText(
                                           '0vljw38e' /* احجز الان */,
                                         ),
+                                        icon: const Icon(
+                                          Icons.calendar_month,
+                                          size: 15.0,
+                                        ),
                                         options: FFButtonOptions(
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                                  5.0, 0.0, 5.0, 0.0),
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
@@ -386,12 +208,12 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
             ),
             Container(
               width: double.infinity,
-              height: 160.0,
+              height: 150.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(14.0),
-                  bottomRight: Radius.circular(14.0),
+                  bottomLeft: Radius.circular(0.0),
+                  bottomRight: Radius.circular(0.0),
                   topLeft: Radius.circular(0.0),
                   topRight: Radius.circular(0.0),
                 ),
@@ -402,16 +224,11 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.search_sharp,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
-                        ),
                         Expanded(
                           child: Text(
                             FFLocalizations.of(context).getText(
@@ -422,22 +239,10 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Cairo',
+                                  fontSize: 16.0,
                                   letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                          ),
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.safePop();
-                          },
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 24.0,
                           ),
                         ),
                       ],
@@ -647,10 +452,6 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                     model: _model.docSearchItemListComponentModel,
                     updateCallback: () => setState(() {}),
                     child: const DocSearchItemListComponentWidget(),
-                  ),
-                  Divider(
-                    thickness: 1.0,
-                    color: FlutterFlowTheme.of(context).alternate,
                   ),
                 ].divide(const SizedBox(height: 3.0)),
               ),

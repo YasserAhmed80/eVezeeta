@@ -65,6 +65,16 @@ class DocBookedTimeRecord extends FirestoreRecord {
   DocumentReference? get docRef => _docRef;
   bool hasDocRef() => _docRef != null;
 
+  // "c_at" field.
+  DateTime? _cAt;
+  DateTime? get cAt => _cAt;
+  bool hasCAt() => _cAt != null;
+
+  // "u_at" field.
+  DateTime? _uAt;
+  DateTime? get uAt => _uAt;
+  bool hasUAt() => _uAt != null;
+
   void _initializeFields() {
     _date = snapshotData['date'] as DateTime?;
     _hour = castToType<int>(snapshotData['hour']);
@@ -76,6 +86,8 @@ class DocBookedTimeRecord extends FirestoreRecord {
     _fee = castToType<int>(snapshotData['fee']);
     _cusRef = snapshotData['cus_ref'] as DocumentReference?;
     _docRef = snapshotData['doc_ref'] as DocumentReference?;
+    _cAt = snapshotData['c_at'] as DateTime?;
+    _uAt = snapshotData['u_at'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -123,6 +135,8 @@ Map<String, dynamic> createDocBookedTimeRecordData({
   int? fee,
   DocumentReference? cusRef,
   DocumentReference? docRef,
+  DateTime? cAt,
+  DateTime? uAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -136,6 +150,8 @@ Map<String, dynamic> createDocBookedTimeRecordData({
       'fee': fee,
       'cus_ref': cusRef,
       'doc_ref': docRef,
+      'c_at': cAt,
+      'u_at': uAt,
     }.withoutNulls,
   );
 
@@ -157,7 +173,9 @@ class DocBookedTimeRecordDocumentEquality
         e1?.price == e2?.price &&
         e1?.fee == e2?.fee &&
         e1?.cusRef == e2?.cusRef &&
-        e1?.docRef == e2?.docRef;
+        e1?.docRef == e2?.docRef &&
+        e1?.cAt == e2?.cAt &&
+        e1?.uAt == e2?.uAt;
   }
 
   @override
@@ -171,7 +189,9 @@ class DocBookedTimeRecordDocumentEquality
         e?.price,
         e?.fee,
         e?.cusRef,
-        e?.docRef
+        e?.docRef,
+        e?.cAt,
+        e?.uAt
       ]);
 
   @override

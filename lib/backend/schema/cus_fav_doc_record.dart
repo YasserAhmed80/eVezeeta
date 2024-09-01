@@ -25,9 +25,15 @@ class CusFavDocRecord extends FirestoreRecord {
   DocumentReference? get docRef => _docRef;
   bool hasDocRef() => _docRef != null;
 
+  // "c_at" field.
+  DateTime? _cAt;
+  DateTime? get cAt => _cAt;
+  bool hasCAt() => _cAt != null;
+
   void _initializeFields() {
     _cusRef = snapshotData['cus_ref'] as DocumentReference?;
     _docRef = snapshotData['doc_ref'] as DocumentReference?;
+    _cAt = snapshotData['c_at'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -67,11 +73,13 @@ class CusFavDocRecord extends FirestoreRecord {
 Map<String, dynamic> createCusFavDocRecordData({
   DocumentReference? cusRef,
   DocumentReference? docRef,
+  DateTime? cAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'cus_ref': cusRef,
       'doc_ref': docRef,
+      'c_at': cAt,
     }.withoutNulls,
   );
 
@@ -83,12 +91,14 @@ class CusFavDocRecordDocumentEquality implements Equality<CusFavDocRecord> {
 
   @override
   bool equals(CusFavDocRecord? e1, CusFavDocRecord? e2) {
-    return e1?.cusRef == e2?.cusRef && e1?.docRef == e2?.docRef;
+    return e1?.cusRef == e2?.cusRef &&
+        e1?.docRef == e2?.docRef &&
+        e1?.cAt == e2?.cAt;
   }
 
   @override
   int hash(CusFavDocRecord? e) =>
-      const ListEquality().hash([e?.cusRef, e?.docRef]);
+      const ListEquality().hash([e?.cusRef, e?.docRef, e?.cAt]);
 
   @override
   bool isValidKey(Object? o) => o is CusFavDocRecord;

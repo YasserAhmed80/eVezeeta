@@ -7,12 +7,10 @@ export '/pages/doctor/doctor_data_address/doctor_data_address_widget.dart'
     show DoctorDataAddressWidget;
 export '/pages/doctor/doctor_data_images/doctor_data_images_widget.dart'
     show DoctorDataImagesWidget;
-export '/pages/doctor/doctor_list/doctor_list_widget.dart'
-    show DoctorListWidget;
 export '/pages/doctor/doctor_data_schedule/doctor_data_schedule_widget.dart'
     show DoctorDataScheduleWidget;
-export '/pages/doctor/doctor_profile/doctor_profile_widget.dart'
-    show DoctorProfileWidget;
+export '/pages/doctor/doctor_account/doctor_account_widget.dart'
+    show DoctorAccountWidget;
 export '/pages/doctor/doctor_search/doctor_search_widget.dart'
     show DoctorSearchWidget;
 export '/pages/doctor/doctor_book_visit/doctor_book_visit_widget.dart'
@@ -38,3 +36,6 @@ export '/customer/customer_favorit_doc/customer_favorit_doc_widget.dart'
     show CustomerFavoritDocWidget;
 export '/customer/customer_doc_booked/customer_doc_booked_widget.dart'
     show CustomerDocBookedWidget;
+export '/show_image/show_image_widget.dart' show ShowImageWidget;
+export '/pages/doctor/doctor_profile/doctor_profile_widget.dart'
+    show DoctorProfileWidget;

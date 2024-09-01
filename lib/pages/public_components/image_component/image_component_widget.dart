@@ -52,18 +52,37 @@ class _ImageComponentWidgetState extends State<ImageComponentWidget> {
         alignment: const AlignmentDirectional(0.0, 0.0),
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
-            child: Image.network(
-              functions.stringToImagePath(widget.imgRef)!,
-              width: 300.0,
-              height: 200.0,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Image.asset(
-                'assets/images/error_image.jpg',
+          child: InkWell(
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () async {
+              if (widget.imgRef != null && widget.imgRef != '') {
+                context.pushNamed(
+                  'Show_image',
+                  queryParameters: {
+                    'imageURL': serializeParam(
+                      widget.imgRef,
+                      ParamType.String,
+                    ),
+                  }.withoutNulls,
+                );
+              }
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5.0),
+              child: Image.network(
+                functions.stringToImagePath(widget.imgRef)!,
                 width: 300.0,
                 height: 200.0,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Image.asset(
+                  'assets/images/error_image.jpg',
+                  width: 300.0,
+                  height: 200.0,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

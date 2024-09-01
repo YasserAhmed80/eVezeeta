@@ -1,6 +1,5 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
@@ -67,7 +66,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
           automaticallyImplyLeading: false,
           title: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 FFLocalizations.of(context).getText(
@@ -80,19 +79,6 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.bold,
                     ),
-              ),
-              FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 20.0,
-                buttonSize: 40.0,
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  context.safePop();
-                },
               ),
             ],
           ),

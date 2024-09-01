@@ -872,6 +872,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                               docRef: widget
                                                                   .docDocument
                                                                   ?.reference,
+                                                              cAt: functions
+                                                                  .getCurrentDate(),
                                                             ));
                                                         _model.loopIndex1 = 0;
                                                         _model.loopMax1 =

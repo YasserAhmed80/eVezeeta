@@ -30,10 +30,16 @@ class DocTimeRecord extends FirestoreRecord {
   DocumentReference? get docRef => _docRef;
   bool hasDocRef() => _docRef != null;
 
+  // "c_at" field.
+  DateTime? _cAt;
+  DateTime? get cAt => _cAt;
+  bool hasCAt() => _cAt != null;
+
   void _initializeFields() {
     _dayId = castToType<int>(snapshotData['day_id']);
     _hrsId = getDataList(snapshotData['hrs_id']);
     _docRef = snapshotData['doc_ref'] as DocumentReference?;
+    _cAt = snapshotData['c_at'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -73,11 +79,13 @@ class DocTimeRecord extends FirestoreRecord {
 Map<String, dynamic> createDocTimeRecordData({
   int? dayId,
   DocumentReference? docRef,
+  DateTime? cAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'day_id': dayId,
       'doc_ref': docRef,
+      'c_at': cAt,
     }.withoutNulls,
   );
 
@@ -92,12 +100,13 @@ class DocTimeRecordDocumentEquality implements Equality<DocTimeRecord> {
     const listEquality = ListEquality();
     return e1?.dayId == e2?.dayId &&
         listEquality.equals(e1?.hrsId, e2?.hrsId) &&
-        e1?.docRef == e2?.docRef;
+        e1?.docRef == e2?.docRef &&
+        e1?.cAt == e2?.cAt;
   }
 
   @override
   int hash(DocTimeRecord? e) =>
-      const ListEquality().hash([e?.dayId, e?.hrsId, e?.docRef]);
+      const ListEquality().hash([e?.dayId, e?.hrsId, e?.docRef, e?.cAt]);
 
   @override
   bool isValidKey(Object? o) => o is DocTimeRecord;

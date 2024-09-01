@@ -145,6 +145,16 @@ class DocRecord extends FirestoreRecord {
   int get sFee => _sFee ?? 0;
   bool hasSFee() => _sFee != null;
 
+  // "c_at" field.
+  DateTime? _cAt;
+  DateTime? get cAt => _cAt;
+  bool hasCAt() => _cAt != null;
+
+  // "u_at" field.
+  DateTime? _uAt;
+  DateTime? get uAt => _uAt;
+  bool hasUAt() => _uAt != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _gender = castToType<int>(snapshotData['gender']);
@@ -172,6 +182,8 @@ class DocRecord extends FirestoreRecord {
     _sToDate = snapshotData['s_to_date'] as DateTime?;
     _sCost = castToType<int>(snapshotData['s_cost']);
     _sFee = castToType<int>(snapshotData['s_fee']);
+    _cAt = snapshotData['c_at'] as DateTime?;
+    _uAt = snapshotData['u_at'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -233,6 +245,8 @@ Map<String, dynamic> createDocRecordData({
   DateTime? sToDate,
   int? sCost,
   int? sFee,
+  DateTime? cAt,
+  DateTime? uAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -261,6 +275,8 @@ Map<String, dynamic> createDocRecordData({
       's_to_date': sToDate,
       's_cost': sCost,
       's_fee': sFee,
+      'c_at': cAt,
+      'u_at': uAt,
     }.withoutNulls,
   );
 
@@ -298,7 +314,9 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e1?.sFDate == e2?.sFDate &&
         e1?.sToDate == e2?.sToDate &&
         e1?.sCost == e2?.sCost &&
-        e1?.sFee == e2?.sFee;
+        e1?.sFee == e2?.sFee &&
+        e1?.cAt == e2?.cAt &&
+        e1?.uAt == e2?.uAt;
   }
 
   @override
@@ -328,7 +346,9 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e?.sFDate,
         e?.sToDate,
         e?.sCost,
-        e?.sFee
+        e?.sFee,
+        e?.cAt,
+        e?.uAt
       ]);
 
   @override

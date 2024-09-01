@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/day_schedule_component/day_schedule_component_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -1102,6 +1103,8 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                       .txtAvergeVisitTextController
                                                       .text),
                                                   bookType: _model.bookTypeCode,
+                                                  uAt: functions
+                                                      .getCurrentDate(),
                                                 ));
                                                 await showDialog(
                                                   context: context,
