@@ -37,7 +37,6 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for txtFullNameField widget.
   FocusNode? txtFullNameFieldFocusNode;

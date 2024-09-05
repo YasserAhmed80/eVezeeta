@@ -33,7 +33,7 @@ class _BookedStatusComponentWidgetState
     super.initState();
     _model = createModel(context, () => BookedStatusComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

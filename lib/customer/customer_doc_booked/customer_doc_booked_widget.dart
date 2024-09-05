@@ -44,7 +44,7 @@ class _CustomerDocBookedWidgetState extends State<CustomerDocBookedWidget> {
       );
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -351,7 +351,7 @@ class _CustomerDocBookedWidgetState extends State<CustomerDocBookedWidget> {
                 alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.customNavbarModel,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: const CustomNavbarWidget(),
                 ),
               ),

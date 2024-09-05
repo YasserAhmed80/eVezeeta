@@ -25,7 +25,6 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for countryCode widget.
   int? countryCodeValue;

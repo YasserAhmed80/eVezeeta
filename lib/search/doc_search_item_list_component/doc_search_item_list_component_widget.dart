@@ -30,7 +30,7 @@ class _DocSearchItemListComponentWidgetState
     super.initState();
     _model = createModel(context, () => DocSearchItemListComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -74,7 +74,7 @@ class _DocSearchItemListComponentWidgetState
                             .docTypeCde
                             .toList()
                             .cast<int>();
-                        setState(() {});
+                        safeSetState(() {});
                       } else {
                         if (searchItemItem.itemType == 'title') {
                           _model.selectedItemData = FFAppState()
@@ -82,7 +82,7 @@ class _DocSearchItemListComponentWidgetState
                               .docTitleCde
                               .toList()
                               .cast<int>();
-                          setState(() {});
+                          safeSetState(() {});
                         }
                       }
 

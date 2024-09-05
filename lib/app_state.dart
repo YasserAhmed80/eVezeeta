@@ -306,6 +306,33 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _refDoctorStatus;
     });
+    _safeInit(() {
+      _refCustomerFiles = prefs
+              .getStringList('ff_refCustomerFiles')
+              ?.map((x) {
+                try {
+                  return DtGeneralListStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refCustomerFiles;
+    });
+    _safeInit(() {
+      if (prefs.containsKey('ff_currentFileCustomer')) {
+        try {
+          final serializedData =
+              prefs.getString('ff_currentFileCustomer') ?? '{}';
+          _currentFileCustomer = DtCustomerFileStruct.fromSerializableMap(
+              jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1059,7 +1086,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_currentCustomer', _currentCustomer.serialize());
   }
 
-  EnumSelectedTab? _selectedNavTab;
+  EnumSelectedTab? _selectedNavTab = EnumSelectedTab.doctor_search;
   EnumSelectedTab? get selectedNavTab => _selectedNavTab;
   set selectedNavTab(EnumSelectedTab? value) {
     _selectedNavTab = value;
@@ -1107,6 +1134,69 @@ class FFAppState extends ChangeNotifier {
     refDoctorStatus.insert(index, value);
     prefs.setStringList('ff_refDoctorStatus',
         _refDoctorStatus.map((x) => x.serialize()).toList());
+  }
+
+  List<DtGeneralListStruct> _refCustomerFiles = [
+    DtGeneralListStruct.fromSerializableMap(
+        jsonDecode('{\"key\":\"1\",\"desc\":\"روشتة\",\"lng_cde\":\"1\"}')),
+    DtGeneralListStruct.fromSerializableMap(
+        jsonDecode('{\"key\":\"2\",\"desc\":\"تحاليل\",\"lng_cde\":\"1\"}')),
+    DtGeneralListStruct.fromSerializableMap(
+        jsonDecode('{\"key\":\"3\",\"desc\":\"أشعة\",\"lng_cde\":\"1\"}')),
+    DtGeneralListStruct.fromSerializableMap(
+        jsonDecode('{\"key\":\"100\",\"desc\":\"اخري\",\"lng_cde\":\"1\"}'))
+  ];
+  List<DtGeneralListStruct> get refCustomerFiles => _refCustomerFiles;
+  set refCustomerFiles(List<DtGeneralListStruct> value) {
+    _refCustomerFiles = value;
+    prefs.setStringList(
+        'ff_refCustomerFiles', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefCustomerFiles(DtGeneralListStruct value) {
+    refCustomerFiles.add(value);
+    prefs.setStringList('ff_refCustomerFiles',
+        _refCustomerFiles.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefCustomerFiles(DtGeneralListStruct value) {
+    refCustomerFiles.remove(value);
+    prefs.setStringList('ff_refCustomerFiles',
+        _refCustomerFiles.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefCustomerFiles(int index) {
+    refCustomerFiles.removeAt(index);
+    prefs.setStringList('ff_refCustomerFiles',
+        _refCustomerFiles.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefCustomerFilesAtIndex(
+    int index,
+    DtGeneralListStruct Function(DtGeneralListStruct) updateFn,
+  ) {
+    refCustomerFiles[index] = updateFn(_refCustomerFiles[index]);
+    prefs.setStringList('ff_refCustomerFiles',
+        _refCustomerFiles.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefCustomerFiles(int index, DtGeneralListStruct value) {
+    refCustomerFiles.insert(index, value);
+    prefs.setStringList('ff_refCustomerFiles',
+        _refCustomerFiles.map((x) => x.serialize()).toList());
+  }
+
+  DtCustomerFileStruct _currentFileCustomer = DtCustomerFileStruct();
+  DtCustomerFileStruct get currentFileCustomer => _currentFileCustomer;
+  set currentFileCustomer(DtCustomerFileStruct value) {
+    _currentFileCustomer = value;
+    prefs.setString('ff_currentFileCustomer', value.serialize());
+  }
+
+  void updateCurrentFileCustomerStruct(
+      Function(DtCustomerFileStruct) updateFn) {
+    updateFn(_currentFileCustomer);
+    prefs.setString('ff_currentFileCustomer', _currentFileCustomer.serialize());
   }
 }
 

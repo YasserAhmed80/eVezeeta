@@ -41,7 +41,7 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
     super.initState();
     _model = createModel(context, () => AddrressComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -45,10 +45,10 @@ class _SwitchTitleComponentWidgetState
       _model.selectedList = widget.inputList!.toList().cast<int>();
       _model.switchValue = functions.checkItemInList(
           widget.item?.subKey, _model.selectedList.toList())!;
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -75,14 +75,14 @@ class _SwitchTitleComponentWidgetState
                 false,
               );
               _model.switchValue = false;
-              setState(() {});
+              safeSetState(() {});
             } else {
               await widget.actionReturnedList?.call(
                 widget.item?.subKey,
                 true,
               );
               _model.switchValue = true;
-              setState(() {});
+              safeSetState(() {});
             }
           },
           child: Container(

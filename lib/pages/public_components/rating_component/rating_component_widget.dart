@@ -26,7 +26,7 @@ class _RatingComponentWidgetState extends State<RatingComponentWidget> {
     super.initState();
     _model = createModel(context, () => RatingComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -40,7 +40,7 @@ class _RatingComponentWidgetState extends State<RatingComponentWidget> {
   Widget build(BuildContext context) {
     return RatingBar.builder(
       onRatingUpdate: (newValue) =>
-          setState(() => _model.ratingBarValue = newValue),
+          safeSetState(() => _model.ratingBarValue = newValue),
       itemBuilder: (context, index) => Icon(
         Icons.star_rounded,
         color: FlutterFlowTheme.of(context).tertiary,

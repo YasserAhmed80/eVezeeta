@@ -1,0 +1,126 @@
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/pages/upload_photo/upload_photo_widget.dart';
+import 'cus_new_file_widget.dart' show CusNewFileWidget;
+import 'package:flutter/material.dart';
+
+class CusNewFileModel extends FlutterFlowModel<CusNewFileWidget> {
+  ///  Local state fields for this page.
+
+  bool isValidFileDate = true;
+
+  bool isValidFileType = true;
+
+  int? fileKey = -1;
+
+  DateTime? fileDate;
+
+  CusFilesRecord? fileDocument;
+
+  bool isDataSaved = false;
+
+  DocumentReference? currentFileRef;
+
+  ///  State fields for stateful widgets in this page.
+
+  final formKey = GlobalKey<FormState>();
+  // Stores action output result for [Backend Call - Read Document] action in cus_new_file widget.
+  CusFilesRecord? returnedFile;
+  // State field(s) for cboFileType widget.
+  int? cboFileTypeValue;
+  FormFieldController<int>? cboFileTypeValueController;
+  // State field(s) for txtFileDesc widget.
+  FocusNode? txtFileDescFocusNode;
+  TextEditingController? txtFileDescTextController;
+  String? Function(BuildContext, String?)? txtFileDescTextControllerValidator;
+  String? _txtFileDescTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'vhkeywy5' /* Field is required */,
+      );
+    }
+
+    if (val.length < 10) {
+      return FFLocalizations.of(context).getText(
+        'rfzfvabs' /* حجم المعلومات صغير جدا */,
+      );
+    }
+    if (val.length > 150) {
+      return FFLocalizations.of(context).getText(
+        '9ujnvguj' /* حجم المعلومات كبير جدا */,
+      );
+    }
+
+    return null;
+  }
+
+  // State field(s) for txtDocDesc widget.
+  FocusNode? txtDocDescFocusNode;
+  TextEditingController? txtDocDescTextController;
+  String? Function(BuildContext, String?)? txtDocDescTextControllerValidator;
+  String? _txtDocDescTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'xcyvq3e6' /* Field is required */,
+      );
+    }
+
+    if (val.length < 10) {
+      return FFLocalizations.of(context).getText(
+        '45xd2xtl' /* حجم المعلومات صغير جدا */,
+      );
+    }
+    if (val.length > 200) {
+      return FFLocalizations.of(context).getText(
+        '9rv7l8f5' /* حجم المعلومات كبير جدا */,
+      );
+    }
+
+    return null;
+  }
+
+  // Model for upload_photo component.
+  late UploadPhotoModel uploadPhotoModel;
+  // Stores action output result for [Action Block - validateData] action in Button widget.
+  bool? isValidData;
+  // Stores action output result for [Validate Form] action in Button widget.
+  bool? formIsValid;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  CusFilesRecord? savedFile;
+
+  @override
+  void initState(BuildContext context) {
+    txtFileDescTextControllerValidator = _txtFileDescTextControllerValidator;
+    txtDocDescTextControllerValidator = _txtDocDescTextControllerValidator;
+    uploadPhotoModel = createModel(context, () => UploadPhotoModel());
+  }
+
+  @override
+  void dispose() {
+    txtFileDescFocusNode?.dispose();
+    txtFileDescTextController?.dispose();
+
+    txtDocDescFocusNode?.dispose();
+    txtDocDescTextController?.dispose();
+
+    uploadPhotoModel.dispose();
+  }
+
+  /// Action blocks.
+  Future<bool?> validateData(BuildContext context) async {
+    if (fileKey == -1) {
+      isValidFileType = false;
+    }
+    if (fileDate == null) {
+      isValidFileDate = false;
+    }
+    if ((isValidFileDate == false) || (isValidFileType == false)) {
+      return false;
+    }
+
+    return true;
+  }
+}

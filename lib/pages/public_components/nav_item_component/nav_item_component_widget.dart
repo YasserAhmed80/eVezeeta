@@ -2,7 +2,6 @@ import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'nav_item_component_model.dart';
 export 'nav_item_component_model.dart';
@@ -37,10 +36,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
     super.initState();
     _model = createModel(context, () => NavItemComponentModel());
 
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,7 +64,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
             context.pushNamed('doctor_search');
 
             FFAppState().selectedNavTab = EnumSelectedTab.doctor_search;
-            setState(() {});
+            safeSetState(() {});
           } else {
             if (widget.navType == EnumSelectedTab.doctor_new) {
               context.pushNamed(
@@ -85,7 +81,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
               );
 
               FFAppState().selectedNavTab = EnumSelectedTab.doctor_new;
-              setState(() {});
+              safeSetState(() {});
             } else {
               if (widget.navType == EnumSelectedTab.doctor_dashboard) {
                 context.pushNamed(
@@ -99,7 +95,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                 );
 
                 FFAppState().selectedNavTab = EnumSelectedTab.doctor_dashboard;
-                setState(() {});
+                safeSetState(() {});
               } else {
                 if (widget.navType == EnumSelectedTab.dotor_profile) {
                   context.pushNamed(
@@ -113,13 +109,13 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                   );
 
                   FFAppState().selectedNavTab = EnumSelectedTab.dotor_profile;
-                  setState(() {});
+                  safeSetState(() {});
                 } else {
                   if (widget.navType == EnumSelectedTab.customer_list) {
                     context.pushNamed('customer_List');
 
                     FFAppState().selectedNavTab = EnumSelectedTab.customer_list;
-                    setState(() {});
+                    safeSetState(() {});
                   } else {
                     if (widget.navType == EnumSelectedTab.customer_profile) {
                       context.pushNamed(
@@ -134,14 +130,14 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
 
                       FFAppState().selectedNavTab =
                           EnumSelectedTab.customer_profile;
-                      setState(() {});
+                      safeSetState(() {});
                     } else {
                       if (widget.navType == EnumSelectedTab.customer_search) {
                         context.pushNamed('doctor_search');
 
                         FFAppState().selectedNavTab =
                             EnumSelectedTab.customer_search;
-                        setState(() {});
+                        safeSetState(() {});
                       } else {
                         if (widget.navType ==
                             EnumSelectedTab.customer_booking) {
@@ -157,7 +153,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
 
                           FFAppState().selectedNavTab =
                               EnumSelectedTab.customer_booking;
-                          setState(() {});
+                          safeSetState(() {});
                         } else {
                           if (widget.navType ==
                               EnumSelectedTab.doctor_visits) {
@@ -173,7 +169,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
 
                             FFAppState().selectedNavTab =
                                 EnumSelectedTab.doctor_visits;
-                            setState(() {});
+                            safeSetState(() {});
                           } else {
                             if (widget.navType ==
                                 EnumSelectedTab.customer_add) {
@@ -181,15 +177,21 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                                 'cus_main_data',
                                 queryParameters: {
                                   'cusRef': serializeParam(
-                                    FFAppState().currentCustomer.cusDocRef,
+                                    null,
                                     ParamType.DocumentReference,
                                   ),
                                 }.withoutNulls,
                               );
 
+                              FFAppState().updateCurrentCustomerStruct(
+                                (e) => e
+                                  ..img = null
+                                  ..cusDocRef = null,
+                              );
+                              safeSetState(() {});
                               FFAppState().selectedNavTab =
                                   EnumSelectedTab.customer_add;
-                              setState(() {});
+                              safeSetState(() {});
                             }
                           }
                         }

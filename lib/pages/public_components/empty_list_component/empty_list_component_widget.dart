@@ -31,7 +31,7 @@ class _EmptyListComponentWidgetState extends State<EmptyListComponentWidget> {
     super.initState();
     _model = createModel(context, () => EmptyListComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -62,7 +62,7 @@ class _EmptyListComponentWidgetState extends State<EmptyListComponentWidget> {
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Cairo',
-                  fontSize: 12.0,
+                  fontSize: 14.0,
                   letterSpacing: 0.0,
                 ),
           ),

@@ -14,7 +14,6 @@ class DoctorAccountModel extends FlutterFlowModel<DoctorAccountWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - Read Document] action in doctor_account widget.
   DocRecord? returnnedDoc;
   // Model for image_component component.

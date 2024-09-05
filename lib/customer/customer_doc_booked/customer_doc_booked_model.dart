@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class CustomerDocBookedModel extends FlutterFlowModel<CustomerDocBookedWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in customer_doc_booked widget.
   List<DocBookedTimeRecord>? returnedBookedItems;
   // Model for custom_navbar component.

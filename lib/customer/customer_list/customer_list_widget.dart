@@ -29,7 +29,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
     super.initState();
     _model = createModel(context, () => CustomerListModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -197,7 +197,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                                 ..cusDocRef =
                                                     listViewCusRecord.reference,
                                             );
-                                            setState(() {});
+                                            safeSetState(() {});
                                           },
                                           child: Container(
                                             decoration: const BoxDecoration(
@@ -394,7 +394,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                 alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.customNavbarModel,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: const CustomNavbarWidget(),
                 ),
               ),

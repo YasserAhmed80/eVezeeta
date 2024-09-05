@@ -28,7 +28,7 @@ class _ShowImageWidgetState extends State<ShowImageWidget> {
     super.initState();
     _model = createModel(context, () => ShowImageModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

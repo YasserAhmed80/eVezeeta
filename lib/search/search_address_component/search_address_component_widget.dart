@@ -59,10 +59,10 @@ class _SearchAddressComponentWidgetState
       _model.selectedGovDesc = FFAppState().searchParameters.govDesc;
       _model.selectedZoneDesc = FFAppState().searchParameters.zoneDesc;
       _model.selectedAreaDesc = FFAppState().searchParameters.areaDesc;
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -150,7 +150,7 @@ class _SearchAddressComponentWidgetState
                                     _model.selectedGovDesc = 'الكل';
                                     _model.selectedZoneDesc = 'الكل';
                                     _model.selectedAreaDesc = 'الكل';
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   text: FFLocalizations.of(context).getText(
                                     '7afu9atg' /* حذف التصفية */,
@@ -189,7 +189,7 @@ class _SearchAddressComponentWidgetState
                                         ..zoneDesc = _model.selectedZoneDesc
                                         ..areaDesc = _model.selectedAreaDesc,
                                     );
-                                    setState(() {});
+                                    safeSetState(() {});
                                     Navigator.pop(context);
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -380,7 +380,7 @@ class _SearchAddressComponentWidgetState
                                   onTap: () async {
                                     _model.selectedGov = govItemItem.key;
                                     _model.selectedGovDesc = govItemItem.desc;
-                                    setState(() {});
+                                    safeSetState(() {});
                                     // load zones
                                     _model.returendZones =
                                         await actions.copyToList(
@@ -403,14 +403,14 @@ class _SearchAddressComponentWidgetState
                                     _model.selectedArea = -1;
                                     _model.selectedZoneDesc = 'الكل';
                                     _model.selectedAreaDesc = 'الكل';
-                                    setState(() {});
+                                    safeSetState(() {});
                                     if (_model.returendZones?.length == 0) {
                                       _model.selectedZone = 0;
                                       _model.selectedArea = 0;
-                                      setState(() {});
+                                      safeSetState(() {});
                                     }
 
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -466,7 +466,7 @@ class _SearchAddressComponentWidgetState
                                   onTap: () async {
                                     _model.selectedZone = zoneItemItem.key;
                                     _model.selectedZoneDesc = zoneItemItem.desc;
-                                    setState(() {});
+                                    safeSetState(() {});
                                     // load zones
                                     _model.returnedArea =
                                         await actions.copyToList(
@@ -478,16 +478,16 @@ class _SearchAddressComponentWidgetState
                                         .cast<DtGeneralListStruct>();
                                     _model.selectedArea = -1;
                                     _model.selectedAreaDesc = 'الكل';
-                                    setState(() {});
+                                    safeSetState(() {});
                                     if (_model.returnedArea?.length == 1) {
                                       _model.selectedArea =
                                           _model.returnedArea?.first.key;
                                       _model.selectedAreaDesc =
                                           _model.returnedArea!.first.desc;
-                                      setState(() {});
+                                      safeSetState(() {});
                                     }
 
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -543,7 +543,7 @@ class _SearchAddressComponentWidgetState
                                   onTap: () async {
                                     _model.selectedArea = areaItemItem.key;
                                     _model.selectedAreaDesc = areaItemItem.desc;
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,

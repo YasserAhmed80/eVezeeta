@@ -51,7 +51,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
       _model.dataList =
           _model.returnedData!.toList().cast<DtGeneralListStruct>();
       _model.selectedList = widget.inputList!.toList().cast<int>();
-      setState(() {});
+      safeSetState(() {});
       if ((widget.dataSource == 'price') &&
           (FFAppState().searchParameters.filterPriceCheck == true)) {
         _model.fromValue = valueOrDefault<double>(
@@ -62,11 +62,11 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
           FFAppState().searchParameters.priceTo,
           3000.0,
         );
-        setState(() {});
+        safeSetState(() {});
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -150,17 +150,17 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     _model.selectedList = [];
-                                    setState(() {});
+                                    safeSetState(() {});
                                     _model.addToSelectedList(-1);
-                                    setState(() {});
+                                    safeSetState(() {});
                                     if (widget.dataSource == 'price') {
                                       FFAppState().updateSearchParametersStruct(
                                         (e) => e..filterPriceCheck = false,
                                       );
-                                      setState(() {});
+                                      safeSetState(() {});
                                       _model.fromValue = 0.0;
                                       _model.toValue = 3000.0;
-                                      setState(() {});
+                                      safeSetState(() {});
                                     }
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -197,7 +197,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                               _model.selectedList.toList()) ==
                                           true) {
                                         _model.selectedList = [];
-                                        setState(() {});
+                                        safeSetState(() {});
                                       }
                                       if (widget.dataSource == 'type') {
                                         FFAppState()
@@ -206,7 +206,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                             ..docTypeCde =
                                                 _model.selectedList.toList(),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       } else {
                                         if (widget.dataSource == 'title') {
                                           FFAppState()
@@ -215,7 +215,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                               ..docTitleCde =
                                                   _model.selectedList.toList(),
                                           );
-                                          setState(() {});
+                                          safeSetState(() {});
                                         }
                                       }
                                     } else {
@@ -229,13 +229,13 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                               ..priceTo = _model.toValue
                                               ..filterPriceCheck = true,
                                           );
-                                          setState(() {});
+                                          safeSetState(() {});
                                         } else {
                                           FFAppState()
                                               .updateSearchParametersStruct(
                                             (e) => e..filterPriceCheck = false,
                                           );
-                                          setState(() {});
+                                          safeSetState(() {});
                                         }
                                       }
                                     }
@@ -320,23 +320,23 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                               true) {
                                             _model.removeFromSelectedList(
                                                 listItemItem.key);
-                                            setState(() {});
+                                            safeSetState(() {});
                                             if (_model.selectedList.isEmpty) {
                                               _model.addToSelectedList(-1);
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                           } else {
                                             _model.addToSelectedList(
                                                 listItemItem.key);
-                                            setState(() {});
+                                            safeSetState(() {});
                                             if (listItemItem.key > 0) {
                                               _model.removeFromSelectedList(-1);
-                                              setState(() {});
+                                              safeSetState(() {});
                                             } else {
                                               _model.selectedList = [];
-                                              setState(() {});
+                                              safeSetState(() {});
                                               _model.addToSelectedList(-1);
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                           }
                                         },
@@ -436,10 +436,10 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                   onChanged: (newValue) async {
                                     newValue = double.parse(
                                         newValue.toStringAsFixed(0));
-                                    setState(() =>
+                                    safeSetState(() =>
                                         _model.sliderFromValue = newValue);
                                     _model.fromValue = _model.sliderFromValue;
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                 ),
                               ),
@@ -501,10 +501,10 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                   onChanged: (newValue) async {
                                     newValue = double.parse(
                                         newValue.toStringAsFixed(0));
-                                    setState(
+                                    safeSetState(
                                         () => _model.sliderToValue = newValue);
                                     _model.toValue = _model.sliderToValue;
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                 ),
                               ),

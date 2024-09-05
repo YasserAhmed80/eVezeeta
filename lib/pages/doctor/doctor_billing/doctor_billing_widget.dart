@@ -37,7 +37,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
       // set from and to date
       _model.fromDate = widget.docDocument?.sFDate;
       _model.toDate = _model.toDate;
-      setState(() {});
+      safeSetState(() {});
       // get booking data
       _model.returnedBookedData = await queryDocBookedTimeRecordOnce(
         queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord
@@ -63,7 +63,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
         _model.returnedBookedData?.length,
         0,
       );
-      setState(() {});
+      safeSetState(() {});
       _model.fromDate = widget.docDocument?.sFDate;
       _model.toDate = widget.docDocument?.sToDate;
       _model.subscriptionFee = valueOrDefault<int>(
@@ -100,10 +100,10 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
         functions.dateDifference(_model.fromDate, _model.toDate),
         0,
       );
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -1,6 +1,20 @@
 {
   "indexes": [
     {
+      "collectionGroup": "cus_files",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cus_ref",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "doc_booked_time",
       "queryScope": "COLLECTION",
       "fields": [
@@ -29,6 +43,24 @@
         {
           "fieldPath": "day_time",
           "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "imgs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "e_type",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "e_code",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "i_seq",
+          "order": "ASCENDING"
         }
       ]
     },

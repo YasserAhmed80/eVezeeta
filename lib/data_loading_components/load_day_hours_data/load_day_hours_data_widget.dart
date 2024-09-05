@@ -37,9 +37,9 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
           queryBuilder: (dayRefRecord) => dayRefRecord.orderBy('seq'),
         );
         _model.loopMax = _model.dayData?.length;
-        setState(() {});
+        safeSetState(() {});
         FFAppState().refDay = [];
-        setState(() {});
+        safeSetState(() {});
         while (_model.loopIndex! < _model.loopMax!) {
           FFAppState().addToRefDay(DtDayStruct(
             dayKey: _model.dayData?[_model.loopIndex!].dayKey,
@@ -48,18 +48,18 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
             lngCde: _model.dayData?[_model.loopIndex!].lngCde,
             descEng: _model.dayData?[_model.loopIndex!].descEng,
           ));
-          setState(() {});
+          safeSetState(() {});
           _model.loopIndex = _model.loopIndex! + 1;
-          setState(() {});
+          safeSetState(() {});
         }
         _model.hourData = await queryHourRefRecordOnce(
           queryBuilder: (hourRefRecord) => hourRefRecord.orderBy('seq'),
         );
         _model.loopMax = _model.hourData?.length;
         _model.loopIndex = 0;
-        setState(() {});
+        safeSetState(() {});
         FFAppState().refHour = [];
-        setState(() {});
+        safeSetState(() {});
         while (_model.loopIndex! < _model.loopMax!) {
           FFAppState().addToRefHour(DtHourStruct(
             hourKey: _model.hourData?[_model.loopIndex!].hourKey,
@@ -68,9 +68,9 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
             seq: _model.hourData?[_model.loopIndex!].seq,
             lngCde: _model.hourData?[_model.loopIndex!].lngCde,
           ));
-          setState(() {});
+          safeSetState(() {});
           _model.loopIndex = _model.loopIndex! + 1;
-          setState(() {});
+          safeSetState(() {});
         }
       } else {
         return;
@@ -79,10 +79,10 @@ class _LoadDayHoursDataWidgetState extends State<LoadDayHoursDataWidget> {
       FFAppState().updateLastDataLoadingStruct(
         (e) => e..reLoadDays = false,
       );
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

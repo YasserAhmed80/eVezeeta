@@ -13,7 +13,6 @@ class CustomerProfileModel extends FlutterFlowModel<CustomerProfileWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - Read Document] action in customer_profile widget.
   CusRecord? returnedCustomer;
   // Model for image_component component.

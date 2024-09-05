@@ -43,32 +43,32 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
       ).then((s) => s.firstOrNull);
       _model.priceAmount = _model.returnedSubFees?.monthlyCost;
       _model.feePerBook = _model.returnedSubFees?.bookFee;
-      setState(() {});
+      safeSetState(() {});
       if (widget.subsrciptionStatus == 1) {
         _model.fromDate = functions.getCurrentDate();
         _model.toDate = functions.addMonths(_model.fromDate, 1);
         _model.priceAmount = FFAppState().subscrptionFee;
         _model.feeAmount = 0;
-        setState(() {});
+        safeSetState(() {});
       }
       // calc total amount
       _model.totAmount = valueOrDefault<int>(
         (_model.priceAmount!) + (_model.feeAmount!),
         0,
       );
-      setState(() {});
+      safeSetState(() {});
       // calc total after discount
       _model.totAfterDiscount = valueOrDefault<int>(
         (_model.totAmount!) - (_model.discountAmount!),
         0,
       );
-      setState(() {});
+      safeSetState(() {});
     });
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {
           _model.textController?.text = FFLocalizations.of(context).getText(
             'gyf54g18' /* 1234567890 */,
           );
@@ -483,10 +483,10 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                             if (_model.hasCapounDiscount ==
                                                 false) {
                                               _model.hasCapounDiscount = true;
-                                              setState(() {});
+                                              safeSetState(() {});
                                             } else {
                                               _model.hasCapounDiscount = false;
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                           },
                                           text: FFLocalizations.of(context)
@@ -767,7 +767,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     _model.paymentMethod = 1;
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -848,7 +848,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     _model.paymentMethod = 2;
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,

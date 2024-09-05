@@ -28,7 +28,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
     super.initState();
     _model = createModel(context, () => CustomNavbarModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -70,7 +70,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel1,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.doctor_search,
                           desc: 'Search',
@@ -84,7 +84,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel2,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.doctor_dashboard,
                           desc: 'Dashboard',
@@ -98,7 +98,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel3,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.doctor_visits,
                           desc: 'Visits',
@@ -112,7 +112,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel4,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.dotor_profile,
                           desc: 'Profile',
@@ -126,7 +126,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel5,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.doctor_new,
                           desc: 'Add',
@@ -147,7 +147,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel6,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.customer_search,
                           desc: 'Search',
@@ -161,7 +161,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel7,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.customer_list,
                           desc: 'List',
@@ -175,7 +175,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel8,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.customer_booking,
                           desc: 'Booking',
@@ -189,7 +189,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel9,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.customer_profile,
                           desc: 'Profile',
@@ -203,7 +203,7 @@ class _CustomNavbarWidgetState extends State<CustomNavbarWidget> {
                       flex: 1,
                       child: wrapWithModel(
                         model: _model.navItemComponentModel10,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavItemComponentWidget(
                           navType: EnumSelectedTab.customer_add,
                           desc: 'Add',

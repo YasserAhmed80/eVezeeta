@@ -58,7 +58,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -240,7 +240,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                   onTap: () async {
                                                     _model.selectedHour =
                                                         hourItemItem.hourKey;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                     await widget
                                                         .selectedHourAction
                                                         ?.call(
@@ -431,7 +431,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                   onTap: () async {
                                                     _model.selectedHour =
                                                         hourItemItem.hourKey;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                     await widget
                                                         .selectedHourAction
                                                         ?.call(

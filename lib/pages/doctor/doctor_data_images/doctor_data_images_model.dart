@@ -17,7 +17,6 @@ class DoctorDataImagesModel extends FlutterFlowModel<DoctorDataImagesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for upload_photo component.
   late UploadPhotoModel uploadPhotoModel1;
   // Model for upload_photo component.

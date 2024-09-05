@@ -46,7 +46,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
       _model.returnedCustomer =
           await CusRecord.getDocumentOnce(widget.cusRef!);
       _model.cusDocument = _model.returnedCustomer;
-      setState(() {});
+      safeSetState(() {});
     });
 
     animationsMap.addAll({
@@ -258,7 +258,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -288,6 +288,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                   FFLocalizations.of(context).getText(
                     'th5p7d74' /* ملفي */,
                   ),
+                  textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Cairo',
                         color: FlutterFlowTheme.of(context).primaryText,
@@ -315,7 +316,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
           ),
           actions: const [],
           centerTitle: true,
-          elevation: 1.0,
+          elevation: 0.0,
         ),
         body: Stack(
           children: [
@@ -339,7 +340,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                               children: [
                                 wrapWithModel(
                                   model: _model.imageComponentModel,
-                                  updateCallback: () => setState(() {}),
+                                  updateCallback: () => safeSetState(() {}),
                                   child: ImageComponentWidget(
                                     imgRef: valueOrDefault<String>(
                                       _model.cusDocument?.img,
@@ -523,7 +524,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                     Expanded(
                                       child: wrapWithModel(
                                         model: _model.addrressComponentModel,
-                                        updateCallback: () => setState(() {}),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
                                         child: AddrressComponentWidget(
                                           govKey: valueOrDefault<int>(
                                             _model.cusDocument?.govCde,
@@ -612,7 +614,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                           FFAppState().updateCurrentCustomerStruct(
                             (e) => e..cusDocRef = widget.cusRef,
                           );
-                          setState(() {});
+                          safeSetState(() {});
 
                           context.pushNamed(
                             'cus_main_data',
@@ -842,57 +844,76 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              8.0, 12.0, 8.0, 12.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 0.0, 0.0, 0.0),
-                                child: Icon(
-                                  Icons.image_outlined,
-                                  color: FlutterFlowTheme.of(context).secondary,
-                                  size: 25.0,
-                                ),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'cus_files',
+                            queryParameters: {
+                              'cusRef': serializeParam(
+                                widget.cusRef,
+                                ParamType.DocumentReference,
                               ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '598l5kys' /* ملفاتي */,
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            borderRadius: BorderRadius.circular(0.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8.0, 12.0, 8.0, 12.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 0.0, 0.0, 0.0),
+                                  child: Icon(
+                                    Icons.image_outlined,
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    size: 25.0,
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        letterSpacing: 0.0,
-                                      ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      '598l5kys' /* ملفاتي */,
                                     ),
-                                  ],
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ).animateOnPageLoad(
@@ -1238,7 +1259,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
               alignment: const AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const CustomNavbarWidget(),
               ),
             ),

@@ -44,11 +44,11 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
       _model.returnnedDoc = await DocRecord.getDocumentOnce(widget.docRef!);
       _model.docDocument = _model.returnnedDoc;
       _model.docStatusCode = _model.returnnedDoc?.statusCde;
-      setState(() {});
+      safeSetState(() {});
       FFAppState().updateCurrentDoctorStruct(
         (e) => e..dbDocRef = widget.docRef,
       );
-      setState(() {});
+      safeSetState(() {});
     });
 
     animationsMap.addAll({
@@ -378,7 +378,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -410,7 +410,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                       children: [
                         wrapWithModel(
                           model: _model.imageComponentModel,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: ImageComponentWidget(
                             imgRef: _model.docDocument!.img,
                           ),
@@ -1802,6 +1802,16 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                     ),
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        'oj9wm83v' /* بيانات الحساب */,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Cairo',
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
                   ],
                 ),
               ),
@@ -1812,7 +1822,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                 padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 1.0, 0.0),
                 child: wrapWithModel(
                   model: _model.customNavbarModel,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: const CustomNavbarWidget(),
                 ),
               ),

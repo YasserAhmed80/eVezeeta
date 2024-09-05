@@ -37,12 +37,12 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.fromDate = functions.getCurrentDate();
       _model.toDate = functions.getCurrentDate();
-      setState(() {});
+      safeSetState(() {});
       await _model.loadDataAction(context);
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -124,11 +124,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             functions.getCurrentDate();
                                         _model.toDate =
                                             functions.getCurrentDate();
-                                        setState(() {});
+                                        safeSetState(() {});
                                         await _model.loadDataAction(context);
-                                        setState(() {});
+                                        safeSetState(() {});
                                         _model.sPeriod = 'd';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Container(
                                         width: 65.0,
@@ -194,11 +194,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             functions.getDateBack('ld');
                                         _model.toDate =
                                             functions.getDateBack('ld');
-                                        setState(() {});
+                                        safeSetState(() {});
                                         await _model.loadDataAction(context);
-                                        setState(() {});
+                                        safeSetState(() {});
                                         _model.sPeriod = 'ld';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Container(
                                         width: 65.0,
@@ -269,11 +269,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             functions.getDateBack('w');
                                         _model.toDate =
                                             functions.getCurrentDate();
-                                        setState(() {});
+                                        safeSetState(() {});
                                         await _model.loadDataAction(context);
-                                        setState(() {});
+                                        safeSetState(() {});
                                         _model.sPeriod = 'w';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Container(
                                         width: 65.0,
@@ -330,11 +330,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             functions.getDateBack('m');
                                         _model.toDate =
                                             functions.getCurrentDate();
-                                        setState(() {});
+                                        safeSetState(() {});
                                         await _model.loadDataAction(context);
-                                        setState(() {});
+                                        safeSetState(() {});
                                         _model.sPeriod = 'm';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Container(
                                         width: 65.0,
@@ -391,11 +391,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             functions.getDateBack('y');
                                         _model.toDate =
                                             functions.getCurrentDate();
-                                        setState(() {});
+                                        safeSetState(() {});
                                         await _model.loadDataAction(context);
-                                        setState(() {});
+                                        safeSetState(() {});
                                         _model.sPeriod = 'y';
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Container(
                                         width: 65.0,
@@ -504,7 +504,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                           (actionReturnedDate) async {
                                                         _model.fromDate =
                                                             actionReturnedDate;
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                       },
                                                     ),
                                                   ),
@@ -515,9 +515,9 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                               (value) => safeSetState(() {}));
 
                                           await _model.loadDataAction(context);
-                                          setState(() {});
+                                          safeSetState(() {});
                                           _model.sPeriod = 'n';
-                                          setState(() {});
+                                          safeSetState(() {});
                                         },
                                         child: Container(
                                           constraints: const BoxConstraints(
@@ -619,7 +619,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                           (actionReturnedDate) async {
                                                         _model.toDate =
                                                             actionReturnedDate;
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                       },
                                                     ),
                                                   ),
@@ -630,9 +630,9 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                               (value) => safeSetState(() {}));
 
                                           await _model.loadDataAction(context);
-                                          setState(() {});
+                                          safeSetState(() {});
                                           _model.sPeriod = 'n';
-                                          setState(() {});
+                                          safeSetState(() {});
                                         },
                                         child: Container(
                                           constraints: const BoxConstraints(
@@ -1524,7 +1524,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
               alignment: const AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const CustomNavbarWidget(),
               ),
             ),

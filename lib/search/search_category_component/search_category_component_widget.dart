@@ -42,7 +42,7 @@ class _SearchCategoryComponentWidgetState
       );
       _model.selectedSubCat =
           FFAppState().searchParameters.subCatCde.toList().cast<int>();
-      setState(() {});
+      safeSetState(() {});
       // cophy category
       _model.returnedCat = await actions.copyToList(
         'cat',
@@ -55,14 +55,14 @@ class _SearchCategoryComponentWidgetState
       _model.catList = _model.returnedCat!.toList().cast<DtGeneralListStruct>();
       _model.subCatList =
           _model.returnedSubCat!.toList().cast<DtGeneralListStruct>();
-      setState(() {});
+      safeSetState(() {});
       if (_model.selectedSubCat.isEmpty) {
         _model.addToSelectedSubCat(-1);
-        setState(() {});
+        safeSetState(() {});
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -147,7 +147,7 @@ class _SearchCategoryComponentWidgetState
                                     _model.selectedCat = -1;
                                     _model.selectedSubCat = [];
                                     _model.selectedCatDesc = 'الكل';
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   text: FFLocalizations.of(context).getText(
                                     'y7v25toa' /* حذف التصفية */,
@@ -189,7 +189,7 @@ class _SearchCategoryComponentWidgetState
                                         ..subCatDesc =
                                             _model.selectedSubCatDesc,
                                     );
-                                    setState(() {});
+                                    safeSetState(() {});
                                     Navigator.pop(context);
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -266,7 +266,7 @@ class _SearchCategoryComponentWidgetState
                                     _model.selectedCat = catItemItem.key;
                                     _model.selectedSubCat = [];
                                     _model.selectedCatDesc = catItemItem.desc;
-                                    setState(() {});
+                                    safeSetState(() {});
                                     _model.filteredSubCat =
                                         await actions.copyToList(
                                       'subCat',
@@ -275,12 +275,12 @@ class _SearchCategoryComponentWidgetState
                                     _model.subCatList = _model.filteredSubCat!
                                         .toList()
                                         .cast<DtGeneralListStruct>();
-                                    setState(() {});
+                                    safeSetState(() {});
                                     // add selected all to sub cat
                                     _model.addToSelectedSubCat(-1);
-                                    setState(() {});
+                                    safeSetState(() {});
 
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -342,30 +342,30 @@ class _SearchCategoryComponentWidgetState
                                       // remove item
                                       _model.removeFromSelectedSubCat(
                                           subCatItemItem.key);
-                                      setState(() {});
+                                      safeSetState(() {});
                                     } else {
                                       // add item
                                       _model.addToSelectedSubCat(
                                           subCatItemItem.key);
-                                      setState(() {});
+                                      safeSetState(() {});
                                       if (subCatItemItem.key != -1) {
                                         // remove all incase of only one item selected
                                         _model.removeFromSelectedSubCat(-1);
-                                        setState(() {});
+                                        safeSetState(() {});
                                       }
                                     }
 
                                     if (_model.selectedSubCat.isEmpty) {
                                       _model.addToSelectedSubCat(-1);
                                       _model.selectedSubCatDesc = 'الكل';
-                                      setState(() {});
+                                      safeSetState(() {});
                                     } else {
                                       _model.selectedSubCatDesc =
                                           valueOrDefault<String>(
                                         subCatItemItem.desc,
                                         'nnn',
                                       );
-                                      setState(() {});
+                                      safeSetState(() {});
                                     }
                                   },
                                   child: Container(

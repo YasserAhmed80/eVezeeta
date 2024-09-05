@@ -43,18 +43,18 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
         _model.returnedDocRef?.length,
         0,
       );
-      setState(() {});
+      safeSetState(() {});
       while (_model.loopIndex! < _model.loopMax!) {
         _model.readDoctor = await DocRecord.getDocumentOnce(
             _model.returnedDocRef![_model.loopIndex!].docRef!);
         _model.addToDoctorDocumentList(_model.readDoctor!);
-        setState(() {});
+        safeSetState(() {});
         _model.loopIndex = _model.loopIndex! + 1;
-        setState(() {});
+        safeSetState(() {});
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

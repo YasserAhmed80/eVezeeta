@@ -35,34 +35,34 @@ class _LoadCitiesCoponentWidgetState extends State<LoadCitiesCoponentWidget> {
           (FFAppState().lastDataLoading.reLoadCities == true)) {
         _model.governateDocs = await queryGovernateRecordOnce();
         _model.loopMax = _model.governateDocs?.length;
-        setState(() {});
+        safeSetState(() {});
         FFAppState().refGovernate = [];
-        setState(() {});
+        safeSetState(() {});
         while (_model.loopIndex! < _model.loopMax!) {
           FFAppState().addToRefGovernate(DtGovernateStruct(
             govKey: _model.governateDocs?[_model.loopIndex!].govKey,
             desc: _model.governateDocs?[_model.loopIndex!].desc,
             cntryCde: _model.governateDocs?[_model.loopIndex!].cntryCde,
           ));
-          setState(() {});
+          safeSetState(() {});
           _model.loopIndex = _model.loopIndex! + 1;
-          setState(() {});
+          safeSetState(() {});
         }
         _model.zoneDocs = await queryGovernZoneRecordOnce();
         _model.loopMax = _model.zoneDocs?.length;
         _model.loopIndex = 0;
-        setState(() {});
+        safeSetState(() {});
         FFAppState().refZone = [];
-        setState(() {});
+        safeSetState(() {});
         while (_model.loopIndex! < _model.loopMax!) {
           FFAppState().addToRefZone(DtZoneStruct(
             zoneKey: _model.zoneDocs?[_model.loopIndex!].zoneKey,
             govCde: _model.zoneDocs?[_model.loopIndex!].governCde,
             desc: _model.zoneDocs?[_model.loopIndex!].desc,
           ));
-          setState(() {});
+          safeSetState(() {});
           _model.loopIndex = _model.loopIndex! + 1;
-          setState(() {});
+          safeSetState(() {});
         }
       } else {
         return;
@@ -71,26 +71,26 @@ class _LoadCitiesCoponentWidgetState extends State<LoadCitiesCoponentWidget> {
       _model.areaDocs = await queryZoneAreaRecordOnce();
       _model.loopMax = _model.areaDocs?.length;
       _model.loopIndex = 0;
-      setState(() {});
+      safeSetState(() {});
       FFAppState().refArea = [];
-      setState(() {});
+      safeSetState(() {});
       while (_model.loopIndex! < _model.loopMax!) {
         FFAppState().addToRefArea(DtAreaStruct(
           areaKey: _model.areaDocs?[_model.loopIndex!].areaKey,
           zoneCde: _model.areaDocs?[_model.loopIndex!].zoneCde,
           desc: _model.areaDocs?[_model.loopIndex!].desc,
         ));
-        setState(() {});
+        safeSetState(() {});
         _model.loopIndex = _model.loopIndex! + 1;
-        setState(() {});
+        safeSetState(() {});
       }
       FFAppState().updateLastDataLoadingStruct(
         (e) => e..reLoadCities = false,
       );
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -61,33 +61,33 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
         _model.addrDesc = widget.docDocument?.aAddr;
         _model.tel1 = widget.docDocument?.tel1;
         _model.tel2 = widget.docDocument?.tel2;
-        setState(() {});
+        safeSetState(() {});
         // contry field
-        setState(() {
+        safeSetState(() {
           _model.countryCodeValueController?.value = valueOrDefault<int>(
             widget.docDocument?.aCon,
             -1,
           );
         });
-        setState(() {
+        safeSetState(() {
           _model.govCodeValueController?.value = valueOrDefault<int>(
             widget.docDocument?.aGov,
             -1,
           );
         });
-        setState(() {
+        safeSetState(() {
           _model.zoneCodeValueController?.value = valueOrDefault<int>(
             widget.docDocument?.aZone,
             -1,
           );
         });
-        setState(() {
+        safeSetState(() {
           _model.areaCodeValueController?.value = valueOrDefault<int>(
             widget.docDocument?.aArea,
             -1,
           );
         });
-        setState(() {
+        safeSetState(() {
           _model.addressDescTextController?.text = valueOrDefault<String>(
             widget.docDocument?.aAddr,
             '-1',
@@ -95,7 +95,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
           _model.addressDescTextController?.selection = TextSelection.collapsed(
               offset: _model.addressDescTextController!.text.length);
         });
-        setState(() {
+        safeSetState(() {
           _model.tel1TextController?.text = valueOrDefault<String>(
             widget.docDocument?.tel1,
             '-1',
@@ -103,7 +103,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
           _model.tel1TextController?.selection = TextSelection.collapsed(
               offset: _model.tel1TextController!.text.length);
         });
-        setState(() {
+        safeSetState(() {
           _model.tel2TextController?.text = valueOrDefault<String>(
             widget.docDocument?.tel2,
             '-1',
@@ -123,7 +123,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
     _model.tel2TextController ??= TextEditingController();
     _model.tel2FocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -292,9 +292,9 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                                   (e) => e.desc)
                                                               .toList(),
                                                       onChanged: (val) =>
-                                                          setState(() => _model
-                                                                  .countryCodeValue =
-                                                              val),
+                                                          safeSetState(() =>
+                                                              _model.countryCodeValue =
+                                                                  val),
                                                       width: double.infinity,
                                                       height: 56.0,
                                                       textStyle:
@@ -367,11 +367,11 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                       .map((e) => e.desc)
                                                       .toList(),
                                                   onChanged: (val) async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                         .govCodeValue = val);
                                                     _model.governateCode =
                                                         _model.govCodeValue;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   width: double.infinity,
                                                   height: 56.0,
@@ -465,11 +465,11 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                       .map((e) => e.desc)
                                                       .toList(),
                                                   onChanged: (val) async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                         .zoneCodeValue = val);
                                                     _model.zoneCode =
                                                         _model.zoneCodeValue;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   width: double.infinity,
                                                   height: 56.0,
@@ -562,11 +562,11 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                       .map((e) => e.desc)
                                                       .toList(),
                                                   onChanged: (val) async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                         .areaCodeValue = val);
                                                     _model.areaCode =
                                                         _model.areaCodeValue;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   width: double.infinity,
                                                   height: 56.0,
@@ -646,7 +646,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                     '_model.addressDescTextController',
                                                     const Duration(
                                                         milliseconds: 2000),
-                                                    () => setState(() {}),
+                                                    () => safeSetState(() {}),
                                                   ),
                                                   autofocus: false,
                                                   textCapitalization:
@@ -811,7 +811,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               _model
                                                                   .addressDescTextController
                                                                   ?.clear();
-                                                              setState(() {});
+                                                              safeSetState(
+                                                                  () {});
                                                             },
                                                             child: const Icon(
                                                               Icons.clear,
@@ -882,7 +883,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                     '_model.tel1TextController',
                                                     const Duration(
                                                         milliseconds: 2000),
-                                                    () => setState(() {}),
+                                                    () => safeSetState(() {}),
                                                   ),
                                                   autofocus: false,
                                                   textCapitalization:
@@ -1050,7 +1051,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               _model
                                                                   .tel1TextController
                                                                   ?.clear();
-                                                              setState(() {});
+                                                              safeSetState(
+                                                                  () {});
                                                             },
                                                             child: const Icon(
                                                               Icons.clear,
@@ -1100,7 +1102,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                     '_model.tel2TextController',
                                                     const Duration(
                                                         milliseconds: 2000),
-                                                    () => setState(() {}),
+                                                    () => safeSetState(() {}),
                                                   ),
                                                   autofocus: false,
                                                   textCapitalization:
@@ -1268,7 +1270,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               _model
                                                                   .tel2TextController
                                                                   ?.clear();
-                                                              setState(() {});
+                                                              safeSetState(
+                                                                  () {});
                                                             },
                                                             child: const Icon(
                                                               Icons.clear,
@@ -1376,7 +1379,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                       ),
                                       wrapWithModel(
                                         model: _model.loadCitiesCoponentModel,
-                                        updateCallback: () => setState(() {}),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
                                         child: const LoadCitiesCoponentWidget(),
                                       ),
                                     ]
@@ -1404,28 +1408,26 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                           if (widget.docDocument?.reference != null) {
                             // save to DB
 
-                            await FFAppState()
-                                .currentDoctor
-                                .dbDocRef!
+                            await widget.docDocument!.reference
                                 .update(createDocRecordData(
-                                  aCon: _model.countryCode,
-                                  aGov: _model.govCodeValue,
-                                  aZone: _model.zoneCode,
-                                  aArea: _model.areaCode,
-                                  tel1: valueOrDefault<String>(
-                                    _model.tel1TextController.text,
-                                    '-1',
-                                  ),
-                                  tel2: valueOrDefault<String>(
-                                    _model.tel2TextController.text,
-                                    '-1',
-                                  ),
-                                  aAddr: valueOrDefault<String>(
-                                    _model.addressDescTextController.text,
-                                    'none',
-                                  ),
-                                  uAt: functions.getCurrentDate(),
-                                ));
+                              aCon: _model.countryCode,
+                              aGov: _model.govCodeValue,
+                              aZone: _model.zoneCode,
+                              aArea: _model.areaCode,
+                              tel1: valueOrDefault<String>(
+                                _model.tel1TextController.text,
+                                '-1',
+                              ),
+                              tel2: valueOrDefault<String>(
+                                _model.tel2TextController.text,
+                                '-1',
+                              ),
+                              aAddr: valueOrDefault<String>(
+                                _model.addressDescTextController.text,
+                                'none',
+                              ),
+                              uAt: functions.getCurrentDate(),
+                            ));
                             await showDialog(
                               context: context,
                               builder: (alertDialogContext) {

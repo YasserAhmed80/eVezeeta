@@ -47,10 +47,10 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
       );
       _model.currentList =
           _model.returnedList!.toList().cast<DtGeneralListStruct>();
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -181,7 +181,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
                                         onTap: () async {
                                           _model.selectedCode =
                                               itemDataItem.key;
-                                          setState(() {});
+                                          safeSetState(() {});
                                           await Future.delayed(
                                               const Duration(milliseconds: 10));
                                           Navigator.pop(

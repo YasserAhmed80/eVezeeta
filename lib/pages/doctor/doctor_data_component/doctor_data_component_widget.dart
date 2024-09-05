@@ -48,9 +48,9 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await _model.getDocDocumentAction(context);
-      setState(() {});
+      safeSetState(() {});
       await _model.getFavAction(context);
-      setState(() {});
+      safeSetState(() {});
     });
 
     animationsMap.addAll({
@@ -81,7 +81,7 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -201,7 +201,7 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                                   onTap: () async {
                                     await _model.favDocRef!.delete();
                                     _model.isFavorite = false;
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Icon(
                                     Icons.favorite_sharp,
@@ -239,9 +239,9 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                                     _model.isFavorite = true;
                                     _model.favDocRef =
                                         _model.createdFavDoc?.reference;
-                                    setState(() {});
+                                    safeSetState(() {});
 
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Icon(
                                     Icons.favorite_border,
@@ -288,31 +288,47 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                         children: [
                           wrapWithModel(
                             model: _model.imageComponentModel,
-                            updateCallback: () => setState(() {}),
+                            updateCallback: () => safeSetState(() {}),
                             child: ImageComponentWidget(
-                              imgRef: valueOrDefault<String>(
-                                _model.docDocument?.img,
-                                '-1',
-                              ),
+                              imgRef: _model.docDocument!.img,
                             ),
                           ),
-                          Text(
-                            valueOrDefault<String>(
-                              FFAppState()
-                                  .refDocTitle
-                                  .where((e) =>
-                                      e.titleKey == _model.docDocument?.titleId)
-                                  .toList()
-                                  .first
-                                  .desc,
-                              'n',
+                          Container(
+                            constraints: const BoxConstraints(
+                              minWidth: 50.0,
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  letterSpacing: 0.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).secondary,
+                              borderRadius: BorderRadius.circular(14.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 2.0, 5.0, 2.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  FFAppState()
+                                      .refDocTitle
+                                      .where((e) =>
+                                          e.titleKey ==
+                                          _model.docDocument?.titleId)
+                                      .toList()
+                                      .first
+                                      .desc,
+                                  'n',
                                 ),
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Cairo',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      fontSize: 12.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -334,6 +350,11 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                             ),
                           }.withoutNulls,
                         );
+
+                        FFAppState().updateCurrentDoctorStruct(
+                          (e) => e..dbDocRef = _model.docDocument?.reference,
+                        );
+                        safeSetState(() {});
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -500,7 +521,7 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                             children: [
                               wrapWithModel(
                                 model: _model.ratingComponentModel,
-                                updateCallback: () => setState(() {}),
+                                updateCallback: () => safeSetState(() {}),
                                 child: const RatingComponentWidget(),
                               ),
                               Padding(
@@ -542,7 +563,7 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                               Expanded(
                                 child: wrapWithModel(
                                   model: _model.addrressComponentModel,
-                                  updateCallback: () => setState(() {}),
+                                  updateCallback: () => safeSetState(() {}),
                                   updateOnChange: true,
                                   child: AddrressComponentWidget(
                                     zoneKey: valueOrDefault<int>(

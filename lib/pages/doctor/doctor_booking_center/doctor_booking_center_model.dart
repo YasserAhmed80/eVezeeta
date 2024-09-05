@@ -52,7 +52,6 @@ class DoctorBookingCenterModel
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 
@@ -101,11 +100,11 @@ class DoctorBookingCenterModel
           returnedBookedItems[loopIndex!].statusCde,
           0,
         ),
-        cusName: 'yasser',
-        cusTel: '01022222222220',
         itemRef: returnedBookedItems[loopIndex!].reference,
         docRef: widget!.docRef,
-        cusRef: FFAppState().currentCustomer.cusDocRef,
+        cusName: 'n',
+        cusTel: 'n',
+        cusRef: null,
       ));
       // get customer data
       returnedCustomer = await CusRecord.getDocumentOnce(
@@ -114,9 +113,10 @@ class DoctorBookingCenterModel
         loopIndex!,
         (e) => e
           ..cusName = returnedCustomer?.name
-          ..cusTel = returnedCustomer?.tel,
+          ..cusTel = returnedCustomer?.tel
+          ..cusRef = returnedCustomer?.reference,
       );
-      loopIndex = loopIndex! + 1;
+          loopIndex = loopIndex! + 1;
     }
   }
 

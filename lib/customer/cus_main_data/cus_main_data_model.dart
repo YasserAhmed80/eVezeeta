@@ -47,7 +47,6 @@ class CusMainDataModel extends FlutterFlowModel<CusMainDataWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - Read Document] action in cus_main_data widget.
   CusRecord? returnedReadCustomer;

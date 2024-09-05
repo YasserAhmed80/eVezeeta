@@ -39,10 +39,10 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.selectedDate = widget.inputDate;
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -154,8 +154,8 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
                 }
                 _model.calenderControlSelectedDay = newSelectedDate;
                 _model.selectedDate = _model.calenderControlSelectedDay?.start;
-                setState(() {});
-                setState(() {});
+                safeSetState(() {});
+                safeSetState(() {});
               },
               titleStyle: FlutterFlowTheme.of(context).headlineSmall.override(
                     fontFamily: 'Cairo',

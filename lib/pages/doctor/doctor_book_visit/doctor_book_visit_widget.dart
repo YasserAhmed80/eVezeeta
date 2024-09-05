@@ -45,7 +45,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
         widget.docDocument?.avgVisit,
         1,
       );
-      setState(() {});
+      safeSetState(() {});
       await _model.updateHourStatus(context);
     });
 
@@ -118,7 +118,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -587,7 +587,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                       5.0, 10.0, 5.0, 10.0),
                                   child: wrapWithModel(
                                     model: _model.dayListComponentModel,
-                                    updateCallback: () => setState(() {}),
+                                    updateCallback: () => safeSetState(() {}),
                                     child: DayListComponentWidget(
                                       docDocument: widget.docDocument!,
                                       dayHoursAction: (dayHourse, dayItemBook,
@@ -599,9 +599,9 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                         _model.bookedHoursList = bookedHoursList
                                             .toList()
                                             .cast<int>();
-                                        setState(() {});
+                                        safeSetState(() {});
                                         await _model.updateHourStatus(context);
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                     ),
                                   ),
@@ -628,7 +628,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                       5.0, 5.0, 5.0, 5.0),
                                   child: wrapWithModel(
                                     model: _model.dayBookingComponentModel,
-                                    updateCallback: () => setState(() {}),
+                                    updateCallback: () => safeSetState(() {}),
                                     child: DayBookingComponentWidget(
                                       dayBookItem: _model.selectedDaybook,
                                       avgCountPerHour:
@@ -648,7 +648,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                               _model.doctorAvergePerHour),
                                           0,
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                     ),
                                   ),
@@ -883,7 +883,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                               .length,
                                                           0,
                                                         );
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                         while (_model
                                                                 .loopIndex1! <
                                                             _model.loopMax1!) {
@@ -902,7 +902,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                                 ..incrementBookCount(
                                                                     1),
                                                             );
-                                                            setState(() {});
+                                                            safeSetState(() {});
                                                             if (FFAppState()
                                                                     .refHour[_model
                                                                         .loopIndex1!]
@@ -918,7 +918,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                                       EnumBookHourStatus
                                                                           .Booked,
                                                               );
-                                                              setState(() {});
+                                                              safeSetState(
+                                                                  () {});
                                                             } else {
                                                               FFAppState()
                                                                   .updateRefHourAtIndex(
@@ -929,17 +930,18 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                                       EnumBookHourStatus
                                                                           .PartiallyBooked,
                                                               );
-                                                              setState(() {});
+                                                              safeSetState(
+                                                                  () {});
                                                             }
                                                           }
                                                           _model.loopIndex1 =
                                                               _model.loopIndex1! +
                                                                   1;
-                                                          setState(() {});
+                                                          safeSetState(() {});
                                                         }
                                                         _model.userSelectedHourItem =
                                                             null;
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                         await showDialog(
                                                           context: context,
                                                           builder:

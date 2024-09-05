@@ -24,7 +24,6 @@ class CusMasterPageModel extends FlutterFlowModel<CusMasterPageWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 

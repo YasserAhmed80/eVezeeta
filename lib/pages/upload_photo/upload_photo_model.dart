@@ -36,4 +36,34 @@ class UploadPhotoModel extends FlutterFlowModel<UploadPhotoWidget> {
 
   @override
   void dispose() {}
+
+  /// Action blocks.
+  Future updateEntityImageAction(
+    BuildContext context, {
+    String? imgURL,
+  }) async {
+    if ((widget!.entityType == 'doc') && (widget!.imgType == 'p')) {
+      await FFAppState().currentDoctor.dbDocRef!.update(createDocRecordData(
+            img: imgURL,
+          ));
+    } else {
+      if ((widget!.entityType == 'cus') && (widget!.imgType == 'p')) {
+        await FFAppState()
+            .currentCustomer
+            .cusDocRef!
+            .update(createCusRecordData(
+              img: imgURL,
+            ));
+      } else {
+        if (widget!.entityType == 'cus_file') {
+          await FFAppState()
+              .currentFileCustomer
+              .fileRef!
+              .update(createCusFilesRecordData(
+                img: imgURL,
+              ));
+        }
+      }
+    }
+  }
 }

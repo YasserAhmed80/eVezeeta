@@ -47,7 +47,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
         _model.returnedReadCustomer =
             await CusRecord.getDocumentOnce(widget.cusRef!);
         _model.cusDocument = _model.returnedReadCustomer;
-        setState(() {});
+        safeSetState(() {});
         _model.cusNmae = _model.cusDocument!.name;
         _model.tel = _model.cusDocument!.tel;
         _model.countryKey = _model.cusDocument?.conCde;
@@ -60,37 +60,37 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
         _model.cusImage = _model.cusDocument!.img;
         _model.genderKey = _model.cusDocument?.sex;
         _model.isDataSaved = true;
-        setState(() {});
-        setState(() {
+        safeSetState(() {});
+        safeSetState(() {
           _model.cboCountryCodeValueController?.value = _model.countryKey!;
         });
-        setState(() {
+        safeSetState(() {
           _model.cboGovCodeValueController?.value = _model.govKey!;
         });
-        setState(() {
+        safeSetState(() {
           _model.cboZoneCodeValueController?.value = _model.zoneKey!;
         });
-        setState(() {
+        safeSetState(() {
           _model.cboAreaCodeValueController?.value = _model.areaKey!;
         });
-        setState(() {
+        safeSetState(() {
           _model.txtFullNameFieldTextController?.text = _model.cusNmae;
           _model.txtFullNameFieldTextController?.selection =
               TextSelection.collapsed(
                   offset: _model.txtFullNameFieldTextController!.text.length);
         });
-        setState(() {
+        safeSetState(() {
           _model.txtMobileTextController?.text = _model.tel;
           _model.txtMobileTextController?.selection = TextSelection.collapsed(
               offset: _model.txtMobileTextController!.text.length);
         });
-        setState(() {
+        safeSetState(() {
           _model.txtAddressDescTextController?.text = _model.addressDesc;
           _model.txtAddressDescTextController?.selection =
               TextSelection.collapsed(
                   offset: _model.txtAddressDescTextController!.text.length);
         });
-        setState(() {
+        safeSetState(() {
           _model.optGenderValueController?.value = [
             valueOrDefault<String>(
               FFAppState()
@@ -115,7 +115,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
     _model.txtAddressDescTextController ??= TextEditingController();
     _model.txtAddressDescFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -232,7 +232,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               EasyDebounce.debounce(
                                             '_model.txtFullNameFieldTextController',
                                             const Duration(milliseconds: 2000),
-                                            () => setState(() {}),
+                                            () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
                                           textCapitalization:
@@ -327,7 +327,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                       _model
                                                           .txtFullNameFieldTextController
                                                           ?.clear();
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: const Icon(
                                                       Icons.clear,
@@ -365,7 +365,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               EasyDebounce.debounce(
                                             '_model.txtMobileTextController',
                                             const Duration(milliseconds: 2000),
-                                            () => setState(() {}),
+                                            () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
                                           textCapitalization:
@@ -456,7 +456,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                       _model
                                                           .txtMobileTextController
                                                           ?.clear();
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: const Icon(
                                                       Icons.clear,
@@ -498,7 +498,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                             if (_model.cusDOB == null) {
                                               _model.cusDOB =
                                                   functions.getCurrentDate();
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
@@ -527,7 +527,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                               actionReturnedDate;
                                                           _model.isValidDOB =
                                                               true;
-                                                          setState(() {});
+                                                          safeSetState(() {});
                                                         },
                                                       ),
                                                     ),
@@ -677,24 +677,24 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           ChipData(label))
                                                       .toList(),
                                                   onChanged: (val) async {
-                                                    setState(() =>
+                                                    safeSetState(() =>
                                                         _model.optGenderValue =
                                                             val?.firstOrNull);
                                                     if (_model.optGenderValue ==
                                                         'انثي') {
                                                       _model.genderKey = 0;
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     } else {
                                                       if (_model
                                                               .optGenderValue ==
                                                           'ذكر') {
                                                         _model.genderKey = 1;
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                       }
                                                     }
 
                                                     _model.isValidGenger = true;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   selectedChipStyle: ChipStyle(
                                                     backgroundColor:
@@ -873,12 +873,12 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                                     e.desc)
                                                                 .toList(),
                                                         onChanged: (val) async {
-                                                          setState(() => _model
-                                                                  .cboCountryCodeValue =
-                                                              val);
+                                                          safeSetState(() =>
+                                                              _model.cboCountryCodeValue =
+                                                                  val);
                                                           _model.countryKey = _model
                                                               .cboCountryCodeValue;
-                                                          setState(() {});
+                                                          safeSetState(() {});
                                                         },
                                                         width: double.infinity,
                                                         height: 56.0,
@@ -953,14 +953,14 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                         .map((e) => e.desc)
                                                         .toList(),
                                                     onChanged: (val) async {
-                                                      setState(() => _model
+                                                      safeSetState(() => _model
                                                               .cboGovCodeValue =
                                                           val);
                                                       _model.govKey = _model
                                                           .cboGovCodeValue;
                                                       _model.isValidGovKey =
                                                           true;
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     width: double.infinity,
                                                     height: 56.0,
@@ -1076,14 +1076,14 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                         .map((e) => e.desc)
                                                         .toList(),
                                                     onChanged: (val) async {
-                                                      setState(() => _model
+                                                      safeSetState(() => _model
                                                               .cboZoneCodeValue =
                                                           val);
                                                       _model.zoneKey = _model
                                                           .cboZoneCodeValue;
                                                       _model.isValidZoneKey =
                                                           true;
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     width: double.infinity,
                                                     height: 56.0,
@@ -1198,14 +1198,14 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                         .map((e) => e.desc)
                                                         .toList(),
                                                     onChanged: (val) async {
-                                                      setState(() => _model
+                                                      safeSetState(() => _model
                                                               .cboAreaCodeValue =
                                                           val);
                                                       _model.isValideAreaKey =
                                                           true;
                                                       _model.areaKey = _model
                                                           .cboAreaCodeValue;
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     width: double.infinity,
                                                     height: 56.0,
@@ -1306,7 +1306,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                       '_model.txtAddressDescTextController',
                                                       const Duration(
                                                           milliseconds: 2000),
-                                                      () => setState(() {}),
+                                                      () => safeSetState(() {}),
                                                     ),
                                                     autofocus: false,
                                                     textCapitalization:
@@ -1477,7 +1477,8 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                                 _model
                                                                     .txtAddressDescTextController
                                                                     ?.clear();
-                                                                setState(() {});
+                                                                safeSetState(
+                                                                    () {});
                                                               },
                                                               child: const Icon(
                                                                 Icons.clear,
@@ -1563,7 +1564,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               wrapWithModel(
                                                 model: _model.uploadPhotoModel,
                                                 updateCallback: () =>
-                                                    setState(() {}),
+                                                    safeSetState(() {}),
                                                 child: UploadPhotoWidget(
                                                   storageFolder: 'cus',
                                                   entityType: 'cus',
@@ -1587,7 +1588,8 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                         ),
                                         wrapWithModel(
                                           model: _model.loadCitiesCoponentModel,
-                                          updateCallback: () => setState(() {}),
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
                                           child: const LoadCitiesCoponentWidget(),
                                         ),
                                       ]
@@ -1617,27 +1619,27 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                             _model.formIsValid = true;
                             if (_model.formKey.currentState == null ||
                                 !_model.formKey.currentState!.validate()) {
-                              setState(() => _model.formIsValid = false);
+                              safeSetState(() => _model.formIsValid = false);
                               return;
                             }
                             if (_model.cboCountryCodeValue == null) {
                               _model.formIsValid = false;
-                              setState(() {});
+                              safeSetState(() {});
                               return;
                             }
                             if (_model.cboGovCodeValue == null) {
                               _model.formIsValid = false;
-                              setState(() {});
+                              safeSetState(() {});
                               return;
                             }
                             if (_model.cboZoneCodeValue == null) {
                               _model.formIsValid = false;
-                              setState(() {});
+                              safeSetState(() {});
                               return;
                             }
                             if (_model.cboAreaCodeValue == null) {
                               _model.formIsValid = false;
-                              setState(() {});
+                              safeSetState(() {});
                               return;
                             }
                             if ((_model.formIsValid == true) &&
@@ -1663,11 +1665,11 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                 );
                                 _model.isDataSaved = true;
                                 _model.cusID = _model.savedRef!.id;
-                                setState(() {});
+                                safeSetState(() {});
                                 FFAppState().updateCurrentCustomerStruct(
                                   (e) => e..cusDocRef = _model.savedRef,
                                 );
-                                setState(() {});
+                                safeSetState(() {});
                               } else {
                                 await showDialog(
                                   context: context,
@@ -1707,7 +1709,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                               );
                             }
 
-                            setState(() {});
+                            safeSetState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
                             '9mg8oamp' /* حفظ البانات */,

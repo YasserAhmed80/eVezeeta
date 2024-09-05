@@ -62,14 +62,14 @@ class _DayScheduleComponentWidgetState
         _model.selectedHours = _model.savedDayRef!.hrsId.toList().cast<int>();
         _model.currentDay = _model.savedDayRef?.reference;
         _model.isActiveDay = true;
-        setState(() {});
+        safeSetState(() {});
       } else {
         _model.isActiveDay = false;
-        setState(() {});
+        safeSetState(() {});
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -134,11 +134,11 @@ class _DayScheduleComponentWidgetState
                       _model.isActiveDay = false;
                       _model.currentDay = null;
                       _model.selectedHours = [];
-                      setState(() {});
+                      safeSetState(() {});
                     }
                   } else {
                     _model.isActiveDay = true;
-                    setState(() {});
+                    safeSetState(() {});
                   }
                 },
                 child: Row(
@@ -264,11 +264,11 @@ class _DayScheduleComponentWidgetState
                                             _model.selectedHours.toList())!) {
                                           _model.removeFromSelectedHours(
                                               hourItemItem.hourKey);
-                                          setState(() {});
+                                          safeSetState(() {});
                                         } else {
                                           _model.addToSelectedHours(
                                               hourItemItem.hourKey);
-                                          setState(() {});
+                                          safeSetState(() {});
                                         }
                                       },
                                       child: Container(
@@ -397,7 +397,7 @@ class _DayScheduleComponentWidgetState
                                         await _model.currentDay!.delete();
                                         _model.currentDay = null;
                                         _model.isActiveDay = false;
-                                        setState(() {});
+                                        safeSetState(() {});
                                       }
 
                                       await showDialog(
@@ -445,7 +445,7 @@ class _DayScheduleComponentWidgetState
                                       }, docTimeRecordReference);
                                       _model.currentDay =
                                           _model.createdDay?.reference;
-                                      setState(() {});
+                                      safeSetState(() {});
                                       await showDialog(
                                         context: context,
                                         builder: (alertDialogContext) {
@@ -465,7 +465,7 @@ class _DayScheduleComponentWidgetState
                                       );
                                     }
 
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   text: FFLocalizations.of(context).getText(
                                     'mlgytsf8' /* حفظ */,

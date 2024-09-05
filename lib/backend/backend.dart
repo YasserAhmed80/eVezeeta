@@ -26,6 +26,7 @@ import 'schema/doc_sub_record.dart';
 import 'schema/subscription_fees_record.dart';
 import 'schema/cus_record.dart';
 import 'schema/cus_fav_doc_record.dart';
+import 'schema/cus_files_record.dart';
 import 'dart:async';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -57,6 +58,7 @@ export 'schema/doc_sub_record.dart';
 export 'schema/subscription_fees_record.dart';
 export 'schema/cus_record.dart';
 export 'schema/cus_fav_doc_record.dart';
+export 'schema/cus_files_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -1682,6 +1684,84 @@ Future<FFFirestorePage<CusFavDocRecord>> queryCusFavDocRecordPage({
       if (isStream) {
         final streamSubscription =
             (page.dataStream)?.listen((List<CusFavDocRecord> data) {
+          for (var item in data) {
+            final itemIndexes = controller.itemList!
+                .asMap()
+                .map((k, v) => MapEntry(v.reference.id, k));
+            final index = itemIndexes[item.reference.id];
+            final items = controller.itemList!;
+            if (index != null) {
+              items.replaceRange(index, index + 1, [item]);
+              controller.itemList = {
+                for (var item in items) item.reference: item
+              }.values.toList();
+            }
+          }
+        });
+        streamSubscriptions?.add(streamSubscription);
+      }
+      return page;
+    });
+
+/// Functions to query CusFilesRecords (as a Stream and as a Future).
+Future<int> queryCusFilesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CusFilesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CusFilesRecord>> queryCusFilesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CusFilesRecord.collection,
+      CusFilesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CusFilesRecord>> queryCusFilesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CusFilesRecord.collection,
+      CusFilesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+Future<FFFirestorePage<CusFilesRecord>> queryCusFilesRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+  required PagingController<DocumentSnapshot?, CusFilesRecord> controller,
+  List<StreamSubscription?>? streamSubscriptions,
+}) =>
+    queryCollectionPage(
+      CusFilesRecord.collection,
+      CusFilesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    ).then((page) {
+      controller.appendPage(
+        page.data,
+        page.nextPageMarker,
+      );
+      if (isStream) {
+        final streamSubscription =
+            (page.dataStream)?.listen((List<CusFilesRecord> data) {
           for (var item in data) {
             final itemIndexes = controller.itemList!
                 .asMap()

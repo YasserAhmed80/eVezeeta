@@ -48,7 +48,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
           .toList()
           .toList()
           .cast<int>();
-      setState(() {});
+      safeSetState(() {});
       await _model.getDaysList(context);
       _model.selectedDate = _model.refDayList
           .where((e) => e.isActive == true)
@@ -57,7 +57,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
           .dayValue;
       _model.selectedDayBook =
           _model.refDayList.where((e) => e.isActive == true).toList().first;
-      setState(() {});
+      safeSetState(() {});
       await _model.getHrsFromDbAction(context);
       await widget.dayHoursAction?.call(
         _model.selectedDayHours,
@@ -66,7 +66,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
       );
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -103,9 +103,9 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             _model.selectedDate = dayListItem.dayValue;
-                            setState(() {});
+                            safeSetState(() {});
                             _model.selectedDayBook = dayListItem;
-                            setState(() {});
+                            safeSetState(() {});
                             await _model.getHrsFromDbAction(context);
                             await widget.dayHoursAction?.call(
                               _model.selectedDayHours,

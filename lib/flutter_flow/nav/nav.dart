@@ -310,6 +310,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               collectionNamePath: ['doc'],
             ),
           ),
+        ),
+        FFRoute(
+          name: 'cus_new_file',
+          path: '/cusNewFile',
+          builder: (context, params) => CusNewFileWidget(
+            cusRef: params.getParam(
+              'cusRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['cus'],
+            ),
+            fileRef: params.getParam(
+              'fileRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['cus_files'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'cus_files',
+          path: '/cusFiles',
+          builder: (context, params) => CusFilesWidget(
+            cusRef: params.getParam(
+              'cusRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['cus'],
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

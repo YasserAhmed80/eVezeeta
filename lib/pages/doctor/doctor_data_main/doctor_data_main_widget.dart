@@ -44,7 +44,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (widget.docDocument != null) {
         // doc name
-        setState(() {
+        safeSetState(() {
           _model.txtFullNameFieldTextController?.text = valueOrDefault<String>(
             widget.docDocument?.name,
             'nn',
@@ -54,7 +54,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                   offset: _model.txtFullNameFieldTextController!.text.length);
         });
         // doc title
-        setState(() {
+        safeSetState(() {
           _model.txtDocTitleFieldTextController?.text = valueOrDefault<String>(
             widget.docDocument?.title,
             'nn',
@@ -64,7 +64,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                   offset: _model.txtDocTitleFieldTextController!.text.length);
         });
         // doc about
-        setState(() {
+        safeSetState(() {
           _model.txtAboutFieldTextController?.text = valueOrDefault<String>(
             widget.docDocument?.about,
             'nn',
@@ -74,7 +74,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                   offset: _model.txtAboutFieldTextController!.text.length);
         });
         // doc cat cde
-        setState(() {
+        safeSetState(() {
           _model.docCategoryValueController?.value = valueOrDefault<int>(
             widget.docDocument?.catId,
             -1,
@@ -95,7 +95,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
           widget.docDocument?.catId,
           -1,
         );
-        setState(() {});
+        safeSetState(() {});
       }
     });
 
@@ -108,7 +108,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
     _model.txtAboutFieldTextController ??= TextEditingController();
     _model.txtAboutFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -224,7 +224,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               EasyDebounce.debounce(
                                             '_model.txtFullNameFieldTextController',
                                             const Duration(milliseconds: 2000),
-                                            () => setState(() {}),
+                                            () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
                                           textCapitalization:
@@ -315,7 +315,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       _model
                                                           .txtFullNameFieldTextController
                                                           ?.clear();
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: const Icon(
                                                       Icons.clear,
@@ -393,7 +393,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                           ChipData(label))
                                                       .toList(),
                                                   onChanged: (val) async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                             .docTypeChoiceValue =
                                                         val?.firstOrNull);
                                                     _model.docType = functions
@@ -405,7 +405,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                                 .toList(),
                                                             -1)
                                                         ?.typeKey;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   selectedChipStyle: ChipStyle(
                                                     backgroundColor:
@@ -557,7 +557,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                           ChipData(label))
                                                       .toList(),
                                                   onChanged: (val) async {
-                                                    setState(() => _model
+                                                    safeSetState(() => _model
                                                             .docTitleChoiceValue =
                                                         val?.firstOrNull);
                                                     _model.docTitleCde = functions
@@ -569,7 +569,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                                 .toList(),
                                                             0)
                                                         ?.titleKey;
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   },
                                                   selectedChipStyle: ChipStyle(
                                                     backgroundColor:
@@ -676,7 +676,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               EasyDebounce.debounce(
                                             '_model.txtDocTitleFieldTextController',
                                             const Duration(milliseconds: 2000),
-                                            () => setState(() {}),
+                                            () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
                                           textCapitalization:
@@ -767,7 +767,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       _model
                                                           .txtDocTitleFieldTextController
                                                           ?.clear();
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: const Icon(
                                                       Icons.clear,
@@ -813,7 +813,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               EasyDebounce.debounce(
                                             '_model.txtAboutFieldTextController',
                                             const Duration(milliseconds: 2000),
-                                            () => setState(() {}),
+                                            () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
                                           textCapitalization:
@@ -904,7 +904,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       _model
                                                           .txtAboutFieldTextController
                                                           ?.clear();
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: const Icon(
                                                       Icons.clear,
@@ -957,11 +957,11 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               .map((e) => e.desc)
                                               .toList(),
                                           onChanged: (val) async {
-                                            setState(() =>
+                                            safeSetState(() =>
                                                 _model.docCategoryValue = val);
                                             _model.docCategory =
                                                 _model.docCategoryValue;
-                                            setState(() {});
+                                            safeSetState(() {});
                                           },
                                           width: double.infinity,
                                           height: 56.0,
@@ -1072,7 +1072,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                     subCatListIndex,
                                                   ),
                                                   updateCallback: () =>
-                                                      setState(() {}),
+                                                      safeSetState(() {}),
                                                   child:
                                                       SwitchTitleComponentWidget(
                                                     key: Key(
@@ -1088,12 +1088,12 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                         _model
                                                             .addToDocSubCategory(
                                                                 returnItem!);
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                       } else {
                                                         _model
                                                             .removeFromDocSubCategory(
                                                                 returnItem!);
-                                                        setState(() {});
+                                                        safeSetState(() {});
                                                       }
                                                     },
                                                   ),
@@ -1112,7 +1112,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                             ),
                             wrapWithModel(
                               model: _model.loadCategoriesComponentModel,
-                              updateCallback: () => setState(() {}),
+                              updateCallback: () => safeSetState(() {}),
                               child: const LoadCategoriesComponentWidget(),
                             ),
                           ],
@@ -1134,7 +1134,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                 _model.docType == -1 ? false : true;
                             _model.isTitleSelected =
                                 _model.docTitleCde == -1 ? false : true;
-                            setState(() {});
+                            safeSetState(() {});
                             if (_model.formKey.currentState == null ||
                                 !_model.formKey.currentState!.validate()) {
                               return;
@@ -1149,7 +1149,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                 _model.txtDocTitleFieldTextController.text;
                             _model.docAbout =
                                 _model.txtAboutFieldTextController.text;
-                            setState(() {});
+                            safeSetState(() {});
                             if (widget.docDocument != null) {
                               // save model to DB
 
@@ -1174,7 +1174,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                 (e) => e
                                   ..dbDocRef = widget.docDocument?.reference,
                               );
-                              setState(() {});
+                              safeSetState(() {});
                             } else {
                               // save model to DB
 
@@ -1223,7 +1223,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                 (e) =>
                                     e..dbDocRef = _model.createdDoc?.reference,
                               );
-                              setState(() {});
+                              safeSetState(() {});
                             }
 
                             await showDialog(
@@ -1243,7 +1243,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                               },
                             );
 
-                            setState(() {});
+                            safeSetState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
                             'r2angc5b' /* حفظ البانات */,

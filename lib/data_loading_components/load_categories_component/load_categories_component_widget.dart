@@ -38,19 +38,19 @@ class _LoadCategoriesComponentWidgetState
           queryBuilder: (categoryRecord) => categoryRecord.orderBy('seq'),
         );
         _model.loopMax = _model.catDocss?.length;
-        setState(() {});
+        safeSetState(() {});
         FFAppState().refCategory = [];
         FFAppState().refSubCategory = [];
-        setState(() {});
+        safeSetState(() {});
         while (_model.loopIndex! < _model.loopMax!) {
           FFAppState().addToRefCategory(DtCategoryStruct(
             catKey: _model.catDocss?[_model.loopIndex!].catKey,
             desc: _model.catDocss?[_model.loopIndex!].desc,
             seq: _model.catDocss?[_model.loopIndex!].seq,
           ));
-          setState(() {});
+          safeSetState(() {});
           _model.loopIndex = _model.loopIndex! + 1;
-          setState(() {});
+          safeSetState(() {});
         }
         // sub categories
         _model.subCatDocss = await queryCategorySubRecordOnce(
@@ -58,7 +58,7 @@ class _LoadCategoriesComponentWidgetState
         );
         _model.loopMax = _model.subCatDocss?.length;
         _model.loopIndex = 0;
-        setState(() {});
+        safeSetState(() {});
         while (_model.loopIndex! < _model.loopMax!) {
           FFAppState().addToRefSubCategory(DtSubCategoryStruct(
             subKey: _model.subCatDocss?[_model.loopIndex!].subKey,
@@ -66,9 +66,9 @@ class _LoadCategoriesComponentWidgetState
             desc: _model.subCatDocss?[_model.loopIndex!].desc,
             seq: _model.subCatDocss?[_model.loopIndex!].seq,
           ));
-          setState(() {});
+          safeSetState(() {});
           _model.loopIndex = _model.loopIndex! + 1;
-          setState(() {});
+          safeSetState(() {});
         }
       } else {
         return;
@@ -77,10 +77,10 @@ class _LoadCategoriesComponentWidgetState
       FFAppState().updateLastDataLoadingStruct(
         (e) => e..reLoadCategory = false,
       );
-      setState(() {});
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

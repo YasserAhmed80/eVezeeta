@@ -18,7 +18,6 @@ class DoctorDataScheduleModel
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for txtPrice widget.
   FocusNode? txtPriceFocusNode;
   TextEditingController? txtPriceTextController;

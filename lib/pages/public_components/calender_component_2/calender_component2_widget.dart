@@ -44,26 +44,26 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
       _model.nMonth = functions.getDatePart(widget.inputDate, 'm');
       _model.nYear = functions.getDatePart(widget.inputDate, 'y');
       _model.selectedDate = widget.inputDate;
-      setState(() {});
+      safeSetState(() {});
       await _model.fillYearsAction(context);
-      setState(() {});
+      safeSetState(() {});
       await _model.fillMonthAction(context);
-      setState(() {});
+      safeSetState(() {});
       await _model.fillDaysAction(context);
-      setState(() {});
-      setState(() {
+      safeSetState(() {});
+      safeSetState(() {
         _model.cboYearValueController?.value = valueOrDefault<String>(
           _model.nYear?.toString(),
           '0',
         );
       });
-      setState(() {
+      safeSetState(() {
         _model.cboMonthValueController?.value = valueOrDefault<String>(
           _model.nMonth?.toString(),
           '0',
         );
       });
-      setState(() {
+      safeSetState(() {
         _model.cboDayValueController?.value = valueOrDefault<String>(
           _model.nDay?.toString(),
           '0',
@@ -71,7 +71,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
       });
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -185,10 +185,10 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                               FormFieldController<String>(null),
                           options: _model.yearList,
                           onChanged: (val) async {
-                            setState(() => _model.cboYearValue = val);
+                            safeSetState(() => _model.cboYearValue = val);
                             _model.nYear =
                                 functions.stringToInteger(_model.cboYearValue);
-                            setState(() {});
+                            safeSetState(() {});
                             await _model.fillDaysAction(context);
                             await _model.createDateAction(context);
                           },
@@ -243,10 +243,10 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                               FormFieldController<String>(null),
                           options: _model.monthList,
                           onChanged: (val) async {
-                            setState(() => _model.cboMonthValue = val);
+                            safeSetState(() => _model.cboMonthValue = val);
                             _model.nMonth =
                                 functions.stringToInteger(_model.cboMonthValue);
-                            setState(() {});
+                            safeSetState(() {});
                             await _model.fillDaysAction(context);
                             await _model.createDateAction(context);
                           },
@@ -299,10 +299,10 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                               FormFieldController<String>(null),
                           options: _model.dayList,
                           onChanged: (val) async {
-                            setState(() => _model.cboDayValue = val);
+                            safeSetState(() => _model.cboDayValue = val);
                             _model.nDay =
                                 functions.stringToInteger(_model.cboDayValue);
-                            setState(() {});
+                            safeSetState(() {});
                             await _model.createDateAction(context);
                           },
                           width: 300.0,

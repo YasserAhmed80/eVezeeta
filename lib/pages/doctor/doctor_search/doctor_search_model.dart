@@ -22,7 +22,6 @@ class DoctorSearchModel extends FlutterFlowModel<DoctorSearchWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Models for doctor_data_component dynamic component.
   late FlutterFlowDynamicModels<DoctorDataComponentModel>
       doctorDataComponentModels;

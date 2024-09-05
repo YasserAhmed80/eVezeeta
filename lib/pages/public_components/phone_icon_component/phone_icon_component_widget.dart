@@ -32,7 +32,7 @@ class _PhoneIconComponentWidgetState extends State<PhoneIconComponentWidget> {
     super.initState();
     _model = createModel(context, () => PhoneIconComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -58,8 +58,8 @@ class _PhoneIconComponentWidgetState extends State<PhoneIconComponentWidget> {
           ));
         },
         child: Container(
-          width: 24.0,
-          height: 24.0,
+          width: 30.0,
+          height: 30.0,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primary,
             borderRadius: BorderRadius.circular(24.0),

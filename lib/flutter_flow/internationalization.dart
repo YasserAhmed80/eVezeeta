@@ -444,7 +444,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '2',
     },
     '1qrdz17y': {
-      'ar': 'صورة إثبات بطاقة مزاولة المهنة*',
+      'ar': 'صورة إثبات بطاقة مزاولة المهنة',
       'en': 'A copy of proof of your professional practice card*',
     },
     'g1qvau7w': {
@@ -619,6 +619,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ftfu7qf5': {
       'ar': 'ليلي',
+      'en': '',
+    },
+    'oj9wm83v': {
+      'ar': 'بيانات الحساب',
       'en': '',
     },
     '8bzssxpu': {
@@ -1339,7 +1343,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'lhav9xod': {
       'ar': 'Home',
-      'en': '',
+      'en': 'Home',
     },
   },
   // customer_doc_booked
@@ -1394,7 +1398,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'سعر الكشف: ',
       'en': '',
     },
-    'f6zt5bsu': {
+    'yzfoyokd': {
       'ar': 'احجز الان',
       'en': '',
     },
@@ -1404,7 +1408,170 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'hijzss1o': {
       'ar': 'Home',
-      'en': 'Home',
+      'en': '',
+    },
+  },
+  // cus_new_file
+  {
+    'gcznyson': {
+      'ar': 'تاريخ الملف',
+      'en': '',
+    },
+    'ey79u5px': {
+      'ar': 'بيانات الملف',
+      'en': '',
+    },
+    'dokjtu3t': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'p1kvh1wd': {
+      'ar': '544545',
+      'en': '',
+    },
+    'b64nijxe': {
+      'ar': 'نوع الملف',
+      'en': '',
+    },
+    'iuvic5bz': {
+      'ar': 'Search for an item...',
+      'en': '',
+    },
+    'm1ngu45z': {
+      'ar': 'بيانات عن الملف',
+      'en': '',
+    },
+    'indy97tp': {
+      'ar': 'بيانات عن الدكتور',
+      'en': '',
+    },
+    'nhcqjz7r': {
+      'ar': 'صورة الملف',
+      'en': '',
+    },
+    'bhnpbej8': {
+      'ar': 'لكي يتم اختيار صورة يجب تسجيل البيانات اولا',
+      'en': '',
+    },
+    'knl8p4az': {
+      'ar': 'حفظ الملف',
+      'en': '',
+    },
+    'vhkeywy5': {
+      'ar': 'Field is required',
+      'en': '',
+    },
+    'rfzfvabs': {
+      'ar': 'حجم المعلومات صغير جدا',
+      'en': '',
+    },
+    '9ujnvguj': {
+      'ar': 'حجم المعلومات كبير جدا',
+      'en': '',
+    },
+    'c3rgy1su': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'xcyvq3e6': {
+      'ar': 'Field is required',
+      'en': '',
+    },
+    '45xd2xtl': {
+      'ar': 'حجم المعلومات صغير جدا',
+      'en': '',
+    },
+    '9rv7l8f5': {
+      'ar': 'حجم المعلومات كبير جدا',
+      'en': '',
+    },
+    'lkt2h4p7': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    '601if6kr': {
+      'ar': 'بيانات الملف',
+      'en': '',
+    },
+    'kofl5x33': {
+      'ar': 'main',
+      'en': '',
+    },
+  },
+  // cus_files
+  {
+    'x4abinob': {
+      'ar':
+          'يمكنك حفظ كل الملفات الخاصة بحالتك الصحية. هذة الملفات تشمل روشتات - تحاليل - واشعة او اي ملف اخر.\nيمكنك مشاركة هذه الملفات مع طبيبك كلما لزم الامر.',
+      'en': '',
+    },
+    'mer9deto': {
+      'ar': 'تاريخ الملف: ',
+      'en': '',
+    },
+    'q7k6lf1f': {
+      'ar': 'عن الملف: ',
+      'en': '',
+    },
+    'aipm8l6r': {
+      'ar': 'عن الدكتور: ',
+      'en': '',
+    },
+    'mkyvtqmn': {
+      'ar': 'تعديل الملف',
+      'en': '',
+    },
+    '2ejuqezr': {
+      'ar': 'من فضلك ادخل اسمك كامل',
+      'en': '',
+    },
+    'f7tkyshn': {
+      'ar': 'اسم طويل جدا',
+      'en': '',
+    },
+    'u2lp74oc': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'm3crzspl': {
+      'ar': 'من فضلك ادخل اسمك الموبيل',
+      'en': '',
+    },
+    'vzwhgbnm': {
+      'ar': 'رقم الموبيل خطأ',
+      'en': '',
+    },
+    'ww9zy04c': {
+      'ar': 'رقم الموبيل خطأ',
+      'en': '',
+    },
+    'za843ezl': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'h326tju7': {
+      'ar': 'Field is required',
+      'en': '',
+    },
+    '0gcvucz5': {
+      'ar': 'يجب ادخال عنوان كامل',
+      'en': '',
+    },
+    'g35ihmus': {
+      'ar': 'العنوان طويل جدا',
+      'en': '',
+    },
+    '9v2f28nx': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    '1r33eias': {
+      'ar': 'ملفاتي',
+      'en': '',
+    },
+    '56pfryii': {
+      'ar': 'main',
+      'en': '',
     },
   },
   // DayScheduleComponent
@@ -1552,6 +1719,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'blusaqkl': {
       'ar': 'تقيم',
+      'en': '',
+    },
+  },
+  // doctor_files_component
+  {
+    'nfpggb41': {
+      'ar': 'صور العيادة',
       'en': '',
     },
   },

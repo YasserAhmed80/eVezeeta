@@ -8,7 +8,6 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'upload_photo_model.dart';
 export 'upload_photo_model.dart';
 
@@ -56,7 +55,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
       _model.saveLoadImage = false;
       _model.isLoading = false;
       _model.curretImage = widget.imgRef;
-      setState(() {});
+      safeSetState(() {});
       _model.queryImage = await queryImgsRecordOnce(
         queryBuilder: (imgsRecord) => imgsRecord
             .where(
@@ -79,11 +78,11 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
       if (_model.queryImage!.isNotEmpty) {
         _model.curretImage = _model.queryImage?.first.iRef;
         _model.imageRef = _model.queryImage?.first.reference;
-        setState(() {});
+        safeSetState(() {});
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -95,8 +94,6 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -259,7 +256,11 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                           );
                                           _model.curretImage = null;
                                           _model.imageRef = null;
-                                          setState(() {});
+                                          safeSetState(() {});
+                                          await _model.updateEntityImageAction(
+                                            context,
+                                            imgURL: '\'\'',
+                                          );
                                         },
                                 ),
                                 FlutterFlowIconButton(
@@ -287,7 +288,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                       : () async {
                                           // StartSaving
                                           _model.isLoading = true;
-                                          setState(() {});
+                                          safeSetState(() {});
                                           // save_cus_photo
                                           _model.photoRef =
                                               await actions.saveImageToStorage1(
@@ -307,39 +308,11 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                           _model.curretImage =
                                               _model.savedImageDoc?.iRef;
                                           _model.imageRef = _model.photoRef;
-                                          setState(() {});
-                                          if ((widget.entityType == 'doc') &&
-                                              (widget.imgType == 'p')) {
-                                            await FFAppState()
-                                                .currentDoctor
-                                                .dbDocRef!
-                                                .update(createDocRecordData(
-                                                  img: _model.curretImage,
-                                                ));
-                                          } else {
-                                            if ((widget.entityType == 'cus') &&
-                                                (widget.imgType == 'p')) {
-                                              FFAppState()
-                                                  .updateCurrentCustomerStruct(
-                                                (e) =>
-                                                    e..img = _model.curretImage,
-                                              );
-                                              setState(() {});
-
-                                              await FFAppState()
-                                                  .currentCustomer
-                                                  .cusDocRef!
-                                                  .update(createCusRecordData(
-                                                    img: valueOrDefault<String>(
-                                                      FFAppState()
-                                                          .currentCustomer
-                                                          .img,
-                                                      'none',
-                                                    ),
-                                                  ));
-                                            }
-                                          }
-
+                                          safeSetState(() {});
+                                          await _model.updateEntityImageAction(
+                                            context,
+                                            imgURL: _model.curretImage,
+                                          );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
@@ -361,7 +334,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                             ),
                                           );
 
-                                          setState(() {});
+                                          safeSetState(() {});
                                         },
                                 ),
                                 FlutterFlowIconButton(
@@ -400,7 +373,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                                   validateFileFormat(
                                                       m.storagePath,
                                                       context))) {
-                                            setState(() =>
+                                            safeSetState(() =>
                                                 _model.isDataUploading = true);
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
@@ -430,12 +403,12 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                             }
                                             if (selectedUploadedFiles.length ==
                                                 selectedMedia.length) {
-                                              setState(() {
+                                              safeSetState(() {
                                                 _model.uploadedLocalFile =
                                                     selectedUploadedFiles.first;
                                               });
                                             } else {
-                                              setState(() {});
+                                              safeSetState(() {});
                                               return;
                                             }
                                           }
@@ -469,14 +442,14 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                               },
                                             );
                                             if (shouldSetState) {
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                             return;
                                           }
                                           _model.uplodedImage =
                                               _model.uploadedLocalFile;
                                           _model.saveLoadImage = true;
-                                          setState(() {});
+                                          safeSetState(() {});
                                           await showDialog(
                                             context: context,
                                             builder: (alertDialogContext) {
@@ -495,7 +468,9 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                               );
                                             },
                                           );
-                                          if (shouldSetState) setState(() {});
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
                                         },
                                 ),
                               ]

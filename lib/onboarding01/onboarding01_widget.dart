@@ -49,7 +49,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
             ..ciityDate = _model.returnedLoadingData?.cityDate
             ..reLoadCities = true,
         );
-        setState(() {});
+        safeSetState(() {});
       }
       if (_model.returnedLoadingData?.categoryDate !=
           FFAppState().lastDataLoading.categoryDate) {
@@ -58,7 +58,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
             ..categoryDate = _model.returnedLoadingData?.categoryDate
             ..reLoadCategory = true,
         );
-        setState(() {});
+        safeSetState(() {});
       }
       if (_model.returnedLoadingData?.daysDate !=
           FFAppState().lastDataLoading.daysDate) {
@@ -67,7 +67,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
             ..daysDate = _model.returnedLoadingData?.daysDate
             ..reLoadDays = true,
         );
-        setState(() {});
+        safeSetState(() {});
       }
       _model.timerController.onStartTimer();
     });
@@ -175,7 +175,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -295,7 +295,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                               FFButtonWidget(
                                 onPressed: () async {
                                   FFAppState().currentProfileType = 1;
-                                  setState(() {});
+                                  safeSetState(() {});
                                   await _model.profileTypeAction(context);
                                 },
                                 text: FFLocalizations.of(context).getText(
@@ -326,7 +326,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                               FFButtonWidget(
                                 onPressed: () async {
                                   FFAppState().currentProfileType = 2;
-                                  setState(() {});
+                                  safeSetState(() {});
                                   await _model.profileTypeAction(context);
                                 },
                                 text: FFLocalizations.of(context).getText(
@@ -370,7 +370,7 @@ class _Onboarding01WidgetState extends State<Onboarding01Widget>
                           onChanged: (value, displayTime, shouldUpdate) {
                             _model.timerMilliseconds = value;
                             _model.timerValue = displayTime;
-                            if (shouldUpdate) setState(() {});
+                            if (shouldUpdate) safeSetState(() {});
                           },
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context)

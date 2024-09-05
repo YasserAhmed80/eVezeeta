@@ -57,7 +57,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
           widget.docDocument?.avgVisit,
           -1,
         );
-        setState(() {});
+        safeSetState(() {});
       }
     });
 
@@ -70,7 +70,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
     _model.txtAvergeVisitTextController ??= TextEditingController();
     _model.txtAvergeVisitFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {
           _model.txtPriceTextController?.text =
               FFLocalizations.of(context).getText(
             'zci0rcuq' /* 400 */,
@@ -241,7 +241,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       _model.bookTypeCode = 1;
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -329,7 +329,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       _model.bookTypeCode = 2;
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -1241,7 +1241,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                     ),
                                     wrapWithModel(
                                       model: _model.loadDayHoursDataModel,
-                                      updateCallback: () => setState(() {}),
+                                      updateCallback: () => safeSetState(() {}),
                                       child: const LoadDayHoursDataWidget(),
                                     ),
                                   ].divide(const SizedBox(height: 5.0)),
@@ -1260,7 +1260,7 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
               alignment: const AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const CustomNavbarWidget(),
               ),
             ),

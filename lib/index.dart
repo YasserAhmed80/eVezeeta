@@ -39,3 +39,5 @@ export '/customer/customer_doc_booked/customer_doc_booked_widget.dart'
 export '/show_image/show_image_widget.dart' show ShowImageWidget;
 export '/pages/doctor/doctor_profile/doctor_profile_widget.dart'
     show DoctorProfileWidget;
+export '/customer/cus_new_file/cus_new_file_widget.dart' show CusNewFileWidget;
+export '/customer/cus_files/cus_files_widget.dart' show CusFilesWidget;

@@ -30,7 +30,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
     super.initState();
     _model = createModel(context, () => DoctorDataImagesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -148,7 +148,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   decoration: const BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel1,
-                                    updateCallback: () => setState(() {}),
+                                    updateCallback: () => safeSetState(() {}),
                                     child: UploadPhotoWidget(
                                       storageFolder: 'doc',
                                       entityType: 'doc',
@@ -244,7 +244,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     decoration: const BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel2,
-                                      updateCallback: () => setState(() {}),
+                                      updateCallback: () => safeSetState(() {}),
                                       child: UploadPhotoWidget(
                                         storageFolder: 'doc',
                                         entityType: 'doc',
@@ -252,7 +252,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                           widget.docRef?.id,
                                           'n',
                                         ),
-                                        imgType: 'h1',
+                                        imgType: 'h',
                                         imgSeq: 2,
                                         imgRef: '\'\'',
                                         isActive: true,
@@ -307,7 +307,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     decoration: const BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel3,
-                                      updateCallback: () => setState(() {}),
+                                      updateCallback: () => safeSetState(() {}),
                                       child: UploadPhotoWidget(
                                         storageFolder: 'doc',
                                         entityType: 'doc',
@@ -315,7 +315,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                           widget.docRef?.id,
                                           'n',
                                         ),
-                                        imgType: 'h2',
+                                        imgType: 'h',
                                         imgSeq: 3,
                                         imgRef: '\'\'',
                                         isActive: true,
@@ -350,7 +350,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      '1qrdz17y' /* صورة إثبات بطاقة مزاولة المهنة... */,
+                                      '1qrdz17y' /* صورة إثبات بطاقة مزاولة المهنة */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -375,7 +375,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   decoration: const BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel4,
-                                    updateCallback: () => setState(() {}),
+                                    updateCallback: () => safeSetState(() {}),
                                     child: UploadPhotoWidget(
                                       storageFolder: 'doc',
                                       entityType: 'doc',
@@ -383,7 +383,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                         widget.docRef?.id,
                                         'n',
                                       ),
-                                      imgType: 'r1',
+                                      imgType: 'f',
                                       imgSeq: 1,
                                       imgRef: '\'\'',
                                       isActive: true,
@@ -445,7 +445,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     decoration: const BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel5,
-                                      updateCallback: () => setState(() {}),
+                                      updateCallback: () => safeSetState(() {}),
                                       child: UploadPhotoWidget(
                                         storageFolder: 'doc',
                                         entityType: 'doc',
@@ -453,7 +453,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                             .currentDoctor
                                             .dbDocRef!
                                             .id,
-                                        imgType: 'r2',
+                                        imgType: 'f',
                                         imgSeq: 1,
                                         imgRef: '\'\'',
                                         isActive: true,

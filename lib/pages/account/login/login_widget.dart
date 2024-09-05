@@ -91,7 +91,7 @@ class _LoginWidgetState extends State<LoginWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -186,7 +186,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.emailAddressTextController',
                               const Duration(milliseconds: 2000),
-                              () => setState(() {}),
+                              () => safeSetState(() {}),
                             ),
                             autofocus: false,
                             obscureText: false,
@@ -243,7 +243,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                       onTap: () async {
                                         _model.emailAddressTextController
                                             ?.clear();
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: const Icon(
                                         Icons.clear,
@@ -275,7 +275,7 @@ class _LoginWidgetState extends State<LoginWidget>
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.passwordTextController',
                               const Duration(milliseconds: 2000),
-                              () => setState(() {}),
+                              () => safeSetState(() {}),
                             ),
                             autofocus: false,
                             obscureText: false,
@@ -331,7 +331,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                   ? InkWell(
                                       onTap: () async {
                                         _model.passwordTextController?.clear();
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: const Icon(
                                         Icons.clear,

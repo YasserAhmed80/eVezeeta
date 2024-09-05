@@ -24,7 +24,6 @@ class DoctorBillingModel extends FlutterFlowModel<DoctorBillingWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in doctor_billing widget.
   List<DocBookedTimeRecord>? returnedBookedData;
 

@@ -30,7 +30,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
     super.initState();
     _model = createModel(context, () => DoctorSearchModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -125,7 +125,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                     listViewDocRecord.reference.id,
                                     listViewIndex,
                                   ),
-                                  updateCallback: () => setState(() {}),
+                                  updateCallback: () => safeSetState(() {}),
                                   child: DoctorDataComponentWidget(
                                     key: Key(
                                       'Keydy0_${listViewDocRecord.reference.id}',
@@ -450,7 +450,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                   ),
                   wrapWithModel(
                     model: _model.docSearchItemListComponentModel,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const DocSearchItemListComponentWidget(),
                   ),
                 ].divide(const SizedBox(height: 3.0)),
@@ -460,7 +460,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
               alignment: const AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const CustomNavbarWidget(),
               ),
             ),
