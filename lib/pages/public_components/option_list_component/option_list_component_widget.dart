@@ -5,6 +5,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'option_list_component_model.dart';
 export 'option_list_component_model.dart';
 
@@ -66,7 +68,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
       height: 400.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -78,7 +80,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,20 +89,20 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
                   child: Stack(
                     children: [
                       Align(
-                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                        alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: 63.0,
-                          decoration: const BoxDecoration(),
-                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          decoration: BoxDecoration(),
+                          alignment: AlignmentDirectional(0.0, -1.0),
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, 1.0),
+                            alignment: AlignmentDirectional(0.0, 1.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 10.0),
                               child: Text(
                                 valueOrDefault<String>(
-                                  widget.dataSource,
+                                  widget!.dataSource,
                                   'data source',
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -147,12 +149,12 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
           ),
           Expanded(
             child: Align(
-              alignment: const AlignmentDirectional(0.0, -1.0),
+              alignment: AlignmentDirectional(0.0, -1.0),
               child: Container(
                 height: 400.0,
-                decoration: const BoxDecoration(),
+                decoration: BoxDecoration(),
                 child: Padding(
-                  padding: const EdgeInsets.all(2.0),
+                  padding: EdgeInsets.all(2.0),
                   child: Builder(
                     builder: (context) {
                       final itemData = _model.currentList.toList();
@@ -171,7 +173,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
                                 children: [
                                   Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -199,7 +201,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
                                                     .tertiary
                                                 : FlutterFlowTheme.of(context)
                                                     .primaryBackground,
-                                            borderRadius: const BorderRadius.only(
+                                            borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(0.0),
                                               bottomRight: Radius.circular(0.0),
                                               topLeft: Radius.circular(0.0),
@@ -208,7 +210,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               itemDataItem.desc,
@@ -253,7 +255,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                   child: Container(
                     width: double.infinity,
                     height: 10.0,
@@ -261,7 +263,7 @@ class _OptionListComponentWidgetState extends State<OptionListComponentWidget> {
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                   ),
                 ),
               ),

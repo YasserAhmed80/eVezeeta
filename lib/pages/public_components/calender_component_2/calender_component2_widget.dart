@@ -6,6 +6,8 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'calender_component2_model.dart';
 export 'calender_component2_model.dart';
 
@@ -40,10 +42,10 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.nDay = functions.getDatePart(widget.inputDate, 'd');
-      _model.nMonth = functions.getDatePart(widget.inputDate, 'm');
-      _model.nYear = functions.getDatePart(widget.inputDate, 'y');
-      _model.selectedDate = widget.inputDate;
+      _model.nDay = functions.getDatePart(widget!.inputDate, 'd');
+      _model.nMonth = functions.getDatePart(widget!.inputDate, 'm');
+      _model.nYear = functions.getDatePart(widget!.inputDate, 'y');
+      _model.selectedDate = widget!.inputDate;
       safeSetState(() {});
       await _model.fillYearsAction(context);
       safeSetState(() {});
@@ -86,7 +88,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
     return Material(
       color: Colors.transparent,
       elevation: 1.0,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
@@ -95,12 +97,12 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
         ),
       ),
       child: Container(
-        constraints: const BoxConstraints(
+        constraints: BoxConstraints(
           maxWidth: 700.0,
         ),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(0.0),
             bottomRight: Radius.circular(0.0),
             topLeft: Radius.circular(14.0),
@@ -115,7 +117,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -136,7 +138,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                   Expanded(
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -168,14 +170,14 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Container(
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).primaryBackground,
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(10.0, 30.0, 10.0, 20.0),
+                      EdgeInsetsDirectional.fromSTEB(10.0, 30.0, 10.0, 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -229,7 +231,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                           borderColor: FlutterFlowTheme.of(context).alternate,
                           borderWidth: 1.0,
                           borderRadius: 8.0,
-                          margin: const EdgeInsetsDirectional.fromSTEB(
+                          margin: EdgeInsetsDirectional.fromSTEB(
                               16.0, 4.0, 16.0, 4.0),
                           hidesUnderline: true,
                           isOverButton: false,
@@ -285,7 +287,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                           borderColor: FlutterFlowTheme.of(context).alternate,
                           borderWidth: 1.0,
                           borderRadius: 8.0,
-                          margin: const EdgeInsetsDirectional.fromSTEB(
+                          margin: EdgeInsetsDirectional.fromSTEB(
                               16.0, 4.0, 16.0, 4.0),
                           hidesUnderline: true,
                           isOverButton: false,
@@ -340,7 +342,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                           borderColor: FlutterFlowTheme.of(context).alternate,
                           borderWidth: 1.0,
                           borderRadius: 8.0,
-                          margin: const EdgeInsetsDirectional.fromSTEB(
+                          margin: EdgeInsetsDirectional.fromSTEB(
                               16.0, 4.0, 16.0, 4.0),
                           hidesUnderline: true,
                           isOverButton: false,
@@ -348,7 +350,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                           isMultiSelect: false,
                         ),
                       ),
-                    ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                    ].divide(SizedBox(width: 5.0)).around(SizedBox(width: 5.0)),
                   ),
                 ),
               ),
@@ -366,8 +368,8 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
               options: FFButtonOptions(
                 width: MediaQuery.sizeOf(context).width * 0.5,
                 height: 40.0,
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Cairo',
@@ -375,7 +377,7 @@ class _CalenderComponent2WidgetState extends State<CalenderComponent2Widget> {
                       letterSpacing: 0.0,
                     ),
                 elevation: 3.0,
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Colors.transparent,
                   width: 1.0,
                 ),

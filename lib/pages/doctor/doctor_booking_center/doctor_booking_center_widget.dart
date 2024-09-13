@@ -1,4 +1,7 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/components/loading_component_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -6,10 +9,13 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
 import '/pages/public_components/phone_icon_component/phone_icon_component_widget.dart';
+import 'dart:math';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_booking_center_model.dart';
 export 'doctor_booking_center_model.dart';
@@ -48,6 +54,8 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
       safeSetState(() {});
       await _model.getFilteredBookedList(context);
       safeSetState(() {});
+      _model.isLoading = false;
+      safeSetState(() {});
     });
 
     animationsMap.addAll({
@@ -66,8 +74,8 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -110,10 +118,10 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(14.0),
                         bottomRight: Radius.circular(14.0),
@@ -123,7 +131,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,7 +148,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 12.0, 0.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -168,12 +176,12 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primaryBackground,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(0.0),
                         bottomRight: Radius.circular(0.0),
                         topLeft: Radius.circular(0.0),
@@ -182,12 +190,12 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 5.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -214,14 +222,14 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 5.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 2.0, 0.0, 2.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -236,7 +244,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                     },
                                     child: Container(
                                       height: 35.0,
-                                      constraints: const BoxConstraints(
+                                      constraints: BoxConstraints(
                                         minWidth: 50.0,
                                       ),
                                       decoration: BoxDecoration(
@@ -254,7 +262,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 5.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -285,7 +293,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 2.0, 5.0, 2.0),
                                   child: Builder(
                                     builder: (context) {
@@ -329,7 +337,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                       opacity: 0.8,
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     2.0,
@@ -338,7 +346,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         child: Container(
                                                           height: 35.0,
                                                           constraints:
-                                                              const BoxConstraints(
+                                                              BoxConstraints(
                                                             minWidth: 50.0,
                                                           ),
                                                           decoration:
@@ -371,7 +379,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -418,7 +426,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                       opacity: 0.8,
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     2.0,
@@ -427,7 +435,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                         child: Container(
                                                           height: 35.0,
                                                           constraints:
-                                                              const BoxConstraints(
+                                                              BoxConstraints(
                                                             minWidth: 50.0,
                                                           ),
                                                           decoration:
@@ -454,7 +462,7 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -498,8 +506,8 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                               ),
                                             );
                                           })
-                                              .divide(const SizedBox(width: 5.0))
-                                              .around(const SizedBox(width: 5.0)),
+                                              .divide(SizedBox(width: 5.0))
+                                              .around(SizedBox(width: 5.0)),
                                         ),
                                       );
                                     },
@@ -514,579 +522,111 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                   ),
                 ),
                 Expanded(
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 70.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: SingleChildScrollView(
-                              primary: false,
-                              child: Column(
+                  child: Builder(
+                    builder: (context) {
+                      if (_model.bookedDays.length > 0) {
+                        return Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 5.0, 70.0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 5.0, 0.0),
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 5.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        _model.allDays = true;
-                                        _model.selectedDay = null;
-                                        safeSetState(() {});
-                                        await _model
-                                            .getFilteredBookedList(context);
-                                      },
-                                      child: Container(
-                                        width: 100.0,
-                                        height: 35.0,
-                                        constraints: const BoxConstraints(
-                                          minWidth: 50.0,
-                                          maxWidth: 120.0,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: _model.allDays == true
-                                              ? FlutterFlowTheme.of(context)
-                                                  .primary
-                                              : FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(14.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .tertiary,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 5.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'f0kkfdt6' /* الكل */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                  Container(
+                                    width: 80.0,
+                                    height: double.infinity,
+                                    constraints: BoxConstraints(
+                                      maxWidth: 100.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(0.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(14.0),
+                                        topRight: Radius.circular(14.0),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        2.0, 0.0, 2.0, 0.0),
-                                    child: Builder(
-                                      builder: (context) {
-                                        final bookedDaysItem =
-                                            _model.bookedDays.toList();
-
-                                        return SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: List.generate(
-                                                    bookedDaysItem.length,
-                                                    (bookedDaysItemIndex) {
-                                              final bookedDaysItemItem =
-                                                  bookedDaysItem[
-                                                      bookedDaysItemIndex];
-                                              return InkWell(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 10.0, 5.0, 10.0),
+                                      child: SingleChildScrollView(
+                                        primary: false,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 5.0),
+                                              child: InkWell(
                                                 splashColor: Colors.transparent,
                                                 focusColor: Colors.transparent,
                                                 hoverColor: Colors.transparent,
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
-                                                  _model.selectedDay =
-                                                      bookedDaysItemItem;
-                                                  _model.allDays = false;
+                                                  _model.allDays = true;
+                                                  _model.selectedDay = null;
                                                   safeSetState(() {});
                                                   await _model
                                                       .getFilteredBookedList(
                                                           context);
-                                                  safeSetState(() {});
                                                 },
                                                 child: Container(
-                                                  constraints: const BoxConstraints(
+                                                  height: 35.0,
+                                                  constraints: BoxConstraints(
                                                     minWidth: 50.0,
                                                     maxWidth: 120.0,
                                                   ),
                                                   decoration: BoxDecoration(
-                                                    color: bookedDaysItemItem ==
-                                                            _model.selectedDay
+                                                    color: _model.allDays ==
+                                                            true
                                                         ? FlutterFlowTheme.of(
                                                                 context)
-                                                            .tertiary
+                                                            .primary
                                                         : FlutterFlowTheme.of(
                                                                 context)
-                                                            .primaryBackground,
+                                                            .secondaryBackground,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5.0),
+                                                    border: Border.all(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .tertiary,
+                                                      width: 1.0,
+                                                    ),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 3.0,
-                                                                0.0, 3.0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, 0.0),
-                                                          child: Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              dateTimeFormat(
-                                                                "d/M/y",
-                                                                bookedDaysItemItem,
-                                                                locale: FFLocalizations.of(
-                                                                        context)
-                                                                    .languageCode,
-                                                              ),
-                                                              'n',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Cairo',
-                                                                  fontSize:
-                                                                      12.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, 0.0),
-                                                          child: Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              dateTimeFormat(
-                                                                "EEEE",
-                                                                bookedDaysItemItem,
-                                                                locale: FFLocalizations.of(
-                                                                        context)
-                                                                    .languageCode,
-                                                              ),
-                                                              'n',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Cairo',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            })
-                                                .divide(const SizedBox(height: 5.0))
-                                                .addToStart(
-                                                    const SizedBox(height: 2.0))
-                                                .addToEnd(
-                                                    const SizedBox(height: 2.0)),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 5.0, 0.0),
-                              child: Builder(
-                                builder: (context) {
-                                  final bookedHoursItem =
-                                      _model.filteredBookedList.toList();
-                                  if (bookedHoursItem.isEmpty) {
-                                    return const EmptyListComponentWidget(
-                                      desc: 'لايوجد حجوزات !',
-                                    );
-                                  }
-
-                                  return ListView.separated(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: bookedHoursItem.length,
-                                    separatorBuilder: (_, __) =>
-                                        const SizedBox(height: 5.0),
-                                    itemBuilder:
-                                        (context, bookedHoursItemIndex) {
-                                      final bookedHoursItemItem =
-                                          bookedHoursItem[bookedHoursItemIndex];
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(0.0),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 5.0, 5.0, 20.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '9gtne1p4' /* عميل:  */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    valueOrDefault<String>(
-                                                      bookedHoursItemItem
-                                                          .cusName,
-                                                      'name',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                  ),
-                                                ].divide(const SizedBox(width: 3.0)),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'zv7hc4a5' /* الوقت:  */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    valueOrDefault<String>(
-                                                      dateTimeFormat(
-                                                        "jm",
-                                                        bookedHoursItemItem
-                                                            .time,
-                                                        locale:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .languageCode,
-                                                      ),
-                                                      '0',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ].divide(const SizedBox(width: 3.0)),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'bi918btg' /* التاريخ:  */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    valueOrDefault<String>(
-                                                      dateTimeFormat(
-                                                        "d/M/y",
-                                                        bookedHoursItemItem
-                                                            .date,
-                                                        locale:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .languageCode,
-                                                      ),
-                                                      '0',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 14.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    valueOrDefault<String>(
-                                                      dateTimeFormat(
-                                                        "relative",
-                                                        bookedHoursItemItem
-                                                            .time,
-                                                        locale:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .languageCode,
-                                                      ),
-                                                      '0',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ].divide(const SizedBox(width: 3.0)),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'hew2lx5z' /* تليفون:  */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                3.0, 0.0),
-                                                    child: Text(
-                                                      valueOrDefault<String>(
-                                                        bookedHoursItemItem
-                                                            .cusTel,
-                                                        '00',
-                                                      ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Cairo',
-                                                            fontSize: 14.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(5.0, 0.0,
+                                                                5.0, 0.0),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.end,
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
-                                                        PhoneIconComponentWidget(
-                                                          key: Key(
-                                                              'Key5rq_${bookedHoursItemIndex}_of_${bookedHoursItem.length}'),
-                                                          telNo:
-                                                              bookedHoursItemItem
-                                                                  .cusTel,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'zcs3d7sl' /* حاله الحجز:   */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  Opacity(
-                                                    opacity: 0.8,
-                                                    child: Container(
-                                                      constraints:
-                                                          const BoxConstraints(
-                                                        minWidth: 50.0,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: valueOrDefault<
-                                                            Color>(
-                                                          FFAppState()
-                                                              .refBookStatus
-                                                              .where((e) =>
-                                                                  e.code ==
-                                                                  valueOrDefault<
-                                                                      int>(
-                                                                    bookedHoursItemItem
-                                                                        .statusCde,
-                                                                    0,
-                                                                  ))
-                                                              .toList()
-                                                              .first
-                                                              .color,
-                                                          FlutterFlowTheme.of(
+                                                        Text(
+                                                          FFLocalizations.of(
                                                                   context)
-                                                              .tertiary,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(14.0),
-                                                        border: Border.all(
-                                                          color: valueOrDefault<
-                                                              Color>(
-                                                            FFAppState()
-                                                                .refBookStatus
-                                                                .where((e) =>
-                                                                    e.code ==
-                                                                    valueOrDefault<
-                                                                        int>(
-                                                                      bookedHoursItemItem
-                                                                          .statusCde,
-                                                                      0,
-                                                                    ))
-                                                                .toList()
-                                                                .first
-                                                                .color,
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .tertiary,
+                                                              .getText(
+                                                            'f0kkfdt6' /* الكل */,
                                                           ),
-                                                          width: 1.0,
-                                                        ),
-                                                      ),
-                                                      alignment:
-                                                          const AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    5.0,
-                                                                    2.0,
-                                                                    5.0,
-                                                                    2.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            FFAppState()
-                                                                .refBookStatus
-                                                                .where((e) =>
-                                                                    e.code ==
-                                                                    valueOrDefault<
-                                                                        int>(
-                                                                      bookedHoursItemItem
-                                                                          .statusCde,
-                                                                      0,
-                                                                    ))
-                                                                .toList()
-                                                                .first
-                                                                .desc,
-                                                            '--',
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.center,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -1095,53 +635,549 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                                     'Cairo',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
+                                                                    .primaryText,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Builder(
+                                              builder: (context) {
+                                                final bookedDaysItem =
+                                                    _model.bookedDays.toList();
+
+                                                return SingleChildScrollView(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: List.generate(
+                                                            bookedDaysItem
+                                                                .length,
+                                                            (bookedDaysItemIndex) {
+                                                      final bookedDaysItemItem =
+                                                          bookedDaysItem[
+                                                              bookedDaysItemIndex];
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          _model.selectedDay =
+                                                              bookedDaysItemItem;
+                                                          _model.allDays =
+                                                              false;
+                                                          safeSetState(() {});
+                                                          await _model
+                                                              .getFilteredBookedList(
+                                                                  context);
+                                                          safeSetState(() {});
+                                                        },
+                                                        child: Container(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                            minWidth: 50.0,
+                                                            maxWidth: 120.0,
+                                                          ),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: bookedDaysItemItem ==
+                                                                    _model
+                                                                        .selectedDay
+                                                                ? FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .tertiary
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
                                                                     .primaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0),
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .tertiary,
+                                                            ),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        3.0,
+                                                                        0.0,
+                                                                        3.0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      dateTimeFormat(
+                                                                        "d/M/y",
+                                                                        bookedDaysItemItem,
+                                                                        locale:
+                                                                            FFLocalizations.of(context).languageCode,
+                                                                      ),
+                                                                      'n',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Cairo',
+                                                                          fontSize:
+                                                                              12.0,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      dateTimeFormat(
+                                                                        "EEEE",
+                                                                        bookedDaysItemItem,
+                                                                        locale:
+                                                                            FFLocalizations.of(context).languageCode,
+                                                                      ),
+                                                                      'n',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Cairo',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    })
+                                                        .divide(SizedBox(
+                                                            height: 5.0))
+                                                        .addToStart(SizedBox(
+                                                            height: 2.0))
+                                                        .addToEnd(SizedBox(
+                                                            height: 2.0)),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Builder(
+                                      builder: (context) {
+                                        final bookedHoursItem =
+                                            _model.filteredBookedList.toList();
+                                        if (bookedHoursItem.isEmpty) {
+                                          return EmptyListComponentWidget(
+                                            desc: 'لايوجد حجوزات !',
+                                          );
+                                        }
+
+                                        return ListView.separated(
+                                          padding: EdgeInsets.zero,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount: bookedHoursItem.length,
+                                          separatorBuilder: (_, __) =>
+                                              SizedBox(height: 5.0),
+                                          itemBuilder:
+                                              (context, bookedHoursItemIndex) {
+                                            final bookedHoursItemItem =
+                                                bookedHoursItem[
+                                                    bookedHoursItemIndex];
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(14.0),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 5.0, 5.0, 20.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                context
+                                                                    .pushNamed(
+                                                                  'Show_image',
+                                                                  queryParameters:
+                                                                      {
+                                                                    'imageURL':
+                                                                        serializeParam(
+                                                                      bookedHoursItemItem
+                                                                          .cusImage,
+                                                                      ParamType
+                                                                          .String,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child: Container(
+                                                                width: 50.0,
+                                                                height: 50.0,
+                                                                clipBehavior: Clip
+                                                                    .antiAlias,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                ),
+                                                                child: Image
+                                                                    .network(
+                                                                  functions.stringToImagePath(
+                                                                      bookedHoursItemItem
+                                                                          .cusImage)!,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  errorBuilder: (context,
+                                                                          error,
+                                                                          stackTrace) =>
+                                                                      Image
+                                                                          .asset(
+                                                                    'assets/images/error_image.jpg',
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          20.0,
+                                                                          0.0),
+                                                              child: Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  bookedHoursItemItem
+                                                                      .cusName,
+                                                                  'name',
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  functions
+                                                                      .calcAge(
+                                                                          bookedHoursItemItem
+                                                                              .cusDob)
+                                                                      .toString(),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Cairo',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'd6s6tbdi' /* سنة */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Cairo',
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ].divide(SizedBox(
+                                                                  width: 5.0)),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ].divide(
+                                                          SizedBox(width: 3.0)),
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'zv7hc4a5' /* الوقت:  */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            dateTimeFormat(
+                                                              "jm",
+                                                              bookedHoursItemItem
+                                                                  .time,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            ),
+                                                            '0',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                        ),
+                                                      ].divide(
+                                                          SizedBox(width: 3.0)),
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'bi918btg' /* التاريخ:  */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            dateTimeFormat(
+                                                              "d/M/y",
+                                                              bookedHoursItemItem
+                                                                  .date,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            ),
+                                                            '0',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                fontSize: 14.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            dateTimeFormat(
+                                                              "relative",
+                                                              bookedHoursItemItem
+                                                                  .time,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            ),
+                                                            '0',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
                                                                 fontSize: 12.0,
                                                                 letterSpacing:
                                                                     0.0,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .normal,
+                                                                        .w500,
                                                               ),
                                                         ),
-                                                      ),
+                                                      ].divide(
+                                                          SizedBox(width: 3.0)),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                      height: 18.0,
-                                                      decoration:
-                                                          const BoxDecoration(),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              if (bookedHoursItemItem
-                                                      .statusCde <=
-                                                  2)
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Divider(
-                                                            thickness: 1.0,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .alternate,
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'hew2lx5z' /* تليفون:  */,
                                                           ),
-                                                          Row(
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      3.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            valueOrDefault<
+                                                                String>(
+                                                              bookedHoursItemItem
+                                                                  .cusTel,
+                                                              '00',
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Cairo',
+                                                                  fontSize:
+                                                                      14.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .max,
@@ -1149,252 +1185,431 @@ class _DoctorBookingCenterWidgetState extends State<DoctorBookingCenterWidget>
                                                                 MainAxisAlignment
                                                                     .end,
                                                             children: [
-                                                              if (bookedHoursItemItem
-                                                                      .statusCde ==
-                                                                  1)
-                                                                FFButtonWidget(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    _model
-                                                                        .updateFilteredBookedListAtIndex(
-                                                                      bookedHoursItemIndex,
-                                                                      (e) => e
-                                                                        ..statusCde =
-                                                                            2,
-                                                                    );
-                                                                    safeSetState(
-                                                                        () {});
-
-                                                                    await bookedHoursItemItem
-                                                                        .itemRef!
-                                                                        .update(
-                                                                            createDocBookedTimeRecordData(
-                                                                      statusCde:
-                                                                          2,
-                                                                      uAt: functions
-                                                                          .getCurrentDate(),
-                                                                    ));
-                                                                  },
-                                                                  text: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'ct1vwy38' /* تأكيد الحجز */,
-                                                                  ),
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
-                                                                    iconPadding:
-                                                                        const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    textStyle:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      fontSize:
-                                                                          12.0,
-                                                                    ),
-                                                                    elevation:
-                                                                        3.0,
-                                                                    borderSide:
-                                                                        const BorderSide(
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      width:
-                                                                          1.0,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
-                                                                  ),
-                                                                ),
-                                                              if (bookedHoursItemItem
-                                                                      .statusCde ==
-                                                                  2)
-                                                                FFButtonWidget(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    _model
-                                                                        .updateFilteredBookedListAtIndex(
-                                                                      bookedHoursItemIndex,
-                                                                      (e) => e
-                                                                        ..statusCde =
-                                                                            3,
-                                                                    );
-                                                                    safeSetState(
-                                                                        () {});
-
-                                                                    await bookedHoursItemItem
-                                                                        .itemRef!
-                                                                        .update(
-                                                                            createDocBookedTimeRecordData(
-                                                                      statusCde:
-                                                                          3,
-                                                                      uAt: functions
-                                                                          .getCurrentDate(),
-                                                                    ));
-                                                                  },
-                                                                  text: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'ashzpyjf' /* تم الكشف */,
-                                                                  ),
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
-                                                                    iconPadding:
-                                                                        const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    textStyle:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondary,
-                                                                      fontSize:
-                                                                          12.0,
-                                                                    ),
-                                                                    elevation:
-                                                                        3.0,
-                                                                    borderSide:
-                                                                        const BorderSide(
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      width:
-                                                                          1.0,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
-                                                                  ),
-                                                                ),
-                                                              if (bookedHoursItemItem
-                                                                      .statusCde <=
-                                                                  2)
-                                                                FFButtonWidget(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    _model
-                                                                        .updateFilteredBookedListAtIndex(
-                                                                      bookedHoursItemIndex,
-                                                                      (e) => e
-                                                                        ..statusCde =
-                                                                            4,
-                                                                    );
-                                                                    safeSetState(
-                                                                        () {});
-
-                                                                    await bookedHoursItemItem
-                                                                        .itemRef!
-                                                                        .update(
-                                                                            createDocBookedTimeRecordData(
-                                                                      statusCde:
-                                                                          4,
-                                                                      uAt: functions
-                                                                          .getCurrentDate(),
-                                                                    ));
-                                                                  },
-                                                                  text: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'e0roigc0' /* الغاء الحجز */,
-                                                                  ),
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
-                                                                    iconPadding:
-                                                                        const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    textStyle:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .error,
-                                                                      fontSize:
-                                                                          12.0,
-                                                                    ),
-                                                                    elevation:
-                                                                        3.0,
-                                                                    borderSide:
-                                                                        const BorderSide(
-                                                                      color: Colors
-                                                                          .transparent,
-                                                                      width:
-                                                                          1.0,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
-                                                                  ),
-                                                                ),
-                                                            ].divide(const SizedBox(
-                                                                width: 5.0)),
+                                                              PhoneIconComponentWidget(
+                                                                key: Key(
+                                                                    'Key5rq_${bookedHoursItemIndex}_of_${bookedHoursItem.length}'),
+                                                                telNo:
+                                                                    bookedHoursItemItem
+                                                                        .cusTel,
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ]
-                                                      .divide(
-                                                          const SizedBox(width: 10.0))
-                                                      .around(const SizedBox(
-                                                          width: 10.0)),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'zcs3d7sl' /* حاله الحجز:   */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                        Opacity(
+                                                          opacity: 0.8,
+                                                          child: Container(
+                                                            constraints:
+                                                                BoxConstraints(
+                                                              minWidth: 50.0,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  valueOrDefault<
+                                                                      Color>(
+                                                                FFAppState()
+                                                                    .refBookStatus
+                                                                    .where((e) =>
+                                                                        e.code ==
+                                                                        valueOrDefault<int>(
+                                                                          bookedHoursItemItem
+                                                                              .statusCde,
+                                                                          0,
+                                                                        ))
+                                                                    .toList()
+                                                                    .first
+                                                                    .color,
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .tertiary,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          14.0),
+                                                              border:
+                                                                  Border.all(
+                                                                color:
+                                                                    valueOrDefault<
+                                                                        Color>(
+                                                                  FFAppState()
+                                                                      .refBookStatus
+                                                                      .where((e) =>
+                                                                          e.code ==
+                                                                          valueOrDefault<int>(
+                                                                            bookedHoursItemItem.statusCde,
+                                                                            0,
+                                                                          ))
+                                                                      .toList()
+                                                                      .first
+                                                                      .color,
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .tertiary,
+                                                                ),
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0.0, 0.0),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          5.0,
+                                                                          2.0,
+                                                                          5.0,
+                                                                          2.0),
+                                                              child: Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  FFAppState()
+                                                                      .refBookStatus
+                                                                      .where((e) =>
+                                                                          e.code ==
+                                                                          valueOrDefault<int>(
+                                                                            bookedHoursItemItem.statusCde,
+                                                                            0,
+                                                                          ))
+                                                                      .toList()
+                                                                      .first
+                                                                      .desc,
+                                                                  '--',
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                      fontSize:
+                                                                          12.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Container(
+                                                            height: 18.0,
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    if (bookedHoursItemItem
+                                                            .statusCde <=
+                                                        2)
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Divider(
+                                                                  thickness:
+                                                                      1.0,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .alternate,
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    if (bookedHoursItemItem
+                                                                            .statusCde ==
+                                                                        1)
+                                                                      FFButtonWidget(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          _model
+                                                                              .updateFilteredBookedListAtIndex(
+                                                                            bookedHoursItemIndex,
+                                                                            (e) => e
+                                                                              ..statusCde = 2,
+                                                                          );
+                                                                          safeSetState(
+                                                                              () {});
+
+                                                                          await bookedHoursItemItem
+                                                                              .itemRef!
+                                                                              .update(createDocBookedTimeRecordData(
+                                                                            statusCde:
+                                                                                2,
+                                                                            uAt:
+                                                                                functions.getCurrentDate(),
+                                                                          ));
+                                                                        },
+                                                                        text: FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'ct1vwy38' /* تأكيد الحجز */,
+                                                                        ),
+                                                                        options:
+                                                                            FFButtonOptions(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              10.0,
+                                                                              0.0,
+                                                                              10.0,
+                                                                              0.0),
+                                                                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryBackground,
+                                                                          textStyle:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            fontSize:
+                                                                                12.0,
+                                                                          ),
+                                                                          elevation:
+                                                                              3.0,
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Colors.transparent,
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                      ),
+                                                                    if (bookedHoursItemItem
+                                                                            .statusCde ==
+                                                                        2)
+                                                                      FFButtonWidget(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          _model
+                                                                              .updateFilteredBookedListAtIndex(
+                                                                            bookedHoursItemIndex,
+                                                                            (e) => e
+                                                                              ..statusCde = 3,
+                                                                          );
+                                                                          safeSetState(
+                                                                              () {});
+
+                                                                          await bookedHoursItemItem
+                                                                              .itemRef!
+                                                                              .update(createDocBookedTimeRecordData(
+                                                                            statusCde:
+                                                                                3,
+                                                                            uAt:
+                                                                                functions.getCurrentDate(),
+                                                                          ));
+                                                                        },
+                                                                        text: FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'ashzpyjf' /* تم الكشف */,
+                                                                        ),
+                                                                        options:
+                                                                            FFButtonOptions(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              10.0,
+                                                                              0.0,
+                                                                              10.0,
+                                                                              0.0),
+                                                                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryBackground,
+                                                                          textStyle:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondary,
+                                                                            fontSize:
+                                                                                12.0,
+                                                                          ),
+                                                                          elevation:
+                                                                              3.0,
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Colors.transparent,
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                      ),
+                                                                    if (bookedHoursItemItem
+                                                                            .statusCde <=
+                                                                        2)
+                                                                      FFButtonWidget(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          _model
+                                                                              .updateFilteredBookedListAtIndex(
+                                                                            bookedHoursItemIndex,
+                                                                            (e) => e
+                                                                              ..statusCde = 4,
+                                                                          );
+                                                                          safeSetState(
+                                                                              () {});
+
+                                                                          await bookedHoursItemItem
+                                                                              .itemRef!
+                                                                              .update(createDocBookedTimeRecordData(
+                                                                            statusCde:
+                                                                                4,
+                                                                            uAt:
+                                                                                functions.getCurrentDate(),
+                                                                          ));
+                                                                        },
+                                                                        text: FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'e0roigc0' /* الغاء الحجز */,
+                                                                        ),
+                                                                        options:
+                                                                            FFButtonOptions(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              10.0,
+                                                                              0.0,
+                                                                              10.0,
+                                                                              0.0),
+                                                                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryBackground,
+                                                                          textStyle:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).error,
+                                                                            fontSize:
+                                                                                12.0,
+                                                                          ),
+                                                                          elevation:
+                                                                              3.0,
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Colors.transparent,
+                                                                            width:
+                                                                                1.0,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                        ),
+                                                                      ),
+                                                                  ].divide(SizedBox(
+                                                                      width:
+                                                                          5.0)),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ]
+                                                            .divide(SizedBox(
+                                                                width: 10.0))
+                                                            .around(SizedBox(
+                                                                width: 10.0)),
+                                                      ),
+                                                  ],
                                                 ),
-                                            ],
-                                          ),
-                                        ),
-                                      ).animateOnPageLoad(animationsMap[
-                                          'containerOnPageLoadAnimation']!);
-                                    },
-                                  );
-                                },
+                                              ),
+                                            ).animateOnPageLoad(animationsMap[
+                                                'containerOnPageLoadAnimation']!);
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ].divide(SizedBox(width: 5.0)),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
+                        );
+                      } else if (_model.isLoading == true) {
+                        return wrapWithModel(
+                          model: _model.loadingComponentModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: LoadingComponentWidget(),
+                        );
+                      } else {
+                        return wrapWithModel(
+                          model: _model.emptyListComponentModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: EmptyListComponentWidget(
+                            desc: 'لا يوجد حجوزات',
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
               ],
             ),
             Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
                 updateCallback: () => safeSetState(() {}),
-                child: const CustomNavbarWidget(),
+                child: CustomNavbarWidget(),
               ),
             ),
           ],

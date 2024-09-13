@@ -1,7 +1,13 @@
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/search/search_item_component/search_item_component_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'doc_search_item_list_component_widget.dart'
     show DocSearchItemListComponentWidget;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DocSearchItemListComponentModel
     extends FlutterFlowModel<DocSearchItemListComponentWidget> {

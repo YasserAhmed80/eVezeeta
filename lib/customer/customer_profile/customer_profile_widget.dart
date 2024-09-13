@@ -1,5 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/components/code_component_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,10 +10,13 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/addrress_component/addrress_component_widget.dart';
 import '/pages/public_components/image_component/image_component_widget.dart';
+import 'dart:math';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'customer_profile_model.dart';
 export 'customer_profile_model.dart';
@@ -20,9 +25,11 @@ class CustomerProfileWidget extends StatefulWidget {
   const CustomerProfileWidget({
     super.key,
     required this.cusRef,
+    required this.isNewCustomer,
   });
 
   final DocumentReference? cusRef;
+  final bool? isNewCustomer;
 
   @override
   State<CustomerProfileWidget> createState() => _CustomerProfileWidgetState();
@@ -44,7 +51,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.returnedCustomer =
-          await CusRecord.getDocumentOnce(widget.cusRef!);
+          await CusRecord.getDocumentOnce(widget!.cusRef!);
       _model.cusDocument = _model.returnedCustomer;
       safeSetState(() {});
     });
@@ -65,8 +72,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -85,8 +92,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -105,8 +112,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -125,8 +132,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -145,8 +152,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -165,8 +172,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -185,8 +192,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -205,8 +212,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -225,8 +232,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -245,8 +252,8 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -298,37 +305,38 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                       ),
                 ),
               ),
-              FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 30.0,
+              if (widget!.isNewCustomer == false)
+                FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 60.0,
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 30.0,
+                  ),
+                  onPressed: () async {
+                    context.pop();
+                  },
                 ),
-                onPressed: () async {
-                  context.pop();
-                },
-              ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           elevation: 0.0,
         ),
         body: Stack(
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -368,7 +376,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 5.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
@@ -399,7 +407,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                       size: 14.0,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
@@ -423,7 +431,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                           'textOnPageLoadAnimation2']!),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
@@ -445,7 +453,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 1.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -461,7 +469,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 5.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
@@ -497,7 +505,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 5.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
@@ -551,12 +559,12 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                               ],
                             ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -580,16 +588,36 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          wrapWithModel(
+                            model: _model.codeComponentModel,
+                            updateCallback: () => safeSetState(() {}),
+                            child: CodeComponentWidget(
+                              code: valueOrDefault<String>(
+                                _model.cusDocument?.code,
+                                'n',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 5.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                '0v9sorvu' /* البيانات الاساسية */,
+                                'e6d0m13x' /* البيانات الاساسية */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -604,7 +632,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
+                          EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -612,7 +640,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                         highlightColor: Colors.transparent,
                         onTap: () async {
                           FFAppState().updateCurrentCustomerStruct(
-                            (e) => e..cusDocRef = widget.cusRef,
+                            (e) => e..cusDocRef = widget!.cusRef,
                           );
                           safeSetState(() {});
 
@@ -634,13 +662,13 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 12.0, 8.0, 12.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 0.0, 0.0, 0.0),
                                   child: Icon(
                                     Icons.account_circle_outlined,
@@ -650,7 +678,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -687,7 +715,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
+                          EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -698,7 +726,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                             'customer_favorit_doc',
                             queryParameters: {
                               'cusRef': serializeParam(
-                                widget.cusRef,
+                                widget!.cusRef,
                                 ParamType.DocumentReference,
                               ),
                             }.withoutNulls,
@@ -712,13 +740,13 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 12.0, 8.0, 12.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 0.0, 0.0, 0.0),
                                   child: Icon(
                                     Icons.location_on,
@@ -728,7 +756,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -765,7 +793,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
+                          EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -776,7 +804,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                             'customer_doc_booked',
                             queryParameters: {
                               'cusRef': serializeParam(
-                                widget.cusRef,
+                                widget!.cusRef,
                                 ParamType.DocumentReference,
                               ),
                             }.withoutNulls,
@@ -790,13 +818,13 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 12.0, 8.0, 12.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 0.0, 0.0, 0.0),
                                   child: Icon(
                                     Icons.calendar_month_rounded,
@@ -806,7 +834,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -843,7 +871,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
+                          EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -854,7 +882,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                             'cus_files',
                             queryParameters: {
                               'cusRef': serializeParam(
-                                widget.cusRef,
+                                widget!.cusRef,
                                 ParamType.DocumentReference,
                               ),
                             }.withoutNulls,
@@ -868,13 +896,13 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 12.0, 8.0, 12.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 0.0, 0.0, 0.0),
                                   child: Icon(
                                     Icons.image_outlined,
@@ -884,7 +912,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -921,12 +949,12 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 5.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -945,7 +973,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
+                          EdgeInsetsDirectional.fromSTEB(3.0, 0.0, 0.0, 3.0),
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -953,7 +981,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                           borderRadius: BorderRadius.circular(0.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               8.0, 12.0, 8.0, 12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -979,10 +1007,10 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                       options: FFButtonOptions(
                                         width: 150.0,
                                         height: 45.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
@@ -1019,10 +1047,10 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                       options: FFButtonOptions(
                                         width: 150.0,
                                         height: 45.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBackground,
@@ -1043,7 +1071,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                       ),
                                     ).animateOnPageLoad(animationsMap[
                                         'buttonOnPageLoadAnimation2']!),
-                                  ].divide(const SizedBox(width: 10.0)),
+                                  ].divide(SizedBox(width: 10.0)),
                                 ),
                               ),
                             ],
@@ -1054,12 +1082,12 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 5.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -1077,7 +1105,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(0.0, -1.0),
+                      alignment: AlignmentDirectional(0.0, -1.0),
                       child: Container(
                         height: 75.0,
                         decoration: BoxDecoration(
@@ -1085,7 +1113,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                           borderRadius: BorderRadius.circular(0.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: EdgeInsets.all(4.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -1137,7 +1165,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                         size: 16.0,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             4.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1212,7 +1240,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                         size: 16.0,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             4.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1239,7 +1267,7 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
                                   ),
                                 ),
                               ),
-                            ].divide(const SizedBox(width: 10.0)),
+                            ].divide(SizedBox(width: 10.0)),
                           ),
                         ),
                       ),
@@ -1256,11 +1284,11 @@ class _CustomerProfileWidgetState extends State<CustomerProfileWidget>
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
                 updateCallback: () => safeSetState(() {}),
-                child: const CustomNavbarWidget(),
+                child: CustomNavbarWidget(),
               ),
             ),
           ],

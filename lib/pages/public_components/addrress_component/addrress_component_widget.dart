@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'addrress_component_model.dart';
 export 'addrress_component_model.dart';
@@ -12,10 +13,10 @@ class AddrressComponentWidget extends StatefulWidget {
     int? zoneKey,
     int? areaKey,
     String? addressDesc,
-  })  : govKey = govKey ?? 0,
-        zoneKey = zoneKey ?? 0,
-        areaKey = areaKey ?? 0,
-        addressDesc = addressDesc ?? 'n';
+  })  : this.govKey = govKey ?? 0,
+        this.zoneKey = zoneKey ?? 0,
+        this.areaKey = areaKey ?? 0,
+        this.addressDesc = addressDesc ?? 'n';
 
   final int govKey;
   final int zoneKey;
@@ -56,7 +57,7 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
     context.watch<FFAppState>();
 
     return Container(
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -69,14 +70,14 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
                 size: 14.0,
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
-                    widget.govKey > 0
+                    widget!.govKey > 0
                         ? valueOrDefault<String>(
                             FFAppState()
                                 .refGovernate
-                                .where((e) => e.govKey == widget.govKey)
+                                .where((e) => e.govKey == widget!.govKey)
                                 .toList()
                                 .first
                                 .desc,
@@ -99,11 +100,11 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  widget.zoneKey > 0
+                  widget!.zoneKey > 0
                       ? valueOrDefault<String>(
                           FFAppState()
                               .refZone
-                              .where((e) => e.zoneKey == widget.zoneKey)
+                              .where((e) => e.zoneKey == widget!.zoneKey)
                               .toList()
                               .first
                               .desc,
@@ -124,11 +125,11 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
                 size: 24.0,
               ),
               Text(
-                widget.areaKey > 0
+                widget!.areaKey > 0
                     ? valueOrDefault<String>(
                         FFAppState()
                             .refArea
-                            .where((e) => e.areaKey == widget.areaKey)
+                            .where((e) => e.areaKey == widget!.areaKey)
                             .toList()
                             .first
                             .desc,
@@ -156,7 +157,7 @@ class _AddrressComponentWidgetState extends State<AddrressComponentWidget> {
               ),
               Text(
                 valueOrDefault<String>(
-                  widget.addressDesc,
+                  widget!.addressDesc,
                   'nn',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(

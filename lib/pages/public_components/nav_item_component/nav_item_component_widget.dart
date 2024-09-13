@@ -1,7 +1,10 @@
 import '/backend/schema/enums/enums.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'nav_item_component_model.dart';
 export 'nav_item_component_model.dart';
@@ -60,13 +63,13 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
         hoverColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () async {
-          if (widget.navType == EnumSelectedTab.doctor_search) {
+          if (widget!.navType == EnumSelectedTab.doctor_search) {
             context.pushNamed('doctor_search');
 
             FFAppState().selectedNavTab = EnumSelectedTab.doctor_search;
             safeSetState(() {});
           } else {
-            if (widget.navType == EnumSelectedTab.doctor_new) {
+            if (widget!.navType == EnumSelectedTab.doctor_new) {
               context.pushNamed(
                 'doctor_data_main',
                 queryParameters: {
@@ -83,7 +86,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
               FFAppState().selectedNavTab = EnumSelectedTab.doctor_new;
               safeSetState(() {});
             } else {
-              if (widget.navType == EnumSelectedTab.doctor_dashboard) {
+              if (widget!.navType == EnumSelectedTab.doctor_dashboard) {
                 context.pushNamed(
                   'doctor_dashboard',
                   queryParameters: {
@@ -97,7 +100,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                 FFAppState().selectedNavTab = EnumSelectedTab.doctor_dashboard;
                 safeSetState(() {});
               } else {
-                if (widget.navType == EnumSelectedTab.dotor_profile) {
+                if (widget!.navType == EnumSelectedTab.dotor_profile) {
                   context.pushNamed(
                     'doctor_account',
                     queryParameters: {
@@ -111,19 +114,23 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                   FFAppState().selectedNavTab = EnumSelectedTab.dotor_profile;
                   safeSetState(() {});
                 } else {
-                  if (widget.navType == EnumSelectedTab.customer_list) {
+                  if (widget!.navType == EnumSelectedTab.customer_list) {
                     context.pushNamed('customer_List');
 
                     FFAppState().selectedNavTab = EnumSelectedTab.customer_list;
                     safeSetState(() {});
                   } else {
-                    if (widget.navType == EnumSelectedTab.customer_profile) {
+                    if (widget!.navType == EnumSelectedTab.customer_profile) {
                       context.pushNamed(
                         'customer_profile',
                         queryParameters: {
                           'cusRef': serializeParam(
                             FFAppState().currentCustomer.cusDocRef,
                             ParamType.DocumentReference,
+                          ),
+                          'isNewCustomer': serializeParam(
+                            false,
+                            ParamType.bool,
                           ),
                         }.withoutNulls,
                       );
@@ -132,14 +139,14 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                           EnumSelectedTab.customer_profile;
                       safeSetState(() {});
                     } else {
-                      if (widget.navType == EnumSelectedTab.customer_search) {
+                      if (widget!.navType == EnumSelectedTab.customer_search) {
                         context.pushNamed('doctor_search');
 
                         FFAppState().selectedNavTab =
                             EnumSelectedTab.customer_search;
                         safeSetState(() {});
                       } else {
-                        if (widget.navType ==
+                        if (widget!.navType ==
                             EnumSelectedTab.customer_booking) {
                           context.pushNamed(
                             'customer_doc_booked',
@@ -155,7 +162,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                               EnumSelectedTab.customer_booking;
                           safeSetState(() {});
                         } else {
-                          if (widget.navType ==
+                          if (widget!.navType ==
                               EnumSelectedTab.doctor_visits) {
                             context.pushNamed(
                               'doctor_booking_center',
@@ -171,7 +178,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                                 EnumSelectedTab.doctor_visits;
                             safeSetState(() {});
                           } else {
-                            if (widget.navType ==
+                            if (widget!.navType ==
                                 EnumSelectedTab.customer_add) {
                               context.pushNamed(
                                 'cus_main_data',
@@ -208,7 +215,7 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
           children: [
             Opacity(
               opacity: valueOrDefault<double>(
-                FFAppState().selectedNavTab == widget.navType ? 1.0 : 0.0,
+                FFAppState().selectedNavTab == widget!.navType ? 1.0 : 0.0,
                 0.0,
               ),
               child: SizedBox(
@@ -219,12 +226,12 @@ class _NavItemComponentWidgetState extends State<NavItemComponentWidget> {
                 ),
               ),
             ),
-            widget.icon!,
+            widget!.icon!,
             Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: Text(
                 valueOrDefault<String>(
-                  widget.desc,
+                  widget!.desc,
                   'nn',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(

@@ -1,4 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,6 +10,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/calender_component/calender_component_widget.dart';
 import '/pages/upload_photo/upload_photo_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -43,13 +46,13 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget.fileRef != null) {
-        _model.currentFileRef = widget.fileRef;
+      if (widget!.fileRef != null) {
+        _model.currentFileCode = widget!.fileRef!.id;
         safeSetState(() {});
         _model.returnedFile =
-            await CusFilesRecord.getDocumentOnce(widget.fileRef!);
+            await CusFilesRecord.getDocumentOnce(widget!.fileRef!);
         FFAppState().updateCurrentFileCustomerStruct(
-          (e) => e..fileRef = widget.fileRef,
+          (e) => e..fileRef = widget!.fileRef,
         );
         safeSetState(() {});
         _model.isValidFileDate = true;
@@ -74,8 +77,13 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
         });
       } else {
         _model.fileDate = functions.getCurrentDate();
+        _model.isDataSaved = false;
+        _model.currentFileCode = 'empty';
         safeSetState(() {});
       }
+
+      _model.isPageLoading = false;
+      safeSetState(() {});
     });
 
     _model.txtFileDescTextController ??= TextEditingController();
@@ -141,13 +149,13 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                   ),
                 ],
               ),
-            ].divide(const SizedBox(height: 4.0)),
+            ].divide(SizedBox(height: 4.0)),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SizedBox(
+        body: Container(
           height: double.infinity,
           child: Stack(
             children: [
@@ -164,14 +172,14 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, -1.0),
+                              alignment: AlignmentDirectional(0.0, -1.0),
                               child: Container(
-                                constraints: const BoxConstraints(
+                                constraints: BoxConstraints(
                                   maxWidth: 770.0,
                                 ),
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: SingleChildScrollView(
                                     primary: false,
@@ -182,7 +190,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 10.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -205,7 +213,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                       padding: MediaQuery
                                                           .viewInsetsOf(
                                                               context),
-                                                      child: SizedBox(
+                                                      child: Container(
                                                         height: 600.0,
                                                         child:
                                                             CalenderComponentWidget(
@@ -234,17 +242,19 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                 borderRadius:
                                                     BorderRadius.circular(14.0),
                                                 border: Border.all(
-                                                  color: _model.fileDate == null
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .error
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
+                                                  color:
+                                                      _model.isValidFileDate ==
+                                                              null
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
                                                 ),
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 10.0, 5.0, 10.0),
                                                 child: Row(
@@ -253,7 +263,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -322,7 +332,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 5.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -339,7 +349,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 10.0, 0.0, 10.0),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -350,7 +360,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                   BorderRadius.circular(0.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 10.0, 10.0, 10.0),
                                               child: Column(
@@ -465,7 +475,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                         borderWidth: 1.0,
                                                         borderRadius: 0.0,
                                                         margin:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     16.0,
                                                                     4.0,
@@ -486,7 +496,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.txtFileDescTextController',
-                                                      const Duration(
+                                                      Duration(
                                                           milliseconds: 2000),
                                                       () => safeSetState(() {}),
                                                     ),
@@ -544,7 +554,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -568,7 +578,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -592,7 +602,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -616,7 +626,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -637,7 +647,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                   context)
                                                               .primaryBackground,
                                                       contentPadding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   20.0,
@@ -663,7 +673,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                 safeSetState(
                                                                     () {});
                                                               },
-                                                              child: const Icon(
+                                                              child: Icon(
                                                                 Icons.clear,
                                                                 size: 22,
                                                               ),
@@ -702,7 +712,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.txtDocDescTextController',
-                                                      const Duration(
+                                                      Duration(
                                                           milliseconds: 2000),
                                                       () => safeSetState(() {}),
                                                     ),
@@ -760,7 +770,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -784,7 +794,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -808,7 +818,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -832,7 +842,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -853,7 +863,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                   context)
                                                               .primaryBackground,
                                                       contentPadding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   20.0,
@@ -878,7 +888,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                 safeSetState(
                                                                     () {});
                                                               },
-                                                              child: const Icon(
+                                                              child: Icon(
                                                                 Icons.clear,
                                                                 size: 22,
                                                               ),
@@ -916,7 +926,187 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 12.0, 16.0, 12.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              _model.isValidData = await _model
+                                                  .validateData(context);
+                                              _model.formIsValid = true;
+                                              if (_model.formKey.currentState ==
+                                                      null ||
+                                                  !_model.formKey.currentState!
+                                                      .validate()) {
+                                                safeSetState(() =>
+                                                    _model.formIsValid = false);
+                                                return;
+                                              }
+                                              if (_model.cboFileTypeValue ==
+                                                  null) {
+                                                _model.formIsValid = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if ((_model.isValidData ==
+                                                      true) &&
+                                                  (_model.formIsValid ==
+                                                      true)) {
+                                                if (_model.fileDocument ==
+                                                    null) {
+                                                  // create new document
+
+                                                  var cusFilesRecordReference =
+                                                      CusFilesRecord.collection
+                                                          .doc();
+                                                  await cusFilesRecordReference
+                                                      .set(
+                                                          createCusFilesRecordData(
+                                                    cusRef: widget!.cusRef,
+                                                    fileCde: _model.fileKey,
+                                                    fileDesc: _model
+                                                        .txtFileDescTextController
+                                                        .text,
+                                                    date: _model.fileDate,
+                                                    cAt: getCurrentTimestamp,
+                                                    docDesc: _model
+                                                        .txtDocDescTextController
+                                                        .text,
+                                                  ));
+                                                  _model.savedFile = CusFilesRecord
+                                                      .getDocumentFromData(
+                                                          createCusFilesRecordData(
+                                                            cusRef:
+                                                                widget!.cusRef,
+                                                            fileCde:
+                                                                _model.fileKey,
+                                                            fileDesc: _model
+                                                                .txtFileDescTextController
+                                                                .text,
+                                                            date:
+                                                                _model.fileDate,
+                                                            cAt:
+                                                                getCurrentTimestamp,
+                                                            docDesc: _model
+                                                                .txtDocDescTextController
+                                                                .text,
+                                                          ),
+                                                          cusFilesRecordReference);
+                                                  FFAppState()
+                                                      .updateCurrentFileCustomerStruct(
+                                                    (e) => e
+                                                      ..fileRef = _model
+                                                          .savedFile?.reference,
+                                                  );
+                                                  safeSetState(() {});
+                                                  _model.fileDocument =
+                                                      _model.savedFile;
+                                                  _model.currentFileCode =
+                                                      _model.savedFile!
+                                                          .reference.id;
+                                                  safeSetState(() {});
+                                                } else {
+                                                  // update  document
+
+                                                  await _model
+                                                      .fileDocument!.reference
+                                                      .update(
+                                                          createCusFilesRecordData(
+                                                    fileCde: _model.fileKey,
+                                                    fileDesc: _model
+                                                        .txtFileDescTextController
+                                                        .text,
+                                                    date: _model.fileDate,
+                                                    docDesc: _model
+                                                        .txtDocDescTextController
+                                                        .text,
+                                                  ));
+
+                                                  safeSetState(() {});
+                                                }
+
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          Text('حفظ البيانات'),
+                                                      content: Text(
+                                                          'تم حفظ البيانات بنجاح'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('موافق'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                _model.isDataSaved = true;
+                                                safeSetState(() {});
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          Text('حفظ البيانات'),
+                                                      content: Text(
+                                                          'خطأ في ادخال البيانات'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('موافق'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+
+                                              safeSetState(() {});
+                                            },
+                                            text: FFLocalizations.of(context)
+                                                .getText(
+                                              'ngp5byjg' /* حفظ الملف */,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: double.infinity,
+                                              height: 48.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              elevation: 3.0,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -929,7 +1119,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
@@ -948,7 +1138,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                 ),
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
@@ -966,180 +1156,39 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                         ),
                                                   ),
                                                 ),
-                                                wrapWithModel(
-                                                  model:
-                                                      _model.uploadPhotoModel,
-                                                  updateCallback: () =>
-                                                      safeSetState(() {}),
-                                                  child: UploadPhotoWidget(
-                                                    storageFolder: 'cus_file',
-                                                    entityType: 'cus_file',
-                                                    entityCode: _model
-                                                        .currentFileRef!.id,
-                                                    imgType: 'f',
-                                                    imgSeq: 1,
-                                                    imgRef: 'cc',
-                                                    isActive:
-                                                        _model.isDataSaved,
+                                                if (_model.isPageLoading ==
+                                                    false)
+                                                  wrapWithModel(
+                                                    model: _model
+                                                        .imageComponentItemModel,
+                                                    updateCallback: () =>
+                                                        safeSetState(() {}),
+                                                    updateOnChange: true,
+                                                    child: UploadPhotoWidget(
+                                                      storageFolder: 'cus_file',
+                                                      entityType: 'cus_file',
+                                                      entityCode: _model
+                                                          .currentFileCode,
+                                                      imgType: 'f',
+                                                      imgSeq: 1,
+                                                      imgRef: 'cc',
+                                                      isActive:
+                                                          _model.isDataSaved,
+                                                    ),
                                                   ),
-                                                ),
                                               ],
                                             ),
                                           ),
                                         ),
                                       ]
-                                          .divide(const SizedBox(height: 12.0))
-                                          .addToEnd(const SizedBox(height: 32.0)),
+                                          .divide(SizedBox(height: 12.0))
+                                          .addToEnd(SizedBox(height: 32.0)),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      constraints: const BoxConstraints(
-                        maxWidth: 770.0,
-                      ),
-                      decoration: const BoxDecoration(),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 12.0, 16.0, 12.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            _model.isValidData =
-                                await _model.validateData(context);
-                            _model.formIsValid = true;
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              safeSetState(() => _model.formIsValid = false);
-                              return;
-                            }
-                            if (_model.cboFileTypeValue == null) {
-                              _model.formIsValid = false;
-                              safeSetState(() {});
-                              return;
-                            }
-                            if ((_model.isValidData == true) &&
-                                (_model.formIsValid == true)) {
-                              if (_model.fileDocument == null) {
-                                // create new document
-
-                                var cusFilesRecordReference =
-                                    CusFilesRecord.collection.doc();
-                                await cusFilesRecordReference
-                                    .set(createCusFilesRecordData(
-                                  cusRef: widget.cusRef,
-                                  fileCde: _model.fileKey,
-                                  fileDesc:
-                                      _model.txtFileDescTextController.text,
-                                  date: _model.fileDate,
-                                  cAt: functions.getCurrentDate(),
-                                  docDesc: _model.txtDocDescTextController.text,
-                                ));
-                                _model.savedFile =
-                                    CusFilesRecord.getDocumentFromData(
-                                        createCusFilesRecordData(
-                                          cusRef: widget.cusRef,
-                                          fileCde: _model.fileKey,
-                                          fileDesc: _model
-                                              .txtFileDescTextController.text,
-                                          date: _model.fileDate,
-                                          cAt: functions.getCurrentDate(),
-                                          docDesc: _model
-                                              .txtDocDescTextController.text,
-                                        ),
-                                        cusFilesRecordReference);
-                                FFAppState().updateCurrentFileCustomerStruct(
-                                  (e) =>
-                                      e..fileRef = _model.savedFile?.reference,
-                                );
-                                safeSetState(() {});
-                                _model.fileDocument = _model.savedFile;
-                                _model.currentFileRef =
-                                    _model.savedFile?.reference;
-                                safeSetState(() {});
-                              } else {
-                                // update  document
-
-                                await _model.fileDocument!.reference
-                                    .update(createCusFilesRecordData(
-                                  fileCde: _model.fileKey,
-                                  fileDesc:
-                                      _model.txtFileDescTextController.text,
-                                  date: _model.fileDate,
-                                  docDesc: _model.txtDocDescTextController.text,
-                                ));
-
-                                safeSetState(() {});
-                              }
-
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('حفظ البيانات'),
-                                    content: const Text('تم حفظ البيانات بنجاح'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: const Text('موافق'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              _model.isDataSaved = true;
-                              safeSetState(() {});
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('حفظ البيانات'),
-                                    content: const Text('خطأ في ادخال البيانات'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: const Text('موافق'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-
-                            safeSetState(() {});
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'knl8p4az' /* حفظ الملف */,
-                          ),
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 48.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
                         ),
                       ),
                     ),

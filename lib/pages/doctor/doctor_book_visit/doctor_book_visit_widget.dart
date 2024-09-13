@@ -1,15 +1,20 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/doctor/day_booking_component/day_booking_component_widget.dart';
 import '/pages/doctor/day_list_component/day_list_component_widget.dart';
+import 'dart:math';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_book_visit_model.dart';
 export 'doctor_book_visit_model.dart';
@@ -42,7 +47,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.doctorAvergePerHour = valueOrDefault<int>(
-        widget.docDocument?.avgVisit,
+        widget!.docDocument?.avgVisit,
         1,
       );
       safeSetState(() {});
@@ -65,8 +70,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -85,8 +90,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -105,8 +110,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -142,10 +147,10 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 0.0, 0.0),
                 child: Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(14.0),
                       bottomRight: Radius.circular(14.0),
@@ -154,7 +159,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,12 +168,12 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                           width: 60.0,
                           height: 60.0,
                           clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           child: Image.network(
                             functions.stringToImagePath(valueOrDefault<String>(
-                              widget.docDocument?.img,
+                              widget!.docDocument?.img,
                               'n',
                             ))!,
                             fit: BoxFit.cover,
@@ -181,7 +186,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -193,7 +198,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -217,7 +222,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
@@ -228,7 +233,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                       .refDocType
                                                       .toList(),
                                                   valueOrDefault<int>(
-                                                    widget.docDocument?.gender,
+                                                    widget!.docDocument?.gender,
                                                     5,
                                                   ))
                                               ?.desc,
@@ -245,11 +250,11 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                           'textOnPageLoadAnimation2']!),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
-                                          widget.docDocument?.name,
+                                          widget!.docDocument?.name,
                                           'n',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -270,7 +275,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(1.0, 0.0),
+                          alignment: AlignmentDirectional(1.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -296,7 +301,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                   color: FlutterFlowTheme.of(context).primaryBackground,
                 ),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -345,8 +350,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                       ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 3.0))
-                                  .around(const SizedBox(width: 3.0)),
+                                  .divide(SizedBox(width: 3.0))
+                                  .around(SizedBox(width: 3.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -364,7 +369,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.docDocument?.price.toString(),
+                                    widget!.docDocument?.price?.toString(),
                                     '0',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -376,8 +381,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                       ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 3.0))
-                                  .around(const SizedBox(width: 3.0)),
+                                  .divide(SizedBox(width: 3.0))
+                                  .around(SizedBox(width: 3.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -395,7 +400,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.docDocument?.priceRe.toString(),
+                                    widget!.docDocument?.priceRe?.toString(),
                                     '0',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -407,18 +412,18 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                       ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 3.0))
-                                  .around(const SizedBox(width: 3.0)),
+                                  .divide(SizedBox(width: 3.0))
+                                  .around(SizedBox(width: 3.0)),
                             ),
                           ]
-                              .divide(const SizedBox(height: 0.0))
-                              .addToStart(const SizedBox(height: 0.0)),
+                              .divide(SizedBox(height: 0.0))
+                              .addToStart(SizedBox(height: 0.0)),
                         ),
                       ),
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -449,8 +454,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 3.0))
-                                    .around(const SizedBox(width: 3.0)),
+                                    .divide(SizedBox(width: 3.0))
+                                    .around(SizedBox(width: 3.0)),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -477,8 +482,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 3.0))
-                                    .around(const SizedBox(width: 3.0)),
+                                    .divide(SizedBox(width: 3.0))
+                                    .around(SizedBox(width: 3.0)),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -505,8 +510,8 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 3.0))
-                                    .around(const SizedBox(width: 3.0)),
+                                    .divide(SizedBox(width: 3.0))
+                                    .around(SizedBox(width: 3.0)),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -533,17 +538,17 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                           FlutterFlowTheme.of(context).cerise,
                                           FlutterFlowTheme.of(context).primary
                                         ],
-                                        stops: const [0.0, 1.0],
-                                        begin: const AlignmentDirectional(0.0, -1.0),
-                                        end: const AlignmentDirectional(0, 1.0),
+                                        stops: [0.0, 1.0],
+                                        begin: AlignmentDirectional(0.0, -1.0),
+                                        end: AlignmentDirectional(0, 1.0),
                                       ),
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 3.0))
-                                    .around(const SizedBox(width: 3.0)),
+                                    .divide(SizedBox(width: 3.0))
+                                    .around(SizedBox(width: 3.0)),
                               ),
-                            ].divide(const SizedBox(height: 0.0)),
+                            ].divide(SizedBox(height: 0.0)),
                           ),
                         ),
                       ),
@@ -552,7 +557,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -560,17 +565,17 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                     Expanded(
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 1.0, 0.0, 0.0),
                               child: Container(
                                 height: 445.0,
-                                constraints: const BoxConstraints(
+                                constraints: BoxConstraints(
                                   maxWidth: 120.0,
                                 ),
                                 decoration: BoxDecoration(
@@ -583,13 +588,13 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 10.0, 5.0, 10.0),
                                   child: wrapWithModel(
                                     model: _model.dayListComponentModel,
                                     updateCallback: () => safeSetState(() {}),
                                     child: DayListComponentWidget(
-                                      docDocument: widget.docDocument!,
+                                      docDocument: widget!.docDocument!,
                                       dayHoursAction: (dayHourse, dayItemBook,
                                           bookedHoursList) async {
                                         _model.selectedDayHours =
@@ -624,7 +629,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 5.0),
                                   child: wrapWithModel(
                                     model: _model.dayBookingComponentModel,
@@ -655,7 +660,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                 ),
                               ),
                             ),
-                          ].divide(const SizedBox(width: 5.0)),
+                          ].divide(SizedBox(width: 5.0)),
                         ),
                       ),
                     ),
@@ -663,14 +668,14 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -684,7 +689,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                     borderRadius: BorderRadius.circular(14.0),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 5.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -711,7 +716,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 10.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -721,7 +726,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                               Text(
                                                 valueOrDefault<String>(
                                                   _model.selectedDaybook
-                                                      ?.dayItem.desc,
+                                                      ?.dayItem?.desc,
                                                   'n',
                                                 ),
                                                 style:
@@ -772,7 +777,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                         ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 5.0, 0.0),
                                                 child: Text(
@@ -853,7 +858,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                               price:
                                                                   valueOrDefault<
                                                                       int>(
-                                                                widget
+                                                                widget!
                                                                     .docDocument
                                                                     ?.price,
                                                                 0,
@@ -861,7 +866,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                               fee:
                                                                   valueOrDefault<
                                                                       int>(
-                                                                widget
+                                                                widget!
                                                                     .docDocument
                                                                     ?.sFee,
                                                                 5,
@@ -869,7 +874,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                               cusRef: FFAppState()
                                                                   .currentCustomer
                                                                   .cusDocRef,
-                                                              docRef: widget
+                                                              docRef: widget!
                                                                   .docDocument
                                                                   ?.reference,
                                                               cAt: functions
@@ -947,16 +952,16 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                           builder:
                                                               (alertDialogContext) {
                                                             return AlertDialog(
-                                                              title: const Text(
+                                                              title: Text(
                                                                   'حجز ميعاد'),
-                                                              content: const Text(
+                                                              content: Text(
                                                                   'تم الحجز بنجاح'),
                                                               actions: [
                                                                 TextButton(
                                                                   onPressed: () =>
                                                                       Navigator.pop(
                                                                           alertDialogContext),
-                                                                  child: const Text(
+                                                                  child: Text(
                                                                       'Ok'),
                                                                 ),
                                                               ],
@@ -972,14 +977,14 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                       options: FFButtonOptions(
                                                         height: 40.0,
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     24.0,
                                                                     0.0,
                                                                     24.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -1004,7 +1009,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                                       0.0,
                                                                 ),
                                                         elevation: 3.0,
-                                                        borderSide: const BorderSide(
+                                                        borderSide: BorderSide(
                                                           color: Colors
                                                               .transparent,
                                                           width: 1.0,
@@ -1018,11 +1023,11 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                                 ),
                                               ),
                                             ]
-                                                .divide(const SizedBox(width: 5.0))
-                                                .around(const SizedBox(width: 5.0)),
+                                                .divide(SizedBox(width: 5.0))
+                                                .around(SizedBox(width: 5.0)),
                                           ),
                                         ),
-                                        const Padding(
+                                        Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 5.0, 0.0, 5.0),
@@ -1030,7 +1035,31 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
-                                            children: [],
+                                            children: [
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  FFAppState()
+                                                      .refBookingType
+                                                      .where((e) =>
+                                                          e.key ==
+                                                          widget!.docDocument
+                                                              ?.bookType)
+                                                      .toList()
+                                                      .first
+                                                      .desc,
+                                                  'n',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -1045,7 +1074,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                                     borderRadius: BorderRadius.circular(14.0),
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
                                         '4gpuj5t4' /* لكي يتم الحجز يجب اختيار اليوم... */,
@@ -1068,7 +1097,7 @@ class _DoctorBookVisitWidgetState extends State<DoctorBookVisitWidget>
                   ),
                 ),
               ),
-              const Row(
+              Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [],
               ),

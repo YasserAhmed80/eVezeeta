@@ -1,15 +1,19 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/image_component/image_component_widget.dart';
+import 'dart:math';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_account_model.dart';
 export 'doctor_account_model.dart';
@@ -41,12 +45,12 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.returnnedDoc = await DocRecord.getDocumentOnce(widget.docRef!);
+      _model.returnnedDoc = await DocRecord.getDocumentOnce(widget!.docRef!);
       _model.docDocument = _model.returnnedDoc;
       _model.docStatusCode = _model.returnnedDoc?.statusCde;
       safeSetState(() {});
       FFAppState().updateCurrentDoctorStruct(
-        (e) => e..dbDocRef = widget.docRef,
+        (e) => e..dbDocRef = widget!.docRef,
       );
       safeSetState(() {});
     });
@@ -67,8 +71,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -87,8 +91,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -107,8 +111,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -127,8 +131,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -147,8 +151,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -167,8 +171,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -211,8 +215,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -231,8 +235,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -251,8 +255,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -271,8 +275,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -291,8 +295,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -311,8 +315,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -331,8 +335,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -351,8 +355,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -371,8 +375,8 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 60.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -400,7 +404,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
         body: Stack(
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 5.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 5.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -539,7 +543,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                           builder: (context) {
                             if (_model.docStatusCode == 0) {
                               return Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
                                 child: Stack(
                                   children: [
@@ -578,11 +582,11 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                               FlutterFlowTheme.of(context)
                                                   .secondary
                                             ],
-                                            stops: const [0.0, 1.0],
+                                            stops: [0.0, 1.0],
                                             begin:
-                                                const AlignmentDirectional(1.0, -1.0),
+                                                AlignmentDirectional(1.0, -1.0),
                                             end:
-                                                const AlignmentDirectional(-1.0, 1.0),
+                                                AlignmentDirectional(-1.0, 1.0),
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(14.0),
@@ -650,16 +654,16 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                                               FontWeight.bold,
                                                         ),
                                                   ),
-                                                ].divide(const SizedBox(width: 5.0)),
+                                                ].divide(SizedBox(width: 5.0)),
                                               ),
                                             ),
-                                          ].divide(const SizedBox(height: 10.0)),
+                                          ].divide(SizedBox(height: 10.0)),
                                         ),
                                       ),
                                     ).animateOnPageLoad(animationsMap[
                                         'containerOnPageLoadAnimation1']!),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 50.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -668,7 +672,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             child: Icon(
                                               Icons.handshake_outlined,
@@ -686,7 +690,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               );
                             } else if (_model.docStatusCode == 1) {
                               return Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
                                 child: Stack(
                                   children: [
@@ -701,9 +705,9 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                             FlutterFlowTheme.of(context)
                                                 .tertiary
                                           ],
-                                          stops: const [0.0, 1.0],
-                                          begin: const AlignmentDirectional(1.0, 0.0),
-                                          end: const AlignmentDirectional(-1.0, 0),
+                                          stops: [0.0, 1.0],
+                                          begin: AlignmentDirectional(1.0, 0.0),
+                                          end: AlignmentDirectional(-1.0, 0),
                                         ),
                                         borderRadius:
                                             BorderRadius.circular(14.0),
@@ -730,7 +734,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             child: Container(
                                               width: 200.0,
@@ -787,16 +791,16 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                                               FontWeight.bold,
                                                         ),
                                                   ),
-                                                ].divide(const SizedBox(width: 5.0)),
+                                                ].divide(SizedBox(width: 5.0)),
                                               ),
                                             ),
                                           ),
-                                        ].divide(const SizedBox(height: 10.0)),
+                                        ].divide(SizedBox(height: 10.0)),
                                       ),
                                     ).animateOnPageLoad(animationsMap[
                                         'containerOnPageLoadAnimation2']!),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 10.0, 20.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -817,7 +821,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               );
                             } else {
                               return Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
                                 child: Stack(
                                   children: [
@@ -828,12 +832,12 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                         gradient: LinearGradient(
                                           colors: [
                                             FlutterFlowTheme.of(context).cerise,
-                                            const Color(0xFFD1ACB9)
+                                            Color(0xFFD1ACB9)
                                           ],
-                                          stops: const [0.0, 1.0],
+                                          stops: [0.0, 1.0],
                                           begin:
-                                              const AlignmentDirectional(1.0, -1.0),
-                                          end: const AlignmentDirectional(-1.0, 1.0),
+                                              AlignmentDirectional(1.0, -1.0),
+                                          end: AlignmentDirectional(-1.0, 1.0),
                                         ),
                                         borderRadius:
                                             BorderRadius.circular(14.0),
@@ -860,7 +864,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             child: Container(
                                               width: 150.0,
@@ -903,15 +907,15 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                                               FontWeight.bold,
                                                         ),
                                                   ),
-                                                ].divide(const SizedBox(width: 5.0)),
+                                                ].divide(SizedBox(width: 5.0)),
                                               ),
                                             ),
                                           ),
-                                        ].divide(const SizedBox(height: 10.0)),
+                                        ].divide(SizedBox(height: 10.0)),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 10.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -939,7 +943,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 0.0, 10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -960,7 +964,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               3.0, 0.0, 0.0, 3.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -989,13 +993,13 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                 borderRadius: BorderRadius.circular(0.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     8.0, 12.0, 8.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.account_circle_outlined,
@@ -1006,7 +1010,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1035,7 +1039,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               animationsMap['containerOnPageLoadAnimation3']!),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               3.0, 0.0, 0.0, 3.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1064,13 +1068,13 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                 borderRadius: BorderRadius.circular(0.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     8.0, 12.0, 8.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.location_on,
@@ -1081,7 +1085,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1110,7 +1114,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               animationsMap['containerOnPageLoadAnimation4']!),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               3.0, 0.0, 0.0, 3.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1136,13 +1140,13 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                 borderRadius: BorderRadius.circular(0.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     8.0, 12.0, 8.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.image_outlined,
@@ -1153,7 +1157,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1182,7 +1186,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               animationsMap['containerOnPageLoadAnimation5']!),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               3.0, 0.0, 0.0, 3.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1211,13 +1215,13 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                 borderRadius: BorderRadius.circular(0.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     8.0, 12.0, 8.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.calendar_month_rounded,
@@ -1228,7 +1232,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1262,7 +1266,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 0.0, 10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -1283,7 +1287,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               3.0, 0.0, 0.0, 3.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1316,13 +1320,13 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                 borderRadius: BorderRadius.circular(0.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     8.0, 12.0, 8.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.account_circle_outlined,
@@ -1333,7 +1337,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1362,7 +1366,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               animationsMap['containerOnPageLoadAnimation7']!),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               3.0, 0.0, 0.0, 3.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1391,13 +1395,13 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                 borderRadius: BorderRadius.circular(0.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     8.0, 12.0, 8.0, 12.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 0.0, 0.0),
                                       child: Icon(
                                         Icons.account_circle_outlined,
@@ -1408,7 +1412,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                     ),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
@@ -1442,7 +1446,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 0.0, 10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -1463,7 +1467,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               3.0, 0.0, 0.0, 3.0),
                           child: Container(
                             width: double.infinity,
@@ -1473,7 +1477,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               borderRadius: BorderRadius.circular(0.0),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   8.0, 12.0, 8.0, 12.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -1503,10 +1507,10 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                             width: 150.0,
                                             height: 45.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
@@ -1548,10 +1552,10 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                             width: 150.0,
                                             height: 45.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
@@ -1574,7 +1578,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                           ),
                                         ).animateOnPageLoad(animationsMap[
                                             'buttonOnPageLoadAnimation2']!),
-                                      ].divide(const SizedBox(width: 10.0)),
+                                      ].divide(SizedBox(width: 10.0)),
                                     ),
                                   ),
                                 ],
@@ -1589,7 +1593,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 0.0, 10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -1610,7 +1614,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          alignment: AlignmentDirectional(0.0, -1.0),
                           child: Container(
                             height: 75.0,
                             decoration: BoxDecoration(
@@ -1619,7 +1623,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                               borderRadius: BorderRadius.circular(0.0),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding: EdgeInsets.all(4.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1677,7 +1681,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     4.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -1759,7 +1763,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     4.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -1788,7 +1792,7 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
                                       ),
                                     ),
                                   ),
-                                ].divide(const SizedBox(width: 10.0)),
+                                ].divide(SizedBox(width: 10.0)),
                               ),
                             ),
                           ),
@@ -1817,13 +1821,13 @@ class _DoctorAccountWidgetState extends State<DoctorAccountWidget>
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 1.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(1.0, 0.0, 1.0, 0.0),
                 child: wrapWithModel(
                   model: _model.customNavbarModel,
                   updateCallback: () => safeSetState(() {}),
-                  child: const CustomNavbarWidget(),
+                  child: CustomNavbarWidget(),
                 ),
               ),
             ),

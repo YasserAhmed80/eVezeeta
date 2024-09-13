@@ -1,8 +1,20 @@
-import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'doctor_data_address_widget.dart' show DoctorDataAddressWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
   ///  Local state fields for this page.
@@ -22,6 +34,14 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
   String? tel2;
 
   LatLng? latLng;
+
+  bool isValidData = true;
+
+  bool isValidGonernate = true;
+
+  bool isValidZone = true;
+
+  bool isValidArea = true;
 
   ///  State fields for stateful widgets in this page.
 
@@ -50,6 +70,17 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
       );
     }
 
+    if (val.length < 10) {
+      return FFLocalizations.of(context).getText(
+        'z00u4mvd' /* عنوان قصير جدا */,
+      );
+    }
+    if (val.length > 500) {
+      return FFLocalizations.of(context).getText(
+        'yz6lqgv9' /* عنوان طويل جدا */,
+      );
+    }
+
     return null;
   }
 
@@ -65,10 +96,14 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
     }
 
     if (val.length < 11) {
-      return 'Requires at least 11 characters.';
+      return FFLocalizations.of(context).getText(
+        'ebgspkuj' /* رقم تليفون خطا */,
+      );
     }
     if (val.length > 11) {
-      return 'Maximum 11 characters allowed, currently ${val.length}.';
+      return FFLocalizations.of(context).getText(
+        'dvwg4rz2' /* رقم تليفون خطا */,
+      );
     }
 
     return null;
@@ -78,26 +113,15 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
   FocusNode? tel2FocusNode;
   TextEditingController? tel2TextController;
   String? Function(BuildContext, String?)? tel2TextControllerValidator;
-  String? _tel2TextControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        'wg1mjq5j' /* من فضلك ادخل تليفون 2  */,
-      );
-    }
-
-    return null;
-  }
-
-  // Model for loadCitiesCoponent component.
-  late LoadCitiesCoponentModel loadCitiesCoponentModel;
+  // Stores action output result for [Validate Form] action in Button widget.
+  bool? formValidation;
+  // Stores action output result for [Action Block - validateDataAction] action in Button widget.
+  bool? validateData;
 
   @override
   void initState(BuildContext context) {
     addressDescTextControllerValidator = _addressDescTextControllerValidator;
     tel1TextControllerValidator = _tel1TextControllerValidator;
-    tel2TextControllerValidator = _tel2TextControllerValidator;
-    loadCitiesCoponentModel =
-        createModel(context, () => LoadCitiesCoponentModel());
   }
 
   @override
@@ -110,7 +134,23 @@ class DoctorDataAddressModel extends FlutterFlowModel<DoctorDataAddressWidget> {
 
     tel2FocusNode?.dispose();
     tel2TextController?.dispose();
+  }
 
-    loadCitiesCoponentModel.dispose();
+  /// Action blocks.
+  Future<bool?> validateDataAction(BuildContext context) async {
+    isValidData = true;
+    if (governateCode == -1) {
+      isValidData = false;
+      isValidGonernate = true;
+    }
+    if (zoneCodeValue == -1) {
+      isValidData = false;
+      isValidZone = false;
+    }
+    if (areaCode == -1) {
+      isValidData = false;
+      isValidArea = false;
+    }
+    return isValidData;
   }
 }

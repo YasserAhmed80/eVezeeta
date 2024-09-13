@@ -5,6 +5,8 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'switch_title_component_model.dart';
 export 'switch_title_component_model.dart';
 
@@ -42,9 +44,9 @@ class _SwitchTitleComponentWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.selectedList = widget.inputList!.toList().cast<int>();
+      _model.selectedList = widget!.inputList!.toList().cast<int>();
       _model.switchValue = functions.checkItemInList(
-          widget.item?.subKey, _model.selectedList.toList())!;
+          widget!.item?.subKey, _model.selectedList.toList())!;
       safeSetState(() {});
     });
 
@@ -71,14 +73,14 @@ class _SwitchTitleComponentWidgetState
           onTap: () async {
             if (_model.switchValue == true) {
               await widget.actionReturnedList?.call(
-                widget.item?.subKey,
+                widget!.item?.subKey,
                 false,
               );
               _model.switchValue = false;
               safeSetState(() {});
             } else {
               await widget.actionReturnedList?.call(
-                widget.item?.subKey,
+                widget!.item?.subKey,
                 true,
               );
               _model.switchValue = true;
@@ -92,14 +94,14 @@ class _SwitchTitleComponentWidgetState
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     valueOrDefault<String>(
-                      widget.item?.desc,
+                      widget!.item?.desc,
                       'n',
                     ),
                     style: TextStyle(
@@ -119,7 +121,7 @@ class _SwitchTitleComponentWidgetState
                             shape: BoxShape.circle,
                           ),
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: FaIcon(
                               FontAwesomeIcons.check,
                               color: FlutterFlowTheme.of(context)
@@ -138,7 +140,7 @@ class _SwitchTitleComponentWidgetState
                             shape: BoxShape.circle,
                           ),
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: FaIcon(
                               FontAwesomeIcons.check,
                               color: FlutterFlowTheme.of(context).alternate,

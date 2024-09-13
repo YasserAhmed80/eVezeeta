@@ -1,5 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -20,9 +21,11 @@ class DoctorDataAddressWidget extends StatefulWidget {
   const DoctorDataAddressWidget({
     super.key,
     required this.docDocument,
-  });
+    bool? isNewDoctor,
+  }) : this.isNewDoctor = isNewDoctor ?? false;
 
   final DocRecord? docDocument;
+  final bool isNewDoctor;
 
   @override
   State<DoctorDataAddressWidget> createState() =>
@@ -41,55 +44,55 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget.docDocument?.aGov != null) {
+      if (widget!.docDocument?.aGov != null) {
         _model.countryCode = valueOrDefault<int>(
-          widget.docDocument?.aCon,
+          widget!.docDocument?.aCon,
           1,
         );
         _model.governateCode = valueOrDefault<int>(
-          widget.docDocument?.aGov,
+          widget!.docDocument?.aGov,
           -1,
         );
         _model.zoneCode = valueOrDefault<int>(
-          widget.docDocument?.aZone,
+          widget!.docDocument?.aZone,
           -1,
         );
         _model.areaCode = valueOrDefault<int>(
-          widget.docDocument?.aArea,
+          widget!.docDocument?.aArea,
           -1,
         );
-        _model.addrDesc = widget.docDocument?.aAddr;
-        _model.tel1 = widget.docDocument?.tel1;
-        _model.tel2 = widget.docDocument?.tel2;
+        _model.addrDesc = widget!.docDocument?.aAddr;
+        _model.tel1 = widget!.docDocument?.tel1;
+        _model.tel2 = widget!.docDocument?.tel2;
         safeSetState(() {});
         // contry field
         safeSetState(() {
           _model.countryCodeValueController?.value = valueOrDefault<int>(
-            widget.docDocument?.aCon,
+            widget!.docDocument?.aCon,
             -1,
           );
         });
         safeSetState(() {
           _model.govCodeValueController?.value = valueOrDefault<int>(
-            widget.docDocument?.aGov,
+            widget!.docDocument?.aGov,
             -1,
           );
         });
         safeSetState(() {
           _model.zoneCodeValueController?.value = valueOrDefault<int>(
-            widget.docDocument?.aZone,
+            widget!.docDocument?.aZone,
             -1,
           );
         });
         safeSetState(() {
           _model.areaCodeValueController?.value = valueOrDefault<int>(
-            widget.docDocument?.aArea,
+            widget!.docDocument?.aArea,
             -1,
           );
         });
         safeSetState(() {
           _model.addressDescTextController?.text = valueOrDefault<String>(
-            widget.docDocument?.aAddr,
+            widget!.docDocument?.aAddr,
             '-1',
           );
           _model.addressDescTextController?.selection = TextSelection.collapsed(
@@ -97,7 +100,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
         });
         safeSetState(() {
           _model.tel1TextController?.text = valueOrDefault<String>(
-            widget.docDocument?.tel1,
+            widget!.docDocument?.tel1,
             '-1',
           );
           _model.tel1TextController?.selection = TextSelection.collapsed(
@@ -105,7 +108,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
         });
         safeSetState(() {
           _model.tel2TextController?.text = valueOrDefault<String>(
-            widget.docDocument?.tel2,
+            widget!.docDocument?.tel2,
             '-1',
           );
           _model.tel2TextController?.selection = TextSelection.collapsed(
@@ -180,9 +183,9 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                   ),
                 ],
               ),
-            ].divide(const SizedBox(height: 4.0)),
+            ].divide(SizedBox(height: 4.0)),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
@@ -201,14 +204,14 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: const AlignmentDirectional(0.0, -1.0),
+                            alignment: AlignmentDirectional(0.0, -1.0),
                             child: Container(
-                              constraints: const BoxConstraints(
+                              constraints: BoxConstraints(
                                 maxWidth: 770.0,
                               ),
-                              decoration: const BoxDecoration(),
+                              decoration: BoxDecoration(),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 16.0, 0.0),
                                 child: SingleChildScrollView(
                                   primary: false,
@@ -229,7 +232,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                             ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 10.0, 0.0, 10.0),
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -240,7 +243,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 10.0, 10.0, 10.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -337,7 +340,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                       borderWidth: 0.5,
                                                       borderRadius: 0.0,
                                                       margin:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   4.0,
@@ -371,6 +374,9 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         .govCodeValue = val);
                                                     _model.governateCode =
                                                         _model.govCodeValue;
+                                                    safeSetState(() {});
+                                                    _model.isValidGonernate =
+                                                        true;
                                                     safeSetState(() {});
                                                   },
                                                   width: double.infinity,
@@ -425,13 +431,18 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               context)
                                                           .primaryBackground,
                                                   elevation: 2.0,
-                                                  borderColor:
-                                                      FlutterFlowTheme.of(
+                                                  borderColor: _model
+                                                              .isValidGonernate ==
+                                                          false
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .error
+                                                      : FlutterFlowTheme.of(
                                                               context)
                                                           .alternate,
                                                   borderWidth: 0.5,
                                                   borderRadius: 0.0,
-                                                  margin: const EdgeInsetsDirectional
+                                                  margin: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           16.0, 4.0, 16.0, 4.0),
                                                   hidesUnderline: true,
@@ -469,6 +480,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         .zoneCodeValue = val);
                                                     _model.zoneCode =
                                                         _model.zoneCodeValue;
+                                                    safeSetState(() {});
+                                                    _model.isValidZone = false;
                                                     safeSetState(() {});
                                                   },
                                                   width: double.infinity,
@@ -524,12 +537,17 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .primaryBackground,
                                                   elevation: 2.0,
                                                   borderColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
+                                                      _model.isValidZone ==
+                                                              false
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
                                                   borderWidth: 0.5,
                                                   borderRadius: 0.0,
-                                                  margin: const EdgeInsetsDirectional
+                                                  margin: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           16.0, 4.0, 16.0, 4.0),
                                                   hidesUnderline: true,
@@ -566,6 +584,8 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         .areaCodeValue = val);
                                                     _model.areaCode =
                                                         _model.areaCodeValue;
+                                                    safeSetState(() {});
+                                                    _model.isValidArea = true;
                                                     safeSetState(() {});
                                                   },
                                                   width: double.infinity,
@@ -623,12 +643,17 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                           .primaryBackground,
                                                   elevation: 2.0,
                                                   borderColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
+                                                      _model.isValidArea ==
+                                                              false
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
                                                   borderWidth: 0.5,
                                                   borderRadius: 0.0,
-                                                  margin: const EdgeInsetsDirectional
+                                                  margin: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           16.0, 4.0, 16.0, 4.0),
                                                   hidesUnderline: true,
@@ -644,7 +669,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
                                                     '_model.addressDescTextController',
-                                                    const Duration(
+                                                    Duration(
                                                         milliseconds: 2000),
                                                     () => safeSetState(() {}),
                                                   ),
@@ -693,7 +718,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -718,7 +743,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -743,7 +768,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -768,7 +793,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -789,7 +814,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                                 context)
                                                             .primaryBackground,
                                                     contentPadding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(
                                                                 16.0,
                                                                 20.0,
@@ -814,7 +839,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               safeSetState(
                                                                   () {});
                                                             },
-                                                            child: const Icon(
+                                                            child: Icon(
                                                               Icons.clear,
                                                               size: 22,
                                                             ),
@@ -857,7 +882,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                             ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 10.0, 0.0, 10.0),
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -868,7 +893,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 10.0, 10.0, 10.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -881,7 +906,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
                                                     '_model.tel1TextController',
-                                                    const Duration(
+                                                    Duration(
                                                         milliseconds: 2000),
                                                     () => safeSetState(() {}),
                                                   ),
@@ -932,7 +957,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -957,7 +982,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -982,7 +1007,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -1007,7 +1032,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -1028,7 +1053,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                                 context)
                                                             .primaryBackground,
                                                     contentPadding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(
                                                                 16.0,
                                                                 20.0,
@@ -1054,7 +1079,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               safeSetState(
                                                                   () {});
                                                             },
-                                                            child: const Icon(
+                                                            child: Icon(
                                                               Icons.clear,
                                                               size: 22,
                                                             ),
@@ -1100,7 +1125,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
                                                     '_model.tel2TextController',
-                                                    const Duration(
+                                                    Duration(
                                                         milliseconds: 2000),
                                                     () => safeSetState(() {}),
                                                   ),
@@ -1151,7 +1176,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -1176,7 +1201,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -1201,7 +1226,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -1226,7 +1251,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
-                                                          const BorderRadius.only(
+                                                          BorderRadius.only(
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 0.0),
@@ -1247,7 +1272,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                                 context)
                                                             .primaryBackground,
                                                     contentPadding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(
                                                                 16.0,
                                                                 20.0,
@@ -1273,7 +1298,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                               safeSetState(
                                                                   () {});
                                                             },
-                                                            child: const Icon(
+                                                            child: Icon(
                                                               Icons.clear,
                                                               size: 22,
                                                             ),
@@ -1328,7 +1353,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                             ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 10.0, 0.0, 10.0),
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -1339,7 +1364,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 10.0, 10.0, 10.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -1354,7 +1379,7 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                                   ),
                                                   child: Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Text(
                                                       FFLocalizations.of(
@@ -1377,15 +1402,190 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                                           ),
                                         ),
                                       ),
-                                      wrapWithModel(
-                                        model: _model.loadCitiesCoponentModel,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: const LoadCitiesCoponentWidget(),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 12.0, 16.0, 12.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            if (widget!
+                                                    .docDocument?.reference !=
+                                                null) {
+                                              _model.formValidation = true;
+                                              if (_model.formKey.currentState ==
+                                                      null ||
+                                                  !_model.formKey.currentState!
+                                                      .validate()) {
+                                                safeSetState(() => _model
+                                                    .formValidation = false);
+                                                return;
+                                              }
+                                              if (_model.countryCodeValue ==
+                                                  null) {
+                                                _model.formValidation = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if (_model.govCodeValue == null) {
+                                                _model.formValidation = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if (_model.zoneCodeValue ==
+                                                  null) {
+                                                _model.formValidation = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if (_model.areaCodeValue ==
+                                                  null) {
+                                                _model.formValidation = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              _model.validateData = await _model
+                                                  .validateDataAction(context);
+                                              if ((_model.formValidation ==
+                                                      true) &&
+                                                  (_model.validateData ==
+                                                      true)) {
+                                                // save to DB
+
+                                                await widget!
+                                                    .docDocument!.reference
+                                                    .update(createDocRecordData(
+                                                  aCon: _model.countryCode,
+                                                  aGov: _model.govCodeValue,
+                                                  aZone: _model.zoneCode,
+                                                  aArea: _model.areaCode,
+                                                  tel1: valueOrDefault<String>(
+                                                    _model.tel1TextController
+                                                        .text,
+                                                    '-1',
+                                                  ),
+                                                  tel2: valueOrDefault<String>(
+                                                    _model.tel2TextController
+                                                        .text,
+                                                    '-1',
+                                                  ),
+                                                  aAddr: valueOrDefault<String>(
+                                                    _model
+                                                        .addressDescTextController
+                                                        .text,
+                                                    'none',
+                                                  ),
+                                                  uAt: functions
+                                                      .getCurrentDate(),
+                                                ));
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'حفظ بيانات الطبيب'),
+                                                      content: Text(
+                                                          'تم حفظ البيانات بنجاح'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('موافق'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                if (widget!.isNewDoctor ==
+                                                    true) {
+                                                  context.pushNamed(
+                                                    'registerationStep',
+                                                    queryParameters: {
+                                                      'docDocument':
+                                                          serializeParam(
+                                                        widget!.docDocument,
+                                                        ParamType.Document,
+                                                      ),
+                                                      'cusDocument':
+                                                          serializeParam(
+                                                        null,
+                                                        ParamType.Document,
+                                                      ),
+                                                      'stepType':
+                                                          serializeParam(
+                                                        'docTime',
+                                                        ParamType.String,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'docDocument':
+                                                          widget!.docDocument,
+                                                      'cusDocument': null,
+                                                    },
+                                                  );
+                                                }
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'حفظ بيانات الطبيب'),
+                                                      content: Text(
+                                                          'خطأ في دخال البيانات'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('موافق'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+                                            }
+
+                                            safeSetState(() {});
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '24qishu0' /* حفظ البانات */,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 48.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    24.0, 0.0, 24.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Cairo',
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 3.0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
                                       ),
                                     ]
-                                        .divide(const SizedBox(height: 12.0))
-                                        .addToEnd(const SizedBox(height: 32.0)),
+                                        .divide(SizedBox(height: 12.0))
+                                        .addToEnd(SizedBox(height: 32.0)),
                                   ),
                                 ),
                               ),
@@ -1396,82 +1596,10 @@ class _DoctorDataAddressWidgetState extends State<DoctorDataAddressWidget> {
                     ),
                   ),
                   Container(
-                    constraints: const BoxConstraints(
+                    constraints: BoxConstraints(
                       maxWidth: 770.0,
                     ),
-                    decoration: const BoxDecoration(),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          16.0, 12.0, 16.0, 12.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          if (widget.docDocument?.reference != null) {
-                            // save to DB
-
-                            await widget.docDocument!.reference
-                                .update(createDocRecordData(
-                              aCon: _model.countryCode,
-                              aGov: _model.govCodeValue,
-                              aZone: _model.zoneCode,
-                              aArea: _model.areaCode,
-                              tel1: valueOrDefault<String>(
-                                _model.tel1TextController.text,
-                                '-1',
-                              ),
-                              tel2: valueOrDefault<String>(
-                                _model.tel2TextController.text,
-                                '-1',
-                              ),
-                              aAddr: valueOrDefault<String>(
-                                _model.addressDescTextController.text,
-                                'none',
-                              ),
-                              uAt: functions.getCurrentDate(),
-                            ));
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: const Text('حفظ بيانات الطبيب'),
-                                  content: const Text('تم حفظ البيانات بنجاح'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: const Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          'l98y3n2a' /* حفظ البانات */,
-                        ),
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 48.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Cairo',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                    ),
+                    decoration: BoxDecoration(),
                   ),
                 ],
               ),

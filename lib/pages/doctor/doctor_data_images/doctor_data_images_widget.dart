@@ -1,9 +1,12 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/upload_photo/upload_photo_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_data_images_model.dart';
 export 'doctor_data_images_model.dart';
@@ -83,23 +86,23 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: Stack(
           children: [
             Align(
-              alignment: const AlignmentDirectional(0.0, -1.0),
+              alignment: AlignmentDirectional(0.0, -1.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
                     child: Container(
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 770.0,
                       ),
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -110,9 +113,9 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                                  alignment: AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 10.0, 0.0),
                                     child: Icon(
                                       Icons.location_history_rounded,
@@ -135,8 +138,8 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                       ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 5.0))
-                                  .around(const SizedBox(width: 5.0)),
+                                  .divide(SizedBox(width: 5.0))
+                                  .around(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -145,7 +148,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                               children: [
                                 Container(
                                   width: 300.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel1,
                                     updateCallback: () => safeSetState(() {}),
@@ -153,7 +156,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                       storageFolder: 'doc',
                                       entityType: 'doc',
                                       entityCode: valueOrDefault<String>(
-                                        widget.docRef?.id,
+                                        widget!.docRef?.id,
                                         'n',
                                       ),
                                       imgType: 'p',
@@ -164,8 +167,8 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 5.0))
-                                  .around(const SizedBox(width: 5.0)),
+                                  .divide(SizedBox(width: 5.0))
+                                  .around(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -173,9 +176,9 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                                  alignment: AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 10.0, 0.0),
                                     child: Icon(
                                       Icons.home,
@@ -198,8 +201,8 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                       ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 5.0))
-                                  .around(const SizedBox(width: 5.0)),
+                                  .divide(SizedBox(width: 5.0))
+                                  .around(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -218,7 +221,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     ),
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
                                         'h0mvthzk' /* 1 */,
@@ -238,10 +241,10 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(1.0, 0.0),
+                                  alignment: AlignmentDirectional(1.0, 0.0),
                                   child: Container(
                                     width: 300.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel2,
                                       updateCallback: () => safeSetState(() {}),
@@ -249,7 +252,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                         storageFolder: 'doc',
                                         entityType: 'doc',
                                         entityCode: valueOrDefault<String>(
-                                          widget.docRef?.id,
+                                          widget!.docRef?.id,
                                           'n',
                                         ),
                                         imgType: 'h',
@@ -261,8 +264,8 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 5.0))
-                                  .around(const SizedBox(width: 5.0)),
+                                  .divide(SizedBox(width: 5.0))
+                                  .around(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -281,7 +284,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     ),
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
                                         'myvv12n7' /* 2 */,
@@ -301,10 +304,10 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(1.0, 0.0),
+                                  alignment: AlignmentDirectional(1.0, 0.0),
                                   child: Container(
                                     width: 300.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel3,
                                       updateCallback: () => safeSetState(() {}),
@@ -312,7 +315,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                         storageFolder: 'doc',
                                         entityType: 'doc',
                                         entityCode: valueOrDefault<String>(
-                                          widget.docRef?.id,
+                                          widget!.docRef?.id,
                                           'n',
                                         ),
                                         imgType: 'h',
@@ -324,11 +327,11 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 5.0))
-                                  .around(const SizedBox(width: 5.0)),
+                                  .divide(SizedBox(width: 5.0))
+                                  .around(SizedBox(width: 5.0)),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -336,9 +339,9 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 10.0, 0.0),
                                       child: FaIcon(
                                         FontAwesomeIcons.receipt,
@@ -361,8 +364,8 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                         ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                             ),
                             Row(
@@ -372,7 +375,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                               children: [
                                 Container(
                                   width: 300.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.uploadPhotoModel4,
                                     updateCallback: () => safeSetState(() {}),
@@ -380,7 +383,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                       storageFolder: 'doc',
                                       entityType: 'doc',
                                       entityCode: valueOrDefault<String>(
-                                        widget.docRef?.id,
+                                        widget!.docRef?.id,
                                         'n',
                                       ),
                                       imgType: 'f',
@@ -391,11 +394,11 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                   ),
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 5.0))
-                                  .around(const SizedBox(width: 5.0)),
+                                  .divide(SizedBox(width: 5.0))
+                                  .around(SizedBox(width: 5.0)),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -403,9 +406,9 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 10.0, 0.0),
                                       child: Icon(
                                         Icons.library_books,
@@ -428,12 +431,12 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                         ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 100.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -442,7 +445,7 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                 children: [
                                   Container(
                                     width: 300.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.uploadPhotoModel5,
                                       updateCallback: () => safeSetState(() {}),
@@ -461,11 +464,11 @@ class _DoctorDataImagesWidgetState extends State<DoctorDataImagesWidget> {
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                             ),
-                          ].divide(const SizedBox(height: 5.0)),
+                          ].divide(SizedBox(height: 5.0)),
                         ),
                       ),
                     ),

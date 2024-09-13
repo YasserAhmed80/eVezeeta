@@ -257,9 +257,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'التخصص الفرعي',
       'en': 'Subspecialty',
     },
-    'r2angc5b': {
+    'oqigkybd': {
       'ar': 'حفظ البانات',
-      'en': 'Save data',
+      'en': '',
     },
     'wpiz9b8i': {
       'ar': 'من فضلك ادخل اسمك كامل',
@@ -388,13 +388,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'Map will be shwon here ',
       'en': 'Map will be shown here',
     },
-    'l98y3n2a': {
+    '24qishu0': {
       'ar': 'حفظ البانات',
-      'en': 'Save data',
+      'en': '',
     },
     '6z4kdjmt': {
       'ar': 'من فضلك ادخل عنوان الشارع و المبني',
       'en': 'Please enter the street and building address',
+    },
+    'z00u4mvd': {
+      'ar': 'عنوان قصير جدا',
+      'en': '',
+    },
+    'yz6lqgv9': {
+      'ar': 'عنوان طويل جدا',
+      'en': '',
     },
     'bjpmmgis': {
       'ar': 'Please choose an option from the dropdown',
@@ -404,6 +412,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'من فضلك ادخل تليفون 1',
       'en': 'Please enter phone 1',
     },
+    'ebgspkuj': {
+      'ar': 'رقم تليفون خطا',
+      'en': '',
+    },
+    'dvwg4rz2': {
+      'ar': 'رقم تليفون خطا',
+      'en': '',
+    },
     '53enuda5': {
       'ar': 'Please choose an option from the dropdown',
       'en': 'Please choose an option from the dropdown',
@@ -411,6 +427,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'wg1mjq5j': {
       'ar': 'من فضلك ادخل تليفون 2 ',
       'en': 'Please enter phone 2',
+    },
+    'rvgsuoa3': {
+      'ar': 'رقم تليفون خطا',
+      'en': '',
+    },
+    'krpy6lli': {
+      'ar': 'رقم تليفون خطا',
+      'en': '',
     },
     'jh7zlt2c': {
       'ar': 'Please choose an option from the dropdown',
@@ -632,10 +656,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // doctor_search
   {
-    '0vljw38e': {
-      'ar': 'احجز الان',
-      'en': '',
-    },
     '30msy7c2': {
       'ar': 'اختار البحث ',
       'en': '',
@@ -730,8 +750,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الكل',
       'en': '',
     },
-    '9gtne1p4': {
-      'ar': 'عميل: ',
+    'd6s6tbdi': {
+      'ar': 'سنة',
       'en': '',
     },
     'zv7hc4a5': {
@@ -862,18 +882,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
-  // congratultion
+  // congratultion_doctor
   {
     '8bvm3x03': {
-      'ar': 'Congrats!',
-      'en': '',
-    },
-    'tic0o98j': {
-      'ar': 'Quiz Results Submitted',
+      'ar': 'سعدا باشتراكم',
       'en': '',
     },
     'xri1wd5q': {
-      'ar': 'Go Home',
+      'ar': 'اوك',
       'en': '',
     },
     'llio5c17': {
@@ -1185,16 +1201,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'العنوان (الشارع و المبني)',
       'en': '',
     },
+    'ov93woap': {
+      'ar': 'حفظ البانات',
+      'en': '',
+    },
     'ju40bfoh': {
       'ar': 'صورة الملف',
       'en': '',
     },
     'mdvj9oh1': {
       'ar': 'لكي يتم اختيار صورة يجب تسجيل البيانات اولا',
-      'en': '',
-    },
-    '9mg8oamp': {
-      'ar': 'حفظ البانات',
       'en': '',
     },
     't43wvfwa': {
@@ -1282,7 +1298,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'سنة',
       'en': '',
     },
-    '0v9sorvu': {
+    'e6d0m13x': {
       'ar': 'البيانات الاساسية',
       'en': '',
     },
@@ -1358,6 +1374,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '792hc1ou': {
       'ar': 'حاله الحجز',
+      'en': '',
+    },
+    '98g2l0uf': {
+      'ar': 'ألغاء الحجز',
+      'en': '',
+    },
+    'pdubb513': {
+      'ar': 'سبب الالغاء',
+      'en': '',
+    },
+    'hl9h0sau': {
+      'ar': 'تخصص: ',
+      'en': '',
+    },
+    'mmei1zcz': {
+      'ar': 'ملف الطبيب',
       'en': '',
     },
     'xq01tr13': {
@@ -1445,16 +1477,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بيانات عن الدكتور',
       'en': '',
     },
+    'ngp5byjg': {
+      'ar': 'حفظ الملف',
+      'en': '',
+    },
     'nhcqjz7r': {
       'ar': 'صورة الملف',
       'en': '',
     },
     'bhnpbej8': {
       'ar': 'لكي يتم اختيار صورة يجب تسجيل البيانات اولا',
-      'en': '',
-    },
-    'knl8p4az': {
-      'ar': 'حفظ الملف',
       'en': '',
     },
     'vhkeywy5': {
@@ -1521,6 +1553,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تعديل الملف',
       'en': '',
     },
+    'aivmciwg': {
+      'ar': 'حذف الملف',
+      'en': '',
+    },
     '2ejuqezr': {
       'ar': 'من فضلك ادخل اسمك كامل',
       'en': '',
@@ -1571,6 +1607,39 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '56pfryii': {
       'ar': 'main',
+      'en': '',
+    },
+  },
+  // registerationStep
+  {
+    'dstilcr0': {
+      'ar': 'موافق',
+      'en': '',
+    },
+    '700yve3p': {
+      'ar': 'Home',
+      'en': '',
+    },
+  },
+  // congratultion_customer
+  {
+    'dz2w4iw4': {
+      'ar': 'سعدا باشتراكم',
+      'en': '',
+    },
+    'dfrwzpt6': {
+      'ar': 'اوك',
+      'en': '',
+    },
+    'pew9khbr': {
+      'ar': 'Home',
+      'en': '',
+    },
+  },
+  // loadRefData_Component
+  {
+    'qv6xtmr9': {
+      'ar': 'جاري تحميل البيانات',
       'en': '',
     },
   },
@@ -1721,11 +1790,41 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تقيم',
       'en': '',
     },
+    'k1c22amp': {
+      'ar': 'احجز الان',
+      'en': '',
+    },
   },
   // doctor_files_component
   {
     'nfpggb41': {
       'ar': 'صور العيادة',
+      'en': '',
+    },
+  },
+  // code_component
+  {
+    'he62ycwm': {
+      'ar': 'رقم عضويتك: ',
+      'en': '',
+    },
+  },
+  // cancel_booking_component
+  {
+    '3cv5mhol': {
+      'ar': 'الغاء الحجز',
+      'en': '',
+    },
+    's1el9953': {
+      'ar': 'سبب الالغاء',
+      'en': '',
+    },
+    'y7qpk6v4': {
+      'ar': 'سبب الغاء الحجز',
+      'en': '',
+    },
+    'ej7jlh53': {
+      'ar': 'ألغاء',
       'en': '',
     },
   },

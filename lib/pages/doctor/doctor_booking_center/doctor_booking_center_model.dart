@@ -1,8 +1,24 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/components/loading_component_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
+import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
+import '/pages/public_components/phone_icon_component/phone_icon_component_widget.dart';
+import 'dart:math';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'doctor_booking_center_widget.dart' show DoctorBookingCenterWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DoctorBookingCenterModel
     extends FlutterFlowModel<DoctorBookingCenterWidget> {
@@ -50,18 +66,29 @@ class DoctorBookingCenterModel
 
   bool? allDays = true;
 
+  bool isLoading = true;
+
   ///  State fields for stateful widgets in this page.
 
+  // Model for loading_component component.
+  late LoadingComponentModel loadingComponentModel;
+  // Model for emptyListComponent component.
+  late EmptyListComponentModel emptyListComponentModel;
   // Model for custom_navbar component.
   late CustomNavbarModel customNavbarModel;
 
   @override
   void initState(BuildContext context) {
+    loadingComponentModel = createModel(context, () => LoadingComponentModel());
+    emptyListComponentModel =
+        createModel(context, () => EmptyListComponentModel());
     customNavbarModel = createModel(context, () => CustomNavbarModel());
   }
 
   @override
   void dispose() {
+    loadingComponentModel.dispose();
+    emptyListComponentModel.dispose();
     customNavbarModel.dispose();
   }
 
@@ -78,7 +105,7 @@ class DoctorBookingCenterModel
       ),
     );
     // get distinct days
-    bookedDays = returnedBookedItems
+    bookedDays = returnedBookedItems!
         .map((e) => e.date)
         .withoutNulls
         .toList()
@@ -88,35 +115,41 @@ class DoctorBookingCenterModel
         .cast<DateTime>();
     loopIndex = 0;
     loopMax = valueOrDefault<int>(
-      returnedBookedItems.length,
+      returnedBookedItems?.length,
       0,
     );
     bookedList = [];
     while (loopIndex! < loopMax!) {
       addToBookedList(DtBookedItemStruct(
-        date: returnedBookedItems[loopIndex!].date,
-        time: returnedBookedItems[loopIndex!].dayTime,
+        date: returnedBookedItems?[loopIndex!]?.date,
+        time: returnedBookedItems?[loopIndex!]?.dayTime,
         statusCde: valueOrDefault<int>(
-          returnedBookedItems[loopIndex!].statusCde,
+          returnedBookedItems?[loopIndex!]?.statusCde,
           0,
         ),
-        itemRef: returnedBookedItems[loopIndex!].reference,
+        itemRef: returnedBookedItems?[loopIndex!]?.reference,
         docRef: widget!.docRef,
         cusName: 'n',
         cusTel: 'n',
         cusRef: null,
       ));
-      // get customer data
-      returnedCustomer = await CusRecord.getDocumentOnce(
-          returnedBookedItems[loopIndex!].cusRef!);
-      updateBookedListAtIndex(
-        loopIndex!,
-        (e) => e
-          ..cusName = returnedCustomer?.name
-          ..cusTel = returnedCustomer?.tel
-          ..cusRef = returnedCustomer?.reference,
-      );
-          loopIndex = loopIndex! + 1;
+      if (returnedBookedItems?[loopIndex!]?.cusRef != null) {
+        // get customer data
+        returnedCustomer = await CusRecord.getDocumentOnce(
+            returnedBookedItems![loopIndex!].cusRef!);
+        if (returnedCustomer?.reference != null) {
+          updateBookedListAtIndex(
+            loopIndex!,
+            (e) => e
+              ..cusName = returnedCustomer?.name
+              ..cusTel = returnedCustomer?.tel
+              ..cusRef = returnedCustomer?.reference
+              ..cusImage = returnedCustomer?.img
+              ..cusDob = returnedCustomer?.dob,
+          );
+        }
+      }
+      loopIndex = loopIndex! + 1;
     }
   }
 

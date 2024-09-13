@@ -1,9 +1,14 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'doctor_files_component_model.dart';
 export 'doctor_files_component_model.dart';
 
@@ -45,7 +50,7 @@ class _DoctorFilesComponentWidgetState
             )
             .where(
               'e_code',
-              isEqualTo: widget.docRef?.id,
+              isEqualTo: widget!.docRef?.id,
             )
             .orderBy('i_seq'),
       );
@@ -74,7 +79,7 @@ class _DoctorFilesComponentWidgetState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -85,7 +90,7 @@ class _DoctorFilesComponentWidgetState
                 borderRadius: BorderRadius.circular(14.0),
               ),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,10 +123,9 @@ class _DoctorFilesComponentWidgetState
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      blurRadius: 4.0,
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      offset: const Offset(
+                                      blurRadius: 1.0,
+                                      color: Color(0x33000000),
+                                      offset: Offset(
                                         0.0,
                                         2.0,
                                       ),
@@ -167,7 +171,7 @@ class _DoctorFilesComponentWidgetState
                                   ),
                                 ),
                               );
-                            }).divide(const SizedBox(width: 10.0)),
+                            }).divide(SizedBox(width: 10.0)),
                           ),
                         );
                       },
@@ -185,7 +189,7 @@ class _DoctorFilesComponentWidgetState
                 final fileItem = _model.returnedData
                         ?.where((e) => e.iType == 'f')
                         .toList()
-                        .toList() ??
+                        ?.toList() ??
                     [];
 
                 return Column(
@@ -199,7 +203,7 @@ class _DoctorFilesComponentWidgetState
                       ),
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                            EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -223,9 +227,9 @@ class _DoctorFilesComponentWidgetState
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    blurRadius: 4.0,
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    offset: const Offset(
+                                    blurRadius: 1.0,
+                                    color: Color(0x33000000),
+                                    offset: Offset(
                                       0.0,
                                       2.0,
                                     ),
@@ -272,11 +276,11 @@ class _DoctorFilesComponentWidgetState
                         ),
                       ),
                     );
-                  }).divide(const SizedBox(height: 5.0)),
+                  }).divide(SizedBox(height: 5.0)),
                 );
               },
             ),
-        ].divide(const SizedBox(height: 5.0)).around(const SizedBox(height: 5.0)),
+        ].divide(SizedBox(height: 5.0)).around(SizedBox(height: 5.0)),
       ),
     );
   }

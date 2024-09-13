@@ -1,8 +1,11 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'cus_master_page_model.dart';
 export 'cus_master_page_model.dart';
 
@@ -78,13 +81,13 @@ class _CusMasterPageWidgetState extends State<CusMasterPageWidget> {
                   ),
                 ],
               ),
-            ].divide(const SizedBox(height: 4.0)),
+            ].divide(SizedBox(height: 4.0)),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SizedBox(
+        body: Container(
           height: double.infinity,
           child: Stack(
             children: [
@@ -93,23 +96,23 @@ class _CusMasterPageWidgetState extends State<CusMasterPageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.0, -1.0),
+                      alignment: AlignmentDirectional(0.0, -1.0),
                       child: Container(
-                        constraints: const BoxConstraints(
+                        constraints: BoxConstraints(
                           maxWidth: 770.0,
                         ),
-                        decoration: const BoxDecoration(),
+                        decoration: BoxDecoration(),
                       ),
                     ),
                   ],
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
+                alignment: AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.customNavbarModel,
                   updateCallback: () => safeSetState(() {}),
-                  child: const CustomNavbarWidget(),
+                  child: CustomNavbarWidget(),
                 ),
               ),
             ],

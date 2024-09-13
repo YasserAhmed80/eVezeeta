@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'calender_component_model.dart';
 export 'calender_component_model.dart';
 
@@ -38,7 +40,7 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.selectedDate = widget.inputDate;
+      _model.selectedDate = widget!.inputDate;
       safeSetState(() {});
     });
 
@@ -57,7 +59,7 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(14.0),
@@ -68,7 +70,7 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -120,9 +122,9 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
                   ),
                   options: FFButtonOptions(
                     height: 30.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                     iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Cairo',
@@ -130,7 +132,7 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
                           letterSpacing: 0.0,
                         ),
                     elevation: 3.0,
-                    borderSide: const BorderSide(
+                    borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1.0,
                     ),
@@ -146,7 +148,7 @@ class _CalenderComponentWidgetState extends State<CalenderComponentWidget> {
               iconColor: FlutterFlowTheme.of(context).secondaryText,
               weekFormat: false,
               weekStartsMonday: false,
-              initialDate: widget.inputDate,
+              initialDate: widget!.inputDate,
               rowHeight: 64.0,
               onChange: (DateTimeRange? newSelectedDate) async {
                 if (_model.calenderControlSelectedDay == newSelectedDate) {

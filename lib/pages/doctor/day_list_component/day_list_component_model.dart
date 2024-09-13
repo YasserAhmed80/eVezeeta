@@ -1,9 +1,16 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'day_list_component_widget.dart' show DayListComponentWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
   ///  Local state fields for this component.
@@ -110,7 +117,7 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
           )
           .where(
             'day_id',
-            isEqualTo: selectedDayBook?.dayItem.dayKey,
+            isEqualTo: selectedDayBook?.dayItem?.dayKey,
           ),
       singleRecord: true,
     ).then((s) => s.firstOrNull);
@@ -138,6 +145,6 @@ class DayListComponentModel extends FlutterFlowModel<DayListComponentWidget> {
     );
     // update booked hours list
     bookedHoursList =
-        returnedBookedHours.map((e) => e.hour).toList().toList().cast<int>();
+        returnedBookedHours!.map((e) => e.hour).toList().toList().cast<int>();
   }
 }

@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/doctor_files_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -5,8 +6,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/public_components/addrress_component/addrress_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_profile_model.dart';
 export 'doctor_profile_model.dart';
@@ -35,7 +39,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.returnedDoc = await DocRecord.getDocumentOnce(widget.docRef!);
+      _model.returnedDoc = await DocRecord.getDocumentOnce(widget!.docRef!);
       _model.docDocument = _model.returnedDoc;
       safeSetState(() {});
       _model.returnedImages = await queryImgsRecordOnce(
@@ -46,7 +50,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
             )
             .where(
               'e_code',
-              isEqualTo: widget.docRef?.id,
+              isEqualTo: widget!.docRef?.id,
             ),
       );
       _model.imageList = _model.returnedImages!
@@ -111,7 +115,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
@@ -120,7 +124,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -149,7 +153,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                               width: 200.0,
                               height: 200.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.network(
@@ -201,7 +205,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 3.0)),
+                        ].divide(SizedBox(width: 3.0)),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -229,7 +233,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                           borderRadius: BorderRadius.circular(14.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 10.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -275,8 +279,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                         ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -299,7 +303,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                       builder: (context) {
                                         final subCatItem = _model
                                                 .docDocument?.subCatId
-                                                .toList() ??
+                                                ?.toList() ??
                                             [];
 
                                         return Wrap(
@@ -333,7 +337,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                                 ),
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 5.0, 0.0),
                                                 child: Text(
@@ -367,12 +371,12 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                             ]
-                                .divide(const SizedBox(height: 5.0))
-                                .around(const SizedBox(height: 5.0)),
+                                .divide(SizedBox(height: 5.0))
+                                .around(SizedBox(height: 5.0)),
                           ),
                         ),
                       ),
@@ -386,7 +390,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -403,14 +407,14 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                             ),
                             Expanded(
                               child: Container(
-                                constraints: const BoxConstraints(
+                                constraints: BoxConstraints(
                                   minHeight: 60.0,
                                 ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(14.0),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 5.0),
                                   child: Text(
                                     valueOrDefault<String>(
@@ -430,8 +434,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                               ),
                             ),
                           ]
-                              .divide(const SizedBox(width: 5.0))
-                              .around(const SizedBox(width: 5.0)),
+                              .divide(SizedBox(width: 5.0))
+                              .around(SizedBox(width: 5.0)),
                         ),
                       ),
                       Container(
@@ -480,8 +484,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                               ),
                             ),
                           ]
-                              .divide(const SizedBox(width: 5.0))
-                              .around(const SizedBox(width: 5.0)),
+                              .divide(SizedBox(width: 5.0))
+                              .around(SizedBox(width: 5.0)),
                         ),
                       ),
                       Container(
@@ -490,7 +494,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                           borderRadius: BorderRadius.circular(14.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 10.0, 0.0, 10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -523,7 +527,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                         Text(
                                           valueOrDefault<String>(
                                             _model.docDocument?.price
-                                                .toString(),
+                                                ?.toString(),
                                             '0',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -538,8 +542,8 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                               ),
                                         ),
                                       ]
-                                          .divide(const SizedBox(width: 5.0))
-                                          .around(const SizedBox(width: 5.0)),
+                                          .divide(SizedBox(width: 5.0))
+                                          .around(SizedBox(width: 5.0)),
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -572,11 +576,11 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                               ),
                                         ),
                                       ]
-                                          .divide(const SizedBox(width: 5.0))
-                                          .around(const SizedBox(width: 5.0)),
+                                          .divide(SizedBox(width: 5.0))
+                                          .around(SizedBox(width: 5.0)),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 10.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -605,10 +609,10 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                             ),
                                             options: FFButtonOptions(
                                               height: 40.0,
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -622,7 +626,7 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -631,16 +635,16 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                                             ),
                                           ),
                                         ]
-                                            .divide(const SizedBox(width: 5.0))
-                                            .around(const SizedBox(width: 5.0)),
+                                            .divide(SizedBox(width: 5.0))
+                                            .around(SizedBox(width: 5.0)),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                             ]
-                                .divide(const SizedBox(width: 5.0))
-                                .around(const SizedBox(width: 5.0)),
+                                .divide(SizedBox(width: 5.0))
+                                .around(SizedBox(width: 5.0)),
                           ),
                         ),
                       ),
@@ -648,12 +652,12 @@ class _DoctorProfileWidgetState extends State<DoctorProfileWidget> {
                         model: _model.doctorFilesComponentModel,
                         updateCallback: () => safeSetState(() {}),
                         child: DoctorFilesComponentWidget(
-                          docRef: widget.docRef!,
+                          docRef: widget!.docRef!,
                         ),
                       ),
                     ]
-                        .divide(const SizedBox(height: 10.0))
-                        .around(const SizedBox(height: 10.0)),
+                        .divide(SizedBox(height: 10.0))
+                        .around(SizedBox(height: 10.0)),
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/data_loading_components/load_cities_coponent/load_cities_coponent_widget.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -10,6 +11,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/calender_component_2/calender_component2_widget.dart';
 import '/pages/upload_photo/upload_photo_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -43,9 +45,9 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget.cusRef != null) {
+      if (widget!.cusRef != null) {
         _model.returnedReadCustomer =
-            await CusRecord.getDocumentOnce(widget.cusRef!);
+            await CusRecord.getDocumentOnce(widget!.cusRef!);
         _model.cusDocument = _model.returnedReadCustomer;
         safeSetState(() {});
         _model.cusNmae = _model.cusDocument!.name;
@@ -103,6 +105,9 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
             )
           ];
         });
+      } else {
+        _model.isNewCustomer = true;
+        safeSetState(() {});
       }
     });
 
@@ -172,13 +177,13 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                   ),
                 ],
               ),
-            ].divide(const SizedBox(height: 4.0)),
+            ].divide(SizedBox(height: 4.0)),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SizedBox(
+        body: Container(
           height: double.infinity,
           child: Stack(
             children: [
@@ -195,14 +200,14 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, -1.0),
+                              alignment: AlignmentDirectional(0.0, -1.0),
                               child: Container(
-                                constraints: const BoxConstraints(
+                                constraints: BoxConstraints(
                                   maxWidth: 770.0,
                                 ),
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
                                   child: SingleChildScrollView(
                                     primary: false,
@@ -231,7 +236,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.txtFullNameFieldTextController',
-                                            const Duration(milliseconds: 2000),
+                                            Duration(milliseconds: 2000),
                                             () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
@@ -316,7 +321,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             contentPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
                                             suffixIcon: _model
                                                     .txtFullNameFieldTextController!
@@ -329,7 +334,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           ?.clear();
                                                       safeSetState(() {});
                                                     },
-                                                    child: const Icon(
+                                                    child: Icon(
                                                       Icons.clear,
                                                       size: 22,
                                                     ),
@@ -364,7 +369,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.txtMobileTextController',
-                                            const Duration(milliseconds: 2000),
+                                            Duration(milliseconds: 2000),
                                             () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
@@ -445,7 +450,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             contentPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
                                             suffixIcon: _model
                                                     .txtMobileTextController!
@@ -458,7 +463,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           ?.clear();
                                                       safeSetState(() {});
                                                     },
-                                                    child: const Icon(
+                                                    child: Icon(
                                                       Icons.clear,
                                                       size: 22,
                                                     ),
@@ -515,7 +520,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     padding:
                                                         MediaQuery.viewInsetsOf(
                                                             context),
-                                                    child: SizedBox(
+                                                    child: Container(
                                                       height: 300.0,
                                                       child:
                                                           CalenderComponent2Widget(
@@ -557,7 +562,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               ),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 5.0, 10.0),
                                               child: Row(
@@ -636,7 +641,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -657,10 +662,10 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         10.0, 10.0, 10.0, 10.0),
                                                 child: FlutterFlowChoiceChips(
@@ -807,7 +812,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 10.0, 0.0, 10.0),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -818,7 +823,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                   BorderRadius.circular(14.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 10.0, 10.0, 10.0),
                                               child: Column(
@@ -921,7 +926,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                         borderWidth: 1.0,
                                                         borderRadius: 0.0,
                                                         margin:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     16.0,
                                                                     4.0,
@@ -1041,7 +1046,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     borderWidth: 1.0,
                                                     borderRadius: 1.0,
                                                     margin:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
                                                                 16.0, 4.0),
                                                     hidesUnderline: true,
@@ -1163,7 +1168,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     borderWidth: 1.0,
                                                     borderRadius: 1.0,
                                                     margin:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
                                                                 16.0, 4.0),
                                                     hidesUnderline: true,
@@ -1288,7 +1293,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     borderWidth: 1.0,
                                                     borderRadius: 1.0,
                                                     margin:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
                                                                 16.0, 4.0),
                                                     hidesUnderline: true,
@@ -1304,7 +1309,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.txtAddressDescTextController',
-                                                      const Duration(
+                                                      Duration(
                                                           milliseconds: 2000),
                                                       () => safeSetState(() {}),
                                                     ),
@@ -1362,7 +1367,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1386,7 +1391,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1410,7 +1415,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1434,7 +1439,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1455,7 +1460,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                                   context)
                                                               .primaryBackground,
                                                       contentPadding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   20.0,
@@ -1480,7 +1485,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                                 safeSetState(
                                                                     () {});
                                                               },
-                                                              child: const Icon(
+                                                              child: Icon(
                                                                 Icons.clear,
                                                                 size: 22,
                                                               ),
@@ -1516,6 +1521,183 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                             ),
                                           ),
                                         ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 12.0, 16.0, 12.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              _model.isValidData = await _model
+                                                  .validateData(context);
+                                              _model.formIsValid = true;
+                                              if (_model.formKey.currentState ==
+                                                      null ||
+                                                  !_model.formKey.currentState!
+                                                      .validate()) {
+                                                safeSetState(() =>
+                                                    _model.formIsValid = false);
+                                                return;
+                                              }
+                                              if (_model.cboCountryCodeValue ==
+                                                  null) {
+                                                _model.formIsValid = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if (_model.cboGovCodeValue ==
+                                                  null) {
+                                                _model.formIsValid = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if (_model.cboZoneCodeValue ==
+                                                  null) {
+                                                _model.formIsValid = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if (_model.cboAreaCodeValue ==
+                                                  null) {
+                                                _model.formIsValid = false;
+                                                safeSetState(() {});
+                                                return;
+                                              }
+                                              if ((_model.formIsValid ==
+                                                      true) &&
+                                                  (_model.isValidData ==
+                                                      true)) {
+                                                _model.savedRef = await _model
+                                                    .createOrUpdateAction(
+                                                        context);
+                                                if (_model.savedRef != null) {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                            'تسجيل البيانات'),
+                                                        content: Text(
+                                                            'تم حفظ البيانات بنجاح'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  _model.isDataSaved = true;
+                                                  _model.cusID =
+                                                      _model.savedRef!.id;
+                                                  safeSetState(() {});
+                                                  FFAppState()
+                                                      .updateCurrentCustomerStruct(
+                                                    (e) => e
+                                                      ..cusDocRef =
+                                                          _model.savedRef,
+                                                  );
+                                                  safeSetState(() {});
+                                                  if (_model.isNewCustomer ==
+                                                      true) {
+                                                    context.pushNamed(
+                                                      'congratultion_customer',
+                                                      queryParameters: {
+                                                        'cusDocument':
+                                                            serializeParam(
+                                                          _model.cusDocument,
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'cusDocument':
+                                                            _model.cusDocument,
+                                                      },
+                                                    );
+                                                  }
+                                                } else {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                            'حفظ البيانات'),
+                                                        content: Text(
+                                                            'خطأ في حفظ البيانات ... من فضلك حاول مةمرة ثانية'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                }
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'تسجيل البيانات'),
+                                                      content: Text(
+                                                          'من فضلك اكمل ادخال البيانات '),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('اوك'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+
+                                              safeSetState(() {});
+                                            },
+                                            text: FFLocalizations.of(context)
+                                                .getText(
+                                              'ov93woap' /* حفظ البانات */,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: double.infinity,
+                                              height: 48.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              elevation: 3.0,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ),
                                         Container(
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
@@ -1525,7 +1707,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     -1.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
@@ -1543,7 +1725,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     -1.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
@@ -1586,15 +1768,9 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                             ],
                                           ),
                                         ),
-                                        wrapWithModel(
-                                          model: _model.loadCitiesCoponentModel,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: const LoadCitiesCoponentWidget(),
-                                        ),
                                       ]
-                                          .divide(const SizedBox(height: 12.0))
-                                          .addToEnd(const SizedBox(height: 32.0)),
+                                          .divide(SizedBox(height: 12.0))
+                                          .addToEnd(SizedBox(height: 32.0)),
                                     ),
                                   ),
                                 ),
@@ -1605,139 +1781,10 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                       ),
                     ),
                     Container(
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 770.0,
                       ),
-                      decoration: const BoxDecoration(),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 12.0, 16.0, 12.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            _model.isValidData =
-                                await _model.validateData(context);
-                            _model.formIsValid = true;
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              safeSetState(() => _model.formIsValid = false);
-                              return;
-                            }
-                            if (_model.cboCountryCodeValue == null) {
-                              _model.formIsValid = false;
-                              safeSetState(() {});
-                              return;
-                            }
-                            if (_model.cboGovCodeValue == null) {
-                              _model.formIsValid = false;
-                              safeSetState(() {});
-                              return;
-                            }
-                            if (_model.cboZoneCodeValue == null) {
-                              _model.formIsValid = false;
-                              safeSetState(() {});
-                              return;
-                            }
-                            if (_model.cboAreaCodeValue == null) {
-                              _model.formIsValid = false;
-                              safeSetState(() {});
-                              return;
-                            }
-                            if ((_model.formIsValid == true) &&
-                                (_model.isValidData == true)) {
-                              _model.savedRef =
-                                  await _model.createOrUpdateAction(context);
-                              if (_model.savedRef != null) {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: const Text('تسجيل البيانات'),
-                                      content: const Text('تم حفظ البيانات بنجاح'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: const Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                _model.isDataSaved = true;
-                                _model.cusID = _model.savedRef!.id;
-                                safeSetState(() {});
-                                FFAppState().updateCurrentCustomerStruct(
-                                  (e) => e..cusDocRef = _model.savedRef,
-                                );
-                                safeSetState(() {});
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: const Text('حفظ البيانات'),
-                                      content: const Text(
-                                          'خطأ في حفظ البيانات ... من فضلك حاول مةمرة ثانية'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: const Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('تسجيل البيانات'),
-                                    content:
-                                        const Text('من فضلك اكمل ادخال البيانات '),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: const Text('اوك'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-
-                            safeSetState(() {});
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            '9mg8oamp' /* حفظ البانات */,
-                          ),
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 48.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
+                      decoration: BoxDecoration(),
                     ),
                   ],
                 ),

@@ -1,9 +1,18 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/doctor_files_component_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/public_components/addrress_component/addrress_component_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'doctor_profile_widget.dart' show DoctorProfileWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DoctorProfileModel extends FlutterFlowModel<DoctorProfileWidget> {
   ///  Local state fields for this page.

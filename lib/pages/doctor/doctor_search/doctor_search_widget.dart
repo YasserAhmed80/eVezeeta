@@ -9,6 +9,7 @@ import '/search/doc_search_item_list_component/doc_search_item_list_component_wi
 import '/search/search_address_component/search_address_component_widget.dart';
 import '/search/search_category_component/search_category_component_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_search_model.dart';
 export 'doctor_search_model.dart';
@@ -57,7 +58,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                     child: Container(
                       width: double.infinity,
                       height: 160.0,
@@ -85,13 +86,13 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                       }
                       List<DocRecord> listViewDocRecordList = snapshot.data!;
                       if (listViewDocRecordList.isEmpty) {
-                        return const EmptyListComponentWidget(
+                        return EmptyListComponentWidget(
                           desc: 'لايوجد بيانات',
                         );
                       }
 
                       return ListView.separated(
-                        padding: const EdgeInsets.fromLTRB(
+                        padding: EdgeInsets.fromLTRB(
                           0,
                           0,
                           0,
@@ -101,7 +102,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: listViewDocRecordList.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 10.0),
+                        separatorBuilder: (_, __) => SizedBox(height: 10.0),
                         itemBuilder: (context, listViewIndex) {
                           final listViewDocRecord =
                               listViewDocRecordList[listViewIndex];
@@ -109,7 +110,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
-                              borderRadius: const BorderRadius.only(
+                              borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(0.0),
                                 bottomRight: Radius.circular(0.0),
                                 topLeft: Radius.circular(0.0),
@@ -132,69 +133,8 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                     ),
                                     docDocumentInput: listViewDocRecord,
                                     docRef: null,
+                                    pageType: 'search',
                                   ),
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 5.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          context.pushNamed(
-                                            'doctor_book_visit',
-                                            queryParameters: {
-                                              'docDocument': serializeParam(
-                                                listViewDocRecord,
-                                                ParamType.Document,
-                                              ),
-                                            }.withoutNulls,
-                                            extra: <String, dynamic>{
-                                              'docDocument': listViewDocRecord,
-                                            },
-                                          );
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '0vljw38e' /* احجز الان */,
-                                        ),
-                                        icon: const Icon(
-                                          Icons.calendar_month,
-                                          size: 15.0,
-                                        ),
-                                        options: FFButtonOptions(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 5.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Cairo',
-                                                    color: Colors.white,
-                                                    fontSize: 12.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ]
-                                      .divide(const SizedBox(width: 5.0))
-                                      .around(const SizedBox(width: 5.0)),
                                 ),
                               ],
                             ),
@@ -211,20 +151,20 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
               height: 150.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(0.0),
                   bottomRight: Radius.circular(0.0),
                   topLeft: Radius.circular(0.0),
                   topRight: Radius.circular(0.0),
                 ),
               ),
-              alignment: const AlignmentDirectional(0.0, -1.0),
+              alignment: AlignmentDirectional(0.0, -1.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -268,7 +208,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                   onTap: () => FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: const SizedBox(
+                                    child: Container(
                                       height: 600.0,
                                       child: SearchAddressComponentWidget(),
                                     ),
@@ -293,7 +233,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                   size: 24.0,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 5.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -324,7 +264,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 5.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -346,7 +286,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                           ),
                         ),
                       ),
-                    ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                    ].divide(SizedBox(width: 5.0)).around(SizedBox(width: 5.0)),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -368,7 +308,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                   onTap: () => FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: const SizedBox(
+                                    child: Container(
                                       height: 600.0,
                                       child: SearchCategoryComponentWidget(),
                                     ),
@@ -393,7 +333,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                   size: 24.0,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 5.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -410,7 +350,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    FFAppState().searchParameters.catDesc,
+                                    '${FFAppState().searchParameters.catDesc}',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -424,7 +364,7 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 5.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -446,22 +386,22 @@ class _DoctorSearchWidgetState extends State<DoctorSearchWidget> {
                           ),
                         ),
                       ),
-                    ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                    ].divide(SizedBox(width: 5.0)).around(SizedBox(width: 5.0)),
                   ),
                   wrapWithModel(
                     model: _model.docSearchItemListComponentModel,
                     updateCallback: () => safeSetState(() {}),
-                    child: const DocSearchItemListComponentWidget(),
+                    child: DocSearchItemListComponentWidget(),
                   ),
-                ].divide(const SizedBox(height: 3.0)),
+                ].divide(SizedBox(height: 3.0)),
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
                 updateCallback: () => safeSetState(() {}),
-                child: const CustomNavbarWidget(),
+                child: CustomNavbarWidget(),
               ),
             ),
           ],

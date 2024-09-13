@@ -1,8 +1,12 @@
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'show_image_model.dart';
 export 'show_image_model.dart';
 
@@ -68,25 +72,25 @@ class _ShowImageWidgetState extends State<ShowImageWidget> {
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: Align(
-          alignment: const AlignmentDirectional(0.0, 0.0),
+          alignment: AlignmentDirectional(0.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 width: double.infinity,
-                constraints: const BoxConstraints(
+                constraints: BoxConstraints(
                   maxWidth: 700.0,
                 ),
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).primaryBackground,
                 ),
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -100,15 +104,15 @@ class _ShowImageWidgetState extends State<ShowImageWidget> {
                         child: FlutterFlowExpandedImageView(
                           image: Image.network(
                             valueOrDefault<String>(
-                              functions.stringToImagePath(widget.imageURL),
+                              functions.stringToImagePath(widget!.imageURL),
                               'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
                             ),
                             fit: BoxFit.contain,
-                            alignment: const Alignment(0.0, 0.0),
+                            alignment: Alignment(0.0, 0.0),
                           ),
                           allowRotation: false,
                           tag: valueOrDefault<String>(
-                            functions.stringToImagePath(widget.imageURL),
+                            functions.stringToImagePath(widget!.imageURL),
                             'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
                           ),
                           useHeroAnimation: true,
@@ -118,7 +122,7 @@ class _ShowImageWidgetState extends State<ShowImageWidget> {
                   },
                   child: Hero(
                     tag: valueOrDefault<String>(
-                      functions.stringToImagePath(widget.imageURL),
+                      functions.stringToImagePath(widget!.imageURL),
                       'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
                     ),
                     transitionOnUserGestures: true,
@@ -126,11 +130,11 @@ class _ShowImageWidgetState extends State<ShowImageWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.network(
                         valueOrDefault<String>(
-                          functions.stringToImagePath(widget.imageURL),
+                          functions.stringToImagePath(widget!.imageURL),
                           'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
                         ),
                         fit: BoxFit.fill,
-                        alignment: const Alignment(0.0, 0.0),
+                        alignment: Alignment(0.0, 0.0),
                       ),
                     ),
                   ),

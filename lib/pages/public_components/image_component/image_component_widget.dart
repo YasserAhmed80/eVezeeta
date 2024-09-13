@@ -1,6 +1,9 @@
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'image_component_model.dart';
 export 'image_component_model.dart';
 
@@ -47,23 +50,26 @@ class _ImageComponentWidgetState extends State<ImageComponentWidget> {
       height: 100.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14.0),
+        border: Border.all(
+          color: FlutterFlowTheme.of(context).alternate,
+        ),
       ),
       child: Align(
-        alignment: const AlignmentDirectional(0.0, 0.0),
+        alignment: AlignmentDirectional(0.0, 0.0),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+          padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
           child: InkWell(
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              if (widget.imgRef != null && widget.imgRef != '') {
+              if (widget!.imgRef != null && widget!.imgRef != '') {
                 context.pushNamed(
                   'Show_image',
                   queryParameters: {
                     'imageURL': serializeParam(
-                      widget.imgRef,
+                      widget!.imgRef,
                       ParamType.String,
                     ),
                   }.withoutNulls,
@@ -73,7 +79,7 @@ class _ImageComponentWidgetState extends State<ImageComponentWidget> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5.0),
               child: Image.network(
-                functions.stringToImagePath(widget.imgRef)!,
+                functions.stringToImagePath(widget!.imgRef)!,
                 width: 300.0,
                 height: 200.0,
                 fit: BoxFit.cover,

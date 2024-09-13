@@ -1,5 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/data_loading_components/load_categories_component/load_categories_component_widget.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -10,6 +11,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
 import '/pages/public_components/switch_title_component/switch_title_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -42,11 +44,11 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget.docDocument != null) {
+      if (widget!.docDocument != null) {
         // doc name
         safeSetState(() {
           _model.txtFullNameFieldTextController?.text = valueOrDefault<String>(
-            widget.docDocument?.name,
+            widget!.docDocument?.name,
             'nn',
           );
           _model.txtFullNameFieldTextController?.selection =
@@ -56,7 +58,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
         // doc title
         safeSetState(() {
           _model.txtDocTitleFieldTextController?.text = valueOrDefault<String>(
-            widget.docDocument?.title,
+            widget!.docDocument?.title,
             'nn',
           );
           _model.txtDocTitleFieldTextController?.selection =
@@ -66,7 +68,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
         // doc about
         safeSetState(() {
           _model.txtAboutFieldTextController?.text = valueOrDefault<String>(
-            widget.docDocument?.about,
+            widget!.docDocument?.about,
             'nn',
           );
           _model.txtAboutFieldTextController?.selection =
@@ -76,25 +78,29 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
         // doc cat cde
         safeSetState(() {
           _model.docCategoryValueController?.value = valueOrDefault<int>(
-            widget.docDocument?.catId,
+            widget!.docDocument?.catId,
             -1,
           );
         });
         // doc sub cat codes
         _model.docSubCategory =
-            widget.docDocument!.subCatId.toList().cast<int>();
+            widget!.docDocument!.subCatId.toList().cast<int>();
         _model.docType = valueOrDefault<int>(
-          widget.docDocument?.gender,
+          widget!.docDocument?.gender,
           -1,
         );
         _model.docTitleCde = valueOrDefault<int>(
-          widget.docDocument?.titleId,
+          widget!.docDocument?.titleId,
           -1,
         );
         _model.docCategory = valueOrDefault<int>(
-          widget.docDocument?.catId,
+          widget!.docDocument?.catId,
           -1,
         );
+        _model.curDoctor = widget!.docDocument;
+        safeSetState(() {});
+      } else {
+        _model.isNewDoctor = true;
         safeSetState(() {});
       }
     });
@@ -165,13 +171,13 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                   ),
                 ],
               ),
-            ].divide(const SizedBox(height: 4.0)),
+            ].divide(SizedBox(height: 4.0)),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SizedBox(
+        body: Container(
           height: double.infinity,
           child: Stack(
             children: [
@@ -188,14 +194,14 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, -1.0),
+                              alignment: AlignmentDirectional(0.0, -1.0),
                               child: Container(
-                                constraints: const BoxConstraints(
+                                constraints: BoxConstraints(
                                   maxWidth: 770.0,
                                 ),
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
                                   child: SingleChildScrollView(
                                     primary: false,
@@ -223,7 +229,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.txtFullNameFieldTextController',
-                                            const Duration(milliseconds: 2000),
+                                            Duration(milliseconds: 2000),
                                             () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
@@ -304,7 +310,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             contentPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
                                             suffixIcon: _model
                                                     .txtFullNameFieldTextController!
@@ -317,7 +323,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                           ?.clear();
                                                       safeSetState(() {});
                                                     },
-                                                    child: const Icon(
+                                                    child: Icon(
                                                       Icons.clear,
                                                       size: 22,
                                                     ),
@@ -357,7 +363,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Container(
                                             height: 50.0,
                                             decoration: BoxDecoration(
@@ -378,10 +384,10 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         10.0, 0.0, 10.0, 0.0),
                                                 child: FlutterFlowChoiceChips(
@@ -481,9 +487,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       FormFieldController<
                                                           List<String>>(
                                                     [
-                                                      FFAppState()
-                                                                  .currentDoctor
-                                                                  .dbDocRef !=
+                                                      widget!.docDocument !=
                                                               null
                                                           ? valueOrDefault<
                                                               String>(
@@ -520,7 +524,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Container(
                                             width: double.infinity,
                                             height: 50.0,
@@ -542,10 +546,10 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         10.0, 0.0, 10.0, 0.0),
                                                 child: FlutterFlowChoiceChips(
@@ -645,9 +649,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       FormFieldController<
                                                           List<String>>(
                                                     [
-                                                      FFAppState()
-                                                                  .currentDoctor
-                                                                  .dbDocRef !=
+                                                      widget!.docDocument !=
                                                               null
                                                           ? functions
                                                               .getDocTitleItem(
@@ -675,7 +677,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.txtDocTitleFieldTextController',
-                                            const Duration(milliseconds: 2000),
+                                            Duration(milliseconds: 2000),
                                             () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
@@ -756,7 +758,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             contentPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
                                             suffixIcon: _model
                                                     .txtDocTitleFieldTextController!
@@ -769,7 +771,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                           ?.clear();
                                                       safeSetState(() {});
                                                     },
-                                                    child: const Icon(
+                                                    child: Icon(
                                                       Icons.clear,
                                                       size: 22,
                                                     ),
@@ -812,7 +814,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.txtAboutFieldTextController',
-                                            const Duration(milliseconds: 2000),
+                                            Duration(milliseconds: 2000),
                                             () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
@@ -893,7 +895,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             contentPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
                                             suffixIcon: _model
                                                     .txtAboutFieldTextController!
@@ -906,7 +908,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                           ?.clear();
                                                       safeSetState(() {});
                                                     },
-                                                    child: const Icon(
+                                                    child: Icon(
                                                       Icons.clear,
                                                       size: 22,
                                                     ),
@@ -1015,7 +1017,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                           borderWidth: 0.5,
                                           borderRadius: 8.0,
                                           margin:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 4.0, 16.0, 4.0),
                                           hidesUnderline: true,
                                           isOverButton: true,
@@ -1044,7 +1046,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                     ?.toList() ??
                                                 [];
                                             if (subCatList.isEmpty) {
-                                              return const SizedBox(
+                                              return Container(
                                                 height: 200.0,
                                                 child:
                                                     EmptyListComponentWidget(),
@@ -1058,7 +1060,7 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                               scrollDirection: Axis.vertical,
                                               itemCount: subCatList.length,
                                               separatorBuilder: (_, __) =>
-                                                  const SizedBox(height: 2.0),
+                                                  SizedBox(height: 2.0),
                                               itemBuilder:
                                                   (context, subCatListIndex) {
                                                 final subCatListItem =
@@ -1102,176 +1104,242 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                             );
                                           },
                                         ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 12.0, 16.0, 12.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              // check doc type and title selection
+                                              _model.isTypeSelected =
+                                                  _model.docType == -1
+                                                      ? false
+                                                      : true;
+                                              _model.isTitleSelected =
+                                                  _model.docTitleCde == -1
+                                                      ? false
+                                                      : true;
+                                              safeSetState(() {});
+                                              if (_model.formKey.currentState ==
+                                                      null ||
+                                                  !_model.formKey.currentState!
+                                                      .validate()) {
+                                                return;
+                                              }
+                                              if (_model.docCategoryValue ==
+                                                  null) {
+                                                return;
+                                              }
+                                              // update page state
+                                              _model.docName = _model
+                                                  .txtFullNameFieldTextController
+                                                  .text;
+                                              _model.docTitleDesc = _model
+                                                  .txtDocTitleFieldTextController
+                                                  .text;
+                                              _model.docAbout = _model
+                                                  .txtAboutFieldTextController
+                                                  .text;
+                                              safeSetState(() {});
+                                              if (widget!.docDocument != null) {
+                                                // save model to DB
+
+                                                await widget!
+                                                    .docDocument!.reference
+                                                    .update({
+                                                  ...createDocRecordData(
+                                                    name: _model
+                                                        .txtFullNameFieldTextController
+                                                        .text,
+                                                    gender: _model.docType,
+                                                    catId: _model.docCategory,
+                                                    titleId: _model.docTitleCde,
+                                                    title: _model.docTitleDesc,
+                                                    about: _model.docAbout,
+                                                    uAt: functions
+                                                        .getCurrentDate(),
+                                                  ),
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'sub_cat_id':
+                                                          _model.docSubCategory,
+                                                    },
+                                                  ),
+                                                });
+                                                FFAppState()
+                                                    .updateCurrentDoctorStruct(
+                                                  (e) => e
+                                                    ..dbDocRef = widget!
+                                                        .docDocument?.reference,
+                                                );
+                                                safeSetState(() {});
+                                              } else {
+                                                // save model to DB
+
+                                                var docRecordReference =
+                                                    DocRecord.collection.doc();
+                                                await docRecordReference.set({
+                                                  ...createDocRecordData(
+                                                    name: _model
+                                                        .txtFullNameFieldTextController
+                                                        .text,
+                                                    gender: _model.docType,
+                                                    catId: _model.docCategory,
+                                                    titleId: _model.docTitleCde,
+                                                    title: _model
+                                                        .txtDocTitleFieldTextController
+                                                        .text,
+                                                    about: _model
+                                                        .txtAboutFieldTextController
+                                                        .text,
+                                                    cAt: functions
+                                                        .getCurrentDate(),
+                                                    aCon: 1,
+                                                    aGov: -1,
+                                                    aZone: -1,
+                                                    aArea: -1,
+                                                    aAddr: ' ',
+                                                  ),
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'sub_cat_id':
+                                                          _model.docSubCategory,
+                                                    },
+                                                  ),
+                                                });
+                                                _model.createdDoc = DocRecord
+                                                    .getDocumentFromData({
+                                                  ...createDocRecordData(
+                                                    name: _model
+                                                        .txtFullNameFieldTextController
+                                                        .text,
+                                                    gender: _model.docType,
+                                                    catId: _model.docCategory,
+                                                    titleId: _model.docTitleCde,
+                                                    title: _model
+                                                        .txtDocTitleFieldTextController
+                                                        .text,
+                                                    about: _model
+                                                        .txtAboutFieldTextController
+                                                        .text,
+                                                    cAt: functions
+                                                        .getCurrentDate(),
+                                                    aCon: 1,
+                                                    aGov: -1,
+                                                    aZone: -1,
+                                                    aArea: -1,
+                                                    aAddr: ' ',
+                                                  ),
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'sub_cat_id':
+                                                          _model.docSubCategory,
+                                                    },
+                                                  ),
+                                                }, docRecordReference);
+                                                FFAppState()
+                                                    .updateCurrentDoctorStruct(
+                                                  (e) => e
+                                                    ..dbDocRef = _model
+                                                        .createdDoc?.reference,
+                                                );
+                                                safeSetState(() {});
+                                                _model.curDoctor =
+                                                    _model.createdDoc;
+                                                safeSetState(() {});
+                                              }
+
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'حفظ بيانات الطبيب'),
+                                                    content: Text(
+                                                        'تم حفظ البيانات بنجاح'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              if (_model.isNewDoctor == true) {
+                                                context.pushNamed(
+                                                  'congratultion_doctor',
+                                                  queryParameters: {
+                                                    'docDocument':
+                                                        serializeParam(
+                                                      _model.curDoctor,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'docDocument':
+                                                        _model.curDoctor,
+                                                  },
+                                                );
+
+                                                _model.isNewDoctor = false;
+                                                safeSetState(() {});
+                                              }
+
+                                              safeSetState(() {});
+                                            },
+                                            text: FFLocalizations.of(context)
+                                                .getText(
+                                              'oqigkybd' /* حفظ البانات */,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: double.infinity,
+                                              height: 48.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Cairo',
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              elevation: 3.0,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ),
                                       ]
-                                          .divide(const SizedBox(height: 12.0))
-                                          .addToEnd(const SizedBox(height: 32.0)),
+                                          .divide(SizedBox(height: 12.0))
+                                          .addToEnd(SizedBox(height: 32.0)),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            wrapWithModel(
-                              model: _model.loadCategoriesComponentModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: const LoadCategoriesComponentWidget(),
                             ),
                           ],
                         ),
                       ),
                     ),
                     Container(
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 770.0,
                       ),
-                      decoration: const BoxDecoration(),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 12.0, 16.0, 12.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            // check doc type and title selection
-                            _model.isTypeSelected =
-                                _model.docType == -1 ? false : true;
-                            _model.isTitleSelected =
-                                _model.docTitleCde == -1 ? false : true;
-                            safeSetState(() {});
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              return;
-                            }
-                            if (_model.docCategoryValue == null) {
-                              return;
-                            }
-                            // update page state
-                            _model.docName =
-                                _model.txtFullNameFieldTextController.text;
-                            _model.docTitleDesc =
-                                _model.txtDocTitleFieldTextController.text;
-                            _model.docAbout =
-                                _model.txtAboutFieldTextController.text;
-                            safeSetState(() {});
-                            if (widget.docDocument != null) {
-                              // save model to DB
-
-                              await widget.docDocument!.reference.update({
-                                ...createDocRecordData(
-                                  name: _model
-                                      .txtFullNameFieldTextController.text,
-                                  gender: _model.docType,
-                                  catId: _model.docCategory,
-                                  titleId: _model.docTitleCde,
-                                  title: _model.docTitleDesc,
-                                  about: _model.docAbout,
-                                  uAt: functions.getCurrentDate(),
-                                ),
-                                ...mapToFirestore(
-                                  {
-                                    'sub_cat_id': _model.docSubCategory,
-                                  },
-                                ),
-                              });
-                              FFAppState().updateCurrentDoctorStruct(
-                                (e) => e
-                                  ..dbDocRef = widget.docDocument?.reference,
-                              );
-                              safeSetState(() {});
-                            } else {
-                              // save model to DB
-
-                              var docRecordReference =
-                                  DocRecord.collection.doc();
-                              await docRecordReference.set({
-                                ...createDocRecordData(
-                                  name: _model
-                                      .txtFullNameFieldTextController.text,
-                                  gender: _model.docType,
-                                  catId: _model.docCategory,
-                                  titleId: _model.docTitleCde,
-                                  title: _model
-                                      .txtDocTitleFieldTextController.text,
-                                  about:
-                                      _model.txtAboutFieldTextController.text,
-                                  cAt: functions.getCurrentDate(),
-                                ),
-                                ...mapToFirestore(
-                                  {
-                                    'sub_cat_id': _model.docSubCategory,
-                                  },
-                                ),
-                              });
-                              _model.createdDoc =
-                                  DocRecord.getDocumentFromData({
-                                ...createDocRecordData(
-                                  name: _model
-                                      .txtFullNameFieldTextController.text,
-                                  gender: _model.docType,
-                                  catId: _model.docCategory,
-                                  titleId: _model.docTitleCde,
-                                  title: _model
-                                      .txtDocTitleFieldTextController.text,
-                                  about:
-                                      _model.txtAboutFieldTextController.text,
-                                  cAt: functions.getCurrentDate(),
-                                ),
-                                ...mapToFirestore(
-                                  {
-                                    'sub_cat_id': _model.docSubCategory,
-                                  },
-                                ),
-                              }, docRecordReference);
-                              FFAppState().updateCurrentDoctorStruct(
-                                (e) =>
-                                    e..dbDocRef = _model.createdDoc?.reference,
-                              );
-                              safeSetState(() {});
-                            }
-
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: const Text('حفظ بيانات الطبيب'),
-                                  content: const Text('تم حفظ البيانات بنجاح'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: const Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-
-                            safeSetState(() {});
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'r2angc5b' /* حفظ البانات */,
-                          ),
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 48.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
+                      decoration: BoxDecoration(),
                     ),
                   ],
                 ),

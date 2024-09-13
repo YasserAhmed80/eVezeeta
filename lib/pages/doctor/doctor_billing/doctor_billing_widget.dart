@@ -1,11 +1,15 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_billing_model.dart';
 export 'doctor_billing_model.dart';
@@ -35,7 +39,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       // set from and to date
-      _model.fromDate = widget.docDocument?.sFDate;
+      _model.fromDate = widget!.docDocument?.sFDate;
       _model.toDate = _model.toDate;
       safeSetState(() {});
       // get booking data
@@ -43,7 +47,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
         queryBuilder: (docBookedTimeRecord) => docBookedTimeRecord
             .where(
               'doc_ref',
-              isEqualTo: widget.docDocument?.reference,
+              isEqualTo: widget!.docDocument?.reference,
             )
             .where(
               'date',
@@ -64,14 +68,14 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
         0,
       );
       safeSetState(() {});
-      _model.fromDate = widget.docDocument?.sFDate;
-      _model.toDate = widget.docDocument?.sToDate;
+      _model.fromDate = widget!.docDocument?.sFDate;
+      _model.toDate = widget!.docDocument?.sToDate;
       _model.subscriptionFee = valueOrDefault<int>(
-        widget.docDocument?.sCost,
+        widget!.docDocument?.sCost,
         0,
       );
       _model.feePerBook = valueOrDefault<int>(
-        widget.docDocument?.sFee,
+        widget!.docDocument?.sFee,
         0,
       );
       _model.totFees = valueOrDefault<int>(
@@ -80,7 +84,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
               0,
             ) *
             valueOrDefault<int>(
-              widget.docDocument?.sFee,
+              widget!.docDocument?.sFee,
               0,
             ),
         0,
@@ -130,7 +134,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'mu62r1ss' /* الفاتورة الحالية */,
@@ -159,7 +163,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 1.0,
         ),
@@ -170,18 +174,18 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
             children: [
               Expanded(
                 child: Align(
-                  alignment: const AlignmentDirectional(0.0, -1.0),
+                  alignment: AlignmentDirectional(0.0, -1.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 12.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 12.0),
                     child: Container(
                       width: double.infinity,
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 770.0,
                       ),
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(0.0),
                           bottomRight: Radius.circular(0.0),
                           topLeft: Radius.circular(0.0),
@@ -190,19 +194,19 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                       ),
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
-                                  borderRadius: const BorderRadius.only(
+                                  borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(0.0),
                                     bottomRight: Radius.circular(0.0),
                                     topLeft: Radius.circular(0.0),
@@ -210,7 +214,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 5.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -382,9 +386,9 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                                   BorderRadius.circular(5.0),
                                             ),
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 1.0, 10.0, 1.0),
                                               child: Text(
@@ -429,14 +433,14 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
-                                  borderRadius: const BorderRadius.only(
+                                  borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(0.0),
                                     bottomRight: Radius.circular(0.0),
                                     topLeft: Radius.circular(0.0),
@@ -444,7 +448,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 5.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -556,7 +560,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               valueOrDefault<String>(
@@ -590,7 +594,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -627,7 +631,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -685,7 +689,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Container(
                                 width: double.infinity,
@@ -700,7 +704,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 15.0, 5.0, 15.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -724,7 +728,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               valueOrDefault<String>(
@@ -748,7 +752,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -785,7 +789,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -839,7 +843,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 50.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -855,10 +859,10 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                       ),
                                       options: FFButtonOptions(
                                         height: 40.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .secondary,
@@ -870,7 +874,7 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                                               letterSpacing: 0.0,
                                             ),
                                         elevation: 3.0,
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),
@@ -883,8 +887,8 @@ class _DoctorBillingWidgetState extends State<DoctorBillingWidget> {
                               ),
                             ),
                           ]
-                              .divide(const SizedBox(height: 5.0))
-                              .around(const SizedBox(height: 5.0)),
+                              .divide(SizedBox(height: 5.0))
+                              .around(SizedBox(height: 5.0)),
                         ),
                       ),
                     ),

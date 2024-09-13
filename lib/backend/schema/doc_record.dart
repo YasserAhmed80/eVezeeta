@@ -3,15 +3,17 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class DocRecord extends FirestoreRecord {
   DocRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -155,6 +157,11 @@ class DocRecord extends FirestoreRecord {
   DateTime? get uAt => _uAt;
   bool hasUAt() => _uAt != null;
 
+  // "code" field.
+  String? _code;
+  String get code => _code ?? '';
+  bool hasCode() => _code != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _gender = castToType<int>(snapshotData['gender']);
@@ -184,6 +191,7 @@ class DocRecord extends FirestoreRecord {
     _sFee = castToType<int>(snapshotData['s_fee']);
     _cAt = snapshotData['c_at'] as DateTime?;
     _uAt = snapshotData['u_at'] as DateTime?;
+    _code = snapshotData['code'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -247,6 +255,7 @@ Map<String, dynamic> createDocRecordData({
   int? sFee,
   DateTime? cAt,
   DateTime? uAt,
+  String? code,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -277,6 +286,7 @@ Map<String, dynamic> createDocRecordData({
       's_fee': sFee,
       'c_at': cAt,
       'u_at': uAt,
+      'code': code,
     }.withoutNulls,
   );
 
@@ -316,7 +326,8 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e1?.sCost == e2?.sCost &&
         e1?.sFee == e2?.sFee &&
         e1?.cAt == e2?.cAt &&
-        e1?.uAt == e2?.uAt;
+        e1?.uAt == e2?.uAt &&
+        e1?.code == e2?.code;
   }
 
   @override
@@ -348,7 +359,8 @@ class DocRecordDocumentEquality implements Equality<DocRecord> {
         e?.sCost,
         e?.sFee,
         e?.cAt,
-        e?.uAt
+        e?.uAt,
+        e?.code
       ]);
 
   @override

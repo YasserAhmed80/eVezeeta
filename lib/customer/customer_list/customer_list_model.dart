@@ -1,9 +1,18 @@
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
+import '/pages/public_components/addrress_component/addrress_component_widget.dart';
+import '/pages/public_components/image_component/image_component_widget.dart';
+import '/pages/public_components/phone_icon_component/phone_icon_component_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'customer_list_widget.dart' show CustomerListWidget;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:provider/provider.dart';
 
 class CustomerListModel extends FlutterFlowModel<CustomerListWidget> {
   ///  State fields for stateful widgets in this page.
@@ -24,9 +33,7 @@ class CustomerListModel extends FlutterFlowModel<CustomerListWidget> {
 
   @override
   void dispose() {
-    for (var s in listViewStreamSubscriptions) {
-      s?.cancel();
-    }
+    listViewStreamSubscriptions.forEach((s) => s?.cancel());
     listViewPagingController?.dispose();
 
     customNavbarModel.dispose();

@@ -3,15 +3,17 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class CusRecord extends FirestoreRecord {
   CusRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -75,6 +77,11 @@ class CusRecord extends FirestoreRecord {
   DateTime? get uAt => _uAt;
   bool hasUAt() => _uAt != null;
 
+  // "code" field.
+  String? _code;
+  String get code => _code ?? '';
+  bool hasCode() => _code != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _tel = snapshotData['tel'] as String?;
@@ -88,6 +95,7 @@ class CusRecord extends FirestoreRecord {
     _img = snapshotData['img'] as String?;
     _cAt = snapshotData['c_at'] as DateTime?;
     _uAt = snapshotData['u_at'] as DateTime?;
+    _code = snapshotData['code'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -136,6 +144,7 @@ Map<String, dynamic> createCusRecordData({
   String? img,
   DateTime? cAt,
   DateTime? uAt,
+  String? code,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -151,6 +160,7 @@ Map<String, dynamic> createCusRecordData({
       'img': img,
       'c_at': cAt,
       'u_at': uAt,
+      'code': code,
     }.withoutNulls,
   );
 
@@ -173,7 +183,8 @@ class CusRecordDocumentEquality implements Equality<CusRecord> {
         e1?.addr == e2?.addr &&
         e1?.img == e2?.img &&
         e1?.cAt == e2?.cAt &&
-        e1?.uAt == e2?.uAt;
+        e1?.uAt == e2?.uAt &&
+        e1?.code == e2?.code;
   }
 
   @override
@@ -189,7 +200,8 @@ class CusRecordDocumentEquality implements Equality<CusRecord> {
         e?.addr,
         e?.img,
         e?.cAt,
-        e?.uAt
+        e?.uAt,
+        e?.code
       ]);
 
   @override

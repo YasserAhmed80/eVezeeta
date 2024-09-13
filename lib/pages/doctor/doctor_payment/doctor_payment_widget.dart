@@ -1,12 +1,15 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_payment_model.dart';
 export 'doctor_payment_model.dart';
@@ -16,7 +19,7 @@ class DoctorPaymentWidget extends StatefulWidget {
     super.key,
     int? subsrciptionStatus,
     required this.docDocument,
-  }) : subsrciptionStatus = subsrciptionStatus ?? 1;
+  }) : this.subsrciptionStatus = subsrciptionStatus ?? 1;
 
   final int subsrciptionStatus;
   final DocRecord? docDocument;
@@ -44,7 +47,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
       _model.priceAmount = _model.returnedSubFees?.monthlyCost;
       _model.feePerBook = _model.returnedSubFees?.bookFee;
       safeSetState(() {});
-      if (widget.subsrciptionStatus == 1) {
+      if (widget!.subsrciptionStatus == 1) {
         _model.fromDate = functions.getCurrentDate();
         _model.toDate = functions.addMonths(_model.fromDate, 1);
         _model.priceAmount = FFAppState().subscrptionFee;
@@ -99,7 +102,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
             children: [
               Expanded(
                 child: Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       '4iqlx6x3' /* تسجيل الاشتراك */,
@@ -128,7 +131,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 1.0,
         ),
@@ -137,19 +140,19 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
           children: [
             Expanded(
               child: Align(
-                alignment: const AlignmentDirectional(0.0, -1.0),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(10.0, 4.0, 10.0, 12.0),
+                      EdgeInsetsDirectional.fromSTEB(10.0, 4.0, 10.0, 12.0),
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    constraints: const BoxConstraints(
+                    constraints: BoxConstraints(
                       maxWidth: 770.0,
                     ),
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(0.0),
                         bottomRight: Radius.circular(0.0),
                         topLeft: Radius.circular(0.0),
@@ -161,7 +164,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Container(
                               width: double.infinity,
@@ -171,7 +174,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                 borderRadius: BorderRadius.circular(14.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -199,7 +202,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 2.0, 10.0, 2.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -443,7 +446,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Container(
                               decoration: BoxDecoration(
@@ -455,7 +458,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 10.0, 5.0, 10.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -464,7 +467,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                       children: [
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'w17e4nu9' /* هل يوجد معكك كود خصم */,
@@ -496,10 +499,10 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                           options: FFButtonOptions(
                                             height: 40.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -513,7 +516,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                                       letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -535,7 +538,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -543,7 +546,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
@@ -562,7 +565,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 5.0, 0.0),
                                                   child: Text(
@@ -592,7 +595,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -600,7 +603,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
@@ -619,7 +622,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 5.0, 0.0),
                                                   child: Text(
@@ -655,7 +658,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Container(
                               width: double.infinity,
@@ -670,7 +673,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                 ),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -735,7 +738,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                   .secondaryBackground,
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -785,14 +788,14 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                       ),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 20.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 5.0, 5.0, 5.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -866,14 +869,14 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                       ),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 20.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 5.0, 5.0, 5.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -922,12 +925,12 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                 ),
                               ),
                             ]
-                                .divide(const SizedBox(width: 10.0))
-                                .addToStart(const SizedBox(width: 5.0))
-                                .addToEnd(const SizedBox(width: 5.0)),
+                                .divide(SizedBox(width: 10.0))
+                                .addToStart(SizedBox(width: 5.0))
+                                .addToEnd(SizedBox(width: 5.0)),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Container(
                               decoration: BoxDecoration(
@@ -939,7 +942,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 10.0, 5.0, 10.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -948,7 +951,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                       children: [
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'z0i4kvhc' /* ادخل كود الدفع */,
@@ -965,7 +968,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                         Expanded(
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 8.0, 0.0),
                                             child: TextFormField(
                                               controller: _model.textController,
@@ -1061,10 +1064,10 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                           options: FFButtonOptions(
                                             height: 40.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -1078,7 +1081,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                                       letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -1094,7 +1097,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 50.0, 0.0, 50.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -1110,8 +1113,8 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
                                                     title:
-                                                        const Text('تاكيد الاستراك'),
-                                                    content: const Text(
+                                                        Text('تاكيد الاستراك'),
+                                                    content: Text(
                                                         'سوف يتم تأكيد اشتراكك خلال ثواني'),
                                                     actions: [
                                                       TextButton(
@@ -1119,14 +1122,14 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                                             Navigator.pop(
                                                                 alertDialogContext,
                                                                 false),
-                                                        child: const Text('الفاء'),
+                                                        child: Text('الفاء'),
                                                       ),
                                                       TextButton(
                                                         onPressed: () =>
                                                             Navigator.pop(
                                                                 alertDialogContext,
                                                                 true),
-                                                        child: const Text('تأكيد'),
+                                                        child: Text('تأكيد'),
                                                       ),
                                                     ],
                                                   );
@@ -1146,11 +1149,11 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                               payRef: _model.payReference,
                                               discount: _model.discountAmount,
                                               feePerBook: _model.feePerBook,
-                                              docRef: widget
+                                              docRef: widget!
                                                   .docDocument?.reference,
                                             ));
 
-                                        await widget.docDocument!.reference
+                                        await widget!.docDocument!.reference
                                             .update(createDocRecordData(
                                           freqCde: 12,
                                           sFDate: _model.fromDate,
@@ -1169,15 +1172,15 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: const Text('تم الاشتراك'),
+                                              title: Text('تم الاشتراك'),
                                               content:
-                                                  const Text('تم الاشتراك بنجاح'),
+                                                  Text('تم الاشتراك بنجاح'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: const Text('اوك'),
+                                                  child: Text('اوك'),
                                                 ),
                                               ],
                                             );
@@ -1190,10 +1193,10 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                     ),
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: FlutterFlowTheme.of(context)
                                           .secondary,
@@ -1205,7 +1208,7 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -1217,8 +1220,8 @@ class _DoctorPaymentWidgetState extends State<DoctorPaymentWidget> {
                             ),
                           ),
                         ]
-                            .divide(const SizedBox(height: 5.0))
-                            .around(const SizedBox(height: 5.0)),
+                            .divide(SizedBox(height: 5.0))
+                            .around(SizedBox(height: 5.0)),
                       ),
                     ),
                   ),

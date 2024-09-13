@@ -3,8 +3,11 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'day_booking_component_model.dart';
 export 'day_booking_component_model.dart';
@@ -15,7 +18,7 @@ class DayBookingComponentWidget extends StatefulWidget {
     this.dayBookItem,
     required this.selectedHourAction,
     int? avgCountPerHour,
-  }) : avgCountPerHour = avgCountPerHour ?? 1;
+  }) : this.avgCountPerHour = avgCountPerHour ?? 1;
 
   final DtDaysListStruct? dayBookItem;
   final Future Function(DtHourStruct selectedHourItem)? selectedHourAction;
@@ -84,9 +87,9 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
             Container(
               width: double.infinity,
               height: 50.0,
-              decoration: const BoxDecoration(),
+              decoration: BoxDecoration(),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -100,7 +103,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                       valueOrDefault<String>(
                         dateTimeFormat(
                           "d/M/y",
-                          widget.dayBookItem?.dayValue,
+                          widget!.dayBookItem?.dayValue,
                           locale: FFLocalizations.of(context).languageCode,
                         ),
                         'none',
@@ -111,7 +114,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                         fontSize: 16.0,
                       ),
                     ),
-                  ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                  ].divide(SizedBox(width: 5.0)).around(SizedBox(width: 5.0)),
                 ),
               ),
             ),
@@ -123,7 +126,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -131,7 +134,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                 FlutterFlowTheme.of(context).primaryBackground,
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 5.0, 5.0, 5.0, 5.0),
                             child: Builder(
                               builder: (context) {
@@ -158,7 +161,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                             if (hourItemItem.statusCde ==
                                                 EnumBookHourStatus.inActive) {
                                               return Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 2.0, 0.0, 2.0),
                                                 child: Container(
@@ -225,7 +228,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                             } else if (hourItemItem.statusCde ==
                                                 EnumBookHourStatus.Active) {
                                               return Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 2.0, 0.0, 2.0),
                                                 child: InkWell(
@@ -319,7 +322,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                             } else if (hourItemItem.statusCde ==
                                                 EnumBookHourStatus.Booked) {
                                               return Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 2.0, 0.0, 2.0),
                                                 child: Container(
@@ -372,7 +375,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       10.0,
                                                                       0.0,
@@ -407,16 +410,16 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                         ),
                                                       ),
                                                     ]
-                                                        .addToStart(const SizedBox(
+                                                        .addToStart(SizedBox(
                                                             height: 2.0))
-                                                        .addToEnd(const SizedBox(
+                                                        .addToEnd(SizedBox(
                                                             height: 2.0)),
                                                   ),
                                                 ),
                                               );
                                             } else {
                                               return Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 2.0, 0.0, 2.0),
                                                 child: InkWell(
@@ -461,12 +464,12 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                                   context)
                                                               .primary
                                                         ],
-                                                        stops: const [0.0, 1.0],
+                                                        stops: [0.0, 1.0],
                                                         begin:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.0, -1.0),
                                                         end:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0, 1.0),
                                                       ),
                                                       borderRadius:
@@ -511,7 +514,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         5.0,
                                                                         0.0,
@@ -525,7 +528,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                                 Text(
                                                                   valueOrDefault<
                                                                       String>(
-                                                                    widget
+                                                                    widget!
                                                                         .avgCountPerHour
                                                                         .toString(),
                                                                     '1',
@@ -591,9 +594,9 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                                                           ),
                                                         ),
                                                       ]
-                                                          .addToStart(const SizedBox(
+                                                          .addToStart(SizedBox(
                                                               height: 2.0))
-                                                          .addToEnd(const SizedBox(
+                                                          .addToEnd(SizedBox(
                                                               height: 2.0)),
                                                     ),
                                                   ),
@@ -615,7 +618,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                   );
                 } else {
                   return Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       height: 88.0,
@@ -623,7 +626,7 @@ class _DayBookingComponentWidgetState extends State<DayBookingComponentWidget>
                         color: FlutterFlowTheme.of(context).primaryBackground,
                       ),
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'oz3ag78l' /* لم يتم اخيار هذا اليوم */,

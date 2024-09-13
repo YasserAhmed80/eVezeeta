@@ -3,7 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
+import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class DtBookedItemStruct extends FFFirebaseStruct {
@@ -16,6 +19,15 @@ class DtBookedItemStruct extends FFFirebaseStruct {
     DocumentReference? itemRef,
     DocumentReference? docRef,
     DocumentReference? cusRef,
+    String? cusImage,
+    DateTime? cusDob,
+    String? cancelReason,
+    String? docName,
+    String? docImg,
+    int? docGender,
+    int? price,
+    int? docCatCde,
+    String? docTitleDesc,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _date = date,
         _time = time,
@@ -25,6 +37,15 @@ class DtBookedItemStruct extends FFFirebaseStruct {
         _itemRef = itemRef,
         _docRef = docRef,
         _cusRef = cusRef,
+        _cusImage = cusImage,
+        _cusDob = cusDob,
+        _cancelReason = cancelReason,
+        _docName = docName,
+        _docImg = docImg,
+        _docGender = docGender,
+        _price = price,
+        _docCatCde = docCatCde,
+        _docTitleDesc = docTitleDesc,
         super(firestoreUtilData);
 
   // "date" field.
@@ -85,6 +106,75 @@ class DtBookedItemStruct extends FFFirebaseStruct {
 
   bool hasCusRef() => _cusRef != null;
 
+  // "cus_image" field.
+  String? _cusImage;
+  String get cusImage => _cusImage ?? '';
+  set cusImage(String? val) => _cusImage = val;
+
+  bool hasCusImage() => _cusImage != null;
+
+  // "cus_dob" field.
+  DateTime? _cusDob;
+  DateTime? get cusDob => _cusDob;
+  set cusDob(DateTime? val) => _cusDob = val;
+
+  bool hasCusDob() => _cusDob != null;
+
+  // "cancel_reason" field.
+  String? _cancelReason;
+  String get cancelReason => _cancelReason ?? '';
+  set cancelReason(String? val) => _cancelReason = val;
+
+  bool hasCancelReason() => _cancelReason != null;
+
+  // "doc_name" field.
+  String? _docName;
+  String get docName => _docName ?? '';
+  set docName(String? val) => _docName = val;
+
+  bool hasDocName() => _docName != null;
+
+  // "doc_img" field.
+  String? _docImg;
+  String get docImg => _docImg ?? '';
+  set docImg(String? val) => _docImg = val;
+
+  bool hasDocImg() => _docImg != null;
+
+  // "doc_gender" field.
+  int? _docGender;
+  int get docGender => _docGender ?? 0;
+  set docGender(int? val) => _docGender = val;
+
+  void incrementDocGender(int amount) => docGender = docGender + amount;
+
+  bool hasDocGender() => _docGender != null;
+
+  // "price" field.
+  int? _price;
+  int get price => _price ?? 0;
+  set price(int? val) => _price = val;
+
+  void incrementPrice(int amount) => price = price + amount;
+
+  bool hasPrice() => _price != null;
+
+  // "doc_Cat_cde" field.
+  int? _docCatCde;
+  int get docCatCde => _docCatCde ?? 0;
+  set docCatCde(int? val) => _docCatCde = val;
+
+  void incrementDocCatCde(int amount) => docCatCde = docCatCde + amount;
+
+  bool hasDocCatCde() => _docCatCde != null;
+
+  // "doc_titleDesc" field.
+  String? _docTitleDesc;
+  String get docTitleDesc => _docTitleDesc ?? '';
+  set docTitleDesc(String? val) => _docTitleDesc = val;
+
+  bool hasDocTitleDesc() => _docTitleDesc != null;
+
   static DtBookedItemStruct fromMap(Map<String, dynamic> data) =>
       DtBookedItemStruct(
         date: data['date'] as DateTime?,
@@ -95,6 +185,15 @@ class DtBookedItemStruct extends FFFirebaseStruct {
         itemRef: data['item_ref'] as DocumentReference?,
         docRef: data['doc_ref'] as DocumentReference?,
         cusRef: data['cus_ref'] as DocumentReference?,
+        cusImage: data['cus_image'] as String?,
+        cusDob: data['cus_dob'] as DateTime?,
+        cancelReason: data['cancel_reason'] as String?,
+        docName: data['doc_name'] as String?,
+        docImg: data['doc_img'] as String?,
+        docGender: castToType<int>(data['doc_gender']),
+        price: castToType<int>(data['price']),
+        docCatCde: castToType<int>(data['doc_Cat_cde']),
+        docTitleDesc: data['doc_titleDesc'] as String?,
       );
 
   static DtBookedItemStruct? maybeFromMap(dynamic data) => data is Map
@@ -110,6 +209,15 @@ class DtBookedItemStruct extends FFFirebaseStruct {
         'item_ref': _itemRef,
         'doc_ref': _docRef,
         'cus_ref': _cusRef,
+        'cus_image': _cusImage,
+        'cus_dob': _cusDob,
+        'cancel_reason': _cancelReason,
+        'doc_name': _docName,
+        'doc_img': _docImg,
+        'doc_gender': _docGender,
+        'price': _price,
+        'doc_Cat_cde': _docCatCde,
+        'doc_titleDesc': _docTitleDesc,
       }.withoutNulls;
 
   @override
@@ -145,6 +253,42 @@ class DtBookedItemStruct extends FFFirebaseStruct {
         'cus_ref': serializeParam(
           _cusRef,
           ParamType.DocumentReference,
+        ),
+        'cus_image': serializeParam(
+          _cusImage,
+          ParamType.String,
+        ),
+        'cus_dob': serializeParam(
+          _cusDob,
+          ParamType.DateTime,
+        ),
+        'cancel_reason': serializeParam(
+          _cancelReason,
+          ParamType.String,
+        ),
+        'doc_name': serializeParam(
+          _docName,
+          ParamType.String,
+        ),
+        'doc_img': serializeParam(
+          _docImg,
+          ParamType.String,
+        ),
+        'doc_gender': serializeParam(
+          _docGender,
+          ParamType.int,
+        ),
+        'price': serializeParam(
+          _price,
+          ParamType.int,
+        ),
+        'doc_Cat_cde': serializeParam(
+          _docCatCde,
+          ParamType.int,
+        ),
+        'doc_titleDesc': serializeParam(
+          _docTitleDesc,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -193,6 +337,51 @@ class DtBookedItemStruct extends FFFirebaseStruct {
           false,
           collectionNamePath: ['cus'],
         ),
+        cusImage: deserializeParam(
+          data['cus_image'],
+          ParamType.String,
+          false,
+        ),
+        cusDob: deserializeParam(
+          data['cus_dob'],
+          ParamType.DateTime,
+          false,
+        ),
+        cancelReason: deserializeParam(
+          data['cancel_reason'],
+          ParamType.String,
+          false,
+        ),
+        docName: deserializeParam(
+          data['doc_name'],
+          ParamType.String,
+          false,
+        ),
+        docImg: deserializeParam(
+          data['doc_img'],
+          ParamType.String,
+          false,
+        ),
+        docGender: deserializeParam(
+          data['doc_gender'],
+          ParamType.int,
+          false,
+        ),
+        price: deserializeParam(
+          data['price'],
+          ParamType.int,
+          false,
+        ),
+        docCatCde: deserializeParam(
+          data['doc_Cat_cde'],
+          ParamType.int,
+          false,
+        ),
+        docTitleDesc: deserializeParam(
+          data['doc_titleDesc'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -208,12 +397,38 @@ class DtBookedItemStruct extends FFFirebaseStruct {
         cusTel == other.cusTel &&
         itemRef == other.itemRef &&
         docRef == other.docRef &&
-        cusRef == other.cusRef;
+        cusRef == other.cusRef &&
+        cusImage == other.cusImage &&
+        cusDob == other.cusDob &&
+        cancelReason == other.cancelReason &&
+        docName == other.docName &&
+        docImg == other.docImg &&
+        docGender == other.docGender &&
+        price == other.price &&
+        docCatCde == other.docCatCde &&
+        docTitleDesc == other.docTitleDesc;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([date, time, statusCde, cusName, cusTel, itemRef, docRef, cusRef]);
+  int get hashCode => const ListEquality().hash([
+        date,
+        time,
+        statusCde,
+        cusName,
+        cusTel,
+        itemRef,
+        docRef,
+        cusRef,
+        cusImage,
+        cusDob,
+        cancelReason,
+        docName,
+        docImg,
+        docGender,
+        price,
+        docCatCde,
+        docTitleDesc
+      ]);
 }
 
 DtBookedItemStruct createDtBookedItemStruct({
@@ -225,6 +440,15 @@ DtBookedItemStruct createDtBookedItemStruct({
   DocumentReference? itemRef,
   DocumentReference? docRef,
   DocumentReference? cusRef,
+  String? cusImage,
+  DateTime? cusDob,
+  String? cancelReason,
+  String? docName,
+  String? docImg,
+  int? docGender,
+  int? price,
+  int? docCatCde,
+  String? docTitleDesc,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -239,6 +463,15 @@ DtBookedItemStruct createDtBookedItemStruct({
       itemRef: itemRef,
       docRef: docRef,
       cusRef: cusRef,
+      cusImage: cusImage,
+      cusDob: cusDob,
+      cancelReason: cancelReason,
+      docName: docName,
+      docImg: docImg,
+      docGender: docGender,
+      price: price,
+      docCatCde: docCatCde,
+      docTitleDesc: docTitleDesc,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

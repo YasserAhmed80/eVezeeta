@@ -1,11 +1,14 @@
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
 import '/pages/public_components/image_component/image_component_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'cus_files_model.dart';
 export 'cus_files_model.dart';
@@ -89,13 +92,13 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                   ),
                 ],
               ),
-            ].divide(const SizedBox(height: 4.0)),
+            ].divide(SizedBox(height: 4.0)),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: SizedBox(
+        body: Container(
           height: double.infinity,
           child: Stack(
             children: [
@@ -112,7 +115,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 10.0, 10.0, 10.0),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -120,7 +123,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                   borderRadius: BorderRadius.circular(14.0),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 20.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -158,7 +161,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                 queryBuilder: (cusFilesRecord) => cusFilesRecord
                                     .where(
                                       'cus_ref',
-                                      isEqualTo: widget.cusRef,
+                                      isEqualTo: widget!.cusRef,
                                     )
                                     .orderBy('date'),
                               ),
@@ -181,7 +184,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                 List<CusFilesRecord>
                                     listViewCusFilesRecordList = snapshot.data!;
                                 if (listViewCusFilesRecordList.isEmpty) {
-                                  return const SizedBox(
+                                  return Container(
                                     height: 200.0,
                                     child: EmptyListComponentWidget(
                                       desc: 'لايوجد ملفات',
@@ -190,13 +193,13 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                 }
 
                                 return ListView.separated(
-                                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                  padding: EdgeInsets.symmetric(vertical: 10.0),
                                   primary: false,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   itemCount: listViewCusFilesRecordList.length,
                                   separatorBuilder: (_, __) =>
-                                      const SizedBox(height: 10.0),
+                                      SizedBox(height: 10.0),
                                   itemBuilder: (context, listViewIndex) {
                                     final listViewCusFilesRecord =
                                         listViewCusFilesRecordList[
@@ -207,7 +210,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                             .primaryBackground,
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -277,7 +280,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                                       ),
                                                                 ),
                                                                 Padding(
-                                                                  padding: const EdgeInsetsDirectional
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -287,7 +290,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                                     dateTimeFormat(
                                                                       "relative",
                                                                       listViewCusFilesRecord
-                                                                          .date!,
+                                                                          .cAt!,
                                                                       locale: FFLocalizations.of(
                                                                               context)
                                                                           .languageCode,
@@ -387,7 +390,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       0.0,
@@ -409,7 +412,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                             ),
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           5.0,
                                                                           0.0,
@@ -464,7 +467,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
                                                                       0.0,
@@ -482,7 +485,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                             ),
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           5.0,
                                                                           0.0,
@@ -509,15 +512,14 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 10.0,
                                                                 0.0, 10.0),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                          MainAxisAlignment.end,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
@@ -538,7 +540,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                               queryParameters: {
                                                                 'cusRef':
                                                                     serializeParam(
-                                                                  widget
+                                                                  widget!
                                                                       .cusRef,
                                                                   ParamType
                                                                       .DocumentReference,
@@ -562,14 +564,14 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                               FFButtonOptions(
                                                             height: 30.0,
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         16.0,
                                                                         0.0,
                                                                         16.0,
                                                                         0.0),
                                                             iconPadding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -599,14 +601,120 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                                                         8.0),
                                                           ),
                                                         ),
-                                                      ],
+                                                        FFButtonWidget(
+                                                          onPressed: () async {
+                                                            var confirmDialogResponse =
+                                                                await showDialog<
+                                                                        bool>(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (alertDialogContext) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              Text('حذف ملف'),
+                                                                          content:
+                                                                              Text('هل تريد حذف الملف؟'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                              child: Text('الفاء'),
+                                                                            ),
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                              child: Text('نعم'),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      },
+                                                                    ) ??
+                                                                    false;
+                                                            if (confirmDialogResponse) {
+                                                              await listViewCusFilesRecord
+                                                                  .reference
+                                                                  .delete();
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'تم حذف الملف',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          2000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                ),
+                                                              );
+                                                            }
+                                                          },
+                                                          text: FFLocalizations
+                                                                  .of(context)
+                                                              .getText(
+                                                            'aivmciwg' /* حذف الملف */,
+                                                          ),
+                                                          options:
+                                                              FFButtonOptions(
+                                                            height: 30.0,
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        0.0,
+                                                                        16.0,
+                                                                        0.0),
+                                                            iconPadding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .warning,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          12.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
+                                                            elevation: 0.0,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                        ),
+                                                      ]
+                                                          .divide(SizedBox(
+                                                              width: 5.0))
+                                                          .around(SizedBox(
+                                                              width: 5.0)),
                                                     ),
                                                   ),
                                                 ]
                                                     .divide(
-                                                        const SizedBox(height: 3.0))
+                                                        SizedBox(height: 3.0))
                                                     .around(
-                                                        const SizedBox(height: 3.0)),
+                                                        SizedBox(height: 3.0)),
                                               ),
                                             ),
                                           ],
@@ -622,14 +730,14 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                       ),
                     ),
                     Container(
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 770.0,
                       ),
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: FlutterFlowIconButton(
                         borderColor: FlutterFlowTheme.of(context).secondary,
                         borderRadius: 20.0,
@@ -646,7 +754,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                             'cus_new_file',
                             queryParameters: {
                               'cusRef': serializeParam(
-                                widget.cusRef,
+                                widget!.cusRef,
                                 ParamType.DocumentReference,
                               ),
                               'fileRef': serializeParam(

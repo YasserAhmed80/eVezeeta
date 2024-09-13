@@ -1,9 +1,16 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/doctor/doctor_data_component/doctor_data_component_widget.dart';
+import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'customer_favorit_doc_model.dart';
 export 'customer_favorit_doc_model.dart';
 
@@ -35,7 +42,7 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
       _model.returnedDocRef = await queryCusFavDocRecordOnce(
         queryBuilder: (cusFavDocRecord) => cusFavDocRecord.where(
           'cus_ref',
-          isEqualTo: widget.cusRef,
+          isEqualTo: widget!.cusRef,
         ),
       );
       _model.loopIndex = 0;
@@ -45,10 +52,12 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
       );
       safeSetState(() {});
       while (_model.loopIndex! < _model.loopMax!) {
-        _model.readDoctor = await DocRecord.getDocumentOnce(
-            _model.returnedDocRef![_model.loopIndex!].docRef!);
-        _model.addToDoctorDocumentList(_model.readDoctor!);
-        safeSetState(() {});
+        if (_model.returnedDocRef?[_model.loopIndex!]?.docRef != null) {
+          _model.readDocDocument = await DocRecord.getDocumentOnce(
+              _model.returnedDocRef![_model.loopIndex!].docRef!);
+          _model.addToDoctorDocumentList(_model.readDocDocument!);
+          safeSetState(() {});
+        }
         _model.loopIndex = _model.loopIndex! + 1;
         safeSetState(() {});
       }
@@ -107,18 +116,18 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
-          elevation: 2.0,
+          elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              constraints: const BoxConstraints(
+              constraints: BoxConstraints(
                 maxWidth: 700.0,
               ),
               decoration: BoxDecoration(
@@ -130,23 +139,45 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
                   children: [
                     Builder(
                       builder: (context) {
-                        final docitem = _model.doctorDocumentList.toList();
+                        if (_model.doctorDocumentList.length > 0) {
+                          return Builder(
+                            builder: (context) {
+                              final docitem =
+                                  _model.doctorDocumentList.toList();
 
-                        return ListView.separated(
-                          padding: const EdgeInsets.symmetric(vertical: 5.0),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: docitem.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 5.0),
-                          itemBuilder: (context, docitemIndex) {
-                            final docitemItem = docitem[docitemIndex];
-                            return DoctorDataComponentWidget(
-                              key: Key(
-                                  'Keyvxk_${docitemIndex}_of_${docitem.length}'),
-                              docDocumentInput: docitemItem,
-                            );
-                          },
-                        );
+                              return ListView.separated(
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                primary: false,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: docitem.length,
+                                separatorBuilder: (_, __) =>
+                                    SizedBox(height: 5.0),
+                                itemBuilder: (context, docitemIndex) {
+                                  final docitemItem = docitem[docitemIndex];
+                                  return DoctorDataComponentWidget(
+                                    key: Key(
+                                        'Keyvxk_${docitemIndex}_of_${docitem.length}'),
+                                    docDocumentInput: docitemItem,
+                                    pageType: 'search',
+                                    docRef: null,
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          return Container(
+                            height: 200.0,
+                            child: wrapWithModel(
+                              model: _model.emptyListComponentModel,
+                              updateCallback: () => safeSetState(() {}),
+                              child: EmptyListComponentWidget(
+                                desc: 'لايوجد اختيارات!',
+                              ),
+                            ),
+                          );
+                        }
                       },
                     ),
                   ],

@@ -1,12 +1,16 @@
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
 import '/pages/public_components/calender_component/calender_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doctor_dashboard_model.dart';
 export 'doctor_dashboard_model.dart';
@@ -82,29 +86,29 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
               ),
             ],
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: Stack(
           children: [
             Align(
-              alignment: const AlignmentDirectional(0.0, -1.0),
+              alignment: AlignmentDirectional(0.0, -1.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
                     child: Container(
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 770.0,
                       ),
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -112,7 +116,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 0.0, 2.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -133,7 +137,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       child: Container(
                                         width: 65.0,
                                         height: 35.0,
-                                        constraints: const BoxConstraints(
+                                        constraints: BoxConstraints(
                                           minWidth: 60.0,
                                         ),
                                         decoration: BoxDecoration(
@@ -150,7 +154,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
@@ -182,7 +186,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 0.0, 2.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -203,7 +207,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       child: Container(
                                         width: 65.0,
                                         height: 35.0,
-                                        constraints: const BoxConstraints(
+                                        constraints: BoxConstraints(
                                           minWidth: 60.0,
                                         ),
                                         decoration: BoxDecoration(
@@ -224,7 +228,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
@@ -257,7 +261,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 0.0, 2.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -278,7 +282,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       child: Container(
                                         width: 65.0,
                                         height: 35.0,
-                                        constraints: const BoxConstraints(
+                                        constraints: BoxConstraints(
                                           minWidth: 60.0,
                                         ),
                                         decoration: BoxDecoration(
@@ -295,7 +299,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'duou9dxb' /* اسبوع */,
@@ -318,7 +322,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 0.0, 2.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -339,7 +343,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       child: Container(
                                         width: 65.0,
                                         height: 35.0,
-                                        constraints: const BoxConstraints(
+                                        constraints: BoxConstraints(
                                           minWidth: 60.0,
                                         ),
                                         decoration: BoxDecoration(
@@ -356,7 +360,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'pmg9dnce' /* شهر */,
@@ -379,7 +383,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 0.0, 2.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -400,7 +404,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       child: Container(
                                         width: 65.0,
                                         height: 35.0,
-                                        constraints: const BoxConstraints(
+                                        constraints: BoxConstraints(
                                           minWidth: 60.0,
                                         ),
                                         decoration: BoxDecoration(
@@ -417,7 +421,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'r7n4ex3s' /* سنة */,
@@ -440,12 +444,12 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 10.0, 5.0, 0.0),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -453,7 +457,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       .primaryBackground,
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 5.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -494,7 +498,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: 600.0,
                                                     child:
                                                         CalenderComponentWidget(
@@ -520,7 +524,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           safeSetState(() {});
                                         },
                                         child: Container(
-                                          constraints: const BoxConstraints(
+                                          constraints: BoxConstraints(
                                             minWidth: 100.0,
                                           ),
                                           decoration: BoxDecoration(
@@ -535,7 +539,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     3.0, 0.0, 3.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -585,7 +589,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                       .secondaryText,
                                                   size: 24.0,
                                                 ),
-                                              ].divide(const SizedBox(width: 2.0)),
+                                              ].divide(SizedBox(width: 2.0)),
                                             ),
                                           ),
                                         ),
@@ -610,7 +614,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: 600.0,
                                                     child:
                                                         CalenderComponentWidget(
@@ -635,7 +639,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           safeSetState(() {});
                                         },
                                         child: Container(
-                                          constraints: const BoxConstraints(
+                                          constraints: BoxConstraints(
                                             minWidth: 100.0,
                                           ),
                                           decoration: BoxDecoration(
@@ -650,7 +654,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     3.0, 0.0, 3.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -700,20 +704,20 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                       .secondaryText,
                                                   size: 24.0,
                                                 ),
-                                              ].divide(const SizedBox(width: 2.0)),
+                                              ].divide(SizedBox(width: 2.0)),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ]
-                                        .divide(const SizedBox(width: 5.0))
-                                        .around(const SizedBox(width: 5.0)),
+                                        .divide(SizedBox(width: 5.0))
+                                        .around(SizedBox(width: 5.0)),
                                   ),
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -722,7 +726,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                 children: [
                                   Container(
                                     width: 160.0,
-                                    constraints: const BoxConstraints(
+                                    constraints: BoxConstraints(
                                       minWidth: 75.0,
                                     ),
                                     decoration: BoxDecoration(
@@ -734,9 +738,9 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             .secondary,
                                       ),
                                     ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 5.0, 10.0, 5.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -778,7 +782,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                   ),
                                   Container(
                                     width: 160.0,
-                                    constraints: const BoxConstraints(
+                                    constraints: BoxConstraints(
                                       minWidth: 75.0,
                                     ),
                                     decoration: BoxDecoration(
@@ -790,9 +794,9 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             .secondary,
                                       ),
                                     ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 5.0, 10.0, 5.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
@@ -833,11 +837,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                             ),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 20.0, 10.0, 0.0),
                               child: Row(
@@ -855,7 +859,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 10.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -864,7 +868,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                       children: [
                                         Container(
                                           width: 100.0,
-                                          constraints: const BoxConstraints(
+                                          constraints: BoxConstraints(
                                             minWidth: 75.0,
                                           ),
                                           decoration: BoxDecoration(
@@ -879,10 +883,10 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             ),
                                           ),
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 5.0, 10.0, 5.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -947,7 +951,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                         Container(
-                                          constraints: const BoxConstraints(
+                                          constraints: BoxConstraints(
                                             minWidth: 75.0,
                                           ),
                                           decoration: BoxDecoration(
@@ -962,10 +966,10 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             ),
                                           ),
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 5.0, 10.0, 5.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -1030,7 +1034,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                         Container(
-                                          constraints: const BoxConstraints(
+                                          constraints: BoxConstraints(
                                             minWidth: 75.0,
                                           ),
                                           decoration: BoxDecoration(
@@ -1045,10 +1049,10 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             ),
                                           ),
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 5.0, 10.0, 5.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -1113,8 +1117,8 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                           ),
                                         ),
                                       ]
-                                          .divide(const SizedBox(width: 5.0))
-                                          .around(const SizedBox(width: 5.0)),
+                                          .divide(SizedBox(width: 5.0))
+                                          .around(SizedBox(width: 5.0)),
                                     ),
                                   ),
                                 ],
@@ -1123,7 +1127,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                             if ((_model.sPeriod != 'd') &&
                                 (_model.sPeriod != 'ld'))
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -1137,9 +1141,9 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             BorderRadius.circular(0.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             5.0, 5.0, 5.0, 5.0),
-                                        child: SizedBox(
+                                        child: Container(
                                           width: 370.0,
                                           height: 198.0,
                                           child: FlutterFlowBarChart(
@@ -1176,13 +1180,13 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                       .secondaryText,
                                               borderWidth: 1.0,
                                             ),
-                                            axisBounds: const AxisBounds(),
+                                            axisBounds: AxisBounds(),
                                             xAxisLabelInfo: AxisLabelInfo(
                                               title: FFLocalizations.of(context)
                                                   .getText(
                                                 'col6lta5' /* Day */,
                                               ),
-                                              titleTextStyle: const TextStyle(
+                                              titleTextStyle: TextStyle(
                                                 fontSize: 14.0,
                                               ),
                                               reservedSize: 28.0,
@@ -1192,7 +1196,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                   .getText(
                                                 '2rupwhsz' /* Count */,
                                               ),
-                                              titleTextStyle: const TextStyle(
+                                              titleTextStyle: TextStyle(
                                                 fontSize: 14.0,
                                               ),
                                               reservedSize: 42.0,
@@ -1205,7 +1209,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                 ),
                               ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -1233,7 +1237,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 0.0, 5.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -1291,11 +1295,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                         opacity: 0.8,
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 2.0, 0.0, 2.0),
                                           child: Container(
                                             height: 20.0,
-                                            constraints: const BoxConstraints(
+                                            constraints: BoxConstraints(
                                               minWidth: 40.0,
                                             ),
                                             decoration: BoxDecoration(
@@ -1303,7 +1307,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                   BorderRadius.circular(14.0),
                                             ),
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -1344,7 +1348,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                   scrollDirection: Axis.vertical,
                                   itemCount: historyItem.length,
                                   separatorBuilder: (_, __) =>
-                                      const SizedBox(height: 2.0),
+                                      SizedBox(height: 2.0),
                                   itemBuilder: (context, historyItemIndex) {
                                     final historyItemItem =
                                         historyItem[historyItemIndex];
@@ -1357,7 +1361,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                             BorderRadius.circular(5.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             5.0, 0.0, 5.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -1422,12 +1426,12 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                               child: Opacity(
                                                 opacity: 0.8,
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 2.0, 0.0, 2.0),
                                                   child: Container(
                                                     height: 20.0,
-                                                    constraints: const BoxConstraints(
+                                                    constraints: BoxConstraints(
                                                       minWidth: 40.0,
                                                     ),
                                                     decoration: BoxDecoration(
@@ -1455,7 +1459,7 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                                                               14.0),
                                                     ),
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Text(
                                                       valueOrDefault<String>(
@@ -1501,18 +1505,18 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
                               },
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 100.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[]
-                                    .divide(const SizedBox(width: 5.0))
-                                    .around(const SizedBox(width: 5.0)),
+                                    .divide(SizedBox(width: 5.0))
+                                    .around(SizedBox(width: 5.0)),
                               ),
                             ),
-                          ].divide(const SizedBox(height: 5.0)),
+                          ].divide(SizedBox(height: 5.0)),
                         ),
                       ),
                     ),
@@ -1521,11 +1525,11 @@ class _DoctorDashboardWidgetState extends State<DoctorDashboardWidget> {
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
+              alignment: AlignmentDirectional(0.0, 1.0),
               child: wrapWithModel(
                 model: _model.customNavbarModel,
                 updateCallback: () => safeSetState(() {}),
-                child: const CustomNavbarWidget(),
+                child: CustomNavbarWidget(),
               ),
             ),
           ],

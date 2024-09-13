@@ -7,6 +7,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'search_category_component_model.dart';
 export 'search_category_component_model.dart';
@@ -56,7 +57,7 @@ class _SearchCategoryComponentWidgetState
       _model.subCatList =
           _model.returnedSubCat!.toList().cast<DtGeneralListStruct>();
       safeSetState(() {});
-      if (_model.selectedSubCat.isEmpty) {
+      if (_model.selectedSubCat.length == 0) {
         _model.addToSelectedSubCat(-1);
         safeSetState(() {});
       }
@@ -79,7 +80,7 @@ class _SearchCategoryComponentWidgetState
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -91,7 +92,7 @@ class _SearchCategoryComponentWidgetState
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,12 +100,12 @@ class _SearchCategoryComponentWidgetState
                 Expanded(
                   child: Container(
                     width: 100.0,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 5.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -140,7 +141,7 @@ class _SearchCategoryComponentWidgetState
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -154,9 +155,9 @@ class _SearchCategoryComponentWidgetState
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
@@ -173,7 +174,7 @@ class _SearchCategoryComponentWidgetState
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -197,9 +198,9 @@ class _SearchCategoryComponentWidgetState
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -212,7 +213,7 @@ class _SearchCategoryComponentWidgetState
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                         ),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       width: 0.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -220,8 +221,8 @@ class _SearchCategoryComponentWidgetState
                                 ),
                               ),
                             ]
-                                .divide(const SizedBox(width: 5.0))
-                                .around(const SizedBox(width: 5.0)),
+                                .divide(SizedBox(width: 5.0))
+                                .around(SizedBox(width: 5.0)),
                           ),
                         ),
                         Divider(
@@ -237,9 +238,9 @@ class _SearchCategoryComponentWidgetState
           ),
           Expanded(
             child: Container(
-              decoration: const BoxDecoration(),
+              decoration: BoxDecoration(),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -294,7 +295,7 @@ class _SearchCategoryComponentWidgetState
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           2.0, 2.0, 2.0, 2.0),
                                       child: Text(
                                         catItemItem.desc,
@@ -309,8 +310,8 @@ class _SearchCategoryComponentWidgetState
                                   ),
                                 );
                               })
-                                      .divide(const SizedBox(height: 5.0))
-                                      .around(const SizedBox(height: 5.0)),
+                                      .divide(SizedBox(height: 5.0))
+                                      .around(SizedBox(height: 5.0)),
                             ),
                           );
                         },
@@ -355,7 +356,7 @@ class _SearchCategoryComponentWidgetState
                                       }
                                     }
 
-                                    if (_model.selectedSubCat.isEmpty) {
+                                    if (_model.selectedSubCat.length == 0) {
                                       _model.addToSelectedSubCat(-1);
                                       _model.selectedSubCatDesc = 'الكل';
                                       safeSetState(() {});
@@ -383,7 +384,7 @@ class _SearchCategoryComponentWidgetState
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           2.0, 2.0, 2.0, 2.0),
                                       child: Text(
                                         subCatItemItem.desc,
@@ -398,17 +399,17 @@ class _SearchCategoryComponentWidgetState
                                   ),
                                 );
                               })
-                                  .divide(const SizedBox(height: 5.0))
-                                  .around(const SizedBox(height: 5.0)),
+                                  .divide(SizedBox(height: 5.0))
+                                  .around(SizedBox(height: 5.0)),
                             ),
                           );
                         },
                       ),
                     ),
                   ]
-                      .divide(const SizedBox(width: 10.0))
-                      .addToStart(const SizedBox(width: 5.0))
-                      .addToEnd(const SizedBox(width: 5.0)),
+                      .divide(SizedBox(width: 10.0))
+                      .addToStart(SizedBox(width: 5.0))
+                      .addToEnd(SizedBox(width: 5.0)),
                 ),
               ),
             ),
@@ -418,7 +419,7 @@ class _SearchCategoryComponentWidgetState
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                   child: Container(
                     width: double.infinity,
                     height: 10.0,
@@ -426,7 +427,7 @@ class _SearchCategoryComponentWidgetState
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                   ),
                 ),
               ),

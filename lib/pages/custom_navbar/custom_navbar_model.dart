@@ -1,7 +1,11 @@
+import '/backend/schema/enums/enums.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/public_components/nav_item_component/nav_item_component_widget.dart';
 import 'custom_navbar_widget.dart' show CustomNavbarWidget;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CustomNavbarModel extends FlutterFlowModel<CustomNavbarWidget> {
   ///  State fields for stateful widgets in this component.

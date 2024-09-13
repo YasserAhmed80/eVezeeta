@@ -6,8 +6,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'upload_photo_model.dart';
 export 'upload_photo_model.dart';
 
@@ -21,8 +25,8 @@ class UploadPhotoWidget extends StatefulWidget {
     required this.imgSeq,
     required this.imgRef,
     bool? isActive,
-  })  : imgType = imgType ?? '',
-        isActive = isActive ?? true;
+  })  : this.imgType = imgType ?? '',
+        this.isActive = isActive ?? true;
 
   final String? storageFolder;
   final String? entityType;
@@ -54,30 +58,30 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.saveLoadImage = false;
       _model.isLoading = false;
-      _model.curretImage = widget.imgRef;
+      _model.curretImage = widget!.imgRef;
       safeSetState(() {});
       _model.queryImage = await queryImgsRecordOnce(
         queryBuilder: (imgsRecord) => imgsRecord
             .where(
               'e_type',
-              isEqualTo: widget.entityType,
+              isEqualTo: widget!.entityType,
             )
             .where(
               'e_code',
-              isEqualTo: widget.entityCode,
+              isEqualTo: widget!.entityCode,
             )
             .where(
               'i_type',
-              isEqualTo: widget.imgType,
+              isEqualTo: widget!.imgType,
             )
             .where(
               'i_seq',
-              isEqualTo: widget.imgSeq,
+              isEqualTo: widget!.imgSeq,
             ),
       );
-      if (_model.queryImage!.isNotEmpty) {
-        _model.curretImage = _model.queryImage?.first.iRef;
-        _model.imageRef = _model.queryImage?.first.reference;
+      if (_model.queryImage!.length > 0) {
+        _model.curretImage = _model.queryImage?.first?.iRef;
+        _model.imageRef = _model.queryImage?.first?.reference;
         safeSetState(() {});
       }
     });
@@ -100,9 +104,9 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
             child: Container(
-              decoration: const BoxDecoration(),
+              decoration: BoxDecoration(),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -118,7 +122,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                           child: Container(
                             width: double.infinity,
                             height: 250.0,
-                            constraints: const BoxConstraints(
+                            constraints: BoxConstraints(
                               maxWidth: 400.0,
                             ),
                             decoration: BoxDecoration(
@@ -183,7 +187,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                           child: Container(
                             width: double.infinity,
                             height: 250.0,
-                            constraints: const BoxConstraints(
+                            constraints: BoxConstraints(
                               maxWidth: 400.0,
                             ),
                             decoration: BoxDecoration(
@@ -206,10 +210,10 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                         ),
                     ],
                   ),
-                  if (widget.isActive == true)
+                  if (widget!.isActive == true)
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Container(
                         width: double.infinity,
                         height: 40.0,
@@ -218,9 +222,9 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                           borderRadius: BorderRadius.circular(24.0),
                         ),
                         child: Align(
-                          alignment: const AlignmentDirectional(0.0, 1.0),
+                          alignment: AlignmentDirectional(0.0, 1.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 5.0, 0.0, 5.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -293,11 +297,11 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                           _model.photoRef =
                                               await actions.saveImageToStorage1(
                                             _model.uplodedImage,
-                                            widget.storageFolder!,
-                                            widget.entityType!,
-                                            widget.entityCode!,
-                                            widget.imgType,
-                                            widget.imgSeq!,
+                                            widget!.storageFolder!,
+                                            widget!.entityType!,
+                                            widget!.entityCode!,
+                                            widget!.imgType,
+                                            widget!.imgSeq!,
                                           );
                                           // read image from DB
                                           _model.savedImageDoc =
@@ -327,7 +331,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                                 ),
                                               ),
                                               duration:
-                                                  const Duration(milliseconds: 1450),
+                                                  Duration(milliseconds: 1450),
                                               backgroundColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -361,7 +365,7 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                           (_model.imageRef != null))
                                       ? null
                                       : () async {
-                                          var shouldSetState = false;
+                                          var _shouldSetState = false;
                                           final selectedMedia =
                                               await selectMediaWithSourceBottomSheet(
                                             context: context,
@@ -417,13 +421,13 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                               await actions.getFileSize(
                                             _model.uploadedLocalFile,
                                           );
-                                          shouldSetState = true;
+                                          _shouldSetState = true;
                                           if (_model.nFileSize! > 4) {
                                             await showDialog(
                                               context: context,
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
-                                                  title: const Text('مساحة الملف'),
+                                                  title: Text('مساحة الملف'),
                                                   content: Text(
                                                       'مساحة الملف اكبر من 4 ميجا. من فضلك اختار  مساحة اصغر(${valueOrDefault<String>(
                                                     _model.nFileSize
@@ -435,15 +439,14 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext),
-                                                      child: const Text('اوك'),
+                                                      child: Text('اوك'),
                                                     ),
                                                   ],
                                                 );
                                               },
                                             );
-                                            if (shouldSetState) {
+                                            if (_shouldSetState)
                                               safeSetState(() {});
-                                            }
                                             return;
                                           }
                                           _model.uplodedImage =
@@ -454,29 +457,28 @@ class _UploadPhotoWidgetState extends State<UploadPhotoWidget> {
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
-                                                title: const Text('حفظ الصورة'),
-                                                content: const Text(
+                                                title: Text('حفظ الصورة'),
+                                                content: Text(
                                                     'من فضلك قم بحفظ الصورة!'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: const Text('اوك'),
+                                                    child: Text('اوك'),
                                                   ),
                                                 ],
                                               );
                                             },
                                           );
-                                          if (shouldSetState) {
+                                          if (_shouldSetState)
                                             safeSetState(() {});
-                                          }
                                         },
                                 ),
                               ]
-                                  .divide(const SizedBox(width: 20.0))
-                                  .addToStart(const SizedBox(width: 0.0))
-                                  .addToEnd(const SizedBox(width: 0.0)),
+                                  .divide(SizedBox(width: 20.0))
+                                  .addToStart(SizedBox(width: 0.0))
+                                  .addToEnd(SizedBox(width: 0.0)),
                             ),
                           ),
                         ),

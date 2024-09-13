@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'booked_status_component_model.dart';
 export 'booked_status_component_model.dart';
@@ -50,16 +51,16 @@ class _BookedStatusComponentWidgetState
     return Opacity(
       opacity: 0.8,
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
+        padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
         child: Container(
-          constraints: const BoxConstraints(
+          constraints: BoxConstraints(
             minWidth: 40.0,
           ),
           decoration: BoxDecoration(
             color: valueOrDefault<Color>(
               FFAppState()
                   .refBookStatus
-                  .where((e) => e.code == widget.bookedStatus)
+                  .where((e) => e.code == widget!.bookedStatus)
                   .toList()
                   .first
                   .color,
@@ -67,14 +68,14 @@ class _BookedStatusComponentWidgetState
             ),
             borderRadius: BorderRadius.circular(14.0),
           ),
-          alignment: const AlignmentDirectional(0.0, 0.0),
+          alignment: AlignmentDirectional(0.0, 0.0),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
             child: Text(
               valueOrDefault<String>(
                 FFAppState()
                     .refBookStatus
-                    .where((e) => e.code == widget.bookedStatus)
+                    .where((e) => e.code == widget!.bookedStatus)
                     .toList()
                     .first
                     .desc,

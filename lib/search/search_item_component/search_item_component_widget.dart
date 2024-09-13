@@ -7,6 +7,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'search_item_component_model.dart';
 export 'search_item_component_model.dart';
@@ -17,7 +18,7 @@ class SearchItemComponentWidget extends StatefulWidget {
     String? dataSource,
     required this.sheetTitle,
     required this.inputList,
-  }) : dataSource = dataSource ?? 'n';
+  }) : this.dataSource = dataSource ?? 'n';
 
   final String dataSource;
   final String? sheetTitle;
@@ -45,14 +46,14 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.returnedData = await actions.copyToList(
-        widget.dataSource,
+        widget!.dataSource,
         0,
       );
       _model.dataList =
           _model.returnedData!.toList().cast<DtGeneralListStruct>();
-      _model.selectedList = widget.inputList!.toList().cast<int>();
+      _model.selectedList = widget!.inputList!.toList().cast<int>();
       safeSetState(() {});
-      if ((widget.dataSource == 'price') &&
+      if ((widget!.dataSource == 'price') &&
           (FFAppState().searchParameters.filterPriceCheck == true)) {
         _model.fromValue = valueOrDefault<double>(
           FFAppState().searchParameters.priceFrom,
@@ -83,7 +84,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -95,7 +96,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,12 +104,12 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                 Expanded(
                   child: Container(
                     width: 100.0,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 5.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -131,7 +132,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                               Expanded(
                                 child: Text(
                                   valueOrDefault<String>(
-                                    widget.sheetTitle,
+                                    widget!.sheetTitle,
                                     'nnnn',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -145,7 +146,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -153,7 +154,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                     safeSetState(() {});
                                     _model.addToSelectedList(-1);
                                     safeSetState(() {});
-                                    if (widget.dataSource == 'price') {
+                                    if (widget!.dataSource == 'price') {
                                       FFAppState().updateSearchParametersStruct(
                                         (e) => e..filterPriceCheck = false,
                                       );
@@ -168,9 +169,9 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
@@ -187,19 +188,19 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if ((widget.dataSource == 'type') ||
-                                        (widget.dataSource == 'title')) {
+                                    if ((widget!.dataSource == 'type') ||
+                                        (widget!.dataSource == 'title')) {
                                       if (functions.checkItemInList(-1,
                                               _model.selectedList.toList()) ==
                                           true) {
                                         _model.selectedList = [];
                                         safeSetState(() {});
                                       }
-                                      if (widget.dataSource == 'type') {
+                                      if (widget!.dataSource == 'type') {
                                         FFAppState()
                                             .updateSearchParametersStruct(
                                           (e) => e
@@ -208,7 +209,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                         );
                                         safeSetState(() {});
                                       } else {
-                                        if (widget.dataSource == 'title') {
+                                        if (widget!.dataSource == 'title') {
                                           FFAppState()
                                               .updateSearchParametersStruct(
                                             (e) => e
@@ -219,7 +220,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                         }
                                       }
                                     } else {
-                                      if (widget.dataSource == 'price') {
+                                      if (widget!.dataSource == 'price') {
                                         if ((_model.fromValue! > 0.0) ||
                                             (_model.toValue! < 3000.0)) {
                                           FFAppState()
@@ -247,9 +248,9 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -265,8 +266,8 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                 ),
                               ),
                             ]
-                                .divide(const SizedBox(width: 5.0))
-                                .around(const SizedBox(width: 5.0)),
+                                .divide(SizedBox(width: 5.0))
+                                .around(SizedBox(width: 5.0)),
                           ),
                         ),
                         Divider(
@@ -283,12 +284,12 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
           Expanded(
             child: Builder(
               builder: (context) {
-                if (widget.dataSource != 'price') {
+                if (widget!.dataSource != 'price') {
                   return Container(
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -321,7 +322,8 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                             _model.removeFromSelectedList(
                                                 listItemItem.key);
                                             safeSetState(() {});
-                                            if (_model.selectedList.isEmpty) {
+                                            if (_model.selectedList.length ==
+                                                0) {
                                               _model.addToSelectedList(-1);
                                               safeSetState(() {});
                                             }
@@ -356,10 +358,10 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     2.0, 2.0, 2.0, 2.0),
                                             child: Text(
                                               listItemItem.desc,
@@ -375,17 +377,17 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                                         ),
                                       );
                                     })
-                                        .divide(const SizedBox(height: 5.0))
-                                        .around(const SizedBox(height: 5.0)),
+                                        .divide(SizedBox(height: 5.0))
+                                        .around(SizedBox(height: 5.0)),
                                   ),
                                 );
                               },
                             ),
                           ),
                         ]
-                            .divide(const SizedBox(width: 10.0))
-                            .addToStart(const SizedBox(width: 5.0))
-                            .addToEnd(const SizedBox(width: 5.0)),
+                            .divide(SizedBox(width: 10.0))
+                            .addToStart(SizedBox(width: 5.0))
+                            .addToEnd(SizedBox(width: 5.0)),
                       ),
                     ),
                   );
@@ -400,7 +402,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 20.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -445,7 +447,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                               ),
                               Container(
                                 width: 50.0,
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Text(
                                   valueOrDefault<String>(
                                     _model.fromValue?.toString(),
@@ -465,7 +467,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 20.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -510,7 +512,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                               ),
                               Container(
                                 width: 50.0,
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Text(
                                   valueOrDefault<String>(
                                     _model.toValue?.toString(),
@@ -530,8 +532,8 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                           ),
                         ),
                       ]
-                          .divide(const SizedBox(height: 20.0))
-                          .around(const SizedBox(height: 20.0)),
+                          .divide(SizedBox(height: 20.0))
+                          .around(SizedBox(height: 20.0)),
                     ),
                   );
                 }
@@ -543,7 +545,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                   child: Container(
                     width: double.infinity,
                     height: 10.0,
@@ -551,7 +553,7 @@ class _SearchItemComponentWidgetState extends State<SearchItemComponentWidget> {
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                   ),
                 ),
               ),

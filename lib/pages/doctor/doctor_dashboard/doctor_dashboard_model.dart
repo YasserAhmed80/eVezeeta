@@ -1,8 +1,20 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_charts.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/custom_navbar/custom_navbar_widget.dart';
+import '/pages/public_components/calender_component/calender_component_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'doctor_dashboard_widget.dart' show DoctorDashboardWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
   ///  Local state fields for this page.
@@ -111,18 +123,18 @@ class DoctorDashboardModel extends FlutterFlowModel<DoctorDashboardWidget> {
     );
     loopIndex = 0;
     loopMax = valueOrDefault<int>(
-      returnedBookedData.length,
+      returnedBookedData?.length,
       0,
     );
     bookingHistory = [];
     while (loopIndex! < loopMax!) {
       addToBookingHistory(DtBookingHistoryStruct(
-        date: returnedBookedData[loopIndex!].date,
-        statusCde: returnedBookedData[loopIndex!].statusCde,
-        cusId: returnedBookedData[loopIndex!].cusRef?.id,
-        price: returnedBookedData[loopIndex!].price,
-        fee: returnedBookedData[loopIndex!].fee,
-        time: returnedBookedData[loopIndex!].dayTime,
+        date: returnedBookedData?[loopIndex!]?.date,
+        statusCde: returnedBookedData?[loopIndex!]?.statusCde,
+        cusId: returnedBookedData?[loopIndex!]?.cusRef?.id,
+        price: returnedBookedData?[loopIndex!]?.price,
+        fee: returnedBookedData?[loopIndex!]?.fee,
+        time: returnedBookedData?[loopIndex!]?.dayTime,
       ));
       loopIndex = loopIndex! + 1;
     }

@@ -1,14 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -73,23 +81,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const LoginWidget() : const Onboarding01Widget(),
+          appStateNotifier.loggedIn ? LoginWidget() : Onboarding01Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const LoginWidget() : const Onboarding01Widget(),
+              appStateNotifier.loggedIn ? LoginWidget() : Onboarding01Widget(),
         ),
         FFRoute(
           name: 'login',
           path: '/login',
-          builder: (context, params) => const LoginWidget(),
+          builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
           name: 'Onboarding01',
           path: '/onboarding01',
-          builder: (context, params) => const Onboarding01Widget(),
+          builder: (context, params) => Onboarding01Widget(),
         ),
         FFRoute(
           name: 'doctor_data_main',
@@ -114,6 +122,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             docDocument: params.getParam(
               'docDocument',
               ParamType.Document,
+            ),
+            isNewDoctor: params.getParam(
+              'isNewDoctor',
+              ParamType.bool,
             ),
           ),
         ),
@@ -157,7 +169,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'doctor_search',
           path: '/doctorSearch',
-          builder: (context, params) => const DoctorSearchWidget(),
+          builder: (context, params) => DoctorSearchWidget(),
         ),
         FFRoute(
           name: 'doctor_book_visit',
@@ -197,9 +209,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'congratultion',
-          path: '/congratultion',
-          builder: (context, params) => const CongratultionWidget(),
+          name: 'congratultion_doctor',
+          path: '/congratultionDoctor',
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+          },
+          builder: (context, params) => CongratultionDoctorWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: 'doctor_payment',
@@ -246,12 +266,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'cus_master_page',
           path: '/cusMasterPage',
-          builder: (context, params) => const CusMasterPageWidget(),
+          builder: (context, params) => CusMasterPageWidget(),
         ),
         FFRoute(
           name: 'customer_List',
           path: '/customerList',
-          builder: (context, params) => const CustomerListWidget(),
+          builder: (context, params) => CustomerListWidget(),
         ),
         FFRoute(
           name: 'customer_profile',
@@ -262,6 +282,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.DocumentReference,
               isList: false,
               collectionNamePath: ['cus'],
+            ),
+            isNewCustomer: params.getParam(
+              'isNewCustomer',
+              ParamType.bool,
             ),
           ),
         ),
@@ -338,6 +362,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.DocumentReference,
               isList: false,
               collectionNamePath: ['cus'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'registerationStep',
+          path: '/registerationStep',
+          asyncParams: {
+            'docDocument': getDoc(['doc'], DocRecord.fromSnapshot),
+            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
+          },
+          builder: (context, params) => RegisterationStepWidget(
+            docDocument: params.getParam(
+              'docDocument',
+              ParamType.Document,
+            ),
+            cusDocument: params.getParam(
+              'cusDocument',
+              ParamType.Document,
+            ),
+            stepType: params.getParam(
+              'stepType',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'congratultion_customer',
+          path: '/congratultionCustomer',
+          asyncParams: {
+            'cusDocument': getDoc(['cus'], CusRecord.fromSnapshot),
+          },
+          builder: (context, params) => CongratultionCustomerWidget(
+            cusDocument: params.getParam(
+              'cusDocument',
+              ParamType.Document,
             ),
           ),
         )
@@ -579,7 +638,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

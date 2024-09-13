@@ -1,10 +1,23 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/data_loading_components/load_categories_component/load_categories_component_widget.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_choice_chips.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
 import '/pages/public_components/switch_title_component/switch_title_component_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'doctor_data_main_widget.dart' show DoctorDataMainWidget;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   ///  Local state fields for this page.
@@ -34,6 +47,10 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   bool isTypeSelected = true;
 
   bool isTitleSelected = true;
+
+  bool isNewDoctor = false;
+
+  DocRecord? curDoctor;
 
   ///  State fields for stateful widgets in this page.
 
@@ -103,8 +120,6 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
   // Models for switchTitleComponent dynamic component.
   late FlutterFlowDynamicModels<SwitchTitleComponentModel>
       switchTitleComponentModels;
-  // Model for loadCategoriesComponent component.
-  late LoadCategoriesComponentModel loadCategoriesComponentModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   DocRecord? createdDoc;
 
@@ -118,8 +133,6 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
         _txtAboutFieldTextControllerValidator;
     switchTitleComponentModels =
         FlutterFlowDynamicModels(() => SwitchTitleComponentModel());
-    loadCategoriesComponentModel =
-        createModel(context, () => LoadCategoriesComponentModel());
   }
 
   @override
@@ -134,6 +147,5 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
     txtAboutFieldTextController?.dispose();
 
     switchTitleComponentModels.dispose();
-    loadCategoriesComponentModel.dispose();
   }
 }

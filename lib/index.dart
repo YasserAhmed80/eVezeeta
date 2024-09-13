@@ -19,7 +19,8 @@ export '/pages/doctor/doctor_booking_center/doctor_booking_center_widget.dart'
     show DoctorBookingCenterWidget;
 export '/pages/doctor/doctor_dashboard/doctor_dashboard_widget.dart'
     show DoctorDashboardWidget;
-export '/congratultion/congratultion_widget.dart' show CongratultionWidget;
+export '/pages/doctor/congratultion_doctor/congratultion_doctor_widget.dart'
+    show CongratultionDoctorWidget;
 export '/pages/doctor/doctor_payment/doctor_payment_widget.dart'
     show DoctorPaymentWidget;
 export '/pages/doctor/doctor_billing/doctor_billing_widget.dart'
@@ -41,3 +42,7 @@ export '/pages/doctor/doctor_profile/doctor_profile_widget.dart'
     show DoctorProfileWidget;
 export '/customer/cus_new_file/cus_new_file_widget.dart' show CusNewFileWidget;
 export '/customer/cus_files/cus_files_widget.dart' show CusFilesWidget;
+export '/registeration_step/registeration_step_widget.dart'
+    show RegisterationStepWidget;
+export '/customer/congratultion_customer/congratultion_customer_widget.dart'
+    show CongratultionCustomerWidget;

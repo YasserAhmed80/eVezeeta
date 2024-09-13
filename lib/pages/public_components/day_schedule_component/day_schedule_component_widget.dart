@@ -1,12 +1,16 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'day_schedule_component_model.dart';
 export 'day_schedule_component_model.dart';
@@ -48,13 +52,13 @@ class _DayScheduleComponentWidgetState
             .where(
               'day_id',
               isEqualTo: valueOrDefault<int>(
-                widget.dayIteam?.dayKey,
+                widget!.dayIteam?.dayKey,
                 0,
               ),
             )
             .where(
               'doc_ref',
-              isEqualTo: widget.docRef,
+              isEqualTo: widget!.docRef,
             ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
@@ -98,7 +102,7 @@ class _DayScheduleComponentWidgetState
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -111,18 +115,18 @@ class _DayScheduleComponentWidgetState
                           context: context,
                           builder: (alertDialogContext) {
                             return AlertDialog(
-                              title: const Text('حذف اليوم'),
-                              content: const Text('سوف يتم الغاء هذ اليوم'),
+                              title: Text('حذف اليوم'),
+                              content: Text('سوف يتم الغاء هذ اليوم'),
                               actions: [
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.pop(alertDialogContext, false),
-                                  child: const Text('الغاء'),
+                                  child: Text('الغاء'),
                                 ),
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.pop(alertDialogContext, true),
-                                  child: const Text('موافق'),
+                                  child: Text('موافق'),
                                 ),
                               ],
                             );
@@ -152,7 +156,7 @@ class _DayScheduleComponentWidgetState
                     ),
                     Text(
                       valueOrDefault<String>(
-                        widget.dayIteam?.desc,
+                        widget!.dayIteam?.desc,
                         'n',
                       ),
                       style: TextStyle(
@@ -178,7 +182,7 @@ class _DayScheduleComponentWidgetState
                                     shape: BoxShape.circle,
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: FaIcon(
                                       FontAwesomeIcons.check,
                                       color: FlutterFlowTheme.of(context)
@@ -197,7 +201,7 @@ class _DayScheduleComponentWidgetState
                                     shape: BoxShape.circle,
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: FaIcon(
                                       FontAwesomeIcons.check,
                                       color: FlutterFlowTheme.of(context)
@@ -212,7 +216,7 @@ class _DayScheduleComponentWidgetState
                         ],
                       ),
                     ),
-                  ].divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
+                  ].divide(SizedBox(width: 5.0)).around(SizedBox(width: 5.0)),
                 ),
               ),
             ),
@@ -225,14 +229,14 @@ class _DayScheduleComponentWidgetState
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 5.0, 5.0, 5.0),
                           child: Builder(
                             builder: (context) {
@@ -251,7 +255,7 @@ class _DayScheduleComponentWidgetState
                                     (hourItemIndex) {
                                   final hourItemItem = hourItem[hourItemIndex];
                                   return Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 2.0, 0.0, 2.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -404,14 +408,14 @@ class _DayScheduleComponentWidgetState
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: const Text('حفظ البيانات'),
+                                            title: Text('حفظ البيانات'),
                                             content:
-                                                const Text('تم تعديل البيانات بنجاح'),
+                                                Text('تم تعديل البيانات بنجاح'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: const Text('Ok'),
+                                                child: Text('Ok'),
                                               ),
                                             ],
                                           );
@@ -422,8 +426,8 @@ class _DayScheduleComponentWidgetState
                                           DocTimeRecord.collection.doc();
                                       await docTimeRecordReference.set({
                                         ...createDocTimeRecordData(
-                                          dayId: widget.dayIteam?.dayKey,
-                                          docRef: widget.docRef,
+                                          dayId: widget!.dayIteam?.dayKey,
+                                          docRef: widget!.docRef,
                                         ),
                                         ...mapToFirestore(
                                           {
@@ -434,8 +438,8 @@ class _DayScheduleComponentWidgetState
                                       _model.createdDay =
                                           DocTimeRecord.getDocumentFromData({
                                         ...createDocTimeRecordData(
-                                          dayId: widget.dayIteam?.dayKey,
-                                          docRef: widget.docRef,
+                                          dayId: widget!.dayIteam?.dayKey,
+                                          docRef: widget!.docRef,
                                         ),
                                         ...mapToFirestore(
                                           {
@@ -450,14 +454,14 @@ class _DayScheduleComponentWidgetState
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: const Text('حفظ البيانات'),
+                                            title: Text('حفظ البيانات'),
                                             content:
-                                                const Text('تم حفظ البيانات بنجاح'),
+                                                Text('تم حفظ البيانات بنجاح'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: const Text('Ok'),
+                                                child: Text('Ok'),
                                               ),
                                             ],
                                           );
@@ -472,9 +476,9 @@ class _DayScheduleComponentWidgetState
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
@@ -499,15 +503,15 @@ class _DayScheduleComponentWidgetState
                             ),
                           ),
                         ]
-                            .divide(const SizedBox(width: 10.0))
-                            .around(const SizedBox(width: 10.0)),
+                            .divide(SizedBox(width: 10.0))
+                            .around(SizedBox(width: 10.0)),
                       ),
                     ),
                   ],
                 );
               } else {
                 return Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: 88.0,
@@ -515,7 +519,7 @@ class _DayScheduleComponentWidgetState
                       color: FlutterFlowTheme.of(context).primaryBackground,
                     ),
                     child: Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'b98rywxu' /* لم يتم اخيار هذا اليوم */,

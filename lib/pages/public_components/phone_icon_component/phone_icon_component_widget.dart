@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'phone_icon_component_model.dart';
 export 'phone_icon_component_model.dart';
@@ -45,7 +47,7 @@ class _PhoneIconComponentWidgetState extends State<PhoneIconComponentWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+      padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
       child: InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
@@ -54,7 +56,7 @@ class _PhoneIconComponentWidgetState extends State<PhoneIconComponentWidget> {
         onTap: () async {
           await launchUrl(Uri(
             scheme: 'tel',
-            path: widget.telNo!,
+            path: widget!.telNo!,
           ));
         },
         child: Container(
@@ -65,7 +67,7 @@ class _PhoneIconComponentWidgetState extends State<PhoneIconComponentWidget> {
             borderRadius: BorderRadius.circular(24.0),
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 2.0, 2.0),
+            padding: EdgeInsetsDirectional.fromSTEB(2.0, 2.0, 2.0, 2.0),
             child: Icon(
               Icons.phone_rounded,
               color: FlutterFlowTheme.of(context).primaryBackground,

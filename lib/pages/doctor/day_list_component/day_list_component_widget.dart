@@ -1,8 +1,14 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'day_list_component_model.dart';
 export 'day_list_component_model.dart';
 
@@ -40,7 +46,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
       _model.returnedDocTime = await queryDocTimeRecordOnce(
         queryBuilder: (docTimeRecord) => docTimeRecord.where(
           'doc_ref',
-          isEqualTo: widget.docDocument?.reference,
+          isEqualTo: widget!.docDocument?.reference,
         ),
       );
       _model.docActiveDays = _model.returnedDocTime!
@@ -80,9 +86,9 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: 500.0,
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 3.0),
+        padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 3.0),
         child: Builder(
           builder: (context) {
             final dayList = _model.refDayList.toList();
@@ -122,7 +128,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
                               borderRadius: BorderRadius.circular(14.0),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 5.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -174,7 +180,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
                             borderRadius: BorderRadius.circular(14.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 5.0, 5.0, 5.0, 5.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -219,7 +225,7 @@ class _DayListComponentWidgetState extends State<DayListComponentWidget> {
                       }
                     },
                   );
-                }).divide(const SizedBox(height: 5.0)),
+                }).divide(SizedBox(height: 5.0)),
               ),
             );
           },
