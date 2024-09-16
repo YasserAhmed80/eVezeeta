@@ -1,10 +1,8 @@
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/search/search_item_component/search_item_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'doc_search_item_list_component_model.dart';
 export 'doc_search_item_list_component_model.dart';
@@ -52,7 +50,7 @@ class _DocSearchItemListComponentWidgetState
         color: FlutterFlowTheme.of(context).primaryBackground,
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
         child: Builder(
           builder: (context) {
             final searchItem = FFAppState().docSearchItems.toList();
@@ -96,7 +94,7 @@ class _DocSearchItemListComponentWidgetState
                         builder: (context) {
                           return Padding(
                             padding: MediaQuery.viewInsetsOf(context),
-                            child: Container(
+                            child: SizedBox(
                               height: 600.0,
                               child: SearchItemComponentWidget(
                                 dataSource: searchItemItem.itemType,
@@ -109,14 +107,14 @@ class _DocSearchItemListComponentWidgetState
                       ).then((value) => safeSetState(() {}));
                     },
                     child: Container(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         minWidth: 60.0,
                       ),
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).alternate,
                         borderRadius: BorderRadius.circular(14.0),
                       ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Builder(
                         builder: (context) {
                           if (functions.checkSearchItemActive(
@@ -130,7 +128,7 @@ class _DocSearchItemListComponentWidgetState
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Container(
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     minWidth: 60.0,
                                   ),
                                   decoration: BoxDecoration(
@@ -138,12 +136,12 @@ class _DocSearchItemListComponentWidgetState
                                         FlutterFlowTheme.of(context).secondary,
                                     borderRadius: BorderRadius.circular(14.0),
                                   ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 5.0, 5.0, 5.0),
                                         child: Text(
                                           searchItemItem.itemDesc,
@@ -180,12 +178,12 @@ class _DocSearchItemListComponentWidgetState
                                         .secondaryBackground,
                                     borderRadius: BorderRadius.circular(14.0),
                                   ),
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5.0, 5.0, 5.0, 5.0),
                                         child: Text(
                                           searchItemItem.itemDesc,
@@ -214,7 +212,7 @@ class _DocSearchItemListComponentWidgetState
                       ),
                     ),
                   );
-                }).divide(SizedBox(width: 5.0)).around(SizedBox(width: 5.0)),
+                }).divide(const SizedBox(width: 5.0)).around(const SizedBox(width: 5.0)),
               ),
             );
           },

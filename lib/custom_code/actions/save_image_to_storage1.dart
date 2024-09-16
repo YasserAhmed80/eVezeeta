@@ -73,7 +73,9 @@ Future<DocumentReference?> saveImageToStorage1(
         'e_code': entityCode,
         'i_ref': downloadURL,
         'i_type': imgType,
-        'i_seq': imgSeq
+        'i_seq': imgSeq,
+        'review_status': 1,
+        'c_at': DateTime.now()
       });
 
       return documentReference;

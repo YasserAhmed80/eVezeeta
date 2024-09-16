@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'search_address_component_model.dart';
 export 'search_address_component_model.dart';
@@ -80,7 +79,7 @@ class _SearchAddressComponentWidgetState
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(20.0),
@@ -92,7 +91,7 @@ class _SearchAddressComponentWidgetState
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,12 +99,12 @@ class _SearchAddressComponentWidgetState
                 Expanded(
                   child: Container(
                     width: 100.0,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 5.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -141,7 +140,7 @@ class _SearchAddressComponentWidgetState
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -158,9 +157,9 @@ class _SearchAddressComponentWidgetState
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
@@ -177,7 +176,7 @@ class _SearchAddressComponentWidgetState
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 10.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -198,9 +197,9 @@ class _SearchAddressComponentWidgetState
                                   ),
                                   options: FFButtonOptions(
                                     height: 35.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         5.0, 0.0, 5.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -213,7 +212,7 @@ class _SearchAddressComponentWidgetState
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                         ),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       width: 0.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -221,8 +220,8 @@ class _SearchAddressComponentWidgetState
                                 ),
                               ),
                             ]
-                                .divide(SizedBox(width: 5.0))
-                                .around(SizedBox(width: 5.0)),
+                                .divide(const SizedBox(width: 5.0))
+                                .around(const SizedBox(width: 5.0)),
                           ),
                         ),
                         Divider(
@@ -237,7 +236,7 @@ class _SearchAddressComponentWidgetState
             ),
           ),
           Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -259,7 +258,7 @@ class _SearchAddressComponentWidgetState
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               2.0, 2.0, 2.0, 2.0),
                           child: Text(
                             _model.selectedGovDesc,
@@ -273,8 +272,8 @@ class _SearchAddressComponentWidgetState
                         ),
                       ),
                     ]
-                        .divide(SizedBox(height: 5.0))
-                        .around(SizedBox(height: 5.0)),
+                        .divide(const SizedBox(height: 5.0))
+                        .around(const SizedBox(height: 5.0)),
                   ),
                 ),
                 Expanded(
@@ -293,7 +292,7 @@ class _SearchAddressComponentWidgetState
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               2.0, 2.0, 2.0, 2.0),
                           child: Text(
                             _model.selectedZoneDesc,
@@ -307,8 +306,8 @@ class _SearchAddressComponentWidgetState
                         ),
                       ),
                     ]
-                        .divide(SizedBox(height: 5.0))
-                        .around(SizedBox(height: 5.0)),
+                        .divide(const SizedBox(height: 5.0))
+                        .around(const SizedBox(height: 5.0)),
                   ),
                 ),
                 Expanded(
@@ -327,7 +326,7 @@ class _SearchAddressComponentWidgetState
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               2.0, 2.0, 2.0, 2.0),
                           child: Text(
                             _model.selectedAreaDesc,
@@ -341,21 +340,21 @@ class _SearchAddressComponentWidgetState
                         ),
                       ),
                     ]
-                        .divide(SizedBox(height: 5.0))
-                        .around(SizedBox(height: 5.0)),
+                        .divide(const SizedBox(height: 5.0))
+                        .around(const SizedBox(height: 5.0)),
                   ),
                 ),
               ]
-                  .divide(SizedBox(width: 10.0))
-                  .addToStart(SizedBox(width: 5.0))
-                  .addToEnd(SizedBox(width: 5.0)),
+                  .divide(const SizedBox(width: 10.0))
+                  .addToStart(const SizedBox(width: 5.0))
+                  .addToEnd(const SizedBox(width: 5.0)),
             ),
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -425,7 +424,7 @@ class _SearchAddressComponentWidgetState
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           2.0, 2.0, 2.0, 2.0),
                                       child: Text(
                                         govItemItem.desc,
@@ -440,8 +439,8 @@ class _SearchAddressComponentWidgetState
                                   ),
                                 );
                               })
-                                      .divide(SizedBox(height: 5.0))
-                                      .around(SizedBox(height: 5.0)),
+                                      .divide(const SizedBox(height: 5.0))
+                                      .around(const SizedBox(height: 5.0)),
                             ),
                           );
                         },
@@ -482,7 +481,7 @@ class _SearchAddressComponentWidgetState
                                     safeSetState(() {});
                                     if (_model.returnedArea?.length == 1) {
                                       _model.selectedArea =
-                                          _model.returnedArea?.first?.key;
+                                          _model.returnedArea?.first.key;
                                       _model.selectedAreaDesc =
                                           _model.returnedArea!.first.desc;
                                       safeSetState(() {});
@@ -502,7 +501,7 @@ class _SearchAddressComponentWidgetState
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           2.0, 2.0, 2.0, 2.0),
                                       child: Text(
                                         zoneItemItem.desc,
@@ -517,8 +516,8 @@ class _SearchAddressComponentWidgetState
                                   ),
                                 );
                               })
-                                  .divide(SizedBox(height: 5.0))
-                                  .around(SizedBox(height: 5.0)),
+                                  .divide(const SizedBox(height: 5.0))
+                                  .around(const SizedBox(height: 5.0)),
                             ),
                           );
                         },
@@ -558,7 +557,7 @@ class _SearchAddressComponentWidgetState
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           2.0, 2.0, 2.0, 2.0),
                                       child: Text(
                                         areaItemItem.desc,
@@ -573,17 +572,17 @@ class _SearchAddressComponentWidgetState
                                   ),
                                 );
                               })
-                                  .divide(SizedBox(height: 5.0))
-                                  .around(SizedBox(height: 5.0)),
+                                  .divide(const SizedBox(height: 5.0))
+                                  .around(const SizedBox(height: 5.0)),
                             ),
                           );
                         },
                       ),
                     ),
                   ]
-                      .divide(SizedBox(width: 10.0))
-                      .addToStart(SizedBox(width: 5.0))
-                      .addToEnd(SizedBox(width: 5.0)),
+                      .divide(const SizedBox(width: 10.0))
+                      .addToStart(const SizedBox(width: 5.0))
+                      .addToEnd(const SizedBox(width: 5.0)),
                 ),
               ),
             ),
@@ -593,7 +592,7 @@ class _SearchAddressComponentWidgetState
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
                   child: Container(
                     width: double.infinity,
                     height: 10.0,
@@ -601,7 +600,7 @@ class _SearchAddressComponentWidgetState
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                   ),
                 ),
               ),

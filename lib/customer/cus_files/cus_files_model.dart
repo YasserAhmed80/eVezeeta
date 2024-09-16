@@ -1,41 +1,46 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
-import '/pages/public_components/image_component/image_component_widget.dart';
+import '/public_components/loading_component/loading_component_widget.dart';
 import 'cus_files_widget.dart' show CusFilesWidget;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class CusFilesModel extends FlutterFlowModel<CusFilesWidget> {
   ///  Local state fields for this page.
 
-  bool isValidFileDate = true;
+  List<DtCusFilesStruct> filesList = [];
+  void addToFilesList(DtCusFilesStruct item) => filesList.add(item);
+  void removeFromFilesList(DtCusFilesStruct item) => filesList.remove(item);
+  void removeAtIndexFromFilesList(int index) => filesList.removeAt(index);
+  void insertAtIndexInFilesList(int index, DtCusFilesStruct item) =>
+      filesList.insert(index, item);
+  void updateFilesListAtIndex(int index, Function(DtCusFilesStruct) updateFn) =>
+      filesList[index] = updateFn(filesList[index]);
 
-  bool isValidFileType = true;
+  int? loopIndex = 0;
 
-  int? fileKey = -1;
+  int? loopMax = 0;
 
-  DateTime? fileDate;
-
-  CusFilesRecord? fileDocument;
-
-  bool isActive = false;
+  bool isLoadingCompleted = false;
 
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
+  // Stores action output result for [Firestore Query - Query a collection] action in cus_files widget.
+  List<CusFilesRecord>? returnedFiles;
+  // Stores action output result for [Backend Call - Read Document] action in cus_files widget.
+  DocRecord? returnedDoc;
+  // Model for loading_component component.
+  late LoadingComponentModel loadingComponentModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    loadingComponentModel = createModel(context, () => LoadingComponentModel());
+  }
 
   @override
-  void dispose() {}
+  void dispose() {
+    loadingComponentModel.dispose();
+  }
 
   /// Action blocks.
   Future<bool?> validateData(BuildContext context) async {

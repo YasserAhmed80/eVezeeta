@@ -163,6 +163,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'From here the patient and doctor communicate',
     },
     'syf05cif': {
+      'ar': 'admin',
+      'en': '',
+    },
+    'f1a1e4hm': {
       'ar': 'Dcotor',
       'en': '',
     },
@@ -475,6 +479,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'صورة إثبات اللقب المهني ',
       'en': 'A copy of proof of professional title',
     },
+    'wpyko5ui': {
+      'ar': 'تم حفظ الصور',
+      'en': '',
+    },
     'jx7kwnlm': {
       'ar': 'ادخال صور العمل',
       'en': 'Insert pictures of work',
@@ -554,6 +562,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تحديد مواعيد العمل',
       'en': '',
     },
+    'nhj89g6w': {
+      'ar': 'تم حفظ البيانات',
+      'en': '',
+    },
     's12hc0up': {
       'ar': 'تحديد نوع و سعر الكشف',
       'en': 'Determine the type and price of the statement',
@@ -590,7 +602,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'xhzlp0e3': {
-      'ar': 'البيانات الاساسية',
+      'ar': 'بيانات ملفك',
       'en': '',
     },
     '9ji1bh67': {
@@ -607,6 +619,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cjvoijbi': {
       'ar': 'تحديد سعر الكشف و مواعيد العمل',
+      'en': '',
+    },
+    'z3u38xyt': {
+      'ar': 'مشاهدة ملفك',
       'en': '',
     },
     'v88doy9y': {
@@ -635,14 +651,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ty0y41np': {
       'ar': 'وضع التطبيق',
-      'en': '',
-    },
-    '2l7vc9l1': {
-      'ar': 'نهاري',
-      'en': '',
-    },
-    'ftfu7qf5': {
-      'ar': 'ليلي',
       'en': '',
     },
     'oj9wm83v': {
@@ -752,6 +760,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'd6s6tbdi': {
       'ar': 'سنة',
+      'en': '',
+    },
+    '5vrn36l0': {
+      'ar': 'ملفات المريض',
       'en': '',
     },
     'zv7hc4a5': {
@@ -1292,7 +1304,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
-  // customer_profile
+  // customer_account
   {
     'wvbhqjb5': {
       'ar': 'سنة',
@@ -1306,16 +1318,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تعديل البيانات الاساسية',
       'en': '',
     },
-    'o8ift4hh': {
-      'ar': 'اطبائي',
-      'en': '',
-    },
     'ibt4yg2f': {
       'ar': 'حجوزاتي',
       'en': '',
     },
+    'o8ift4hh': {
+      'ar': 'اطبائي',
+      'en': '',
+    },
     '598l5kys': {
-      'ar': 'ملفاتي',
+      'ar': 'اوراق كشفي',
       'en': '',
     },
     '8bb5eygz': {
@@ -1332,14 +1344,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'o7ov5plp': {
       'ar': 'وضع التطبيق',
-      'en': '',
-    },
-    'xoiaw504': {
-      'ar': 'نهاري',
-      'en': '',
-    },
-    'zgit4hr2': {
-      'ar': 'ليلي',
       'en': '',
     },
     'th5p7d74': {
@@ -1384,12 +1388,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'سبب الالغاء',
       'en': '',
     },
-    'hl9h0sau': {
-      'ar': 'تخصص: ',
+    '5sqfekib': {
+      'ar':
+          'بعد اتمام الكشف يفضل ادخال الاوراق الخاصه بة ... مثل الروشتة او الاشعة',
       'en': '',
     },
-    'mmei1zcz': {
-      'ar': 'ملف الطبيب',
+    'j183k1bj': {
+      'ar': 'اضافة',
+      'en': '',
+    },
+    'hl9h0sau': {
+      'ar': 'تخصص: ',
       'en': '',
     },
     'xq01tr13': {
@@ -1549,6 +1558,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عن الدكتور: ',
       'en': '',
     },
+    'wu0x1yix': {
+      'ar': 'تخصص: ',
+      'en': '',
+    },
     'mkyvtqmn': {
       'ar': 'تعديل الملف',
       'en': '',
@@ -1632,6 +1645,158 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     'pew9khbr': {
+      'ar': 'Home',
+      'en': '',
+    },
+  },
+  // cus_files_Doctor
+  {
+    'a5zlnx1g': {
+      'ar': 'تاريخ الملف: ',
+      'en': '',
+    },
+    'qycq8z45': {
+      'ar': 'عن الملف: ',
+      'en': '',
+    },
+    'bc02uy9t': {
+      'ar': 'عن الدكتور: ',
+      'en': '',
+    },
+    'o7ntdxec': {
+      'ar': 'تخصص: ',
+      'en': '',
+    },
+    'sbj78iz2': {
+      'ar': 'من فضلك ادخل اسمك كامل',
+      'en': '',
+    },
+    'vozjuhu6': {
+      'ar': 'اسم طويل جدا',
+      'en': '',
+    },
+    'j2mfz0xw': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'jkkoss79': {
+      'ar': 'من فضلك ادخل اسمك الموبيل',
+      'en': '',
+    },
+    'megsui6r': {
+      'ar': 'رقم الموبيل خطأ',
+      'en': '',
+    },
+    'wm8gqrmw': {
+      'ar': 'رقم الموبيل خطأ',
+      'en': '',
+    },
+    'tql8e4q5': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'gmurycnb': {
+      'ar': 'Field is required',
+      'en': '',
+    },
+    '09u8bia0': {
+      'ar': 'يجب ادخال عنوان كامل',
+      'en': '',
+    },
+    '03nn7p79': {
+      'ar': 'العنوان طويل جدا',
+      'en': '',
+    },
+    'x7mlmukl': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    '95r9ymeh': {
+      'ar': 'ملفات مريض',
+      'en': '',
+    },
+    'ny9kjl1h': {
+      'ar': 'main',
+      'en': '',
+    },
+  },
+  // customer_profile
+  {
+    'jtdpubug': {
+      'ar': 'سنة',
+      'en': '',
+    },
+    'prqi6q1x': {
+      'ar': 'ملف عميل',
+      'en': '',
+    },
+    'bujl7ich': {
+      'ar': '__',
+      'en': '',
+    },
+  },
+  // admin_doctor_review
+  {
+    'k1492vfs': {
+      'ar': 'مراجعة ملفات الاطباء',
+      'en': '',
+    },
+    '4w7xgrx9': {
+      'ar': 'الاسم: ',
+      'en': '',
+    },
+    'zzw66px4': {
+      'ar': 'اللقب: ',
+      'en': '',
+    },
+    'z1zskwyp': {
+      'ar': 'عن الدكتور: ',
+      'en': '',
+    },
+    'eraa39f5': {
+      'ar': 'العنوان: ',
+      'en': '',
+    },
+    'mnws5lqv': {
+      'ar': 'تعليق: ',
+      'en': '',
+    },
+    'om3lwynp': {
+      'ar': 'تاكيد الملف',
+      'en': '',
+    },
+    'qu6223qy': {
+      'ar': 'محتاج تعديل',
+      'en': '',
+    },
+    '2igkin21': {
+      'ar': 'بلوك',
+      'en': '',
+    },
+    '4cjjo6x6': {
+      'ar': 'Home',
+      'en': '',
+    },
+  },
+  // admin_images_review
+  {
+    'm4piyqil': {
+      'ar': 'مراجعة الصور',
+      'en': '',
+    },
+    '9hocdd3n': {
+      'ar': 'تعليق: ',
+      'en': '',
+    },
+    'fa74uev0': {
+      'ar': 'تاكيد الصوره',
+      'en': '',
+    },
+    'nrvkec8c': {
+      'ar': 'حذف',
+      'en': '',
+    },
+    '494w8z1i': {
       'ar': 'Home',
       'en': '',
     },
@@ -1802,10 +1967,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
+  // loading_component
+  {
+    's87y8k9f': {
+      'ar': 'جاري تحميل البيانات',
+      'en': '',
+    },
+  },
   // code_component
   {
     'he62ycwm': {
-      'ar': 'رقم عضويتك: ',
+      'ar': 'رقم العضوية: ',
       'en': '',
     },
   },
@@ -1825,6 +1997,90 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ej7jlh53': {
       'ar': 'ألغاء',
+      'en': '',
+    },
+  },
+  // darkMode_Component
+  {
+    'tqamlwzo': {
+      'ar': 'نهاري',
+      'en': '',
+    },
+    'hyejx00u': {
+      'ar': 'ليلي',
+      'en': '',
+    },
+  },
+  // admin_sideNav_component
+  {
+    '34unu0xa': {
+      'ar': 'ادارة التطبيق',
+      'en': '',
+    },
+    '0wmhlfc6': {
+      'ar': 'المهام',
+      'en': '',
+    },
+    '5uvx8v9z': {
+      'ar': 'مراجعة ملفات الااطباء',
+      'en': '',
+    },
+    '4i6v9x07': {
+      'ar': 'مراجعة الصور',
+      'en': '',
+    },
+    'gjpd99jk': {
+      'ar': 'المواظفين',
+      'en': '',
+    },
+    '6yywr0kx': {
+      'ar': 'مواظفين ',
+      'en': '',
+    },
+    'nchm7jle': {
+      'ar': 'شركاء نجاح',
+      'en': '',
+    },
+  },
+  // reviw_status_component
+  {
+    'jg8bnvfu': {
+      'ar': 'حالة ملفك: ',
+      'en': '',
+    },
+    '1eip84hv': {
+      'ar': 'سبب:',
+      'en': '',
+    },
+  },
+  // create_note_component
+  {
+    'd5w7geyp': {
+      'ar': 'اضافة تعليق',
+      'en': '',
+    },
+    'i02xxb6i': {
+      'ar': 'من فضلك اكتب التعليق',
+      'en': '',
+    },
+    'g60q7v3q': {
+      'ar': 'Field is required',
+      'en': '',
+    },
+    'fdz6j6j7': {
+      'ar': 'اقل من 10 حروف',
+      'en': '',
+    },
+    'bzt90599': {
+      'ar': 'اكثر من 200 حرف',
+      'en': '',
+    },
+    '2waz6oz5': {
+      'ar': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    '6ntj6a5u': {
+      'ar': 'اوك',
       'en': '',
     },
   },

@@ -333,6 +333,21 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _refReviewStatus = prefs
+              .getStringList('ff_refReviewStatus')
+              ?.map((x) {
+                try {
+                  return DtGeneralListStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refReviewStatus;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -973,7 +988,7 @@ class FFAppState extends ChangeNotifier {
     DtGeneralListStruct.fromSerializableMap(jsonDecode(
         '{\"key\":\"1\",\"desc\":\"الحجز مسبقا و الدخول بأسبقية الحضور\"}')),
     DtGeneralListStruct.fromSerializableMap(
-        jsonDecode('{\"key\":\"0\",\"desc\":\"Hello World\"}'))
+        jsonDecode('{\"key\":\"2\",\"desc\":\"Hello World\"}'))
   ];
   List<DtGeneralListStruct> get refBookingType => _refBookingType;
   set refBookingType(List<DtGeneralListStruct> value) {
@@ -1197,6 +1212,56 @@ class FFAppState extends ChangeNotifier {
       Function(DtCustomerFileStruct) updateFn) {
     updateFn(_currentFileCustomer);
     prefs.setString('ff_currentFileCustomer', _currentFileCustomer.serialize());
+  }
+
+  List<DtGeneralListStruct> _refReviewStatus = [
+    DtGeneralListStruct.fromSerializableMap(jsonDecode(
+        '{\"key\":\"1\",\"desc\":\"تحت المراجعة\",\"lng_cde\":\"1\",\"color\":\"#4169e1\"}')),
+    DtGeneralListStruct.fromSerializableMap(jsonDecode(
+        '{\"key\":\"2\",\"desc\":\"مؤكد\",\"lng_cde\":\"1\",\"color\":\"#00d76d\"}')),
+    DtGeneralListStruct.fromSerializableMap(jsonDecode(
+        '{\"key\":\"3\",\"desc\":\"محتاج تعديل\",\"lng_cde\":\"1\",\"color\":\"#ffc107\"}')),
+    DtGeneralListStruct.fromSerializableMap(jsonDecode(
+        '{\"key\":\"4\",\"desc\":\"ملغي\",\"lng_cde\":\"1\",\"color\":\"#f44336\"}'))
+  ];
+  List<DtGeneralListStruct> get refReviewStatus => _refReviewStatus;
+  set refReviewStatus(List<DtGeneralListStruct> value) {
+    _refReviewStatus = value;
+    prefs.setStringList(
+        'ff_refReviewStatus', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefReviewStatus(DtGeneralListStruct value) {
+    refReviewStatus.add(value);
+    prefs.setStringList('ff_refReviewStatus',
+        _refReviewStatus.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefReviewStatus(DtGeneralListStruct value) {
+    refReviewStatus.remove(value);
+    prefs.setStringList('ff_refReviewStatus',
+        _refReviewStatus.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefReviewStatus(int index) {
+    refReviewStatus.removeAt(index);
+    prefs.setStringList('ff_refReviewStatus',
+        _refReviewStatus.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefReviewStatusAtIndex(
+    int index,
+    DtGeneralListStruct Function(DtGeneralListStruct) updateFn,
+  ) {
+    refReviewStatus[index] = updateFn(_refReviewStatus[index]);
+    prefs.setStringList('ff_refReviewStatus',
+        _refReviewStatus.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefReviewStatus(int index, DtGeneralListStruct value) {
+    refReviewStatus.insert(index, value);
+    prefs.setStringList('ff_refReviewStatus',
+        _refReviewStatus.map((x) => x.serialize()).toList());
   }
 }
 

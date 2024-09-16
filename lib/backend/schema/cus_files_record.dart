@@ -3,17 +3,15 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
-import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class CusFilesRecord extends FirestoreRecord {
   CusFilesRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -57,6 +55,16 @@ class CusFilesRecord extends FirestoreRecord {
   String get docDesc => _docDesc ?? '';
   bool hasDocDesc() => _docDesc != null;
 
+  // "review_status" field.
+  int? _reviewStatus;
+  int get reviewStatus => _reviewStatus ?? 0;
+  bool hasReviewStatus() => _reviewStatus != null;
+
+  // "review_reason" field.
+  String? _reviewReason;
+  String get reviewReason => _reviewReason ?? '';
+  bool hasReviewReason() => _reviewReason != null;
+
   void _initializeFields() {
     _cusRef = snapshotData['cus_ref'] as DocumentReference?;
     _fileCde = castToType<int>(snapshotData['file_cde']);
@@ -66,6 +74,8 @@ class CusFilesRecord extends FirestoreRecord {
     _cAt = snapshotData['c_at'] as DateTime?;
     _img = snapshotData['img'] as String?;
     _docDesc = snapshotData['doc_desc'] as String?;
+    _reviewStatus = castToType<int>(snapshotData['review_status']);
+    _reviewReason = snapshotData['review_reason'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -111,6 +121,8 @@ Map<String, dynamic> createCusFilesRecordData({
   DateTime? cAt,
   String? img,
   String? docDesc,
+  int? reviewStatus,
+  String? reviewReason,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -122,6 +134,8 @@ Map<String, dynamic> createCusFilesRecordData({
       'c_at': cAt,
       'img': img,
       'doc_desc': docDesc,
+      'review_status': reviewStatus,
+      'review_reason': reviewReason,
     }.withoutNulls,
   );
 
@@ -140,7 +154,9 @@ class CusFilesRecordDocumentEquality implements Equality<CusFilesRecord> {
         e1?.date == e2?.date &&
         e1?.cAt == e2?.cAt &&
         e1?.img == e2?.img &&
-        e1?.docDesc == e2?.docDesc;
+        e1?.docDesc == e2?.docDesc &&
+        e1?.reviewStatus == e2?.reviewStatus &&
+        e1?.reviewReason == e2?.reviewReason;
   }
 
   @override
@@ -152,7 +168,9 @@ class CusFilesRecordDocumentEquality implements Equality<CusFilesRecord> {
         e?.date,
         e?.cAt,
         e?.img,
-        e?.docDesc
+        e?.docDesc,
+        e?.reviewStatus,
+        e?.reviewReason
       ]);
 
   @override

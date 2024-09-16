@@ -1,12 +1,8 @@
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 import 'show_image_model.dart';
 export 'show_image_model.dart';
 
@@ -72,75 +68,77 @@ class _ShowImageWidgetState extends State<ShowImageWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: Align(
-          alignment: AlignmentDirectional(0.0, 0.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  maxWidth: 700.0,
-                ),
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                ),
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.fade,
-                        child: FlutterFlowExpandedImageView(
-                          image: Image.network(
-                            valueOrDefault<String>(
-                              functions.stringToImagePath(widget!.imageURL),
+          alignment: const AlignmentDirectional(0.0, 0.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: double.infinity,
+                  constraints: const BoxConstraints(
+                    maxWidth: 700.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                  ),
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: FlutterFlowExpandedImageView(
+                            image: Image.network(
+                              valueOrDefault<String>(
+                                functions.stringToImagePath(widget.imageURL),
+                                'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
+                              ),
+                              fit: BoxFit.contain,
+                              alignment: const Alignment(0.0, 0.0),
+                            ),
+                            allowRotation: false,
+                            tag: valueOrDefault<String>(
+                              functions.stringToImagePath(widget.imageURL),
                               'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
                             ),
-                            fit: BoxFit.contain,
-                            alignment: Alignment(0.0, 0.0),
+                            useHeroAnimation: true,
                           ),
-                          allowRotation: false,
-                          tag: valueOrDefault<String>(
-                            functions.stringToImagePath(widget!.imageURL),
+                        ),
+                      );
+                    },
+                    child: Hero(
+                      tag: valueOrDefault<String>(
+                        functions.stringToImagePath(widget.imageURL),
+                        'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
+                      ),
+                      transitionOnUserGestures: true,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          valueOrDefault<String>(
+                            functions.stringToImagePath(widget.imageURL),
                             'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
                           ),
-                          useHeroAnimation: true,
+                          fit: BoxFit.fill,
+                          alignment: const Alignment(0.0, 0.0),
                         ),
-                      ),
-                    );
-                  },
-                  child: Hero(
-                    tag: valueOrDefault<String>(
-                      functions.stringToImagePath(widget!.imageURL),
-                      'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
-                    ),
-                    transitionOnUserGestures: true,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        valueOrDefault<String>(
-                          functions.stringToImagePath(widget!.imageURL),
-                          'https://img.freepik.com/premium-photo/painting-clouds-sun-sky_1117379-6391.jpg?w=1380',
-                        ),
-                        fit: BoxFit.fill,
-                        alignment: Alignment(0.0, 0.0),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

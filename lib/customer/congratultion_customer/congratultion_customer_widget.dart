@@ -1,15 +1,12 @@
 import '/backend/backend.dart';
-import '/components/code_component_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:math';
+import '/public_components/code_component/code_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'congratultion_customer_model.dart';
 export 'congratultion_customer_model.dart';
 
@@ -41,8 +38,8 @@ class _CongratultionCustomerWidgetState
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget!.cusDocument != null) {
-        _model.name = widget!.cusDocument!.name;
+      if (widget.cusDocument != null) {
+        _model.name = widget.cusDocument!.name;
         _model.sequence = 0;
         safeSetState(() {});
       }
@@ -66,22 +63,22 @@ class _CongratultionCustomerWidgetState
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.8, 0.8),
+            end: const Offset(1.0, 1.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0, 1.396),
-            end: Offset(0, 0),
+            begin: const Offset(0, 1.396),
+            end: const Offset(0, 0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.0, 40.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 40.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -92,8 +89,8 @@ class _CongratultionCustomerWidgetState
             curve: Curves.linear,
             delay: 340.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 0.0),
-            end: Offset(0.0, 1.0),
+            begin: const Offset(0.0, 0.0),
+            end: const Offset(0.0, 1.0),
           ),
         ],
       ),
@@ -112,22 +109,22 @@ class _CongratultionCustomerWidgetState
             curve: Curves.easeInOut,
             delay: 100.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.8, 0.8),
+            end: const Offset(1.0, 1.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 100.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0, 1.396),
-            end: Offset(0, 0),
+            begin: const Offset(0, 1.396),
+            end: const Offset(0, 0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 100.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.0, 40.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 40.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -146,22 +143,22 @@ class _CongratultionCustomerWidgetState
             curve: Curves.easeInOut,
             delay: 150.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.8, 0.8),
+            end: const Offset(1.0, 1.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 150.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0, 1.396),
-            end: Offset(0, 0),
+            begin: const Offset(0, 1.396),
+            end: const Offset(0, 0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 150.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.0, 40.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 40.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -180,22 +177,22 @@ class _CongratultionCustomerWidgetState
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.8, 0.8),
+            end: const Offset(1.0, 1.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0, 1.396),
-            end: Offset(0, 0),
+            begin: const Offset(0, 1.396),
+            end: const Offset(0, 0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.0, 40.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 40.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -214,22 +211,22 @@ class _CongratultionCustomerWidgetState
             curve: Curves.easeInOut,
             delay: 350.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.8, 0.8),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.8, 0.8),
+            end: const Offset(1.0, 1.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 350.0.ms,
             duration: 300.0.ms,
-            begin: Offset(1.222, 0),
-            end: Offset(0, 0),
+            begin: const Offset(1.222, 0),
+            end: const Offset(0, 0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 350.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.0, 40.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 40.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -253,14 +250,14 @@ class _CongratultionCustomerWidgetState
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: Align(
-          alignment: AlignmentDirectional(0.0, 0.0),
+          alignment: const AlignmentDirectional(0.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: Container(
                   height: double.infinity,
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: 770.0,
                   ),
                   decoration: BoxDecoration(
@@ -273,9 +270,9 @@ class _CongratultionCustomerWidgetState
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, -1.0),
+                        alignment: const AlignmentDirectional(0.0, -1.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 44.0, 0.0, 0.0),
                           child: Container(
                             width: 120.0,
@@ -289,7 +286,7 @@ class _CongratultionCustomerWidgetState
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Container(
                                 width: 140.0,
                                 height: 140.0,
@@ -314,7 +311,7 @@ class _CongratultionCustomerWidgetState
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, -1.0),
+                        alignment: const AlignmentDirectional(0.0, -1.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'dz2w4iw4' /* سعدا باشتراكم */,
@@ -329,7 +326,7 @@ class _CongratultionCustomerWidgetState
                             animationsMap['textOnPageLoadAnimation1']!),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, -1.0),
+                        alignment: const AlignmentDirectional(0.0, -1.0),
                         child: Text(
                           _model.name,
                           style: FlutterFlowTheme.of(context)
@@ -351,7 +348,7 @@ class _CongratultionCustomerWidgetState
                       ).animateOnPageLoad(
                           animationsMap['dividerOnPageLoadAnimation']!),
                       Align(
-                        alignment: AlignmentDirectional(0.0, -1.0),
+                        alignment: const AlignmentDirectional(0.0, -1.0),
                         child: wrapWithModel(
                           model: _model.codeComponentModel,
                           updateCallback: () => safeSetState(() {}),
@@ -363,10 +360,10 @@ class _CongratultionCustomerWidgetState
                       FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed(
-                            'customer_profile',
+                            'customer_account',
                             queryParameters: {
                               'cusRef': serializeParam(
-                                widget!.cusDocument?.reference,
+                                widget.cusDocument?.reference,
                                 ParamType.DocumentReference,
                               ),
                               'isNewCustomer': serializeParam(
@@ -381,9 +378,9 @@ class _CongratultionCustomerWidgetState
                         ),
                         options: FFButtonOptions(
                           height: 48.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
@@ -393,7 +390,7 @@ class _CongratultionCustomerWidgetState
                                     letterSpacing: 0.0,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -401,7 +398,7 @@ class _CongratultionCustomerWidgetState
                         ),
                       ).animateOnPageLoad(
                           animationsMap['buttonOnPageLoadAnimation']!),
-                    ].divide(SizedBox(height: 8.0)),
+                    ].divide(const SizedBox(height: 8.0)),
                   ),
                 ),
               ),

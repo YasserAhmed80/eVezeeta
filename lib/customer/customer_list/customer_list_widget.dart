@@ -1,15 +1,12 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/custom_navbar/custom_navbar_widget.dart';
-import '/pages/public_components/addrress_component/addrress_component_widget.dart';
-import '/pages/public_components/image_component/image_component_widget.dart';
-import '/pages/public_components/phone_icon_component/phone_icon_component_widget.dart';
+import '/public_components/addrress_component/addrress_component_widget.dart';
+import '/public_components/custom_navbar/custom_navbar_widget.dart';
+import '/public_components/image_component/image_component_widget.dart';
+import '/public_components/phone_icon_component/phone_icon_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'customer_list_model.dart';
@@ -71,7 +68,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -89,7 +86,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -106,12 +103,12 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                       pagingController: _model.setListViewController(
                         CusRecord.collection,
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
                       primary: false,
                       shrinkWrap: true,
                       reverse: false,
                       scrollDirection: Axis.vertical,
-                      separatorBuilder: (_, __) => SizedBox(height: 5.0),
+                      separatorBuilder: (_, __) => const SizedBox(height: 5.0),
                       builderDelegate: PagedChildBuilderDelegate<CusRecord>(
                         // Customize what your widget looks like when it's loading the first page.
                         firstPageProgressIndicatorBuilder: (_) => Center(
@@ -148,7 +145,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                   .primaryBackground,
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -185,7 +182,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             context.pushNamed(
-                                              'customer_profile',
+                                              'customer_account',
                                               queryParameters: {
                                                 'cusRef': serializeParam(
                                                   listViewCusRecord.reference,
@@ -207,7 +204,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                             safeSetState(() {});
                                           },
                                           child: Container(
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               borderRadius: BorderRadius.only(
                                                 bottomLeft:
                                                     Radius.circular(14.0),
@@ -218,7 +215,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                               ),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 4.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -343,7 +340,7 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                                 ),
-                                              ].divide(SizedBox(width: 2.0)),
+                                              ].divide(const SizedBox(width: 2.0)),
                                             ),
                                             Text(
                                               valueOrDefault<String>(
@@ -366,11 +363,11 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
-                                          ].divide(SizedBox(width: 5.0)),
+                                          ].divide(const SizedBox(width: 5.0)),
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 5.0),
                                           child: AddrressComponentWidget(
                                             key: Key(
@@ -385,9 +382,9 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                                     ),
                                   ),
                                 ]
-                                    .divide(SizedBox(width: 20.0))
-                                    .addToStart(SizedBox(width: 5.0))
-                                    .addToEnd(SizedBox(width: 5.0)),
+                                    .divide(const SizedBox(width: 20.0))
+                                    .addToStart(const SizedBox(width: 5.0))
+                                    .addToEnd(const SizedBox(width: 5.0)),
                               ),
                             ),
                           );
@@ -398,11 +395,11 @@ class _CustomerListWidgetState extends State<CustomerListWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.customNavbarModel,
                   updateCallback: () => safeSetState(() {}),
-                  child: CustomNavbarWidget(),
+                  child: const CustomNavbarWidget(),
                 ),
               ),
             ],

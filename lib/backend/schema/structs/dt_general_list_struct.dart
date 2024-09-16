@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
-import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -14,10 +13,12 @@ class DtGeneralListStruct extends FFFirebaseStruct {
     int? key,
     String? desc,
     int? lngCde,
+    Color? color,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _key = key,
         _desc = desc,
         _lngCde = lngCde,
+        _color = color,
         super(firestoreUtilData);
 
   // "key" field.
@@ -45,11 +46,19 @@ class DtGeneralListStruct extends FFFirebaseStruct {
 
   bool hasLngCde() => _lngCde != null;
 
+  // "color" field.
+  Color? _color;
+  Color? get color => _color;
+  set color(Color? val) => _color = val;
+
+  bool hasColor() => _color != null;
+
   static DtGeneralListStruct fromMap(Map<String, dynamic> data) =>
       DtGeneralListStruct(
         key: castToType<int>(data['key']),
         desc: data['desc'] as String?,
         lngCde: castToType<int>(data['lng_cde']),
+        color: getSchemaColor(data['color']),
       );
 
   static DtGeneralListStruct? maybeFromMap(dynamic data) => data is Map
@@ -60,6 +69,7 @@ class DtGeneralListStruct extends FFFirebaseStruct {
         'key': _key,
         'desc': _desc,
         'lng_cde': _lngCde,
+        'color': _color,
       }.withoutNulls;
 
   @override
@@ -75,6 +85,10 @@ class DtGeneralListStruct extends FFFirebaseStruct {
         'lng_cde': serializeParam(
           _lngCde,
           ParamType.int,
+        ),
+        'color': serializeParam(
+          _color,
+          ParamType.Color,
         ),
       }.withoutNulls;
 
@@ -95,6 +109,11 @@ class DtGeneralListStruct extends FFFirebaseStruct {
           ParamType.int,
           false,
         ),
+        color: deserializeParam(
+          data['color'],
+          ParamType.Color,
+          false,
+        ),
       );
 
   @override
@@ -105,17 +124,19 @@ class DtGeneralListStruct extends FFFirebaseStruct {
     return other is DtGeneralListStruct &&
         key == other.key &&
         desc == other.desc &&
-        lngCde == other.lngCde;
+        lngCde == other.lngCde &&
+        color == other.color;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([key, desc, lngCde]);
+  int get hashCode => const ListEquality().hash([key, desc, lngCde, color]);
 }
 
 DtGeneralListStruct createDtGeneralListStruct({
   int? key,
   String? desc,
   int? lngCde,
+  Color? color,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -125,6 +146,7 @@ DtGeneralListStruct createDtGeneralListStruct({
       key: key,
       desc: desc,
       lngCde: lngCde,
+      color: color,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

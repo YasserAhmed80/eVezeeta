@@ -9,6 +9,7 @@ export 'dt_booked_item_struct.dart';
 export 'dt_booking_history_struct.dart';
 export 'dt_country_struct.dart';
 export 'dt_cus_struct.dart';
+export 'dt_cus_files_struct.dart';
 export 'dt_customer_file_struct.dart';
 export 'dt_day_struct.dart';
 export 'dt_day_analysis_struct.dart';

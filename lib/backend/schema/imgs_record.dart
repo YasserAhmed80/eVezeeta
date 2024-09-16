@@ -3,17 +3,15 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
-import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class ImgsRecord extends FirestoreRecord {
   ImgsRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -32,11 +30,6 @@ class ImgsRecord extends FirestoreRecord {
   int get iSeq => _iSeq ?? 0;
   bool hasISeq() => _iSeq != null;
 
-  // "i_ver" field.
-  bool? _iVer;
-  bool get iVer => _iVer ?? false;
-  bool hasIVer() => _iVer != null;
-
   // "i_ref" field.
   String? _iRef;
   String get iRef => _iRef ?? '';
@@ -52,14 +45,25 @@ class ImgsRecord extends FirestoreRecord {
   DateTime? get cAt => _cAt;
   bool hasCAt() => _cAt != null;
 
+  // "review_status" field.
+  int? _reviewStatus;
+  int get reviewStatus => _reviewStatus ?? 0;
+  bool hasReviewStatus() => _reviewStatus != null;
+
+  // "review_reason" field.
+  String? _reviewReason;
+  String get reviewReason => _reviewReason ?? '';
+  bool hasReviewReason() => _reviewReason != null;
+
   void _initializeFields() {
     _eType = snapshotData['e_type'] as String?;
     _iType = snapshotData['i_type'] as String?;
     _iSeq = castToType<int>(snapshotData['i_seq']);
-    _iVer = snapshotData['i_ver'] as bool?;
     _iRef = snapshotData['i_ref'] as String?;
     _eCode = snapshotData['e_code'] as String?;
     _cAt = snapshotData['c_at'] as DateTime?;
+    _reviewStatus = castToType<int>(snapshotData['review_status']);
+    _reviewReason = snapshotData['review_reason'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -99,20 +103,22 @@ Map<String, dynamic> createImgsRecordData({
   String? eType,
   String? iType,
   int? iSeq,
-  bool? iVer,
   String? iRef,
   String? eCode,
   DateTime? cAt,
+  int? reviewStatus,
+  String? reviewReason,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'e_type': eType,
       'i_type': iType,
       'i_seq': iSeq,
-      'i_ver': iVer,
       'i_ref': iRef,
       'e_code': eCode,
       'c_at': cAt,
+      'review_status': reviewStatus,
+      'review_reason': reviewReason,
     }.withoutNulls,
   );
 
@@ -127,15 +133,24 @@ class ImgsRecordDocumentEquality implements Equality<ImgsRecord> {
     return e1?.eType == e2?.eType &&
         e1?.iType == e2?.iType &&
         e1?.iSeq == e2?.iSeq &&
-        e1?.iVer == e2?.iVer &&
         e1?.iRef == e2?.iRef &&
         e1?.eCode == e2?.eCode &&
-        e1?.cAt == e2?.cAt;
+        e1?.cAt == e2?.cAt &&
+        e1?.reviewStatus == e2?.reviewStatus &&
+        e1?.reviewReason == e2?.reviewReason;
   }
 
   @override
-  int hash(ImgsRecord? e) => const ListEquality()
-      .hash([e?.eType, e?.iType, e?.iSeq, e?.iVer, e?.iRef, e?.eCode, e?.cAt]);
+  int hash(ImgsRecord? e) => const ListEquality().hash([
+        e?.eType,
+        e?.iType,
+        e?.iSeq,
+        e?.iRef,
+        e?.eCode,
+        e?.cAt,
+        e?.reviewStatus,
+        e?.reviewReason
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ImgsRecord;

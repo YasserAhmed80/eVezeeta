@@ -1,6 +1,4 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,10 +6,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/calender_component_2/calender_component2_widget.dart';
-import '/pages/upload_photo/upload_photo_widget.dart';
+import '/public_components/calender_component_2/calender_component2_widget.dart';
+import '/public_components/upload_photo/upload_photo_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -45,9 +42,9 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget!.cusRef != null) {
+      if (widget.cusRef != null) {
         _model.returnedReadCustomer =
-            await CusRecord.getDocumentOnce(widget!.cusRef!);
+            await CusRecord.getDocumentOnce(widget.cusRef!);
         _model.cusDocument = _model.returnedReadCustomer;
         safeSetState(() {});
         _model.cusNmae = _model.cusDocument!.name;
@@ -177,13 +174,13 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                   ),
                 ],
               ),
-            ].divide(SizedBox(height: 4.0)),
+            ].divide(const SizedBox(height: 4.0)),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: Container(
+        body: SizedBox(
           height: double.infinity,
           child: Stack(
             children: [
@@ -200,14 +197,14 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, -1.0),
+                              alignment: const AlignmentDirectional(0.0, -1.0),
                               child: Container(
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                   maxWidth: 770.0,
                                 ),
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 0.0),
                                   child: SingleChildScrollView(
                                     primary: false,
@@ -236,7 +233,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.txtFullNameFieldTextController',
-                                            Duration(milliseconds: 2000),
+                                            const Duration(milliseconds: 2000),
                                             () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
@@ -321,7 +318,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
                                             suffixIcon: _model
                                                     .txtFullNameFieldTextController!
@@ -334,7 +331,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           ?.clear();
                                                       safeSetState(() {});
                                                     },
-                                                    child: Icon(
+                                                    child: const Icon(
                                                       Icons.clear,
                                                       size: 22,
                                                     ),
@@ -369,7 +366,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                           onChanged: (_) =>
                                               EasyDebounce.debounce(
                                             '_model.txtMobileTextController',
-                                            Duration(milliseconds: 2000),
+                                            const Duration(milliseconds: 2000),
                                             () => safeSetState(() {}),
                                           ),
                                           autofocus: false,
@@ -450,7 +447,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 20.0, 16.0, 20.0),
                                             suffixIcon: _model
                                                     .txtMobileTextController!
@@ -463,7 +460,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           ?.clear();
                                                       safeSetState(() {});
                                                     },
-                                                    child: Icon(
+                                                    child: const Icon(
                                                       Icons.clear,
                                                       size: 22,
                                                     ),
@@ -520,7 +517,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     padding:
                                                         MediaQuery.viewInsetsOf(
                                                             context),
-                                                    child: Container(
+                                                    child: SizedBox(
                                                       height: 300.0,
                                                       child:
                                                           CalenderComponent2Widget(
@@ -562,7 +559,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               ),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       5.0, 10.0, 5.0, 10.0),
                                               child: Row(
@@ -641,7 +638,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                         ),
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Container(
                                             decoration: BoxDecoration(
                                               color:
@@ -662,10 +659,10 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         10.0, 10.0, 10.0, 10.0),
                                                 child: FlutterFlowChoiceChips(
@@ -812,7 +809,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 10.0, 0.0, 10.0),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -823,7 +820,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                   BorderRadius.circular(14.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 10.0, 10.0, 10.0),
                                               child: Column(
@@ -926,7 +923,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                         borderWidth: 1.0,
                                                         borderRadius: 0.0,
                                                         margin:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     16.0,
                                                                     4.0,
@@ -1046,7 +1043,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     borderWidth: 1.0,
                                                     borderRadius: 1.0,
                                                     margin:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
                                                                 16.0, 4.0),
                                                     hidesUnderline: true,
@@ -1168,7 +1165,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     borderWidth: 1.0,
                                                     borderRadius: 1.0,
                                                     margin:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
                                                                 16.0, 4.0),
                                                     hidesUnderline: true,
@@ -1293,7 +1290,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     borderWidth: 1.0,
                                                     borderRadius: 1.0,
                                                     margin:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 4.0,
                                                                 16.0, 4.0),
                                                     hidesUnderline: true,
@@ -1309,7 +1306,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.txtAddressDescTextController',
-                                                      Duration(
+                                                      const Duration(
                                                           milliseconds: 2000),
                                                       () => safeSetState(() {}),
                                                     ),
@@ -1367,7 +1364,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1391,7 +1388,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1415,7 +1412,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1439,7 +1436,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -1460,7 +1457,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                                   context)
                                                               .primaryBackground,
                                                       contentPadding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   20.0,
@@ -1485,7 +1482,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                                 safeSetState(
                                                                     () {});
                                                               },
-                                                              child: Icon(
+                                                              child: const Icon(
                                                                 Icons.clear,
                                                                 size: 22,
                                                               ),
@@ -1523,7 +1520,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 12.0, 16.0, 12.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -1575,16 +1572,16 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     builder:
                                                         (alertDialogContext) {
                                                       return AlertDialog(
-                                                        title: Text(
+                                                        title: const Text(
                                                             'تسجيل البيانات'),
-                                                        content: Text(
+                                                        content: const Text(
                                                             'تم حفظ البيانات بنجاح'),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () =>
                                                                 Navigator.pop(
                                                                     alertDialogContext),
-                                                            child: Text('Ok'),
+                                                            child: const Text('Ok'),
                                                           ),
                                                         ],
                                                       );
@@ -1624,16 +1621,16 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                     builder:
                                                         (alertDialogContext) {
                                                       return AlertDialog(
-                                                        title: Text(
+                                                        title: const Text(
                                                             'حفظ البيانات'),
-                                                        content: Text(
+                                                        content: const Text(
                                                             'خطأ في حفظ البيانات ... من فضلك حاول مةمرة ثانية'),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () =>
                                                                 Navigator.pop(
                                                                     alertDialogContext),
-                                                            child: Text('Ok'),
+                                                            child: const Text('Ok'),
                                                           ),
                                                         ],
                                                       );
@@ -1646,16 +1643,16 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                   builder:
                                                       (alertDialogContext) {
                                                     return AlertDialog(
-                                                      title: Text(
+                                                      title: const Text(
                                                           'تسجيل البيانات'),
-                                                      content: Text(
+                                                      content: const Text(
                                                           'من فضلك اكمل ادخال البيانات '),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   alertDialogContext),
-                                                          child: Text('اوك'),
+                                                          child: const Text('اوك'),
                                                         ),
                                                       ],
                                                     );
@@ -1672,10 +1669,10 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                             options: FFButtonOptions(
                                               width: double.infinity,
                                               height: 48.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1689,7 +1686,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -1707,7 +1704,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Align(
-                                                alignment: AlignmentDirectional(
+                                                alignment: const AlignmentDirectional(
                                                     -1.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
@@ -1725,7 +1722,7 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(
+                                                alignment: const AlignmentDirectional(
                                                     -1.0, 0.0),
                                                 child: Text(
                                                   FFLocalizations.of(context)
@@ -1769,8 +1766,8 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                                           ),
                                         ),
                                       ]
-                                          .divide(SizedBox(height: 12.0))
-                                          .addToEnd(SizedBox(height: 32.0)),
+                                          .divide(const SizedBox(height: 12.0))
+                                          .addToEnd(const SizedBox(height: 32.0)),
                                     ),
                                   ),
                                 ),
@@ -1781,10 +1778,10 @@ class _CusMainDataWidgetState extends State<CusMainDataWidget> {
                       ),
                     ),
                     Container(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 770.0,
                       ),
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                     ),
                   ],
                 ),

@@ -2,13 +2,10 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:math';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'load_ref_data_component_model.dart';
 export 'load_ref_data_component_model.dart';
 
@@ -90,7 +87,7 @@ class _LoadRefDataComponentWidgetState extends State<LoadRefDataComponentWidget>
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
@@ -107,7 +104,7 @@ class _LoadRefDataComponentWidgetState extends State<LoadRefDataComponentWidget>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   'qv6xtmr9' /* جاري تحميل البيانات */,
@@ -130,7 +127,7 @@ class _LoadRefDataComponentWidgetState extends State<LoadRefDataComponentWidget>
               milliSecond: false,
             ),
             controller: _model.timerController,
-            updateStateInterval: Duration(milliseconds: 1000),
+            updateStateInterval: const Duration(milliseconds: 1000),
             onChanged: (value, displayTime, shouldUpdate) {
               _model.timerMilliseconds = value;
               _model.timerValue = displayTime;

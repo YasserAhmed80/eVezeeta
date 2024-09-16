@@ -1,14 +1,14 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
-import '/pages/public_components/image_component/image_component_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '/public_components/empty_list_component/empty_list_component_widget.dart';
+import '/public_components/image_component/image_component_widget.dart';
+import '/public_components/image_component_circle/image_component_circle_widget.dart';
+import '/public_components/loading_component/loading_component_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'cus_files_model.dart';
 export 'cus_files_model.dart';
@@ -34,6 +34,52 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CusFilesModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.returnedFiles = await queryCusFilesRecordOnce(
+        queryBuilder: (cusFilesRecord) => cusFilesRecord
+            .where(
+              'cus_ref',
+              isEqualTo: widget.cusRef,
+            )
+            .orderBy('date', descending: true),
+      );
+      _model.loopIndex = 0;
+      _model.loopMax = _model.returnedFiles?.length;
+      safeSetState(() {});
+      while (_model.loopIndex! < _model.loopMax!) {
+        _model.addToFilesList(DtCusFilesStruct(
+          fileRef: _model.returnedFiles?[_model.loopIndex!].reference,
+          cusRef: _model.returnedFiles?[_model.loopIndex!].cusRef,
+          docRef: _model.returnedFiles?[_model.loopIndex!].docRef,
+          fileDate: _model.returnedFiles?[_model.loopIndex!].date,
+          typeCde: _model.returnedFiles?[_model.loopIndex!].fileCde,
+          fileDesc: _model.returnedFiles?[_model.loopIndex!].fileDesc,
+          docDesc: _model.returnedFiles?[_model.loopIndex!].docDesc,
+          img: _model.returnedFiles?[_model.loopIndex!].img,
+        ));
+        safeSetState(() {});
+        if (_model.returnedFiles?[_model.loopIndex!].docRef != null) {
+          _model.returnedDoc = await DocRecord.getDocumentOnce(
+              _model.returnedFiles![_model.loopIndex!].docRef!);
+          _model.updateFilesListAtIndex(
+            _model.loopIndex!,
+            (e) => e
+              ..docName = _model.returnedDoc?.name
+              ..docGeneder = _model.returnedDoc?.gender
+              ..docTitleDesc = _model.returnedDoc?.title
+              ..docCat = _model.returnedDoc?.catId
+              ..docImg = _model.returnedDoc?.img,
+          );
+          safeSetState(() {});
+        }
+        _model.loopIndex = _model.loopIndex! + 1;
+        safeSetState(() {});
+      }
+      _model.isLoadingCompleted = true;
+      safeSetState(() {});
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -92,13 +138,13 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                   ),
                 ],
               ),
-            ].divide(SizedBox(height: 4.0)),
+            ].divide(const SizedBox(height: 4.0)),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: Container(
+        body: SizedBox(
           height: double.infinity,
           child: Stack(
             children: [
@@ -115,7 +161,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 10.0, 10.0, 10.0),
                               child: Container(
                                 decoration: BoxDecoration(
@@ -123,7 +169,7 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                   borderRadius: BorderRadius.circular(14.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 20.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -156,573 +202,751 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                                 ),
                               ),
                             ),
-                            StreamBuilder<List<CusFilesRecord>>(
-                              stream: queryCusFilesRecord(
-                                queryBuilder: (cusFilesRecord) => cusFilesRecord
-                                    .where(
-                                      'cus_ref',
-                                      isEqualTo: widget!.cusRef,
-                                    )
-                                    .orderBy('date'),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<CusFilesRecord>
-                                    listViewCusFilesRecordList = snapshot.data!;
-                                if (listViewCusFilesRecordList.isEmpty) {
-                                  return Container(
-                                    height: 200.0,
-                                    child: EmptyListComponentWidget(
-                                      desc: 'لايوجد ملفات',
-                                    ),
-                                  );
-                                }
+                            Builder(
+                              builder: (context) {
+                                if (_model.isLoadingCompleted == true) {
+                                  return Builder(
+                                    builder: (context) {
+                                      final fileItem =
+                                          _model.filesList.toList();
+                                      if (fileItem.isEmpty) {
+                                        return const SizedBox(
+                                          height: 200.0,
+                                          child: EmptyListComponentWidget(
+                                            desc: 'لايوجد ملفات',
+                                          ),
+                                        );
+                                      }
 
-                                return ListView.separated(
-                                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: listViewCusFilesRecordList.length,
-                                  separatorBuilder: (_, __) =>
-                                      SizedBox(height: 10.0),
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewCusFilesRecord =
-                                        listViewCusFilesRecordList[
-                                            listViewIndex];
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 10.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Column(
+                                      return ListView.separated(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10.0),
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: fileItem.length,
+                                        separatorBuilder: (_, __) =>
+                                            const SizedBox(height: 10.0),
+                                        itemBuilder: (context, fileItemIndex) {
+                                          final fileItemItem =
+                                              fileItem[fileItemIndex];
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      10.0, 0.0, 10.0, 0.0),
+                                              child: Row(
                                                 mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Column(
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'mer9deto' /* تاريخ الملف:  */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Cairo',
-                                                                        fontSize:
-                                                                            12.0,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  dateTimeFormat(
-                                                                    "d/M/y",
-                                                                    listViewCusFilesRecord
-                                                                        .date!,
-                                                                    locale: FFLocalizations.of(
-                                                                            context)
-                                                                        .languageCode,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Cairo',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondary,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          20.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    dateTimeFormat(
-                                                                      "relative",
-                                                                      listViewCusFilesRecord
-                                                                          .cAt!,
-                                                                      locale: FFLocalizations.of(
-                                                                              context)
-                                                                          .languageCode,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Cairo',
-                                                                          fontSize:
-                                                                              12.0,
-                                                                          letterSpacing:
-                                                                              0.0,
+                                                            Expanded(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'mer9deto' /* تاريخ الملف:  */,
                                                                         ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Cairo',
+                                                                              fontSize: 12.0,
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                      Text(
+                                                                        dateTimeFormat(
+                                                                          "d/M/y",
+                                                                          fileItemItem
+                                                                              .fileDate!,
+                                                                          locale:
+                                                                              FFLocalizations.of(context).languageCode,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Cairo',
+                                                                              color: FlutterFlowTheme.of(context).secondary,
+                                                                              fontSize: 16.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            20.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          dateTimeFormat(
+                                                                            "relative",
+                                                                            fileItemItem.fileDate!,
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageCode,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Cairo',
+                                                                                fontSize: 12.0,
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          FFAppState()
+                                                                              .refCustomerFiles
+                                                                              .where((e) => e.key == fileItemItem.typeCde)
+                                                                              .toList()
+                                                                              .first
+                                                                              .desc,
+                                                                          'n',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Cairo',
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
-                                                            Row(
+                                                            Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .max,
                                                               children: [
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    FFAppState()
-                                                                        .refCustomerFiles
-                                                                        .where((e) =>
-                                                                            e.key ==
-                                                                            listViewCusFilesRecord.fileCde)
-                                                                        .toList()
-                                                                        .first
-                                                                        .desc,
-                                                                    'n',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Cairo',
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
+                                                                ImageComponentWidget(
+                                                                  key: Key(
+                                                                      'Keymmo_${fileItemIndex}_of_${fileItem.length}'),
+                                                                  imgRef:
+                                                                      fileItemItem
+                                                                          .img,
                                                                 ),
                                                               ],
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          ImageComponentWidget(
-                                                            key: Key(
-                                                                'Keymmo_${listViewIndex}_of_${listViewCusFilesRecordList.length}'),
-                                                            imgRef:
-                                                                listViewCusFilesRecord
-                                                                    .img,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                          'q7k6lf1f' /* عن الملف:  */,
-                                                        ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Cairo',
-                                                              fontSize: 12.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .normal,
-                                                            ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      5.0,
-                                                                      0.0,
-                                                                      5.0,
-                                                                      0.0),
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5.0),
-                                                              border:
-                                                                  Border.all(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'q7k6lf1f' /* عن الملف:  */,
                                                               ),
-                                                            ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          5.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                listViewCusFilesRecord
-                                                                    .fileDesc,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Cairo',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                          'aipm8l6r' /* عن الدكتور:  */,
-                                                        ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Cairo',
-                                                              fontSize: 12.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .normal,
-                                                            ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      5.0,
-                                                                      0.0,
-                                                                      5.0,
-                                                                      0.0),
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border:
-                                                                  Border.all(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryBackground,
-                                                              ),
-                                                            ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          5.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                listViewCusFilesRecord
-                                                                    .docDesc,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Cairo',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 10.0,
-                                                                0.0, 10.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        FFButtonWidget(
-                                                          onPressed: () async {
-                                                            FFAppState()
-                                                                .updateCurrentFileCustomerStruct(
-                                                              (e) => e
-                                                                ..fileRef =
-                                                                    listViewCusFilesRecord
-                                                                        .reference,
-                                                            );
-                                                            safeSetState(() {});
-
-                                                            context.pushNamed(
-                                                              'cus_new_file',
-                                                              queryParameters: {
-                                                                'cusRef':
-                                                                    serializeParam(
-                                                                  widget!
-                                                                      .cusRef,
-                                                                  ParamType
-                                                                      .DocumentReference,
-                                                                ),
-                                                                'fileRef':
-                                                                    serializeParam(
-                                                                  listViewCusFilesRecord
-                                                                      .reference,
-                                                                  ParamType
-                                                                      .DocumentReference,
-                                                                ),
-                                                              }.withoutNulls,
-                                                            );
-                                                          },
-                                                          text: FFLocalizations
-                                                                  .of(context)
-                                                              .getText(
-                                                            'mkyvtqmn' /* تعديل الملف */,
-                                                          ),
-                                                          options:
-                                                              FFButtonOptions(
-                                                            height: 30.0,
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        16.0,
-                                                                        0.0,
-                                                                        16.0,
-                                                                        0.0),
-                                                            iconPadding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Cairo',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                            elevation: 0.0,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                          ),
-                                                        ),
-                                                        FFButtonWidget(
-                                                          onPressed: () async {
-                                                            var confirmDialogResponse =
-                                                                await showDialog<
-                                                                        bool>(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (alertDialogContext) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text('حذف ملف'),
-                                                                          content:
-                                                                              Text('هل تريد حذف الملف؟'),
-                                                                          actions: [
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                              child: Text('الفاء'),
-                                                                            ),
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                              child: Text('نعم'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    ) ??
-                                                                    false;
-                                                            if (confirmDialogResponse) {
-                                                              await listViewCusFilesRecord
-                                                                  .reference
-                                                                  .delete();
-                                                              ScaffoldMessenger
+                                                              style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'تم حذف الملف',
-                                                                    style:
-                                                                        TextStyle(
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Cairo',
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                  ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                child:
+                                                                    Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0),
+                                                                    border:
+                                                                        Border
+                                                                            .all(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primaryText,
+                                                                          .secondaryBackground,
                                                                     ),
                                                                   ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          2000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      fileItemItem
+                                                                          .fileDesc,
+                                                                      style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primary,
-                                                                ),
-                                                              );
-                                                            }
-                                                          },
-                                                          text: FFLocalizations
-                                                                  .of(context)
-                                                              .getText(
-                                                            'aivmciwg' /* حذف الملف */,
-                                                          ),
-                                                          options:
-                                                              FFButtonOptions(
-                                                            height: 30.0,
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        16.0,
-                                                                        0.0,
-                                                                        16.0,
-                                                                        0.0),
-                                                            iconPadding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .warning,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Cairo',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Cairo',
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
                                                                     ),
-                                                            elevation: 0.0,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'aipm8l6r' /* عن الدكتور:  */,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Cairo',
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                  ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                child:
+                                                                    Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                    ),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      fileItemItem
+                                                                          .docDesc,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Cairo',
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        if (fileItemItem
+                                                                .docRef !=
+                                                            null)
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Container(
+                                                                constraints:
+                                                                    const BoxConstraints(
+                                                                  maxWidth:
+                                                                      80.0,
+                                                                ),
+                                                                decoration:
+                                                                    const BoxDecoration(),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          5.0,
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      ImageComponentCircleWidget(
+                                                                        key: Key(
+                                                                            'Keykmp_${fileItemIndex}_of_${fileItem.length}'),
+                                                                        imgURL:
+                                                                            fileItemItem.docImg,
+                                                                        width:
+                                                                            50,
+                                                                      ),
+                                                                    ]
+                                                                        .divide(const SizedBox(
+                                                                            height:
+                                                                                5.0))
+                                                                        .around(const SizedBox(
+                                                                            height:
+                                                                                5.0)),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 3,
+                                                                child: Padding(
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          10.0,
+                                                                          0.0),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          context
+                                                                              .pushNamed(
+                                                                            'doctor_profile',
+                                                                            queryParameters:
+                                                                                {
+                                                                              'docRef': serializeParam(
+                                                                                fileItemItem.docRef,
+                                                                                ParamType.DocumentReference,
+                                                                              ),
+                                                                            }.withoutNulls,
+                                                                          );
+                                                                        },
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children:
+                                                                              [
+                                                                            Text(
+                                                                              valueOrDefault<String>(
+                                                                                FFAppState().refDocType.where((e) => e.typeKey == fileItemItem.docGeneder).toList().first.desc,
+                                                                                'nnn',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Cairo',
+                                                                                    fontSize: 12.0,
+                                                                                    letterSpacing: 0.0,
+                                                                                  ),
+                                                                            ),
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                valueOrDefault<String>(
+                                                                                  fileItemItem.docName,
+                                                                                  'docName',
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Cairo',
+                                                                                      color: FlutterFlowTheme.of(context).secondary,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                            Icon(
+                                                                              Icons.arrow_forward_ios,
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                              size: 24.0,
+                                                                            ),
+                                                                          ].divide(const SizedBox(width: 5.0)),
+                                                                        ),
+                                                                      ),
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children:
+                                                                            [
+                                                                          Text(
+                                                                            valueOrDefault<String>(
+                                                                              fileItemItem.docTitleDesc,
+                                                                              'nnnn',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Cairo',
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                ),
+                                                                          ),
+                                                                        ].divide(const SizedBox(width: 5.0)),
+                                                                      ),
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children:
+                                                                            [
+                                                                          Text(
+                                                                            FFLocalizations.of(context).getText(
+                                                                              'wu0x1yix' /* تخصص:  */,
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Cairo',
+                                                                                  fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                ),
+                                                                          ),
+                                                                          Text(
+                                                                            valueOrDefault<String>(
+                                                                              FFAppState().refCategory.where((e) => e.catKey == fileItemItem.docCat).toList().first.desc,
+                                                                              'nnn',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Cairo',
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                ),
+                                                                          ),
+                                                                        ].divide(const SizedBox(width: 5.0)),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      20.0,
+                                                                      0.0,
+                                                                      10.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  FFAppState()
+                                                                      .updateCurrentFileCustomerStruct(
+                                                                    (e) => e
+                                                                      ..fileRef =
+                                                                          fileItemItem
+                                                                              .fileRef,
+                                                                  );
+                                                                  safeSetState(
+                                                                      () {});
+
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'cus_new_file',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'cusRef':
+                                                                          serializeParam(
+                                                                        widget
+                                                                            .cusRef,
+                                                                        ParamType
+                                                                            .DocumentReference,
+                                                                      ),
+                                                                      'fileRef':
+                                                                          serializeParam(
+                                                                        fileItemItem
+                                                                            .fileRef,
+                                                                        ParamType
+                                                                            .DocumentReference,
+                                                                      ),
+                                                                      'docRef':
+                                                                          serializeParam(
+                                                                        fileItemItem
+                                                                            .docRef,
+                                                                        ParamType
+                                                                            .DocumentReference,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                  );
+                                                                },
+                                                                text: FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'mkyvtqmn' /* تعديل الملف */,
+                                                                ),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  height: 30.0,
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          0.0,
+                                                                          16.0,
+                                                                          0.0),
+                                                                  iconPadding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Cairo',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                              ),
+                                                              FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  var confirmDialogResponse =
+                                                                      await showDialog<
+                                                                              bool>(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: const Text('حذف ملف'),
+                                                                                content: const Text('هل تريد حذف الملف؟'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                    child: const Text('الفاء'),
+                                                                                  ),
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                    child: const Text('نعم'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          ) ??
+                                                                          false;
+                                                                  if (confirmDialogResponse) {
+                                                                    await fileItemItem
+                                                                        .fileRef!
+                                                                        .delete();
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'تم حذف الملف',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            const Duration(milliseconds: 2000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).primary,
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                },
+                                                                text: FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'aivmciwg' /* حذف الملف */,
+                                                                ),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  height: 30.0,
+                                                                  padding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          0.0,
+                                                                          16.0,
+                                                                          0.0),
+                                                                  iconPadding: const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .warning,
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Cairo',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                  elevation:
+                                                                      0.0,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                ),
+                                                              ),
+                                                            ]
+                                                                .divide(const SizedBox(
+                                                                    width: 5.0))
+                                                                .around(const SizedBox(
+                                                                    width:
+                                                                        5.0)),
                                                           ),
                                                         ),
                                                       ]
-                                                          .divide(SizedBox(
-                                                              width: 5.0))
-                                                          .around(SizedBox(
-                                                              width: 5.0)),
+                                                          .divide(const SizedBox(
+                                                              height: 3.0))
+                                                          .around(const SizedBox(
+                                                              height: 3.0)),
                                                     ),
                                                   ),
-                                                ]
-                                                    .divide(
-                                                        SizedBox(height: 3.0))
-                                                    .around(
-                                                        SizedBox(height: 3.0)),
+                                                ],
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return Container(
+                                    child: wrapWithModel(
+                                      model: _model.loadingComponentModel,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: const LoadingComponentWidget(),
+                                    ),
+                                  );
+                                }
                               },
                             ),
                           ],
@@ -730,14 +954,14 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                       ),
                     ),
                     Container(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 770.0,
                       ),
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: FlutterFlowIconButton(
                         borderColor: FlutterFlowTheme.of(context).secondary,
                         borderRadius: 20.0,
@@ -754,10 +978,14 @@ class _CusFilesWidgetState extends State<CusFilesWidget> {
                             'cus_new_file',
                             queryParameters: {
                               'cusRef': serializeParam(
-                                widget!.cusRef,
+                                widget.cusRef,
                                 ParamType.DocumentReference,
                               ),
                               'fileRef': serializeParam(
+                                null,
+                                ParamType.DocumentReference,
+                              ),
+                              'docRef': serializeParam(
                                 null,
                                 ParamType.DocumentReference,
                               ),

@@ -1,16 +1,11 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/doctor/doctor_data_component/doctor_data_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/doctor/doctor_data_component/doctor_data_component_widget.dart';
-import '/pages/public_components/empty_list_component/empty_list_component_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
+import '/public_components/empty_list_component/empty_list_component_widget.dart';
+import '/public_components/loading_component/loading_component_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'customer_favorit_doc_model.dart';
 export 'customer_favorit_doc_model.dart';
 
@@ -42,7 +37,7 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
       _model.returnedDocRef = await queryCusFavDocRecordOnce(
         queryBuilder: (cusFavDocRecord) => cusFavDocRecord.where(
           'cus_ref',
-          isEqualTo: widget!.cusRef,
+          isEqualTo: widget.cusRef,
         ),
       );
       _model.loopIndex = 0;
@@ -52,15 +47,19 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
       );
       safeSetState(() {});
       while (_model.loopIndex! < _model.loopMax!) {
-        if (_model.returnedDocRef?[_model.loopIndex!]?.docRef != null) {
+        if (_model.returnedDocRef?[_model.loopIndex!].docRef != null) {
           _model.readDocDocument = await DocRecord.getDocumentOnce(
               _model.returnedDocRef![_model.loopIndex!].docRef!);
-          _model.addToDoctorDocumentList(_model.readDocDocument!);
-          safeSetState(() {});
+          if (_model.readDocDocument?.reference != null) {
+            _model.addToDoctorDocumentList(_model.readDocDocument!);
+            safeSetState(() {});
+          }
         }
         _model.loopIndex = _model.loopIndex! + 1;
         safeSetState(() {});
       }
+      _model.isLoadingCompleted = true;
+      safeSetState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -116,18 +115,18 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0.0,
         ),
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxWidth: 700.0,
               ),
               decoration: BoxDecoration(
@@ -139,20 +138,28 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
                   children: [
                     Builder(
                       builder: (context) {
-                        if (_model.doctorDocumentList.length > 0) {
+                        if (_model.isLoadingCompleted == true) {
                           return Builder(
                             builder: (context) {
                               final docitem =
                                   _model.doctorDocumentList.toList();
+                              if (docitem.isEmpty) {
+                                return const SizedBox(
+                                  height: 200.0,
+                                  child: EmptyListComponentWidget(
+                                    desc: 'لايوجد اختيارات',
+                                  ),
+                                );
+                              }
 
                               return ListView.separated(
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                padding: const EdgeInsets.symmetric(vertical: 5.0),
                                 primary: false,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
                                 itemCount: docitem.length,
                                 separatorBuilder: (_, __) =>
-                                    SizedBox(height: 5.0),
+                                    const SizedBox(height: 5.0),
                                 itemBuilder: (context, docitemIndex) {
                                   final docitemItem = docitem[docitemIndex];
                                   return DoctorDataComponentWidget(
@@ -167,14 +174,12 @@ class _CustomerFavoritDocWidgetState extends State<CustomerFavoritDocWidget> {
                             },
                           );
                         } else {
-                          return Container(
+                          return SizedBox(
                             height: 200.0,
                             child: wrapWithModel(
-                              model: _model.emptyListComponentModel,
+                              model: _model.loadingComponentModel,
                               updateCallback: () => safeSetState(() {}),
-                              child: EmptyListComponentWidget(
-                                desc: 'لايوجد اختيارات!',
-                              ),
+                              child: const LoadingComponentWidget(),
                             ),
                           );
                         }

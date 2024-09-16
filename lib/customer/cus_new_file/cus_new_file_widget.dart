@@ -1,16 +1,13 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/pages/public_components/calender_component/calender_component_widget.dart';
-import '/pages/upload_photo/upload_photo_widget.dart';
+import '/public_components/calender_component/calender_component_widget.dart';
+import '/public_components/upload_photo/upload_photo_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -25,10 +22,12 @@ class CusNewFileWidget extends StatefulWidget {
     super.key,
     this.cusRef,
     required this.fileRef,
+    required this.docRef,
   });
 
   final DocumentReference? cusRef;
   final DocumentReference? fileRef;
+  final DocumentReference? docRef;
 
   @override
   State<CusNewFileWidget> createState() => _CusNewFileWidgetState();
@@ -46,13 +45,13 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget!.fileRef != null) {
-        _model.currentFileCode = widget!.fileRef!.id;
+      if (widget.fileRef != null) {
+        _model.currentFileCode = widget.fileRef!.id;
         safeSetState(() {});
         _model.returnedFile =
-            await CusFilesRecord.getDocumentOnce(widget!.fileRef!);
+            await CusFilesRecord.getDocumentOnce(widget.fileRef!);
         FFAppState().updateCurrentFileCustomerStruct(
-          (e) => e..fileRef = widget!.fileRef,
+          (e) => e..fileRef = widget.fileRef,
         );
         safeSetState(() {});
         _model.isValidFileDate = true;
@@ -149,13 +148,13 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                   ),
                 ],
               ),
-            ].divide(SizedBox(height: 4.0)),
+            ].divide(const SizedBox(height: 4.0)),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0.0,
         ),
-        body: Container(
+        body: SizedBox(
           height: double.infinity,
           child: Stack(
             children: [
@@ -172,14 +171,14 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, -1.0),
+                              alignment: const AlignmentDirectional(0.0, -1.0),
                               child: Container(
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                   maxWidth: 770.0,
                                 ),
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: SingleChildScrollView(
                                     primary: false,
@@ -190,7 +189,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 10.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -213,7 +212,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                       padding: MediaQuery
                                                           .viewInsetsOf(
                                                               context),
-                                                      child: Container(
+                                                      child: SizedBox(
                                                         height: 600.0,
                                                         child:
                                                             CalenderComponentWidget(
@@ -254,7 +253,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                 ),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 10.0, 5.0, 10.0),
                                                 child: Row(
@@ -263,7 +262,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -332,7 +331,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 5.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -349,7 +348,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 10.0, 0.0, 10.0),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -360,7 +359,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                   BorderRadius.circular(0.0),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       10.0, 10.0, 10.0, 10.0),
                                               child: Column(
@@ -475,7 +474,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                         borderWidth: 1.0,
                                                         borderRadius: 0.0,
                                                         margin:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     16.0,
                                                                     4.0,
@@ -496,7 +495,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.txtFileDescTextController',
-                                                      Duration(
+                                                      const Duration(
                                                           milliseconds: 2000),
                                                       () => safeSetState(() {}),
                                                     ),
@@ -554,7 +553,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -578,7 +577,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -602,7 +601,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -626,7 +625,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -647,7 +646,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                   context)
                                                               .primaryBackground,
                                                       contentPadding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   20.0,
@@ -673,7 +672,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                 safeSetState(
                                                                     () {});
                                                               },
-                                                              child: Icon(
+                                                              child: const Icon(
                                                                 Icons.clear,
                                                                 size: 22,
                                                               ),
@@ -712,7 +711,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                     onChanged: (_) =>
                                                         EasyDebounce.debounce(
                                                       '_model.txtDocDescTextController',
-                                                      Duration(
+                                                      const Duration(
                                                           milliseconds: 2000),
                                                       () => safeSetState(() {}),
                                                     ),
@@ -770,7 +769,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -794,7 +793,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -818,7 +817,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -842,7 +841,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                           width: 0.5,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -863,7 +862,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                   context)
                                                               .primaryBackground,
                                                       contentPadding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   20.0,
@@ -888,7 +887,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                                 safeSetState(
                                                                     () {});
                                                               },
-                                                              child: Icon(
+                                                              child: const Icon(
                                                                 Icons.clear,
                                                                 size: 22,
                                                               ),
@@ -926,7 +925,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 12.0, 16.0, 12.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -961,7 +960,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                   await cusFilesRecordReference
                                                       .set(
                                                           createCusFilesRecordData(
-                                                    cusRef: widget!.cusRef,
+                                                    cusRef: widget.cusRef,
                                                     fileCde: _model.fileKey,
                                                     fileDesc: _model
                                                         .txtFileDescTextController
@@ -971,12 +970,13 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                     docDesc: _model
                                                         .txtDocDescTextController
                                                         .text,
+                                                    docRef: widget.docRef,
                                                   ));
                                                   _model.savedFile = CusFilesRecord
                                                       .getDocumentFromData(
                                                           createCusFilesRecordData(
                                                             cusRef:
-                                                                widget!.cusRef,
+                                                                widget.cusRef,
                                                             fileCde:
                                                                 _model.fileKey,
                                                             fileDesc: _model
@@ -989,6 +989,8 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                             docDesc: _model
                                                                 .txtDocDescTextController
                                                                 .text,
+                                                            docRef:
+                                                                widget.docRef,
                                                           ),
                                                           cusFilesRecordReference);
                                                   FFAppState()
@@ -1030,15 +1032,15 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                       (alertDialogContext) {
                                                     return AlertDialog(
                                                       title:
-                                                          Text('حفظ البيانات'),
-                                                      content: Text(
+                                                          const Text('حفظ البيانات'),
+                                                      content: const Text(
                                                           'تم حفظ البيانات بنجاح'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   alertDialogContext),
-                                                          child: Text('موافق'),
+                                                          child: const Text('موافق'),
                                                         ),
                                                       ],
                                                     );
@@ -1053,15 +1055,15 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                       (alertDialogContext) {
                                                     return AlertDialog(
                                                       title:
-                                                          Text('حفظ البيانات'),
-                                                      content: Text(
+                                                          const Text('حفظ البيانات'),
+                                                      content: const Text(
                                                           'خطأ في ادخال البيانات'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   alertDialogContext),
-                                                          child: Text('موافق'),
+                                                          child: const Text('موافق'),
                                                         ),
                                                       ],
                                                     );
@@ -1078,10 +1080,10 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                             options: FFButtonOptions(
                                               width: double.infinity,
                                               height: 48.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1095,7 +1097,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -1106,7 +1108,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -1119,7 +1121,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
@@ -1138,7 +1140,7 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                                 ),
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
@@ -1181,8 +1183,8 @@ class _CusNewFileWidgetState extends State<CusNewFileWidget> {
                                           ),
                                         ),
                                       ]
-                                          .divide(SizedBox(height: 12.0))
-                                          .addToEnd(SizedBox(height: 32.0)),
+                                          .divide(const SizedBox(height: 12.0))
+                                          .addToEnd(const SizedBox(height: 32.0)),
                                     ),
                                   ),
                                 ),

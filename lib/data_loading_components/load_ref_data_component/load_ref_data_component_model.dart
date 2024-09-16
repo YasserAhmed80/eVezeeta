@@ -1,20 +1,10 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:math';
 import 'load_ref_data_component_widget.dart' show LoadRefDataComponentWidget;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class LoadRefDataComponentModel
     extends FlutterFlowModel<LoadRefDataComponentWidget> {
@@ -52,20 +42,20 @@ class LoadRefDataComponentModel
     List<CategoryRecord>? catDocss;
     List<CategorySubRecord>? subCatDocss;
 
-    if ((FFAppState().refCategory.length <= 0) ||
+    if ((FFAppState().refCategory.isEmpty) ||
         (FFAppState().lastDataLoading.reLoadCategory == true)) {
       catDocss = await queryCategoryRecordOnce(
         queryBuilder: (categoryRecord) => categoryRecord.orderBy('seq'),
       );
-      loopMax = catDocss?.length;
+      loopMax = catDocss.length;
       loopIndex = 0;
       FFAppState().refCategory = [];
       FFAppState().refSubCategory = [];
       while (loopIndex! < loopMax!) {
         FFAppState().addToRefCategory(DtCategoryStruct(
-          catKey: catDocss?[loopIndex!]?.catKey,
-          desc: catDocss?[loopIndex!]?.desc,
-          seq: catDocss?[loopIndex!]?.seq,
+          catKey: catDocss[loopIndex!].catKey,
+          desc: catDocss[loopIndex!].desc,
+          seq: catDocss[loopIndex!].seq,
         ));
         loopIndex = loopIndex! + 1;
       }
@@ -73,14 +63,14 @@ class LoadRefDataComponentModel
       subCatDocss = await queryCategorySubRecordOnce(
         queryBuilder: (categorySubRecord) => categorySubRecord.orderBy('seq'),
       );
-      loopMax = subCatDocss?.length;
+      loopMax = subCatDocss.length;
       loopIndex = 0;
       while (loopIndex! < loopMax!) {
         FFAppState().addToRefSubCategory(DtSubCategoryStruct(
-          subKey: subCatDocss?[loopIndex!]?.subKey,
-          catCde: subCatDocss?[loopIndex!]?.catCde,
-          desc: subCatDocss?[loopIndex!]?.desc,
-          seq: subCatDocss?[loopIndex!]?.seq,
+          subKey: subCatDocss[loopIndex!].subKey,
+          catCde: subCatDocss[loopIndex!].catCde,
+          desc: subCatDocss[loopIndex!].desc,
+          seq: subCatDocss[loopIndex!].seq,
         ));
         loopIndex = loopIndex! + 1;
       }
@@ -130,29 +120,29 @@ class LoadRefDataComponentModel
     List<GovernZoneRecord>? zoneDocs;
     List<ZoneAreaRecord>? areaDocs;
 
-    if ((FFAppState().refGovernate.length <= 0) ||
+    if ((FFAppState().refGovernate.isEmpty) ||
         (FFAppState().lastDataLoading.reLoadCities == true)) {
       governateDocs = await queryGovernateRecordOnce();
-      loopMax = governateDocs?.length;
+      loopMax = governateDocs.length;
       loopIndex = 0;
       FFAppState().refGovernate = [];
       while (loopIndex! < loopMax!) {
         FFAppState().addToRefGovernate(DtGovernateStruct(
-          govKey: governateDocs?[loopIndex!]?.govKey,
-          desc: governateDocs?[loopIndex!]?.desc,
-          cntryCde: governateDocs?[loopIndex!]?.cntryCde,
+          govKey: governateDocs[loopIndex!].govKey,
+          desc: governateDocs[loopIndex!].desc,
+          cntryCde: governateDocs[loopIndex!].cntryCde,
         ));
         loopIndex = loopIndex! + 1;
       }
       zoneDocs = await queryGovernZoneRecordOnce();
-      loopMax = zoneDocs?.length;
+      loopMax = zoneDocs.length;
       loopIndex = 0;
       FFAppState().refZone = [];
       while (loopIndex! < loopMax!) {
         FFAppState().addToRefZone(DtZoneStruct(
-          zoneKey: zoneDocs?[loopIndex!]?.zoneKey,
-          govCde: zoneDocs?[loopIndex!]?.governCde,
-          desc: zoneDocs?[loopIndex!]?.desc,
+          zoneKey: zoneDocs[loopIndex!].zoneKey,
+          govCde: zoneDocs[loopIndex!].governCde,
+          desc: zoneDocs[loopIndex!].desc,
         ));
         loopIndex = loopIndex! + 1;
       }
@@ -161,14 +151,14 @@ class LoadRefDataComponentModel
     }
 
     areaDocs = await queryZoneAreaRecordOnce();
-    loopMax = areaDocs?.length;
+    loopMax = areaDocs.length;
     loopIndex = 0;
     FFAppState().refArea = [];
     while (loopIndex! < loopMax!) {
       FFAppState().addToRefArea(DtAreaStruct(
-        areaKey: areaDocs?[loopIndex!]?.areaKey,
-        zoneCde: areaDocs?[loopIndex!]?.zoneCde,
-        desc: areaDocs?[loopIndex!]?.desc,
+        areaKey: areaDocs[loopIndex!].areaKey,
+        zoneCde: areaDocs[loopIndex!].zoneCde,
+        desc: areaDocs[loopIndex!].desc,
       ));
       loopIndex = loopIndex! + 1;
     }
@@ -181,38 +171,38 @@ class LoadRefDataComponentModel
     List<DayRefRecord>? returnedDays;
     List<HourRefRecord>? returnedHours;
 
-    if ((FFAppState().refDay.length <= 0) ||
+    if ((FFAppState().refDay.isEmpty) ||
         (FFAppState().lastDataLoading.reLoadDays == true)) {
       // day Data
       returnedDays = await queryDayRefRecordOnce(
         queryBuilder: (dayRefRecord) => dayRefRecord.orderBy('seq'),
       );
-      loopMax = returnedDays?.length;
+      loopMax = returnedDays.length;
       loopIndex = 0;
       FFAppState().refDay = [];
       while (loopIndex! < loopMax!) {
         FFAppState().addToRefDay(DtDayStruct(
-          dayKey: returnedDays?[loopIndex!]?.dayKey,
-          desc: returnedDays?[loopIndex!]?.desc,
-          seq: returnedDays?[loopIndex!]?.seq,
-          lngCde: returnedDays?[loopIndex!]?.lngCde,
-          descEng: returnedDays?[loopIndex!]?.descEng,
+          dayKey: returnedDays[loopIndex!].dayKey,
+          desc: returnedDays[loopIndex!].desc,
+          seq: returnedDays[loopIndex!].seq,
+          lngCde: returnedDays[loopIndex!].lngCde,
+          descEng: returnedDays[loopIndex!].descEng,
         ));
         loopIndex = loopIndex! + 1;
       }
       returnedHours = await queryHourRefRecordOnce(
         queryBuilder: (hourRefRecord) => hourRefRecord.orderBy('seq'),
       );
-      loopMax = returnedHours?.length;
+      loopMax = returnedHours.length;
       loopIndex = 0;
       FFAppState().refHour = [];
       while (loopIndex! < loopMax!) {
         FFAppState().addToRefHour(DtHourStruct(
-          hourKey: returnedHours?[loopIndex!]?.hourKey,
-          desc: returnedHours?[loopIndex!]?.desc,
-          period: returnedHours?[loopIndex!]?.period,
-          seq: returnedHours?[loopIndex!]?.seq,
-          lngCde: returnedHours?[loopIndex!]?.lngCde,
+          hourKey: returnedHours[loopIndex!].hourKey,
+          desc: returnedHours[loopIndex!].desc,
+          period: returnedHours[loopIndex!].period,
+          seq: returnedHours[loopIndex!].seq,
+          lngCde: returnedHours[loopIndex!].lngCde,
         ));
         loopIndex = loopIndex! + 1;
       }
