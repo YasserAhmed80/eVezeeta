@@ -162,11 +162,39 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /admin_msg/{document} {
+    match /notification/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if true;
-      allow delete: if true;
+      allow delete: if false;
+    }
+
+    match /refNotificationType/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /admin_users/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /msg/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /doc_notify/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if false;
     }
   }
 }

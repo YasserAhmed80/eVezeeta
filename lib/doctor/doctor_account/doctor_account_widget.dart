@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/reviw_status_component_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,6 +9,7 @@ import '/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/public_components/dark_mode_component/dark_mode_component_widget.dart';
 import '/public_components/image_component_circle/image_component_circle_widget.dart';
 import '/public_components/loading_component/loading_component_widget.dart';
+import '/public_components/reviw_status_component/reviw_status_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

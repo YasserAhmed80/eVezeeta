@@ -7,6 +7,7 @@ import '/public_components/addrress_component/addrress_component_widget.dart';
 import '/public_components/image_component/image_component_widget.dart';
 import '/public_components/loading_component/loading_component_widget.dart';
 import '/public_components/rating_component/rating_component_widget.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -161,38 +162,21 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 5.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
-                                        'doctor_profile',
-                                        queryParameters: {
-                                          'docRef': serializeParam(
-                                            _model.docDocument?.reference,
-                                            ParamType.DocumentReference,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Text(
-                                      valueOrDefault<String>(
-                                        _model.docDocument?.name,
-                                        'n',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .override(
-                                            fontFamily: 'Cairo',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondary,
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      _model.docDocument?.name,
+                                      'n',
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondary,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
                                 ),
                               ),
@@ -364,10 +348,23 @@ class _DoctorDataComponentWidgetState extends State<DoctorDataComponentWidget>
                                 }.withoutNulls,
                               );
 
+                              _model.returnedNotify =
+                                  await queryDocNotifyRecordOnce(
+                                queryBuilder: (docNotifyRecord) =>
+                                    docNotifyRecord.where(
+                                  'doc_ref',
+                                  isEqualTo: widget.docRef,
+                                ),
+                                singleRecord: true,
+                              ).then((s) => s.firstOrNull);
                               FFAppState().updateCurrentDoctorStruct(
-                                (e) =>
-                                    e..dbDocRef = _model.docDocument?.reference,
+                                (e) => e
+                                  ..dbDocRef = _model.docDocument?.reference
+                                  ..notifyRef =
+                                      _model.returnedNotify?.reference,
                               );
+                              safeSetState(() {});
+
                               safeSetState(() {});
                             },
                             child: Column(

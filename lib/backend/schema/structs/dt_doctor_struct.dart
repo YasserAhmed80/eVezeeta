@@ -9,8 +9,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 class DtDoctorStruct extends FFFirebaseStruct {
   DtDoctorStruct({
     DocumentReference? dbDocRef,
+    DocumentReference? notifyRef,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _dbDocRef = dbDocRef,
+        _notifyRef = notifyRef,
         super(firestoreUtilData);
 
   // "db_doc_ref" field.
@@ -20,8 +22,16 @@ class DtDoctorStruct extends FFFirebaseStruct {
 
   bool hasDbDocRef() => _dbDocRef != null;
 
+  // "notify_Ref" field.
+  DocumentReference? _notifyRef;
+  DocumentReference? get notifyRef => _notifyRef;
+  set notifyRef(DocumentReference? val) => _notifyRef = val;
+
+  bool hasNotifyRef() => _notifyRef != null;
+
   static DtDoctorStruct fromMap(Map<String, dynamic> data) => DtDoctorStruct(
         dbDocRef: data['db_doc_ref'] as DocumentReference?,
+        notifyRef: data['notify_Ref'] as DocumentReference?,
       );
 
   static DtDoctorStruct? maybeFromMap(dynamic data) =>
@@ -29,12 +39,17 @@ class DtDoctorStruct extends FFFirebaseStruct {
 
   Map<String, dynamic> toMap() => {
         'db_doc_ref': _dbDocRef,
+        'notify_Ref': _notifyRef,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
         'db_doc_ref': serializeParam(
           _dbDocRef,
+          ParamType.DocumentReference,
+        ),
+        'notify_Ref': serializeParam(
+          _notifyRef,
           ParamType.DocumentReference,
         ),
       }.withoutNulls;
@@ -47,6 +62,12 @@ class DtDoctorStruct extends FFFirebaseStruct {
           false,
           collectionNamePath: ['doc'],
         ),
+        notifyRef: deserializeParam(
+          data['notify_Ref'],
+          ParamType.DocumentReference,
+          false,
+          collectionNamePath: ['doc_notify'],
+        ),
       );
 
   @override
@@ -54,15 +75,18 @@ class DtDoctorStruct extends FFFirebaseStruct {
 
   @override
   bool operator ==(Object other) {
-    return other is DtDoctorStruct && dbDocRef == other.dbDocRef;
+    return other is DtDoctorStruct &&
+        dbDocRef == other.dbDocRef &&
+        notifyRef == other.notifyRef;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([dbDocRef]);
+  int get hashCode => const ListEquality().hash([dbDocRef, notifyRef]);
 }
 
 DtDoctorStruct createDtDoctorStruct({
   DocumentReference? dbDocRef,
+  DocumentReference? notifyRef,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -70,6 +94,7 @@ DtDoctorStruct createDtDoctorStruct({
 }) =>
     DtDoctorStruct(
       dbDocRef: dbDocRef,
+      notifyRef: notifyRef,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

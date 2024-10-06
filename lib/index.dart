@@ -54,3 +54,5 @@ export '/admin_app/admin_doctor_review/admin_doctor_review_widget.dart'
     show AdminDoctorReviewWidget;
 export '/admin_app/admin_images_review/admin_images_review_widget.dart'
     show AdminImagesReviewWidget;
+export '/doctor/doctor_message_center/doctor_message_center_widget.dart'
+    show DoctorMessageCenterWidget;

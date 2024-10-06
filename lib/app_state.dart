@@ -348,6 +348,22 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _refReviewStatus;
     });
+    _safeInit(() {
+      _refNotificationTypes = prefs
+              .getStringList('ff_refNotificationTypes')
+              ?.map((x) {
+                try {
+                  return DtNotificationRefStruct.fromSerializableMap(
+                      jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _refNotificationTypes;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1262,6 +1278,49 @@ class FFAppState extends ChangeNotifier {
     refReviewStatus.insert(index, value);
     prefs.setStringList('ff_refReviewStatus',
         _refReviewStatus.map((x) => x.serialize()).toList());
+  }
+
+  List<DtNotificationRefStruct> _refNotificationTypes = [];
+  List<DtNotificationRefStruct> get refNotificationTypes =>
+      _refNotificationTypes;
+  set refNotificationTypes(List<DtNotificationRefStruct> value) {
+    _refNotificationTypes = value;
+    prefs.setStringList(
+        'ff_refNotificationTypes', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToRefNotificationTypes(DtNotificationRefStruct value) {
+    refNotificationTypes.add(value);
+    prefs.setStringList('ff_refNotificationTypes',
+        _refNotificationTypes.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromRefNotificationTypes(DtNotificationRefStruct value) {
+    refNotificationTypes.remove(value);
+    prefs.setStringList('ff_refNotificationTypes',
+        _refNotificationTypes.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromRefNotificationTypes(int index) {
+    refNotificationTypes.removeAt(index);
+    prefs.setStringList('ff_refNotificationTypes',
+        _refNotificationTypes.map((x) => x.serialize()).toList());
+  }
+
+  void updateRefNotificationTypesAtIndex(
+    int index,
+    DtNotificationRefStruct Function(DtNotificationRefStruct) updateFn,
+  ) {
+    refNotificationTypes[index] = updateFn(_refNotificationTypes[index]);
+    prefs.setStringList('ff_refNotificationTypes',
+        _refNotificationTypes.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInRefNotificationTypes(
+      int index, DtNotificationRefStruct value) {
+    refNotificationTypes.insert(index, value);
+    prefs.setStringList('ff_refNotificationTypes',
+        _refNotificationTypes.map((x) => x.serialize()).toList());
   }
 }
 

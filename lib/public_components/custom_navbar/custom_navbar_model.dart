@@ -26,6 +26,8 @@ class CustomNavbarModel extends FlutterFlowModel<CustomNavbarWidget> {
   late NavItemComponentModel navItemComponentModel9;
   // Model for nav_item_component component.
   late NavItemComponentModel navItemComponentModel10;
+  // Model for nav_item_component component.
+  late NavItemComponentModel navItemComponentModel11;
 
   @override
   void initState(BuildContext context) {
@@ -49,6 +51,8 @@ class CustomNavbarModel extends FlutterFlowModel<CustomNavbarWidget> {
         createModel(context, () => NavItemComponentModel());
     navItemComponentModel10 =
         createModel(context, () => NavItemComponentModel());
+    navItemComponentModel11 =
+        createModel(context, () => NavItemComponentModel());
   }
 
   @override
@@ -63,5 +67,6 @@ class CustomNavbarModel extends FlutterFlowModel<CustomNavbarWidget> {
     navItemComponentModel8.dispose();
     navItemComponentModel9.dispose();
     navItemComponentModel10.dispose();
+    navItemComponentModel11.dispose();
   }
 }

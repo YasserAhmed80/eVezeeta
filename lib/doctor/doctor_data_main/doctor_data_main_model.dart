@@ -108,6 +108,8 @@ class DoctorDataMainModel extends FlutterFlowModel<DoctorDataMainWidget> {
       switchTitleComponentModels;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   DocRecord? createdDoc;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  DocNotifyRecord? createdNotify;
 
   @override
   void initState(BuildContext context) {

@@ -1757,10 +1757,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'العنوان: ',
       'en': '',
     },
-    'mnws5lqv': {
-      'ar': 'تعليق: ',
-      'en': '',
-    },
     'om3lwynp': {
       'ar': 'تاكيد الملف',
       'en': '',
@@ -1784,10 +1780,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مراجعة الصور',
       'en': '',
     },
-    '9hocdd3n': {
-      'ar': 'تعليق: ',
-      'en': '',
-    },
     'fa74uev0': {
       'ar': 'تاكيد الصوره',
       'en': '',
@@ -1798,6 +1790,41 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '494w8z1i': {
       'ar': 'Home',
+      'en': '',
+    },
+  },
+  // doctor_message_center
+  {
+    'x6phr7rw': {
+      'ar': 'اشعارات',
+      'en': '',
+    },
+    'rspwlmw5': {
+      'ar': 'رسايل',
+      'en': '',
+    },
+    'x3in5325': {
+      'ar': 'اخبار',
+      'en': '',
+    },
+    'ozkgunb6': {
+      'ar': 'اشعارات',
+      'en': '',
+    },
+    'iae36bqx': {
+      'ar': 'رسايل',
+      'en': '',
+    },
+    'x380ccd4': {
+      'ar': 'اخبار',
+      'en': '',
+    },
+    'ycyeea31': {
+      'ar': 'مركز التواصل',
+      'en': '',
+    },
+    'qhm7ukz3': {
+      'ar': 'Shop',
       'en': '',
     },
   },
@@ -2053,10 +2080,30 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
   },
-  // create_note_component
+  // notification_component
   {
     'd5w7geyp': {
       'ar': 'اضافة تعليق',
+      'en': '',
+    },
+    'negm7s3g': {
+      'ar': 'Option 1',
+      'en': '',
+    },
+    'axh480dm': {
+      'ar': 'Option 2',
+      'en': '',
+    },
+    'di5cvtt3': {
+      'ar': 'Option 3',
+      'en': '',
+    },
+    'ajenmtzy': {
+      'ar': 'من فضلك اختار نوع التعليق',
+      'en': '',
+    },
+    'igcad57c': {
+      'ar': 'Search...',
       'en': '',
     },
     'i02xxb6i': {
@@ -2081,6 +2128,36 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6ntj6a5u': {
       'ar': 'اوك',
+      'en': '',
+    },
+  },
+  // notification_item_component
+  {
+    'bzh30pjn': {
+      'ar': 'New Message',
+      'en': '',
+    },
+    'yx2ir4yq': {
+      'ar': 'You have a new message from John',
+      'en': '',
+    },
+    'dceywhjt': {
+      'ar': '2m ago',
+      'en': '',
+    },
+  },
+  // news_item_component
+  {
+    '1o49fk7f': {
+      'ar': 'New Message',
+      'en': '',
+    },
+    'k0rsiez9': {
+      'ar': 'You have a new message from John',
+      'en': '',
+    },
+    'izwle0og': {
+      'ar': '2m ago',
       'en': '',
     },
   },

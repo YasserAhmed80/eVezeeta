@@ -18,6 +18,7 @@ enum EnumSelectedTab {
   customer_booking,
   doctor_visits,
   customer_add,
+  doctor_message,
 }
 
 extension FFEnumExtensions<T extends Enum> on T {

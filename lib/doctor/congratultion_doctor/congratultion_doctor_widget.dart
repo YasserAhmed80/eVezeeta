@@ -307,153 +307,161 @@ class _CongratultionDoctorWidgetState extends State<CongratultionDoctorWidget>
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     borderRadius: BorderRadius.circular(0.0),
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 44.0, 0.0, 0.0),
-                          child: Container(
-                            width: 120.0,
-                            height: 120.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).accent2,
-                              shape: BoxShape.circle,
-                              border: Border.all(
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 44.0, 0.0, 0.0),
+                            child: Container(
+                              width: 120.0,
+                              height: 120.0,
+                              decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).accent2,
-                                width: 4.0,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: 140.0,
-                                height: 140.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).secondary,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: FlutterFlowTheme.of(context).accent2,
-                                    width: 4.0,
-                                  ),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: FlutterFlowTheme.of(context).accent2,
+                                  width: 4.0,
                                 ),
-                                child: Icon(
-                                  Icons.check_rounded,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 64.0,
-                                ).animateOnPageLoad(
-                                    animationsMap['iconOnPageLoadAnimation']!),
                               ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: 140.0,
+                                  height: 140.0,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color:
+                                          FlutterFlowTheme.of(context).accent2,
+                                      width: 4.0,
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    Icons.check_rounded,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 64.0,
+                                  ).animateOnPageLoad(animationsMap[
+                                      'iconOnPageLoadAnimation']!),
+                                ),
+                              ),
+                            ).animateOnPageLoad(
+                                animationsMap['containerOnPageLoadAnimation']!),
+                          ),
+                        ),
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              '8bvm3x03' /* سعدا باشتراكم */,
                             ),
+                            style: FlutterFlowTheme.of(context)
+                                .displaySmall
+                                .override(
+                                  fontFamily: 'Cairo',
+                                  letterSpacing: 0.0,
+                                ),
                           ).animateOnPageLoad(
-                              animationsMap['containerOnPageLoadAnimation']!),
+                              animationsMap['textOnPageLoadAnimation1']!),
                         ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
-                        child: Text(
-                          FFLocalizations.of(context).getText(
-                            '8bvm3x03' /* سعدا باشتراكم */,
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          child: Text(
+                            _model.titleDesc,
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Cairo',
+                                  letterSpacing: 0.0,
+                                ),
+                          ).animateOnPageLoad(
+                              animationsMap['textOnPageLoadAnimation2']!),
+                        ),
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          child: Text(
+                            _model.name,
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Cairo',
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ).animateOnPageLoad(
+                              animationsMap['textOnPageLoadAnimation3']!),
+                        ),
+                        Divider(
+                          height: 44.0,
+                          thickness: 2.0,
+                          color: FlutterFlowTheme.of(context).alternate,
+                        ).animateOnPageLoad(
+                            animationsMap['dividerOnPageLoadAnimation']!),
+                        wrapWithModel(
+                          model: _model.codeComponentModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: CodeComponentWidget(
+                            code: _model.code,
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .displaySmall
-                              .override(
-                                fontFamily: 'Cairo',
-                                letterSpacing: 0.0,
-                              ),
-                        ).animateOnPageLoad(
-                            animationsMap['textOnPageLoadAnimation1']!),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
-                        child: Text(
-                          _model.titleDesc,
-                          style:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Cairo',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ).animateOnPageLoad(
-                            animationsMap['textOnPageLoadAnimation2']!),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
-                        child: Text(
-                          _model.name,
-                          style: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: 'Cairo',
-                                color: FlutterFlowTheme.of(context).secondary,
-                                fontSize: 20.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                        ).animateOnPageLoad(
-                            animationsMap['textOnPageLoadAnimation3']!),
-                      ),
-                      Divider(
-                        height: 44.0,
-                        thickness: 2.0,
-                        color: FlutterFlowTheme.of(context).alternate,
-                      ).animateOnPageLoad(
-                          animationsMap['dividerOnPageLoadAnimation']!),
-                      wrapWithModel(
-                        model: _model.codeComponentModel,
-                        updateCallback: () => safeSetState(() {}),
-                        child: CodeComponentWidget(
-                          code: _model.code,
                         ),
-                      ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed(
-                            'registerationStep',
-                            queryParameters: {
-                              'docDocument': serializeParam(
-                                widget.docDocument,
-                                ParamType.Document,
-                              ),
-                              'stepType': serializeParam(
-                                'docAddress',
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'docDocument': widget.docDocument,
-                            },
-                          );
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          'xri1wd5q' /* اوك */,
-                        ),
-                        options: FFButtonOptions(
-                          height: 48.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Cairo',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                        FFButtonWidget(
+                          onPressed: () async {
+                            context.pushNamed(
+                              'registerationStep',
+                              queryParameters: {
+                                'docDocument': serializeParam(
+                                  widget.docDocument,
+                                  ParamType.Document,
+                                ),
+                                'stepType': serializeParam(
+                                  'docAddress',
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                              extra: <String, dynamic>{
+                                'docDocument': widget.docDocument,
+                              },
+                            );
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            'xri1wd5q' /* اوك */,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['buttonOnPageLoadAnimation']!),
-                    ].divide(const SizedBox(height: 8.0)),
+                          options: FFButtonOptions(
+                            height: 48.0,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Cairo',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ).animateOnPageLoad(
+                            animationsMap['buttonOnPageLoadAnimation']!),
+                      ].divide(const SizedBox(height: 8.0)),
+                    ),
                   ),
                 ),
               ),

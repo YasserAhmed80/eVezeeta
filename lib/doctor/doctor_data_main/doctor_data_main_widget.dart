@@ -1284,11 +1284,31 @@ class _DoctorDataMainWidgetState extends State<DoctorDataMainWidget> {
                                                       },
                                                     ),
                                                   }, docRecordReference);
+
+                                                  var docNotifyRecordReference =
+                                                      DocNotifyRecord.collection
+                                                          .doc();
+                                                  await docNotifyRecordReference
+                                                      .set(
+                                                          createDocNotifyRecordData(
+                                                    docRef: _model
+                                                        .createdDoc?.reference,
+                                                  ));
+                                                  _model.createdNotify = DocNotifyRecord
+                                                      .getDocumentFromData(
+                                                          createDocNotifyRecordData(
+                                                            docRef: _model
+                                                                .createdDoc
+                                                                ?.reference,
+                                                          ),
+                                                          docNotifyRecordReference);
                                                   FFAppState()
                                                       .updateCurrentDoctorStruct(
                                                     (e) => e
                                                       ..dbDocRef = _model
-                                                          .createdDoc
+                                                          .createdDoc?.reference
+                                                      ..notifyRef = _model
+                                                          .createdNotify
                                                           ?.reference,
                                                   );
                                                   safeSetState(() {});

@@ -238,9 +238,19 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                       BorderRadius.circular(
                                                           14.0),
                                                   border: Border.all(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
+                                                    color:
+                                                        valueOrDefault<Color>(
+                                                      _model.isValideBookType == false
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                    ),
                                                   ),
                                                 ),
                                                 child: Padding(
@@ -263,6 +273,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                         onTap: () async {
                                                           _model.bookTypeCode =
                                                               1;
+                                                          safeSetState(() {});
+                                                          _model.isValideBookType =
+                                                              true;
                                                           safeSetState(() {});
                                                         },
                                                         child: Container(
@@ -358,6 +371,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                         onTap: () async {
                                                           _model.bookTypeCode =
                                                               2;
+                                                          safeSetState(() {});
+                                                          _model.isValideBookType =
+                                                              true;
                                                           safeSetState(() {});
                                                         },
                                                         child: Container(
@@ -647,8 +663,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                                     GoogleFonts
                                                                         .getFont(
                                                                   'Cairo',
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -814,8 +831,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                                     GoogleFonts
                                                                         .getFont(
                                                                   'Cairo',
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -1066,8 +1084,9 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                                     GoogleFonts
                                                                         .getFont(
                                                                   'Cairo',
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -1147,7 +1166,12 @@ class _DoctorDataScheduleWidgetState extends State<DoctorDataScheduleWidget> {
                                                               '') ||
                                                       (_model.txtAvergeVisitTextController
                                                                   .text ==
-                                                              '')) {
+                                                              '') ||
+                                                      (_model.bookTypeCode ==
+                                                          -1)) {
+                                                    _model.isValideBookType =
+                                                        false;
+                                                    safeSetState(() {});
                                                     await showDialog(
                                                       context: context,
                                                       builder:

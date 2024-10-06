@@ -30,10 +30,16 @@ class LastDataLoadingRecord extends FirestoreRecord {
   DateTime? get daysDate => _daysDate;
   bool hasDaysDate() => _daysDate != null;
 
+  // "ref_data" field.
+  DateTime? _refData;
+  DateTime? get refData => _refData;
+  bool hasRefData() => _refData != null;
+
   void _initializeFields() {
     _cityDate = snapshotData['city_date'] as DateTime?;
     _categoryDate = snapshotData['category_date'] as DateTime?;
     _daysDate = snapshotData['days_date'] as DateTime?;
+    _refData = snapshotData['ref_data'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -74,12 +80,14 @@ Map<String, dynamic> createLastDataLoadingRecordData({
   DateTime? cityDate,
   DateTime? categoryDate,
   DateTime? daysDate,
+  DateTime? refData,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'city_date': cityDate,
       'category_date': categoryDate,
       'days_date': daysDate,
+      'ref_data': refData,
     }.withoutNulls,
   );
 
@@ -94,12 +102,13 @@ class LastDataLoadingRecordDocumentEquality
   bool equals(LastDataLoadingRecord? e1, LastDataLoadingRecord? e2) {
     return e1?.cityDate == e2?.cityDate &&
         e1?.categoryDate == e2?.categoryDate &&
-        e1?.daysDate == e2?.daysDate;
+        e1?.daysDate == e2?.daysDate &&
+        e1?.refData == e2?.refData;
   }
 
   @override
-  int hash(LastDataLoadingRecord? e) =>
-      const ListEquality().hash([e?.cityDate, e?.categoryDate, e?.daysDate]);
+  int hash(LastDataLoadingRecord? e) => const ListEquality()
+      .hash([e?.cityDate, e?.categoryDate, e?.daysDate, e?.refData]);
 
   @override
   bool isValidKey(Object? o) => o is LastDataLoadingRecord;

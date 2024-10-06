@@ -15,6 +15,8 @@ class DoctorDataScheduleModel
 
   int? avgVisitPerHour = 1;
 
+  bool isValideBookType = true;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for txtPrice widget.

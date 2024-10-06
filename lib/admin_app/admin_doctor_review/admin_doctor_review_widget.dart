@@ -1,12 +1,13 @@
 import '/admin_app/admin_side_nav_component/admin_side_nav_component_widget.dart';
 import '/backend/backend.dart';
-import '/components/create_note_component_widget.dart';
+import '/components/notification_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/public_components/empty_list_component/empty_list_component_widget.dart';
 import '/public_components/image_component/image_component_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'admin_doctor_review_model.dart';
 export 'admin_doctor_review_model.dart';
 
@@ -40,6 +41,8 @@ class _AdminDoctorReviewWidgetState extends State<AdminDoctorReviewWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -303,331 +306,329 @@ class _AdminDoctorReviewWidgetState extends State<AdminDoctorReviewWidget> {
                                               ),
                                             ],
                                           ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'mnws5lqv' /* تعليق:  */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                  constraints: const BoxConstraints(
-                                                    minHeight: 60.0,
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 10.0, 0.0, 10.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                FFButtonWidget(
+                                                  onPressed: () async {
+                                                    await listViewDocRecord
+                                                        .reference
+                                                        .update(
+                                                            createDocRecordData(
+                                                      reviewStatus: 2,
+                                                    ));
+                                                    // send notification
+
+                                                    await NotificationRecord
+                                                        .collection
+                                                        .doc()
+                                                        .set(
+                                                            createNotificationRecordData(
+                                                          adminId: 'admin',
+                                                          eId: listViewDocRecord
+                                                              .reference.id,
+                                                          eType: 'doc',
+                                                          msg:
+                                                              'تم قبول بيانات ملفك بنجاح',
+                                                          cAt:
+                                                              getCurrentTimestamp,
+                                                          notCde: 4,
+                                                          seenInd: false,
+                                                        ));
+                                                    // update notification numbers
+
+                                                    await FFAppState()
+                                                        .currentDoctor
+                                                        .notifyRef!
+                                                        .update({
+                                                      ...mapToFirestore(
+                                                        {
+                                                          'notify_cnt':
+                                                              FieldValue
+                                                                  .increment(1),
+                                                        },
+                                                      ),
+                                                    });
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    'om3lwynp' /* تاكيد الملف */,
                                                   ),
-                                                  decoration: BoxDecoration(
+                                                  options: FFButtonOptions(
+                                                    height: 40.0,
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                16.0, 0.0),
+                                                    iconPadding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            14.0),
-                                                  ),
-                                                  child: Text(
-                                                    valueOrDefault<String>(
-                                                      _model.reasonDesc,
-                                                      'n/a',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
+                                                        .primary,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .titleSmall
                                                         .override(
                                                           fontFamily: 'Cairo',
+                                                          color: Colors.white,
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                         ),
+                                                    elevation: 0.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
                                                   ),
                                                 ),
-                                              ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () =>
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child:
-                                                              CreateNoteComponentWidget(
-                                                            returnedNoteAction:
-                                                                (noteText) async {
-                                                              _model.reasonDesc =
-                                                                  noteText;
-                                                              safeSetState(
-                                                                  () {});
-                                                            },
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                child: Icon(
-                                                  Icons.add,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 30.0,
-                                                ),
-                                              ),
-                                            ]
-                                                .divide(const SizedBox(width: 5.0))
-                                                .around(const SizedBox(width: 5.0)),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  await listViewDocRecord
-                                                      .reference
-                                                      .update(
-                                                          createDocRecordData(
-                                                    reviewStatus: 2,
-                                                  ));
-                                                },
-                                                text:
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                  'om3lwynp' /* تاكيد الملف */,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  height: 40.0,
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily: 'Cairo',
-                                                            color: Colors.white,
-                                                            fontSize: 14.0,
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  if (_model.reasonDesc !=
-                                                          null &&
-                                                      _model.reasonDesc != '') {
-                                                    await listViewDocRecord
-                                                        .reference
-                                                        .update(
-                                                            createDocRecordData(
-                                                      reviewStatus: 3,
-                                                      reviewReason:
-                                                          _model.reasonDesc,
-                                                    ));
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'تم التعديل بنجاح',
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                          ),
-                                                        ),
-                                                        duration: const Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    await showDialog(
+                                                FFButtonWidget(
+                                                  onPressed: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
                                                       context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          content: const Text(
-                                                              'من فضلك ادخل التعليق'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () =>
+                                                              FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child: SizedBox(
+                                                              height: 500.0,
                                                               child:
-                                                                  const Text('اوك'),
+                                                                  NotificationComponentWidget(
+                                                                entityType:
+                                                                    'doc',
+                                                                entityCode:
+                                                                    listViewDocRecord
+                                                                        .reference
+                                                                        .id,
+                                                                defaultNoticiationType:
+                                                                    3,
+                                                                returnCallBackResults:
+                                                                    (actionResults) async {
+                                                                  if (actionResults ==
+                                                                      true) {
+                                                                    await listViewDocRecord
+                                                                        .reference
+                                                                        .update(
+                                                                            createDocRecordData(
+                                                                      reviewStatus:
+                                                                          3,
+                                                                      reviewReason:
+                                                                          'ملفك محتاج بعض التعديلات',
+                                                                    ));
+                                                                    // update notification numbers
+
+                                                                    await FFAppState()
+                                                                        .currentDoctor
+                                                                        .notifyRef!
+                                                                        .update({
+                                                                      ...mapToFirestore(
+                                                                        {
+                                                                          'notify_cnt':
+                                                                              FieldValue.increment(1),
+                                                                        },
+                                                                      ),
+                                                                    });
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'تم تسجيل المراجعة بنجاح',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            const Duration(milliseconds: 1000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                },
+                                                              ),
                                                             ),
-                                                          ],
+                                                          ),
                                                         );
                                                       },
-                                                    );
-                                                  }
-                                                },
-                                                text:
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                  'qu6223qy' /* محتاج تعديل */,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  height: 40.0,
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+                                                  },
+                                                  text: FFLocalizations.of(
                                                           context)
-                                                      .warning,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily: 'Cairo',
-                                                            color: Colors.white,
-                                                            fontSize: 14.0,
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                              FFButtonWidget(
-                                                onPressed: () async {
-                                                  if (_model.reasonDesc !=
-                                                          null &&
-                                                      _model.reasonDesc != '') {
-                                                    await listViewDocRecord
-                                                        .reference
-                                                        .update(
-                                                            createDocRecordData(
-                                                      reviewStatus: 4,
-                                                      reviewReason:
-                                                          _model.reasonDesc,
-                                                    ));
-                                                    ScaffoldMessenger.of(
+                                                      .getText(
+                                                    'qu6223qy' /* محتاج تعديل */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    height: 40.0,
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                16.0, 0.0),
+                                                    iconPadding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(
                                                             context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'تم التعديل بنجاح',
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                          ),
+                                                        .warning,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          color: Colors.white,
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
                                                         ),
-                                                        duration: const Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    await showDialog(
+                                                    elevation: 0.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
+                                                FFButtonWidget(
+                                                  onPressed: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
                                                       context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          content: const Text(
-                                                              'من فضلك ادخل التعليق'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () =>
+                                                              FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child: SizedBox(
+                                                              height: 500.0,
                                                               child:
-                                                                  const Text('اوك'),
+                                                                  NotificationComponentWidget(
+                                                                entityType:
+                                                                    'doc',
+                                                                entityCode:
+                                                                    listViewDocRecord
+                                                                        .reference
+                                                                        .id,
+                                                                defaultNoticiationType:
+                                                                    1,
+                                                                returnCallBackResults:
+                                                                    (actionResults) async {
+                                                                  if (actionResults ==
+                                                                      true) {
+                                                                    await listViewDocRecord
+                                                                        .reference
+                                                                        .update(
+                                                                            createDocRecordData(
+                                                                      reviewStatus:
+                                                                          4,
+                                                                      reviewReason:
+                                                                          'بياناتك غير مناسبة',
+                                                                    ));
+                                                                    // update notification numbers
+
+                                                                    await FFAppState()
+                                                                        .currentDoctor
+                                                                        .notifyRef!
+                                                                        .update({
+                                                                      ...mapToFirestore(
+                                                                        {
+                                                                          'notify_cnt':
+                                                                              FieldValue.increment(1),
+                                                                        },
+                                                                      ),
+                                                                    });
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'تم تسجيل المراجعة بنجاح',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            const Duration(milliseconds: 1000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                },
+                                                              ),
                                                             ),
-                                                          ],
+                                                          ),
                                                         );
                                                       },
-                                                    );
-                                                  }
-                                                },
-                                                text:
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                  '2igkin21' /* بلوك */,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  height: 40.0,
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+                                                  },
+                                                  text: FFLocalizations.of(
                                                           context)
-                                                      .error,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily: 'Cairo',
-                                                            color: Colors.white,
-                                                            fontSize: 14.0,
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                  elevation: 0.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
+                                                      .getText(
+                                                    '2igkin21' /* بلوك */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    height: 40.0,
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                16.0, 0.0),
+                                                    iconPadding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Cairo',
+                                                          color: Colors.white,
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    elevation: 0.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
                                                 ),
-                                              ),
-                                            ]
-                                                .divide(const SizedBox(width: 5.0))
-                                                .around(const SizedBox(width: 5.0)),
+                                              ]
+                                                  .divide(const SizedBox(width: 5.0))
+                                                  .around(const SizedBox(width: 5.0)),
+                                            ),
                                           ),
                                         ]
                                             .divide(const SizedBox(height: 5.0))

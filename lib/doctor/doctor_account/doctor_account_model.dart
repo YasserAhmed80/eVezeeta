@@ -1,11 +1,11 @@
 import '/backend/backend.dart';
-import '/components/reviw_status_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/public_components/code_component/code_component_widget.dart';
 import '/public_components/custom_navbar/custom_navbar_widget.dart';
 import '/public_components/dark_mode_component/dark_mode_component_widget.dart';
 import '/public_components/image_component_circle/image_component_circle_widget.dart';
 import '/public_components/loading_component/loading_component_widget.dart';
+import '/public_components/reviw_status_component/reviw_status_component_widget.dart';
 import 'doctor_account_widget.dart' show DoctorAccountWidget;
 import 'package:flutter/material.dart';
 

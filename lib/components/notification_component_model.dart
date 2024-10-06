@@ -1,12 +1,16 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'create_note_component_widget.dart' show CreateNoteComponentWidget;
+import '/flutter_flow/form_field_controller.dart';
+import 'notification_component_widget.dart' show NotificationComponentWidget;
 import 'package:flutter/material.dart';
 
-class CreateNoteComponentModel
-    extends FlutterFlowModel<CreateNoteComponentWidget> {
+class NotificationComponentModel
+    extends FlutterFlowModel<NotificationComponentWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
+  // State field(s) for DropDown widget.
+  int? dropDownValue;
+  FormFieldController<int>? dropDownValueController;
   // State field(s) for txtNote widget.
   FocusNode? txtNoteFocusNode;
   TextEditingController? txtNoteTextController;

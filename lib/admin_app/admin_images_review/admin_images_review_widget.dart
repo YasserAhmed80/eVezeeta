@@ -1,11 +1,10 @@
 import '/admin_app/admin_side_nav_component/admin_side_nav_component_widget.dart';
 import '/backend/backend.dart';
-import '/components/create_note_component_widget.dart';
+import '/components/notification_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/public_components/empty_list_component/empty_list_component_widget.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'admin_images_review_model.dart';
@@ -274,111 +273,7 @@ class _AdminImagesReviewWidgetState extends State<AdminImagesReviewWidget> {
                                         Padding(
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 30.0, 0.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '9hocdd3n' /* تعليق:  */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                  constraints: const BoxConstraints(
-                                                    minHeight: 60.0,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            14.0),
-                                                  ),
-                                                  child: Text(
-                                                    valueOrDefault<String>(
-                                                      _model.reasonDesc,
-                                                      'n/a',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Cairo',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () =>
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child:
-                                                              CreateNoteComponentWidget(
-                                                            returnedNoteAction:
-                                                                (noteText) async {
-                                                              _model.reasonDesc =
-                                                                  noteText;
-                                                              safeSetState(
-                                                                  () {});
-                                                            },
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                child: Icon(
-                                                  Icons.add,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 30.0,
-                                                ),
-                                              ),
-                                            ]
-                                                .divide(const SizedBox(width: 5.0))
-                                                .around(const SizedBox(width: 5.0)),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 10.0, 0.0, 0.0),
+                                                  0.0, 10.0, 0.0, 10.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -390,11 +285,31 @@ class _AdminImagesReviewWidgetState extends State<AdminImagesReviewWidget> {
                                                         40.0, 0.0, 0.0, 0.0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
+                                                    await NotificationRecord
+                                                        .collection
+                                                        .doc()
+                                                        .set(
+                                                            createNotificationRecordData(
+                                                          adminId: 'admin',
+                                                          eId:
+                                                              listViewImgsRecord
+                                                                  .eCode,
+                                                          eType:
+                                                              listViewImgsRecord
+                                                                  .eType,
+                                                          msg: 'تم قبول الصورة',
+                                                          cAt:
+                                                              getCurrentTimestamp,
+                                                          notCde: 4,
+                                                          seenInd: false,
+                                                        ));
+
                                                     await listViewImgsRecord
                                                         .reference
                                                         .update(
                                                             createImgsRecordData(
                                                       reviewStatus: 2,
+                                                      reviewReason: ' ',
                                                     ));
                                                     ScaffoldMessenger.of(
                                                             context)
@@ -409,7 +324,7 @@ class _AdminImagesReviewWidgetState extends State<AdminImagesReviewWidget> {
                                                           ),
                                                         ),
                                                         duration: const Duration(
-                                                            milliseconds: 4000),
+                                                            milliseconds: 2000),
                                                         backgroundColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -452,62 +367,71 @@ class _AdminImagesReviewWidgetState extends State<AdminImagesReviewWidget> {
                                               ),
                                               FFButtonWidget(
                                                 onPressed: () async {
-                                                  if (_model.reasonDesc !=
-                                                          null &&
-                                                      _model.reasonDesc != '') {
-                                                    await listViewImgsRecord
-                                                        .reference
-                                                        .update(
-                                                            createImgsRecordData(
-                                                      reviewStatus: 4,
-                                                      reviewReason:
-                                                          _model.reasonDesc,
-                                                    ));
-                                                    await actions
-                                                        .deleteImageByURL(
-                                                      listViewImgsRecord.iRef,
-                                                    );
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'تم التعديل بنجاح',
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    enableDrag: false,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return GestureDetector(
+                                                        onTap: () =>
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
+                                                        child: Padding(
+                                                          padding: MediaQuery
+                                                              .viewInsetsOf(
+                                                                  context),
+                                                          child: SizedBox(
+                                                            height: 500.0,
+                                                            child:
+                                                                NotificationComponentWidget(
+                                                              entityType:
+                                                                  listViewImgsRecord
+                                                                      .eType,
+                                                              entityCode:
+                                                                  listViewImgsRecord
+                                                                      .eCode,
+                                                              defaultNoticiationType:
+                                                                  2,
+                                                              returnCallBackResults:
+                                                                  (actionResults) async {
+                                                                if (actionResults ==
+                                                                    true) {
+                                                                  await listViewImgsRecord
+                                                                      .reference
+                                                                      .delete();
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'تم حذف الصورة',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              1000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .secondary,
+                                                                    ),
+                                                                  );
+                                                                }
+                                                              },
+                                                            ),
                                                           ),
                                                         ),
-                                                        duration: const Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          content: const Text(
-                                                              'من فضلك ادخل التعليق'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
-                                                              child:
-                                                                  const Text('اوك'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  }
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
                                                 },
                                                 text:
                                                     FFLocalizations.of(context)

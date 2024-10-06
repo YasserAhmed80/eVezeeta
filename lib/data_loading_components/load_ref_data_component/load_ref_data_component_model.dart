@@ -113,6 +113,14 @@ class LoadRefDataComponentModel
           ..reLoadDays = true,
       );
     }
+    if (returnedLoadingData?.refData != FFAppState().lastDataLoading.refData) {
+      FFAppState().updateLastDataLoadingStruct(
+        (e) => e
+          ..daysDate = returnedLoadingData?.daysDate
+          ..reLoadDays = true
+          ..reLoadRefData = true,
+      );
+    }
   }
 
   Future loadCityAction(BuildContext context) async {
@@ -212,6 +220,49 @@ class LoadRefDataComponentModel
 
     FFAppState().updateLastDataLoadingStruct(
       (e) => e..reLoadDays = false,
+    );
+  }
+
+  Future loadRefData(BuildContext context) async {
+    List<RefNotificationTypeRecord>? returnedNotificationsType;
+
+    if ((FFAppState().refNotificationTypes.isEmpty) ||
+        (FFAppState().lastDataLoading.reLoadRefData == true)) {
+      // day Data
+      returnedNotificationsType = await queryRefNotificationTypeRecordOnce(
+        queryBuilder: (refNotificationTypeRecord) =>
+            refNotificationTypeRecord.orderBy('key'),
+      );
+      loopMax = returnedNotificationsType.length;
+      loopIndex = 0;
+      FFAppState().refNotificationTypes = [];
+      while (loopIndex! < loopMax!) {
+        FFAppState().addToRefNotificationTypes(DtNotificationRefStruct(
+          key: valueOrDefault<int>(
+            returnedNotificationsType[loopIndex!].key,
+            -1,
+          ),
+          desc: valueOrDefault<String>(
+            returnedNotificationsType[loopIndex!].desc,
+            '-1',
+          ),
+          severtyCde: valueOrDefault<int>(
+            returnedNotificationsType[loopIndex!].severtyCde,
+            -1,
+          ),
+          color: valueOrDefault<Color>(
+            returnedNotificationsType[loopIndex!].color,
+            const Color(0x00000000),
+          ),
+        ));
+        loopIndex = loopIndex! + 1;
+      }
+    } else {
+      return;
+    }
+
+    FFAppState().updateLastDataLoadingStruct(
+      (e) => e..reLoadRefData = false,
     );
   }
 }

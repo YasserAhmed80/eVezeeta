@@ -26,6 +26,8 @@ class DoctorDataComponentModel
   CusFavDocRecord? createdFavDoc;
   // Model for image_component component.
   late ImageComponentModel imageComponentModel;
+  // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
+  DocNotifyRecord? returnedNotify;
   // Model for rating_Component component.
   late RatingComponentModel ratingComponentModel;
   // Model for addrress_component component.

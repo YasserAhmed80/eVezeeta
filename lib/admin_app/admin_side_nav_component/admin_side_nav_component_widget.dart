@@ -130,7 +130,16 @@ class _AdminSideNavComponentWidgetState
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('admin_doctor_review');
+                          context.pushNamed(
+                            'admin_doctor_review',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: const TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
@@ -191,7 +200,16 @@ class _AdminSideNavComponentWidgetState
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('admin_images_review');
+                          context.pushNamed(
+                            'admin_images_review',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: const TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),

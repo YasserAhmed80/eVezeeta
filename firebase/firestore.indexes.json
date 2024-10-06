@@ -1,6 +1,60 @@
 {
   "indexes": [
     {
+      "collectionGroup": "notification",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "e_type",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "not_cde",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "c_at",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "notification",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "e_type",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "e_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "c_at",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "notification",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "e_type",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "not_cde",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "c_at",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "doc_booked_time",
       "queryScope": "COLLECTION",
       "fields": [

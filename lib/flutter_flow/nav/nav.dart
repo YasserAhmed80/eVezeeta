@@ -435,6 +435,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'admin_images_review',
           path: '/adminImagesReview',
           builder: (context, params) => const AdminImagesReviewWidget(),
+        ),
+        FFRoute(
+          name: 'doctor_message_center',
+          path: '/doctorMessageCenter',
+          builder: (context, params) => DoctorMessageCenterWidget(
+            docRef: params.getParam(
+              'docRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['doc'],
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

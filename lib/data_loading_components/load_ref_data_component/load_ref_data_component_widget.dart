@@ -45,6 +45,7 @@ class _LoadRefDataComponentWidgetState extends State<LoadRefDataComponentWidget>
       await _model.loadCategoryAction(context);
       await _model.loadCityAction(context);
       await _model.loadDaysAction(context);
+      await _model.loadRefData(context);
       _model.isLoadingCompleted = true;
       safeSetState(() {});
       if (_model.timerMilliseconds < 2000) {

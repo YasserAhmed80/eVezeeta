@@ -11,16 +11,20 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
     DateTime? ciityDate,
     DateTime? categoryDate,
     DateTime? daysDate,
+    DateTime? refData,
     bool? reLoadCities,
     bool? reLoadCategory,
     bool? reLoadDays,
+    bool? reLoadRefData,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _ciityDate = ciityDate,
         _categoryDate = categoryDate,
         _daysDate = daysDate,
+        _refData = refData,
         _reLoadCities = reLoadCities,
         _reLoadCategory = reLoadCategory,
         _reLoadDays = reLoadDays,
+        _reLoadRefData = reLoadRefData,
         super(firestoreUtilData);
 
   // "ciity_date" field.
@@ -47,6 +51,14 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
 
   bool hasDaysDate() => _daysDate != null;
 
+  // "ref_data" field.
+  DateTime? _refData;
+  DateTime get refData =>
+      _refData ?? DateTime.fromMicrosecondsSinceEpoch(1727816400000000);
+  set refData(DateTime? val) => _refData = val;
+
+  bool hasRefData() => _refData != null;
+
   // "reLoadCities" field.
   bool? _reLoadCities;
   bool get reLoadCities => _reLoadCities ?? true;
@@ -68,14 +80,23 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
 
   bool hasReLoadDays() => _reLoadDays != null;
 
+  // "reLoadRefData" field.
+  bool? _reLoadRefData;
+  bool get reLoadRefData => _reLoadRefData ?? true;
+  set reLoadRefData(bool? val) => _reLoadRefData = val;
+
+  bool hasReLoadRefData() => _reLoadRefData != null;
+
   static DtLastLoadingStruct fromMap(Map<String, dynamic> data) =>
       DtLastLoadingStruct(
         ciityDate: data['ciity_date'] as DateTime?,
         categoryDate: data['category_date'] as DateTime?,
         daysDate: data['days_date'] as DateTime?,
+        refData: data['ref_data'] as DateTime?,
         reLoadCities: data['reLoadCities'] as bool?,
         reLoadCategory: data['reLoadCategory'] as bool?,
         reLoadDays: data['reLoadDays'] as bool?,
+        reLoadRefData: data['reLoadRefData'] as bool?,
       );
 
   static DtLastLoadingStruct? maybeFromMap(dynamic data) => data is Map
@@ -86,9 +107,11 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
         'ciity_date': _ciityDate,
         'category_date': _categoryDate,
         'days_date': _daysDate,
+        'ref_data': _refData,
         'reLoadCities': _reLoadCities,
         'reLoadCategory': _reLoadCategory,
         'reLoadDays': _reLoadDays,
+        'reLoadRefData': _reLoadRefData,
       }.withoutNulls;
 
   @override
@@ -105,6 +128,10 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
           _daysDate,
           ParamType.DateTime,
         ),
+        'ref_data': serializeParam(
+          _refData,
+          ParamType.DateTime,
+        ),
         'reLoadCities': serializeParam(
           _reLoadCities,
           ParamType.bool,
@@ -115,6 +142,10 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
         ),
         'reLoadDays': serializeParam(
           _reLoadDays,
+          ParamType.bool,
+        ),
+        'reLoadRefData': serializeParam(
+          _reLoadRefData,
           ParamType.bool,
         ),
       }.withoutNulls;
@@ -136,6 +167,11 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
           ParamType.DateTime,
           false,
         ),
+        refData: deserializeParam(
+          data['ref_data'],
+          ParamType.DateTime,
+          false,
+        ),
         reLoadCities: deserializeParam(
           data['reLoadCities'],
           ParamType.bool,
@@ -151,6 +187,11 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
           ParamType.bool,
           false,
         ),
+        reLoadRefData: deserializeParam(
+          data['reLoadRefData'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -162,9 +203,11 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
         ciityDate == other.ciityDate &&
         categoryDate == other.categoryDate &&
         daysDate == other.daysDate &&
+        refData == other.refData &&
         reLoadCities == other.reLoadCities &&
         reLoadCategory == other.reLoadCategory &&
-        reLoadDays == other.reLoadDays;
+        reLoadDays == other.reLoadDays &&
+        reLoadRefData == other.reLoadRefData;
   }
 
   @override
@@ -172,9 +215,11 @@ class DtLastLoadingStruct extends FFFirebaseStruct {
         ciityDate,
         categoryDate,
         daysDate,
+        refData,
         reLoadCities,
         reLoadCategory,
-        reLoadDays
+        reLoadDays,
+        reLoadRefData
       ]);
 }
 
@@ -182,9 +227,11 @@ DtLastLoadingStruct createDtLastLoadingStruct({
   DateTime? ciityDate,
   DateTime? categoryDate,
   DateTime? daysDate,
+  DateTime? refData,
   bool? reLoadCities,
   bool? reLoadCategory,
   bool? reLoadDays,
+  bool? reLoadRefData,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -194,9 +241,11 @@ DtLastLoadingStruct createDtLastLoadingStruct({
       ciityDate: ciityDate,
       categoryDate: categoryDate,
       daysDate: daysDate,
+      refData: refData,
       reLoadCities: reLoadCities,
       reLoadCategory: reLoadCategory,
       reLoadDays: reLoadDays,
+      reLoadRefData: reLoadRefData,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
